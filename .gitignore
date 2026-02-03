@@ -1,0 +1,8 @@
+
+castle
+*.exe
+*.out
+
+*.o
+
+.vscode/
