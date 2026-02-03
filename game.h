@@ -54,4 +54,6 @@ void game_print(Game *game);
 
 Status game_add_space(Game *game, Space *space);
 
+Id game_get_space_id_at(Game *game, int position);
+
 #endif

@@ -24,8 +24,8 @@
    Private functions
 */
 
+/*ya no hay privadas porque todas hacen falta para otras funciones (game_reader)*/
 
-Id game_get_space_id_at(Game *game, int position);
 
 /**
    Game interface implementation
