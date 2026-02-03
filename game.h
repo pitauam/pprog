@@ -52,4 +52,6 @@ Status game_set_finished(Game *game, Bool finished);
 
 void game_print(Game *game);
 
+Status game_add_space(Game *game, Space *space);
+
 #endif
