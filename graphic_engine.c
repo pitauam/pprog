@@ -104,13 +104,15 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     if (id_act != NO_ID) {
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
-      sprintf(str, "  | ^C>     %2d|", (int)id_act);
+      sprintf(str, "  | :D      %2d|", (int)id_act);
       screen_area_puts(ge->map, str);
       sprintf(str, "  |     %c     |", obj);
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
     }
+
+    /*^C>*/
 
     if (game_get_object_location(game) == id_next)
       obj = '+';
