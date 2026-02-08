@@ -4,6 +4,10 @@
 #CFLAGS son las banderas para warnings y estilo
 #CC es el comando de compilacion
 
+
+#TRUCO IMPORTANTE: gcc -MM game.c
+#dice las dependencias de un .c
+
 EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
 CFLAGS = -Wall -pedantic -ansi -g
