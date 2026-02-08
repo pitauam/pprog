@@ -10,7 +10,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "game.h"
+#include "types.h"
+/*Aqui te he cambiado el include por types.h (no le hace falta el game.h)*/
 
 typedef struct _Player Player;
 
