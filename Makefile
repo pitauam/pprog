@@ -32,13 +32,13 @@ game_reader.o: game_reader.c game.h command.h types.h space.h
 graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h
 	$(CC) -c $(CFLAGS) $<
 
-object.o: object.c object.h game.h
+object.o: object.c object.h game.h types.h
 	$(CC) -c $(CFLAGS) $<
 	
-player.o: player.c player.h game.h
+player.o: player.c player.h game.h types.h
 	$(CC) -c $(CFLAGS) $<
 
-space.o: space.c space.h
+space.o: space.c space.h types.h
 	$(CC) -c $(CFLAGS) $<
 
 
