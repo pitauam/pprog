@@ -10,7 +10,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "types.h"
+#include "game.h"
 
 typedef struct _Object Object;
 
