@@ -1,3 +1,12 @@
+/**
+ * @brief Define el modulo player
+ *
+ * @file player.h
+ * @author Mario Rodriguez
+ * @version 0
+ * @date 03-01-2026
+ * @copyright GNU Public License
+ */
 #ifndef PLAYER_H
 #define PLAYER_H
 
