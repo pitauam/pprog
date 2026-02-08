@@ -49,50 +49,48 @@ Player* player_create(Id id) {
   return newPlayer;
 }
 
-/** player_destroy elimina la memoria destruyendo al jugador*/
+
 Status player_destroy(Player* player) {
-  /*error control*/
   if (!player) {
     return ERROR;
   }
-  /*libera la memoria*/
+  
   free(player);
   return OK;
 }
-/** player_get_id consigue la id del jugador*/
+
 Id player_get_id(Player* player) {
-  /*error control*/
+
   if (!player) {
     return NO_ID;
   }
   return player->id;
 }
 
-/** player_set_id establece la id del jugador*/
+
 Status player_set_name(Player* player, char* name) {
-  /*error control*/
   if (!player || !name) {
     return ERROR;
   }
-  /*copia el nombre*/
+
   if (!strcpy(player->name, name)) {
     return ERROR;
   }
   return OK;
 }
 
-/** player_get_name consigue el nombre del jugador*/
+
 const char* player_get_name(Player* player) {
-  /*error control*/
+
   if (!player) {
     return NULL;
   }
   return player->name;
 }
 
-/** player_set_location establece la localizacion del jugador*/
+
 Status player_set_location(Player* player, Id id) {
-  /*error control*/
+
   if (!player || id == NO_ID) {
     return ERROR;
   }
@@ -100,18 +98,18 @@ Status player_set_location(Player* player, Id id) {
   return OK;
 }
 
-/** player_get_location consigue la localizacion del jugador*/
+
 Id player_get_location(Player* player) {
-  /*error control*/
+
   if (!player) {
     return NO_ID;
   }
   return player->location;
 }
 
-/** player_set_object establece el objeto del jugador*/
+
 Status player_set_object(Player* player, Id id) {
-  /*error control*/
+
   if (!player || id == NO_ID) {
     return ERROR;
   }
@@ -119,7 +117,7 @@ Status player_set_object(Player* player, Id id) {
   return OK;
 }
 
-/** player_get_object consigue el id del objeto del jugador*/
+
 Id player_get_object(Player* player) {
   if (!player) {
     return NO_ID;
