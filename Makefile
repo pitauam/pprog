@@ -1,12 +1,10 @@
 #Castle game Makefile
-#EXE es el nombre del .exe
-#OBJS son los .o
-#CFLAGS son las banderas para warnings y estilo
-#CC es el comando de compilacion
+#EXE is the name the .exe will have
+#OBJS references .o files
+#CFLAGS flags used for warnings and style
+#CC compilation command
 
-
-#TRUCO IMPORTANTE: gcc -MM game.c
-#dice las dependencias de un .c
+#IMPORTANT: gcc -MM game.c
 
 EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
@@ -46,7 +44,7 @@ space.o: space.c space.h types.h
 	$(CC) -c $(CFLAGS) $<
 
 
-
+#cleans the .o and .exe files (used before uploading to git)
 clean: 
 	rm -f *.o $(EXE)
 
