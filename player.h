@@ -1,5 +1,5 @@
 /**
- * @brief Define el modulo player
+ * @brief Defines the module "player"
  *
  * @file player.h
  * @author Mario Rodriguez
@@ -15,96 +15,97 @@
 typedef struct _Player Player;
 
 /**
- * @brief Crea un nuevo jugador, reservando la memoria e inicializando sus parametros
+ * @brief Creates a new player, allocating memory and initialazing all of its parameters
  * @author Mario Rodriguez
  *
- * @param id identificacion del nuevo jugador
- * @return un nuevo jugador, inicializado
+ * @param id identification number of the player
+ * @return a new initialized player
  */
 Player* player_create(Id id);
 
 /**
- * @brief Destuye un jugador, liberando su memoria
+ * @brief Destroys a player, freeing its memory
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador que se quiere destruir
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param player pointer to the structure of the player to destroy
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_destroy(Player* player);
 
 /**
- * @brief Consigue la id de un jugador
+ * @brief Gives the id of a player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @return id del jugador
+ * @param player pointer to the structure of the player
+ * @return Player's id
  */
 Id player_get_id(Player* player);
 
 /**
- * @brief Establece el nombre del jugador
+ * @brief Sets the name of a player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @param name puntero al nombre del jugador
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param player pointer to the structure of the player
+ * @param name pointer to the name of the player
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_set_name(Player* player, char* name);
 
 /**
- * @brief Consigue el nombre de un jugador
+ * @brief Gives the id of a player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @return una cadena con el nombre del jugador
+ * @param player pointer to the structure of the player
+ * @return a string with the player's name
  */
 const char* player_get_name(Player* player);
 
 /**
- * @brief Establece la localizacion de un jugador
+ * @brief Sets the location of the player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @param id id de la localizacion
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param player pointer to the structure of the player
+ * @param id Id of the location of the player
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_set_location(Player* player, Id id);
 
 /**
- * @brief Consigue la localizacion de un jugador
+ * @brief Gives the location of the player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @return la id del espacio en el que se encuentra
+ * @param player pointer to the structure of the player
+ * @return Id of the location of the player
  */
 Id player_get_location(Player* player);
 
 /**
- * @brief Establece el objeto de un jugador
+ * @brief Sets an object to the player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @param id id del objeto
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param player pointer to the structure of the player
+ * @param id id of the object
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_set_object(Player* player, Id id);
 
 /**
- * @brief Establece la localizacion de un jugador
+ * @brief Sets the location of the player
  * @author Mario Rodriguez
  *
- * @param player puntero a la esturctura del jugador
- * @return la id del objeto
+ * @param player pointer to the structure of the player
+ * @return id of the player
  */
 Id player_get_object(Player* player);
 
 /**
- * @brief Imprime la informacion de player
+ * @brief Prints information about the player
  * @author Mario Rodriguez
  *
- * Esta funcion muestra el id-nombre-localizacion- y objeto del jugador si tiene uno
- * @param player puntero a la esturctura del jugador
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * This function shows the id-name-location and the object of the player if it has one
+ * 
+ * @param player pointer to the structure of the player
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_print(Player* player);
 #endif

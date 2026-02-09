@@ -15,7 +15,7 @@
 typedef struct _Object Object;
 
 /**
- * @brief Creates a new object, allocating memory and initialazing all its parameters
+ * @brief Creates a new object, allocating memory and initialazing all of its parameters
  * @author Santiago Pita
  *
  * @param id identification number of the object
@@ -33,40 +33,40 @@ Object* object_create(Id id);
 Status object_destroy(Object* object);
 
 /**
- * @brief Consigue la id de un objeto
+ * @brief Gives the id of an object
  * @author Santiago Pita
  *
- * @param object puntero a la esturctura del objeto
- * @return id del objeto
+ * @param object pointer to the structure of the object
+ * @return Object's id
  */
 Id object_get_id(Object* object);
 
 /**
- * @brief Establece el nombre del objeto
+ * @brief Sets the name of an object
  * @author Santiago Pita
  *
- * @param object puntero a la esturctura del objeto
- * @param name puntero al nombre del objeto
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param object pointer to the structure of the object
+ * @param name pointer to the name of the object
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_set_name(Object* object, char* name);
 
 /**
- * @brief Consigue el nombre de un objeto
+ * @brief Gives the id of an object
  * @author Santiago Pita
  *
- * @param object puntero a la esturctura del objeto
- * @return una cadena con el nombre del objeto
+ * @param object pointer to the structure of the object
+ * @return a string with the name of an object
  */
 const char* object_get_name(Object* object);
 
 /**
- * @brief Imprime la informacion de object
+ * @brief Prints the information of an object (shows its Id)
  * @author Santiago Pita
  *
- * Esta funcion muestra el id-nombre del objeto
- * @param object puntero a la esturctura del objeto
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * 
+ * @param object pointer to the structure of the object
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_print(Object* object);
 

@@ -17,7 +17,7 @@
 /**
  * @brief Object
  *
- * This structure saves all the information of an object
+ * This structure contains all the information of an object
  */
 
 struct _Object {
