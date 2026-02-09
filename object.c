@@ -1,5 +1,5 @@
 /**
- * @brief Implementa el modulo object
+ * @brief Implements the object module
  *
  * @file object.c
  * @author Santiago Pita
@@ -17,15 +17,15 @@
 /**
  * @brief Object
  *
- * Esta estructura guarda toda la informacin de un objeto
+ * This structure saves all the information of an object
  */
 
 struct _Object {
-  Id id;                    /*!< Id del objeto, tiene que ser unico */
-  char name[WORD_SIZE + 1]; /*!< nombre del objeto */
+  Id id;                    /*!< Object's id, must be unique */
+  char name[WORD_SIZE + 1]; /*!< Object's name */
 };
 
-/** object_create reserva la memoria e inicializa todas las variables*/
+/** object_create allocates memory and initializes all variables*/
 
 Object* object_create(Id id) {
   Object* newObject = NULL;
@@ -38,7 +38,7 @@ Object* object_create(Id id) {
     return NULL;
   }
 
-  /* Inicializacion de un objeto vacio*/
+  /* Initialization of an empty object*/
   newObject->id = id;
   newObject->name[0] = '\0';
 
@@ -87,7 +87,7 @@ Status object_print(Object* object) {
     return ERROR;
   }
 
-  /* 1. Imprime el id y el nombre del objeto */
+  /* 1. Prints object's id and name */
   fprintf(stdout, "--> object (Id: %ld; Name: %s)\n", object->id, object->name);
 
   return OK;

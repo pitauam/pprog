@@ -1,5 +1,5 @@
 /**
- * @brief Define el modulo object
+ * @brief Defines the module "object"
  *
  * @file object.h
  * @author Santiago Pita
@@ -15,20 +15,20 @@
 typedef struct _Object Object;
 
 /**
- * @brief Crea un nuevo objeto, reservando la memoria e inicializando sus parametros
+ * @brief Creates a new object, allocating memory and initialazing all its parameters
  * @author Santiago Pita
  *
- * @param id identificacion del nuevo objeto
- * @return un nuevo objeto, inicializado
+ * @param id identification number of the object
+ * @return a new initialized object
  */
 Object* object_create(Id id);
 
 /**
- * @brief Destuye un objeto, liberando su memoria
+ * @brief Destroys an object, freeing its memory
  * @author Santiago Pita
  *
- * @param object puntero a la esturctura del objeto que se quiere destruir
- * @return OK si todo salio bien, ERROR si algo salio mal
+ * @param object pointer to the structure of the object to destroy
+ * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_destroy(Object* object);
 
