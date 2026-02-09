@@ -9,8 +9,6 @@
  */
 
 #include "game.h"
-#include "object.h"
-#include "player.h"
 #include "game_reader.h"
 
 
@@ -39,8 +37,8 @@ Status game_create(Game *game) {
   }
 
   game->n_spaces = 0;
-  game->player_location = NO_ID;
-  game->object_location = NO_ID;
+  game->player = player_create(NO_ID);
+  game->object = object_create(NO_ID);
   game->last_cmd = command_create();
   game->finished = FALSE;
 
@@ -76,14 +74,13 @@ Space *game_get_space(Game *game, Id id) {
   return NULL;
 }
 
-Id game_get_player_location(Game *game, Player *player) { 
-  if(game == NULL || player == NULL){
+Id game_get_player_location(Game *game) { 
+  if(game == NULL || game->player == NULL){
     return  NO_ID;
   }
 
-  game->player_location = player_get_location(player);
+  return player_get_location(game->player);
 
-  return game->player_location; 
 }
 
 
@@ -92,12 +89,11 @@ Status game_set_player_location(Game *game, Id id) {
     return ERROR;
   }
 
-  game->player_location = id;
 
-  return OK;
+  return player_set_location(game->player, id);
 }
 
-Id game_get_object_location(Game *game) { return game->object_location; }
+Id game_get_object_location(Game *game) { return game->object; }
 
 Status game_set_object_location(Game *game, Id id) {
   
