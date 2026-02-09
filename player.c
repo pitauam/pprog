@@ -23,7 +23,7 @@ struct _Player
     Id id; /*!< numero de id del jugador, tiene que ser unico */
     char name [WORD_SIZE +1]; /*!< nombre del jugador */
     Id location; /*!< Id de la localizacion */
-    Bool object; /*!< tiene objeto o no*/
+    Id object; /*!< Id del objeto*/
 };
 
 /** player_create reserva la memoria e inicializa las variables*/
@@ -51,6 +51,7 @@ Player* player_create(Id id) {
 
 
 Status player_destroy(Player* player) {
+  
   if (!player) {
     return ERROR;
   }
@@ -69,6 +70,7 @@ Id player_get_id(Player* player) {
 
 
 Status player_set_name(Player* player, char* name) {
+
   if (!player || !name) {
     return ERROR;
   }
@@ -119,6 +121,7 @@ Status player_set_object(Player* player, Id id) {
 
 
 Id player_get_object(Player* player) {
+
   if (!player) {
     return NO_ID;
   }
