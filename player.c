@@ -112,7 +112,7 @@ Id player_get_location(Player* player) {
 
 Status player_set_object(Player* player, Id id) {
 
-  if (!player || id == NO_ID) {
+  if (!player) { /*linea quitada  "|| id == NO_ID" da ERROR al quitar el objeto del player al darle NO_ID en drop*/
     return ERROR;
   }
   player->object = id;
