@@ -8,7 +8,7 @@
 
 EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
-CFLAGS = -Wall
+CFLAGS = -Wall -ansi -pedantic -g
 CC = gcc
 CLIB = -lscreen -L.
 

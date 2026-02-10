@@ -135,8 +135,6 @@ void game_actions_take(Game *game){
     player_set_object(game->player, object_id);
     /*deletes the object from the space*/
     space_set_object(game_get_space(game, space_id), NO_ID);
-
-    return;
   }
 
   return;
@@ -144,7 +142,6 @@ void game_actions_take(Game *game){
 
 
 void game_actions_drop(Game *game){
-
   Id space_id = NO_ID;
   Id object_id = NO_ID;
 
@@ -155,13 +152,12 @@ void game_actions_drop(Game *game){
   }
   /*checks if the player has an object*/
   object_id = player_get_object(game->player);
+  /*if the player has no object with him*/
   if(object_id != NO_ID){
     /*places the object on the space*/
     space_set_object(game_get_space(game, space_id), object_id);
     /*deletes the object from the player*/
     player_set_object(game->player, NO_ID);
-
-    return;
   }
   return;
 }

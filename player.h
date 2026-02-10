@@ -90,11 +90,11 @@ Id player_get_location(Player* player);
 Status player_set_object(Player* player, Id id);
 
 /**
- * @brief Sets the location of the player
+ * @brief Gets the id of the object the player is carrying
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
- * @return id of the player
+ * @return id of the object the player is carrying
  */
 Id player_get_object(Player* player);
 
