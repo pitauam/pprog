@@ -116,25 +116,26 @@ void game_actions_back(Game *game) {
 }
 
 void game_actions_take(Game *game){
-  Id space_id = NO_ID;
+  Id player_location = NO_ID;
   Id object_location = NO_ID;
   Id object_id = NO_ID;
 
   /*gets the id of the space where the player is*/
-  space_id = game_get_player_location(game);
-  if(space_id == NO_ID){
+  player_location = game_get_player_location(game);
+  if(player_location == NO_ID){
     return;
   }
   /*gets the id of the space where the object is*/
   object_location = game_get_object_location(game);
+
   /*checks if the player is in the same space as the object*/
-  if(object_location != NO_ID && object_location == space_id){
+  if(object_location != NO_ID && object_location == player_location){
     /*gets the object id*/
     object_id = object_get_id(game->object);
     /*sets the object to the player*/
     player_set_object(game->player, object_id);
     /*deletes the object from the space*/
-    space_set_object(game_get_space(game, space_id), NO_ID);
+    space_set_object(game_get_space(game, player_location), NO_ID);
   }
 
   return;
@@ -157,7 +158,7 @@ void game_actions_drop(Game *game){
     /*places the object on the space*/
     space_set_object(game_get_space(game, space_id), object_id);
     /*deletes the object from the player*/
-    player_set_object(game->player, NO_ID);
+    player_set_object(game->player, NO_ID);    
   }
   return;
 }
