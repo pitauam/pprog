@@ -27,8 +27,8 @@ Status game_create(Game *game) {
   }
 
   game->n_spaces = 0;
-  game->player = player_create(1);
-  game->object = object_create(1);
+  game->player = player_create(100); /*Temporary hard-coded values*/
+  game->object = object_create(200);
   game->last_cmd = command_create();
   game->finished = FALSE;
 
@@ -84,7 +84,7 @@ Status game_set_player_location(Game *game, Id id) {
 Id game_get_object_location(Game *game) 
 {
   int i;
-  if (!game || !(game->object)) {return NO_ID;}
+  if (!game) {return NO_ID;}
   
   for (i = 0; i < game->n_spaces; i++)
   {
