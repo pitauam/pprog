@@ -10,11 +10,12 @@ EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
 CFLAGS = -Wall -pedantic -ansi -g
 CC = gcc
+CLIB = -lscreen -L.
 
 all: $(EXE)
 
 $(EXE) : $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $^ -lscreen -L.
+	$(CC) -o $@ $(CFLAGS) $^ $(CLIB)
 
 game.o: game.c game.h object.h player.h game_reader.h command.h space.h types.h
 	$(CC) -c $(CFLAGS) game.c

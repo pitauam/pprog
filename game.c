@@ -93,7 +93,9 @@ Status game_set_player_location(Game *game, Id id) {
   return player_set_location(game->player, id);
 }
 
-Id game_get_object_location(Game *game) { return game->object; }
+Id game_get_object_location(Game *game) { return game->object; } /*Hay que recorrer todos los espacios viendo si hay un objecto en él.
+*. Cuando lo encuentre returnea el ID del espacio en el que se encuentra.
+*/
 
 Status game_set_object_location(Game *game, Id id) {
   
@@ -102,7 +104,7 @@ Status game_set_object_location(Game *game, Id id) {
     return ERROR;
   }
 
-  game->object_location = id;
+  id = game_get_object_location(game);
   space_set_object(game_get_space(game, id), TRUE);
   return OK;
 }
@@ -133,8 +135,8 @@ void game_print(Game *game) {
     space_print(game->spaces[i]);
   }
 
-  printf("=> Object location: %d\n", (int)game->object_location);
-  printf("=> Player location: %d\n", (int)game->player_location);
+  printf("=> Object location: %d\n", (int)game_get_object_location(game));
+  printf("=> Player location: %d\n", (int)game_get_player_location(game));
 }
 
 /**
