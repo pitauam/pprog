@@ -11,19 +11,9 @@
 #include "game.h"
 #include "game_reader.h"
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-
-/**
-   Private functions
-*/
-
-/*ya no hay privadas porque todas hacen falta para otras funciones (game_reader)*/
-
 
 /**
    Game interface implementation
@@ -80,26 +70,34 @@ Id game_get_player_location(Game *game) {
   }
 
   return player_get_location(game->player);
-
 }
 
 
 Status game_set_player_location(Game *game, Id id) {
-  if (id == NO_ID) {
+  if (id == NO_ID || game == NULL || game->player == NULL) {
     return ERROR;
   }
-
 
   return player_set_location(game->player, id);
 }
 
-Id game_get_object_location(Game *game) { return game->object; } /*Hay que recorrer todos los espacios viendo si hay un objecto en él.
-*. Cuando lo encuentre returnea el ID del espacio en el que se encuentra.
-*/
+Id game_get_object_location(Game *game) 
+{
+  int i;
+  if (!game || !(game->object)) {return NO_ID;}
+  
+  for (i = 0; i < game->n_spaces; i++)
+  {
+    if (space_get_object(game->spaces[i]) != NO_ID)
+    {
+      return game_get_space_id_at(game, i);
+    }
+  }
+  
+  return NO_ID; 
+}
 
 Status game_set_object_location(Game *game, Id id) {
-  
-
   if (id == NO_ID) {
     return ERROR;
   }
@@ -144,7 +142,7 @@ void game_print(Game *game) {
 */
 
 Status game_add_space(Game *game, Space *space) {
-  if ((space == NULL) || (game->n_spaces >= MAX_SPACES)) {
+  if ((!space) || (game->n_spaces >= MAX_SPACES)) {
     return ERROR;
   }
 

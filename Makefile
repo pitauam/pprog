@@ -8,14 +8,14 @@
 
 EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
-CFLAGS = -Wall -pedantic -ansi -g
+CFLAGS = -Wall
 CC = gcc
 CLIB = -lscreen -L.
 
 all: $(EXE)
 
 $(EXE) : $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $^ $(CLIB)
+	$(CC) -o $@ $^ $(CLIB)
 
 game.o: game.c game.h object.h player.h game_reader.h command.h space.h types.h
 	$(CC) -c $(CFLAGS) game.c
@@ -23,7 +23,7 @@ game.o: game.c game.h object.h player.h game_reader.h command.h space.h types.h
 command.o : command.c command.h types.h
 	$(CC) -c $(CFLAGS) $<
 
-game_actions.o: game_actions.c game_actions.h command.h game.h space.h types.h
+game_actions.o: game_actions.c game_actions.h command.h types.h game.h space.h object.h player.h
 	$(CC) -c $(CFLAGS) $<
 
 game_loop.o: game_loop.c command.h game.h game_actions.h graphic_engine.h types.h space.h
@@ -35,17 +35,19 @@ game_reader.o: game_reader.c game.h command.h types.h space.h
 graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h
 	$(CC) -c $(CFLAGS) $<
 
-object.o: object.c object.h game.h types.h
+object.o: object.c object.h types.h
 	$(CC) -c $(CFLAGS) $<
 	
-player.o: player.c player.h game.h types.h
+player.o: player.c player.h types.h
 	$(CC) -c $(CFLAGS) $<
 
 space.o: space.c space.h types.h
 	$(CC) -c $(CFLAGS) $<
 
-
 #cleans the .o and .exe files (used before uploading to git)
 clean: 
 	rm -f *.o $(EXE)
+
+run:
+	./$(EXE) castle.dat
 
