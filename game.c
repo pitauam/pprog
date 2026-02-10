@@ -27,8 +27,8 @@ Status game_create(Game *game) {
   }
 
   game->n_spaces = 0;
-  game->player = player_create(NO_ID);
-  game->object = object_create(NO_ID);
+  game->player = player_create(1);
+  game->object = object_create(1);
   game->last_cmd = command_create();
   game->finished = FALSE;
 
@@ -66,7 +66,7 @@ Space *game_get_space(Game *game, Id id) {
 
 Id game_get_player_location(Game *game) { 
   if(game == NULL || game->player == NULL){
-    return  NO_ID;
+    return NO_ID;
   }
 
   return player_get_location(game->player);
@@ -97,13 +97,27 @@ Id game_get_object_location(Game *game)
   return NO_ID; 
 }
 
-Status game_set_object_location(Game *game, Id id) {
-  if (id == NO_ID) {
-    return ERROR;
+Status game_set_object_location(Game *game, Id new_space_id) {
+  int i;
+  Space *space;
+
+  if (!game || new_space_id == NO_ID) return ERROR;
+
+  /* Quitar el objeto de donde esté */
+  for (i = 0; i < game->n_spaces; i++) {
+    space = game->spaces[i];
+    if (space_get_object(space) != NO_ID) {
+      space_set_object(space, NO_ID);
+      break;
+    }
   }
 
-  id = game_get_object_location(game);
-  space_set_object(game_get_space(game, id), TRUE);
+  /* Colocar el objeto en el nuevo espacio */
+  space = game_get_space(game, new_space_id);
+  if (!space) return ERROR;
+
+  space_set_object(space, object_get_id(game->object));
+
   return OK;
 }
 
