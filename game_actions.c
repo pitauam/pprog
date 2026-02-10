@@ -54,6 +54,14 @@ Status game_actions_update(Game *game, Command *command) {
       game_actions_back(game);
       break;
 
+    case TAKE:
+      game_actions_take(game);
+      break;
+    
+    case DROP:
+      game_actions_drop(game);
+      break;
+
     default:
       break;
   }
@@ -91,7 +99,6 @@ void game_actions_back(Game *game) {
   Id space_id = NO_ID;
 
   space_id = game_get_player_location(game);
-
   if (NO_ID == space_id) {
     return;
   }
@@ -101,5 +108,56 @@ void game_actions_back(Game *game) {
     game_set_player_location(game, current_id);
   }
 
+  return;
+}
+
+void game_actions_take(Game *game){
+  Id space_id = NO_ID;
+  Id object_location = NO_ID;
+  Id object_id = NO_ID;
+
+  /*gets the id of the space where the player is*/
+  space_id = game_get_player_location(game);
+  if(space_id == NO_ID){
+    return;
+  }
+  /*gets the id of the space where the object is*/
+  object_location = game_get_object_location(game);
+  /*checks if the player is in the same space as the object*/
+  if(object_location != NO_ID && object_location == space_id){
+    /*gets the object id*/
+    object_id = object_get_id(game->object);
+    /*sets the object to the player*/
+    player_set_object(game->player, object_id);
+    /*deletes the object from the space*/
+    space_set_object(space_id, NO_ID);
+
+    return;
+  }
+
+  return;
+}
+
+
+void game_actions_drop(Game *game){
+
+  Id space_id = NO_ID;
+  Id object_id = NO_ID;
+
+  /*gets the id of the space where the player is*/
+  space_id = game_get_player_location(game);
+  if(space_id == NO_ID){
+    return;
+  }
+  /*checks if the player has an object*/
+  object_id = player_get_object(game);
+  if(object_id != NO_ID){
+    /*places the object on the space*/
+    space_set_object(space_id, object_id);
+    /*deletes the object from the player*/
+    player_set_object(game, NO_ID);
+
+    return;
+  }
   return;
 }
