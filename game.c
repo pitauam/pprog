@@ -35,7 +35,6 @@ Status game_create(Game *game) {
   return OK;
 }
 
-
 Status game_destroy(Game *game) {
   int i = 0;
 
@@ -71,7 +70,6 @@ Id game_get_player_location(Game *game) {
 
   return player_get_location(game->player);
 }
-
 
 Status game_set_player_location(Game *game, Id id) {
   if (id == NO_ID || game == NULL || game->player == NULL) {

@@ -33,26 +33,26 @@ struct _Space {
  *  and initializes its members
  */
 Space* space_create(Id id) {
-  Space* newSpace = NULL;
+  Space* new_space = NULL;
 
   /* Error control */
   if (id == NO_ID) return NULL;
 
-  newSpace = (Space*)calloc(1, sizeof(Space));
-  if (newSpace == NULL) {
+  new_space = (Space*)calloc(1, sizeof(Space));
+  if (new_space == NULL) {
     return NULL;
   }
 
   /* Initialization of an empty space*/
-  newSpace->id = id;
-  newSpace->name[0] = '\0';
-  newSpace->north = NO_ID;
-  newSpace->south = NO_ID;
-  newSpace->east = NO_ID;
-  newSpace->west = NO_ID;
-  newSpace->object = NO_ID;
+  new_space->id = id;
+  new_space->name[0] = '\0';
+  new_space->north = NO_ID;
+  new_space->south = NO_ID;
+  new_space->east = NO_ID;
+  new_space->west = NO_ID;
+  new_space->object = NO_ID;
 
-  return newSpace;
+  return new_space;
 }
 
 Status space_destroy(Space* space) {

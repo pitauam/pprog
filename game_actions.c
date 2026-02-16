@@ -178,7 +178,6 @@ void game_actions_take(Game *game){
   return;
 }
 
-
 void game_actions_drop(Game *game){
   Id space_id = NO_ID;
   Id object_id = NO_ID;

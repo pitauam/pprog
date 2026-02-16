@@ -28,21 +28,21 @@ struct _Object {
 /** object_create allocates memory and initializes all variables*/
 
 Object* object_create(Id id) {
-  Object* newObject = NULL;
+  Object* new_object = NULL;
 
   /* Error control */
   if (id == NO_ID) return NULL;
 
-  newObject = (Object*)calloc(1, sizeof(Object));
-  if (newObject == NULL) {
+  new_object = (Object*)calloc(1, sizeof(Object));
+  if (new_object == NULL) {
     return NULL;
   }
 
   /* Initialization of an empty object*/
-  newObject->id = id;
-  newObject->name[0] = '\0';
+  new_object->id = id;
+  new_object->name[0] = '\0';
 
-  return newObject;
+  return new_object;
 }
 
 Status object_destroy(Object* object) {
@@ -92,4 +92,3 @@ Status object_print(Object* object) {
 
   return OK;
 }
-

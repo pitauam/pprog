@@ -99,5 +99,4 @@ Status command_get_user_input(Command* command) {
   }
   else
     return command_set_code(command, EXIT);
-  
 }

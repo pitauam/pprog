@@ -29,26 +29,25 @@ struct _Player
 /** player_create allocates memory and initializes all variables*/
 
 Player* player_create(Id id) {
-  Player* newPlayer = NULL;
+  Player* new_player = NULL;
 
   /* Error control */
   if (id == NO_ID) return NULL;
 
-  newPlayer = (Player*)calloc(1, sizeof(Player));
-  if (newPlayer == NULL) {
+  new_player = (Player*)calloc(1, sizeof(Player));
+  if (new_player == NULL) {
     return NULL;
   }
 
   /* Initialization of an empty player*/
-  newPlayer->id = id;
-  newPlayer->name[0] = '\0';
-  newPlayer->location = NO_ID;
-  newPlayer->object = NO_ID;
+  new_player->id = id;
+  new_player->name[0] = '\0';
+  new_player->location = NO_ID;
+  new_player->object = NO_ID;
 
 
-  return newPlayer;
+  return new_player;
 }
-
 
 Status player_destroy(Player* player) {
   
@@ -68,7 +67,6 @@ Id player_get_id(Player* player) {
   return player->id;
 }
 
-
 Status player_set_name(Player* player, char* name) {
 
   if (!player || !name) {
@@ -81,7 +79,6 @@ Status player_set_name(Player* player, char* name) {
   return OK;
 }
 
-
 const char* player_get_name(Player* player) {
 
   if (!player) {
@@ -89,7 +86,6 @@ const char* player_get_name(Player* player) {
   }
   return player->name;
 }
-
 
 Status player_set_location(Player* player, Id id) {
 
@@ -100,7 +96,6 @@ Status player_set_location(Player* player, Id id) {
   return OK;
 }
 
-
 Id player_get_location(Player* player) {
 
   if (!player) {
@@ -108,7 +103,6 @@ Id player_get_location(Player* player) {
   }
   return player->location;
 }
-
 
 Status player_set_object(Player* player, Id id) {
 
@@ -118,7 +112,6 @@ Status player_set_object(Player* player, Id id) {
   player->object = id;
   return OK;
 }
-
 
 Id player_get_object(Player* player) {
 

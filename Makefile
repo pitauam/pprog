@@ -52,8 +52,10 @@ space.o: space.c space.h types.h
 clean: 
 	rm -f *.o $(EXE)
 
+ #runs Iteration 1 map
 run:
 	./$(EXE) castle.dat
 
+ #runs Iteration 2 map
 runmap:
 	./$(EXE) nuevomapa.dat
