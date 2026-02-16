@@ -3,8 +3,8 @@
  *
  * @file game.c
  * @author Profesores PPROG
- * @version 0
- * @date 27-01-2025
+ * @version 1
+ * @date 09-02-2025
  * @copyright GNU Public License
  */
 
@@ -18,16 +18,52 @@
    Private functions
 */
 
+/**
+ * @brief the command is unknown
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ */
 void game_actions_unknown(Game *game);
 
+/**
+ * @brief it has selected exit
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ */
 void game_actions_exit(Game *game);
 
+/**
+ * @brief moves to the next space at the south
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ */
 void game_actions_next(Game *game);
 
+/**
+ * @brief goes back to the north
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ */
 void game_actions_back(Game *game);
 
+/**
+ * @brief the player takes the object of the space
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
 void game_actions_take(Game *game);
 
+/**
+ * @brief the player drops the object to the space
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
 void game_actions_drop(Game *game);
 
 /**

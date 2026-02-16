@@ -3,8 +3,8 @@
  *
  * @file game.c
  * @author Profesores PPROG
- * @version 0
- * @date 27-01-2025
+ * @version 1
+ * @date 09-02-2025
  * @copyright GNU Public License
  */
 
@@ -103,7 +103,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
 
   if (!game || new_space_id == NO_ID) return ERROR;
 
-  /* Quitar el objeto de donde esté */
+  /* takes out the object of the space */
   for (i = 0; i < game->n_spaces; i++) {
     space = game->spaces[i];
     if (space_get_object(space) != NO_ID) {
@@ -112,7 +112,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
     }
   }
 
-  /* Colocar el objeto en el nuevo espacio */
+  /* Places the object in the new space */
   space = game_get_space(game, new_space_id);
   if (!space) return ERROR;
 

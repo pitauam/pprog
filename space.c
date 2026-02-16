@@ -3,8 +3,8 @@
  *
  * @file space.c
  * @author Profesores PPROG
- * @version 0
- * @date 24-01-2026
+ * @version 1
+ * @date 09-02-2026
  * @copyright GNU Public License
  */
 
@@ -26,7 +26,7 @@ struct _Space {
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
-  Id object;              /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the space*/
+  Id object;              /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the player*/
 };
 
 /** space_create allocates memory for a new space

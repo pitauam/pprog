@@ -1,3 +1,12 @@
+/**
+ * @brief Reads the information of the .dat
+ *
+ * @file game_reader.c
+ * @author Santiago Pita
+ * @version 0
+ * @date 03-02-2025
+ * @copyright GNU Public License
+ */
 #include "game.h"
 #include "game_reader.h"
 
