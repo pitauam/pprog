@@ -43,7 +43,7 @@ Status game_create_from_file(Game *game, char *filename);
  * @author Profesores PPROG
  *
  * @param game pointer to game
- * @return OK, if everything goes well or ERROR if there was some mistake
+ * @return OK, if everything goes well or ERROR if something went wrong
  */
 Status game_destroy(Game *game);
 
@@ -58,7 +58,7 @@ Status game_destroy(Game *game);
 Space *game_get_space(Game *game, Id id);
 /**
  * @brief Gets the id of the player location
- * @author Profesores PPROG
+ * @author Mario Rodriguez
  *
  * @param game pointer to game
  * @return the id of the space where the player is
@@ -67,7 +67,7 @@ Id game_get_player_location(Game *game);
 
 /**
  * @brief Sets the id of the player location
- * @author Profesores PPROG
+ * @author Mario Rodriguez
  *
  * @param game pointer to game
  * @param id id of the player location
@@ -77,7 +77,7 @@ Status game_set_player_location(Game *game, Id id);
 
 /**
  * @brief Gets the id of the object location
- * @author Profesores PPROG
+ * @author Santiago Pita
  *
  * @param game pointer to game
  * @return the id of the space where the object is located at
@@ -86,7 +86,7 @@ Id game_get_object_location(Game *game);
 
 /**
  * @brief Gets the id of the object location
- * @author Profesores PPROG
+ * @author Santiago Pita
  *
  * @param game pointer to game
  * @param id id of the object location

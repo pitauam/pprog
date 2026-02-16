@@ -1,10 +1,14 @@
-#Castle game Makefile
-#EXE is the name the .exe will have
-#OBJS references .o files
-#CFLAGS flags used for warnings and style
-#CC compilation command
+ # @brief Makefile for the Castle game
+ #
+ # @file Makefile
+ # @author Santiago Pita and Mario Rodriguez
+ # @version 1
+ # @date 07-02-2025
 
-#IMPORTANT: gcc -MM game.c
+ #EXE is the name the .exe will have
+ #OBJS references .o files
+ #CFLAGS flags used for warnings and style
+ #CC stands for compilation command
 
 EXE = castle
 OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o
@@ -44,10 +48,12 @@ player.o: player.c player.h types.h
 space.o: space.c space.h types.h
 	$(CC) -c $(CFLAGS) $<
 
-#cleans the .o and .exe files (used before uploading to git)
+ #cleans the .o and .exe files (used before uploading to git)
 clean: 
 	rm -f *.o $(EXE)
 
 run:
 	./$(EXE) castle.dat
 
+runmap:
+	./$(EXE) nuevomapa.dat
