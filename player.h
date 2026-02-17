@@ -52,7 +52,7 @@ Id player_get_id(Player* player);
 Status player_set_name(Player* player, char* name);
 
 /**
- * @brief Gives the id of a player
+ * @brief gets the name of the player
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
