@@ -15,6 +15,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*Opaque Game struct*/
+struct _Game {
+  Player *player;
+  Object *object;
+  Space *spaces[MAX_SPACES];
+  int n_spaces;
+  Command *last_cmd;
+  Bool finished;
+};
+
 /**
    Game interface implementation
 */

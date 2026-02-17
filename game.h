@@ -19,14 +19,9 @@
 
 #define MAX_SPACES 100
 
-typedef struct _Game {
-  Player *player;
-  Object *object;
-  Space *spaces[MAX_SPACES];
-  int n_spaces;
-  Command *last_cmd;
-  Bool finished;
-} Game;
+/*Defines the struct Game*/
+typedef struct _Game Game;
+
 /**
  * @brief creates the game, initializing all the variables
  * @author Profesores PPROG
