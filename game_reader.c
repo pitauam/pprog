@@ -71,7 +71,7 @@ Status game_load_spaces(Game *game, char *filename) {
 }
 
 Status game_create_from_file(Game *game, char *filename) {
-  if (game_create(game) == ERROR) {
+  if (game_create() == NULL) {
     return ERROR;
   }
 

@@ -61,8 +61,9 @@ runmap:
 	./$(EXE) nuevomapa.dat
 
 runv:
-	@echo ">>>>>>Running castle with valgrind"
 	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
+
+#@echo ">>>>>>Running castle with valgrind"
 
 	
 	

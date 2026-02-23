@@ -29,8 +29,12 @@ struct _Game {
    Game interface implementation
 */
 
-Status game_create(Game *game) {
+Game* game_create() {
   int i;
+  Game *game;
+
+  game = (Game *)calloc(1, sizeof(Game));
+  if (!game) {return NULL;}
 
   for (i = 0; i < MAX_SPACES; i++) {
     game->spaces[i] = NULL;
@@ -42,7 +46,7 @@ Status game_create(Game *game) {
   game->last_cmd = command_create();
   game->finished = FALSE;
 
-  return OK;
+  return game;
 }
 
 Status game_destroy(Game *game) {
@@ -53,6 +57,11 @@ Status game_destroy(Game *game) {
   }
 
   command_destroy(game->last_cmd);
+  
+  player_destroy(game->player);
+  object_destroy(game->object);
+
+  free(game);
 
   return OK;
 }
@@ -164,7 +173,7 @@ void game_print(Game *game) {
 */
 
 Status game_add_space(Game *game, Space *space) {
-  if ((!space) || (game->n_spaces >= MAX_SPACES)) {
+  if ((!game) || (!space) || (game->n_spaces >= MAX_SPACES)) {
     return ERROR;
   }
 
@@ -182,16 +191,16 @@ Id game_get_space_id_at(Game *game, int position) {
   return space_get_id(game->spaces[position]);
 }
 
-Id game_get_player(Game *game)
+Player* game_get_player(Game *game)
 {
-  if (!game || game->player == NULL) {return NO_ID;}
+  if (!game || game->player == NULL) {return NULL;}
 
   return game->player;
 }
 
-Id game_get_object_at_location(Game *game, Space* space)
+Object* game_get_object(Game *game)
 {
-  if (!game || game->spaces == NULL) {return NO_ID;}
+  if (!game) {return NULL;}
 
   return game->object;
 }

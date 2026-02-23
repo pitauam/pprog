@@ -29,7 +29,7 @@ typedef struct _Game Game;
  * @param game pointer to game
  * @return OK, if everything goes well
  */
-Status game_create(Game *game);
+Game* game_create();
 
 Status game_create_from_file(Game *game, char *filename);
 
@@ -161,7 +161,7 @@ Id game_get_space_id_at(Game *game, int position);
  * @param game pointer to game
  * @return Id of the player if every thing has gone correctly or NO_ID if something was wrong
  */
-Id game_get_player(Game *game);
+Player* game_get_player(Game *game);
 
 /**
  * @brief gets the Id of an object in a specific location
@@ -170,6 +170,6 @@ Id game_get_player(Game *game);
  * @param game pointer to game
  * @return Id of the object if every thing has gone correctly or NO_ID if something was wrong
  */
-Id game_get_object_at_location(Game *game, Space* space);
+Object* game_get_object(Game *game);
 
 #endif
