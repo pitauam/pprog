@@ -16,5 +16,17 @@ struct Set
     int n_ids;      /*Keeps track of the number of ids in the Set*/
 };
 
+Set* set_create();
+
+Status set_destroy(Set* set);
+
+Status set_add_value(Set* set, Id value);
+
+Status set_del_value(Set* set, Id value);
+
+Status set_find_id(Set* set, Id id);
+
+Status set_print(Set *set, FILE *pf);
+
 
 

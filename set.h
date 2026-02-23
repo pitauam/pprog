@@ -11,6 +11,7 @@
 #define SET_H
 
 #include "types.h"
+#include <stdio.h>
 
 typedef struct _Set Set;
 
@@ -36,16 +37,40 @@ Status set_destroy(Set* set);
  * @author Santiago Pita
  *
  * @param set pointer to the set structure
- * @param value number to add 
+ * @param value Id to add 
  * @return OK if success ERROR if error
  */
 Status set_add_value(Set* set, Id value);
 
+/**
+ * @brief Deletes a value from a set
+ * @author Santiago Pita
+ *
+ * @param set pointer to the set structure
+ * @param value Id to remove
+ * @return OK if success ERROR if error
+ */
 Status set_del_value(Set* set, Id value);
 
-Id set_find_id(Set* set, Id id);
+/**
+ * @brief Finds an id inside a set
+ * @author Santiago Pita
+ *
+ * @param set pointer to the set structure
+ * @param value Id to find
+ * @return OK if found, ERROR if not found
+ */
+Status set_find_id(Set* set, Id id); /*no se si poner Status o Id de return*/
 
-Status set_print(Set *set);
+/**
+ * @brief Prints the Ids inside a set
+ * @author Santiago Pita
+ *
+ * @param set pointer to the set structure
+ * @param value Id to find
+ * @return OK if found, ERROR if not found
+ */
+Status set_print(Set *set, FILE *pf); /*le paso FILE *pf o lo imrpimo en pantalla directamene?*/
 
 
 #endif
