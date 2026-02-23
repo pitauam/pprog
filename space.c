@@ -9,6 +9,7 @@
  */
 
 #include "space.h"
+#include "set.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +27,7 @@ struct _Space {
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
-  Id object;              /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the player*/
+  Set *objects;         /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the player*/
 };
 
 /** space_create allocates memory for a new space
@@ -50,7 +51,7 @@ Space* space_create(Id id) {
   new_space->south = NO_ID;
   new_space->east = NO_ID;
   new_space->west = NO_ID;
-  new_space->object = NO_ID;
+  new_space->objects = set_create();
 
   return new_space;
 }
@@ -60,7 +61,9 @@ Status space_destroy(Space* space) {
     return ERROR;
   }
 
+  free(space->objects);
   free(space);
+
   return OK;
 }
 
@@ -150,23 +153,28 @@ Id space_get_west(Space* space) {
 }
 
 Status space_set_object(Space* space, Id id) {
-  if (!space) {
+  if (space == NULL || space->objects == NULL) {
     return ERROR;
   }
-  space->object = id;
+  if(set_find_id(space->objects, id)){
+    return ERROR;
+  }
+  set_add_value(space->objects, id);
+
   return OK;
 }
 
-Id space_get_object(Space* space) {
-  if (!space) {
-    return NO_ID;
+Set* space_get_objects(Space* space) {
+  if (space == NULL || space->objects == NULL) {
+    return NULL;
   }
-  return space->object;
+
+  return space->objects;
 }
 
 Status space_print(Space* space) {
   Id idaux = NO_ID;
-
+  int i;
   /* Error Control */
   if (!space) {
     return ERROR;
@@ -202,8 +210,10 @@ Status space_print(Space* space) {
   }
 
   /* 3. Print if there is an object in the space or not */
-  if (space_get_object(space) != NO_ID) {
-    fprintf(stdout, "---> Object in the space.\n");
+  if (space_get_objects(space) == NULL) {
+    for(i=0, i< set_get_n_ids(space->objects), i++){
+      fprintf(stdout, "---> Object%d: %ld.\n", i+1, space->id);
+    }
   } else {
     fprintf(stdout, "---> No object in the space.\n");
   }
