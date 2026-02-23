@@ -73,4 +73,14 @@ Status set_find_id(Set* set, Id id); /*no se si poner Status o Id de return*/
 Status set_print(Set *set, FILE *pf); /*le paso FILE *pf o lo imrpimo en pantalla directamene?*/
 
 
+/**
+ * @brief gets the number of ids in a set
+ * @author Santiago Pita
+ *
+ * @param set pointer to the set structure
+ * @return number of sets it ok, -1 if error
+ */
+int set_get_n_ids(Set *set);
+
+
 #endif

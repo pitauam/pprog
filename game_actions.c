@@ -167,7 +167,7 @@ void game_actions_take(Game *game){
   /*checks if the player is in the same space as the object*/
   if(object_location != NO_ID && object_location == player_location){
     /*gets the object id*/
-    object_id = object_get_id(game->object);
+    object_id = object_get_id();
     /*sets the object to the player*/
     player_set_object(player_get_id(game.player), object_id);
     /*deletes the object from the space*/

@@ -194,6 +194,4 @@ Id game_get_object_at_location(Game *game, Space* space)
   if (!game || game->spaces == NULL) {return NO_ID;}
 
   return game->object;
-
-
 }
