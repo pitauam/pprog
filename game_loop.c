@@ -18,10 +18,11 @@
 
 int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name);
 
-void game_loop_cleanup(Game game, Graphic_engine *gengine);
+void game_loop_cleanup(Game *game, Graphic_engine *gengine);
 
 int main(int argc, char *argv[]) {
-  Game game;
+  Game *game;
+  game = game_create;
   Graphic_engine *gengine;
   int result;
   Command *last_cmd;
@@ -67,7 +68,7 @@ int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name) {
   return 0;
 }
 
-void game_loop_cleanup(Game game, Graphic_engine *gengine) {
-  game_destroy(&game);
+void game_loop_cleanup(Game* game, Graphic_engine *gengine) {
+  game_destroy(game);
   graphic_engine_destroy(gengine);
 }

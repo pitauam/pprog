@@ -154,4 +154,13 @@ Status game_add_space(Game *game, Space *space);
  */
 Id game_get_space_id_at(Game *game, int position);
 
+/**
+ * @brief gets the Id of the player
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return Id of the player if every thing has gone correctly or NO_ID if something was wrong
+ */
+Id game_get_player(Game *game);
+
 #endif

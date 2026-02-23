@@ -181,3 +181,19 @@ Id game_get_space_id_at(Game *game, int position) {
 
   return space_get_id(game->spaces[position]);
 }
+
+Id game_get_player(Game *game)
+{
+  if (!game || game->player == NULL) {return NO_ID;}
+
+  return game->player;
+}
+
+Id game_get_object_at_location(Game *game, Space* space)
+{
+  if (!game || game->spaces == NULL) {return NO_ID;}
+
+  return game->object;
+
+
+}

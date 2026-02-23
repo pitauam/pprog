@@ -59,3 +59,10 @@ run:
  #runs Iteration 2 map
 runmap:
 	./$(EXE) nuevomapa.dat
+
+runv:
+	@echo ">>>>>>Running castle with valgrind"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
+
+	
+	

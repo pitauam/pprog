@@ -169,7 +169,7 @@ void game_actions_take(Game *game){
     /*gets the object id*/
     object_id = object_get_id(game->object);
     /*sets the object to the player*/
-    player_set_object(game->player, object_id);
+    player_set_object(player_get_id(game.player), object_id);
     /*deletes the object from the space*/
     space_set_object(game_get_space(game, player_location), NO_ID);
 

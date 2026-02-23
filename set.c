@@ -30,15 +30,36 @@ Set* set_create()
         new_set->ids[i] = NO_ID;
     }
 
-
-
-
     return new_set;
 }
 
-Status set_destroy(Set* set);
+Status set_destroy(Set* set)
+{
+    if (!set){
+        return ERROR;
+    }
 
-Status set_add_value(Set* set, Id value);
+    free(set);
+    return OK;
+}
+
+Status set_add_value(Set* set, Id value)
+{
+    int i;
+    if (!set){
+        return ERROR;
+    }
+
+    for (i = 0; i < SIZE; i++)
+    {
+        if (set->ids[i] == NULL)
+        {
+            set->ids[i] = value;
+            return OK;
+        }
+    }
+    return ERROR;
+}
 
 Status set_del_value(Set* set, Id value);
 
@@ -46,5 +67,11 @@ Status set_find_id(Set* set, Id id);
 
 Status set_print(Set *set, FILE *pf);
 
+int set_get_n_ids(Set *set)
+{
+    if (!set){return -1;}
+
+    return set->n_ids;
+}
 
 
