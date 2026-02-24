@@ -96,7 +96,6 @@ Status set_find_id(Set* set, Id id)
     return ERROR; 
 }
 
-
 Status set_print(Set *set, FILE *pf);
 
 int set_get_n_ids(Set *set)
