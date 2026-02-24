@@ -175,7 +175,7 @@ void game_actions_take(Game *game){
     player = game_get_player(game);
     player_set_object(player, object_id);
     /*deletes the object from the space*/
-    space_set_object(game_get_space(game, player_location), NO_ID);
+    space_remove_object(game_get_space(game, player_location), NO_ID);
 
   }
 
