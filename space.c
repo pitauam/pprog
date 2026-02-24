@@ -152,8 +152,8 @@ Id space_get_west(Space* space) {
   return space->west;
 }
 
-Status space_set_object(Space* space, Id id) {
-  if (space == NULL || space->objects == NULL) {
+Status space_add_object(Space* space, Id id) {
+  if (space == NULL || space->objects == NULL || id == NO_ID) {
     return ERROR;
   }
   if(set_find_id(space->objects, id)){
@@ -162,6 +162,17 @@ Status space_set_object(Space* space, Id id) {
   set_add_value(space->objects, id);
 
   return OK;
+}
+Status space_remove_object(Space* space, Id id) {
+  if (space == NULL || space->objects == NULL || id == NO_ID) {
+    return ERROR;
+  }
+  if(set_find_id(space->objects, id)){
+    set_del_value(space->objects, id);
+    return OK;
+  }
+
+  return ERROR;
 }
 
 Set* space_get_objects(Space* space) {

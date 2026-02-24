@@ -8,9 +8,6 @@
  */
 
 #include "set.h"
-#include "stdio.h"
-#include "stdlib.h"
-
 #define SIZE 256 /*64 Ids */
 
 

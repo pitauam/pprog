@@ -3,8 +3,8 @@
  *
  * @file space.h
  * @author Profesores PPROG
- * @version 0
- * @date 27-01-2025
+ * @version 2
+ * @date 24-02-2025
  * @copyright GNU Public License
  */
 
@@ -140,15 +140,23 @@ Status space_set_west(Space* space, Id id);
 Id space_get_west(Space* space);
 
 /**
- * @brief It sets whether the space has an object or not
- * @author Profesores PPROG
+ * @brief It adds a object to the space
+ * @author Mario Rodriguez
  *
  * @param space a pointer to the space
  * @param id an Id, specifying if in the space there is an object (Id) or not (NO_ID)
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status space_set_object(Space* space, Id id);
-
+Status space_add_object(Space* space, Id id);
+/**
+ * @brief It removes a object from the space
+ * @author Mario Rodriguez
+ *
+ * @param space a pointer to the space
+ * @param id an Id, specifying if in the space there is an object (Id) or not (NO_ID)
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_remove_object(Space* space, Id id);
 /**
  * @brief It gets whether the space has an object or not
  * @author Profesores PPROG
