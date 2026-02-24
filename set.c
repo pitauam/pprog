@@ -8,7 +8,12 @@
  */
 
 #include "set.h"
+#include "stdio.h"
+#include "stdlib.h"
+
 #define SIZE 256 /*64 Ids */
+
+
 
 struct _Set
 {
@@ -52,7 +57,7 @@ Status set_add_value(Set* set, Id value)
 
     for (i = 0; i < SIZE; i++)
     {
-        if (set->ids[i] == NULL)
+        if (set->ids[i] == NO_ID)
         {
             set->ids[i] = value;
             return OK;
@@ -63,7 +68,23 @@ Status set_add_value(Set* set, Id value)
 
 Status set_del_value(Set* set, Id value);
 
-Status set_find_id(Set* set, Id id);
+Status set_find_id(Set* set, Id id)
+{
+    int i;
+    if (!set) {
+        return ERROR; 
+    }
+
+    for (i = 0; i < SIZE; i++) {
+        if (set->ids[i] == id) {
+            return i;
+            return OK;
+        }
+    }
+
+    return ERROR; 
+}
+
 
 Status set_print(Set *set, FILE *pf);
 
