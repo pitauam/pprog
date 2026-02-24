@@ -8,6 +8,8 @@
  */
 
 #include "set.h"
+#include <stdlib.h>
+
 #define SIZE 256 /*64 Ids */
 
 
@@ -63,7 +65,19 @@ Status set_add_value(Set* set, Id value)
     return ERROR;
 }
 
-Status set_del_value(Set* set, Id value);
+Status set_del_value(Set* set, Id value) {
+    int i;
+    if (!set || value == NO_ID) return ERROR;
+
+    for (i = 0; i < SIZE; i++) {
+        if (set->ids[i] == value) {
+            set->ids[i] = NO_ID;
+            set->n_ids--;
+            return OK;
+        }
+    }
+    return ERROR;
+}
 
 Status set_find_id(Set* set, Id id)
 {

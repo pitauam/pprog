@@ -15,7 +15,7 @@
 #include "game.h"
 #include "game_actions.h"
 #include "graphic_engine.h"
-
+#include "game_reader.h"
 
 int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name);
 

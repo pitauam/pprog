@@ -2,7 +2,6 @@
 #define GAME_READER_H
 
 #include "game.h"
-#include "game_reader.h"
 
 /**
  * @brief loads the spaces of the game
