@@ -8,7 +8,6 @@
  * @copyright GNU Public License
  */
 #include "game.h"
-#include "game_reader.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,19 +68,20 @@ Status game_load_spaces(Game *game, char *filename) {
 
   return status;
 }
-
-Status game_create_from_file(Game *game, char *filename) {
-  if (game_create() == NULL) {
-    return ERROR;
+Game* game_create_from_file(char *filename) {
+  Game *game;
+  game = game_create();
+  if (game == NULL) {
+    return NULL;
   }
 
   if (game_load_spaces(game, filename) == ERROR) {
-    return ERROR;
+    return NULL;
   }
 
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
   game_set_object_location(game, game_get_space_id_at(game, 0));
 
-  return OK;
+  return game;
 }

@@ -16,6 +16,7 @@
 #include "game_actions.h"
 #include "graphic_engine.h"
 
+
 int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name);
 
 void game_loop_cleanup(Game *game, Graphic_engine *gengine);
@@ -55,7 +56,9 @@ int main(int argc, char *argv[]) {
 }
 
 int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name) {
-  if (game_create_from_file(game, file_name) == ERROR) {
+  
+  game = game_create_from_file(file_name);
+  if (game == NULL) {
     return 1;
   }
 

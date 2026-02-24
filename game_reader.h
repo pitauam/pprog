@@ -2,6 +2,7 @@
 #define GAME_READER_H
 
 #include "game.h"
+#include "game_reader.h"
 
 /**
  * @brief loads the spaces of the game
@@ -21,7 +22,7 @@ Status game_load_spaces(Game *game, char *filename);
  * @param filename pointer to a tring with the file name
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status game_create_from_file(Game *game, char *filename);
+Game* game_create_from_file(char *filename);
 
 
 #endif

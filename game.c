@@ -9,7 +9,6 @@
  */
 
 #include "game.h"
-#include "game_reader.h"
 
 #include <stdio.h>
 #include <stdlib.h>

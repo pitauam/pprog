@@ -16,6 +16,7 @@
 #include "types.h"
 #include "object.h"
 #include "player.h"
+#include "game_reader.h"
 
 #define MAX_SPACES 100
 
@@ -30,8 +31,6 @@ typedef struct _Game Game;
  * @return OK, if everything goes well
  */
 Game* game_create();
-
-Status game_create_from_file(Game *game, char *filename);
 
 /**
  * @brief deletes the records of commands and deletes the spaces
