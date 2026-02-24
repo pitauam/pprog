@@ -123,7 +123,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
   for (i = 0; i < game->n_spaces; i++) {
     space = game->spaces[i];
     if (space_get_objects(space) != NULL) {
-      space_set_object(space, NO_ID);
+      space_remove_object(space, NO_ID);
       break;
     }
   }
@@ -132,7 +132,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
   space = game_get_space(game, new_space_id);
   if (!space) return ERROR;
 
-  space_set_object(space, object_get_id(game->object));
+  space_add_object(space, object_get_id(game->object));
 
   return OK;
 }
