@@ -105,7 +105,7 @@ Id game_get_object_location(Game *game)
   
   for (i = 0; i < game->n_spaces; i++)
   {
-    if (space_get_object(game->spaces[i]) != NO_ID)
+    if (space_get_objects(game->spaces[i]) != NULL)
     {
       return game_get_space_id_at(game, i);
     }
@@ -123,7 +123,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
   /* takes out the object of the space */
   for (i = 0; i < game->n_spaces; i++) {
     space = game->spaces[i];
-    if (space_get_object(space) != NO_ID) {
+    if (space_get_objects(space) != NULL) {
       space_set_object(space, NO_ID);
       break;
     }
