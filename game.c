@@ -17,7 +17,7 @@
 /*Opaque Game struct*/
 struct _Game {
   Player *player;
-  Object *object;
+  Object *object; /*hay que hacer un array de objetos*/
   Space *spaces[MAX_SPACES];
   int n_spaces;
   Command *last_cmd;
