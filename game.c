@@ -14,14 +14,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define PLAYER_ID 100
+#define OBJECT_ID 200
+
 /*Opaque Game struct*/
 struct _Game {
-  Player *player;
-  Object *object; /*hay que hacer un array de objetos*/
-  Space *spaces[MAX_SPACES];
-  int n_spaces;
-  Command *last_cmd;
-  Bool finished;
+  Player *player;             /*pointer to the player structure*/
+  Object *object;             /*pointer to the object structure*/
+  Space *spaces[MAX_SPACES];  /*pointer to the spaces structure*/
+  int n_spaces;               /*number of spaces in castle*/
+  Command *last_cmd;          /*pointer to the last command executed*/
+  Bool finished;    
 };
 
 /**
@@ -40,8 +43,8 @@ Game* game_create() {
   }
 
   game->n_spaces = 0;
-  game->player = player_create(100); /*Temporary hard-coded values*/
-  game->object = object_create(200);
+  game->player = player_create(PLAYER_ID); /*Temporary hard-coded values*/
+  game->object = object_create(OBJECT_ID);
   game->last_cmd = command_create();
   game->finished = FALSE;
 

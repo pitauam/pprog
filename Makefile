@@ -60,8 +60,8 @@ run:
 	./$(EXE) castle.dat
 
  #runs Iteration 2 map
-runmap:
-	./$(EXE) nuevomapa.dat
+#runmap:
+#	./$(EXE) nuevomapa.dat
 
 runv:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
