@@ -24,6 +24,8 @@ struct _Player
     char name [WORD_SIZE +1]; /*!< Player's name */
     Id location; /*!< Id of the location */
     Id object; /*!< Id of the object */
+    int health; /*!< Health of the player */
+    char gdesc[7]; /*!< Gives a graphic description */
 };
 
 /** player_create allocates memory and initializes all variables*/
@@ -44,6 +46,8 @@ Player* player_create(Id id) {
   new_player->name[0] = '\0';
   new_player->location = NO_ID;
   new_player->object = NO_ID;
+  new_player->health = 100;
+  new_player->gdesc[0] = '\0';
 
   return new_player;
 }
@@ -120,6 +124,41 @@ Id player_get_object(Player* player) {
   return player->object;
 }
 
+Status player_set_health(Player *player, int health){
+    if(player == NULL || health < 0 || health > 100){
+        return ERROR;
+    }
+
+    player->health = health;
+
+    return OK;
+}
+
+int player_get_health(Player *player){
+    if(player == NULL){
+        return -1;
+    }
+
+    return player->health;
+}
+
+Status player_set_description(Player *player, char *descrp){
+    if(player == NULL || descrp == NULL || strlen(descrp) > 6){
+        return ERROR;
+    }
+
+    strcpy(player->gdesc, descrp);
+
+    return OK;
+}
+
+const char *player_get_description(Player *player){
+    if(player == NULL){
+        return NULL;
+    }
+
+    return player->gdesc;
+}
 /**player_print prints the information of the player*/
 Status player_print(Player* player) {
   Id idaux = NO_ID;
@@ -129,8 +168,8 @@ Status player_print(Player* player) {
     return ERROR;
   }
 
-  /* 1. Prints the player's id and name */
-  fprintf(stdout, "--> player (Id: %ld; Name: %s)\n", player->id, player->name);
+  /* 1. Prints the player's id name and health */
+  fprintf(stdout, "--> player (Id: %ld; Name: %s; Health: %d)\n", player->id, player->name, player->health);
 
   /* 2. Prints the id and the location*/
   idaux = player_get_location(player);
@@ -145,6 +184,11 @@ Status player_print(Player* player) {
   } else {
     fprintf(stdout, "---> No object in the player.\n");
   }
-
+  /* 3. Prints if the player has an object */
+  if (player_get_description(player)) {
+    fprintf(stdout, "---> Description: %s.\n", player->gdesc);
+  } else {
+    fprintf(stdout, "---> No descrioption in the player.\n");
+  }
   return OK;
 }
