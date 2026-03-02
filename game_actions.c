@@ -3,8 +3,8 @@
  *
  * @file game.c
  * @author Profesores PPROG
- * @version 1
- * @date 09-02-2025
+ * @version 2
+ * @date 02-03-2025
  * @copyright GNU Public License
  */
 
@@ -51,6 +51,22 @@ void game_actions_next(Game *game);
 void game_actions_back(Game *game);
 
 /**
+ * @brief moves to the next space at the west
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
+void game_actions_left(Game *game);
+
+/**
+ * @brief moves to the next space at the east
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
+void game_actions_right(Game *game);
+
+/**
  * @brief the player takes the object of the space
  * @author Mario Rodriguez
  *
@@ -66,6 +82,21 @@ void game_actions_take(Game *game);
  */
 void game_actions_drop(Game *game);
 
+/**
+ * @brief let's the player attack
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
+void game_actions_attack(Game *game);
+
+/**
+ * @brief let's the player chat
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ */
+void game_actions_chat(Game *game);
 /**
    Game actions implementation
 */
@@ -100,6 +131,22 @@ Status game_actions_update(Game *game, Command *command) {
     
     case DROP:
       game_actions_drop(game);
+      break;
+
+    case LEFT:
+      game_actions_left(game);
+      break;
+
+    case RIGHT:
+      game_actions_right(game);
+      break;
+
+    case ATTACK:
+      game_actions_left(game);
+      break;
+
+    case CHAT:
+      game_actions_right(game);
       break;
 
     default:
@@ -150,7 +197,36 @@ void game_actions_back(Game *game) {
 
   return;
 }
+void game_actions_left(Game *game){
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
 
+  space_id = game_get_player_location(game);
+  if (NO_ID == space_id) {
+    return;
+  }
+
+  current_id = space_get_west(game_get_space(game, space_id));
+  if (current_id != NO_ID) {
+    game_set_player_location(game, current_id);
+  }
+
+}
+
+void game_actions_right(Game *game){
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
+
+  space_id = game_get_player_location(game);
+  if (NO_ID == space_id) {
+    return;
+  }
+
+  current_id = space_get_east(game_get_space(game, space_id));
+  if (current_id != NO_ID) {
+    game_set_player_location(game, current_id);
+  }
+}
 void game_actions_take(Game *game){
   Id player_location = NO_ID;
   Id object_location = NO_ID;
@@ -205,4 +281,21 @@ void game_actions_drop(Game *game){
     player_set_object(player, NO_ID);    
   }
   return;
+}
+
+void game_actions_attack(Game *game){
+  Player* player;
+  Id player_location = NO_ID;
+  Id character_location = NO_ID;
+
+
+  player = game_get_player(game);
+
+  player_location = player_get_location(player);
+
+  
+
+
+
+
 }
