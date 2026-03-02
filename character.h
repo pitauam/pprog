@@ -105,7 +105,7 @@ int character_get_health(Character *character);
  * @param fiendly int with the state of the character
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status character_set_friendly(Character *character, int friendly);
+Status character_set_friendly(Character *character, Bool *friendly);
 /**
  * @brief gets if the character is friendly ot nor
  * @author Mario Rodriguez
@@ -114,7 +114,7 @@ Status character_set_friendly(Character *character, int friendly);
  * @param fiendly int with the state of the character
  * @return if its friendly
  */
-Bool Character_get_friendly();
+Bool Character_get_friendly(Character *character);
 
 /**
  * @brief sets the message of the character
@@ -126,9 +126,23 @@ Bool Character_get_friendly();
  */
 Status character_set_message(Character *character, char *message);
 
+/**
+ * @brief gets the message of the character
+ * @author Mario Rodriguez
+ *
+ * @param character pointer to the structure of the character
+ * @return The message of the character
+ */
 const char *character_get_message(Character *character);
 
-
+/**
+ * @brief Prints the information of the character
+ * @author Mario Rodriguez
+ *
+ * @param character pointer to the structure of the character
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status character_print(Character *character);
 
 
 #endif
