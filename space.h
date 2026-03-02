@@ -164,7 +164,7 @@ Status space_remove_object(Space* space, Id id);
  * @param space a pointer to the space
  * @return an Id, specifying if in the space there is an object (Id) or not (NO_ID)
  */
-Set *space_get_objects(Space* space);
+Set *space_get_object(Space* space);
 
 /**
  * @brief It prints the space information

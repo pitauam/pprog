@@ -16,8 +16,13 @@
 #include "types.h"
 #include "object.h"
 #include "player.h"
+#include "character.h"
 
 #define MAX_SPACES 100
+#define MAX_OBJECTS 100
+#define MAX_CHARACTERS 100
+
+#define PLAYER_ID 100
 
 /*Defines the struct Game*/
 typedef struct _Game Game;

@@ -11,7 +11,7 @@
  #CC stands for compilation command
 
 EXE = castle
-OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o character.o
+OBJS = game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o character.o
 CFLAGS = -Wall -ansi -pedantic -g
 CC = gcc
 CLIB = -lscreen -L.
@@ -68,6 +68,16 @@ run:
 
 runv:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
+
+
+spacetest: space_test.o
+	$(CC) -o $@ $^
+
+space_test.o: space_test.c space.h types.h set.h space_test.h test.h
+	$(CC) -c $<
+	
+runspacetest: 
+	./spacetest
 
 #@echo ">>>>>>Running castle with valgrind"
 

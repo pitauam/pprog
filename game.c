@@ -14,13 +14,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define PLAYER_ID 100
-#define OBJECT_ID 200
+
 
 /*Opaque Game struct*/
 struct _Game {
   Player *player;             /*pointer to the player structure*/
-  Object *object;             /*pointer to the object structure*/
+  Object *object[MAX_OBJECTS];             /*pointer to the array of objects*/
+  Character *characters[MAX_CHARACTERS];      /*pointer to the array of characters*/
   Space *spaces[MAX_SPACES];  /*pointer to the spaces structure*/
   int n_spaces;               /*number of spaces in castle*/
   Command *last_cmd;          /*pointer to the last command executed*/
@@ -44,7 +44,8 @@ Game* game_create() {
 
   game->n_spaces = 0;
   game->player = player_create(PLAYER_ID); /*Temporary hard-coded values*/
-  game->object = object_create(OBJECT_ID);
+  game->object[0] = '\0';
+  game->characters[0] = '\0';
   game->last_cmd = command_create();
   game->finished = FALSE;
 
@@ -107,7 +108,7 @@ Id game_get_object_location(Game *game)
   
   for (i = 0; i < game->n_spaces; i++)
   {
-    if (space_get_objects(game->spaces[i]) != NULL)
+    if (space_get_object(game->spaces[i]) != NULL)
     {
       return game_get_space_id_at(game, i);
     }
@@ -125,7 +126,7 @@ Status game_set_object_location(Game *game, Id new_space_id) {
   /* takes out the object of the space */
   for (i = 0; i < game->n_spaces; i++) {
     space = game->spaces[i];
-    if (space_get_objects(space) != NULL) {
+    if (space_get_object(space) != NULL) {
       space_remove_object(space, NO_ID);
       break;
     }

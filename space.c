@@ -28,6 +28,7 @@ struct _Space {
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
   Set *objects;         /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the player*/
+  Id character; /*Stores the ID of the character in the space, or NO_ID if there is no character*/
 };
 
 /** space_create allocates memory for a new space
@@ -175,7 +176,7 @@ Status space_remove_object(Space* space, Id id) {
   return ERROR;
 }
 
-Set* space_get_objects(Space* space) {
+Set* space_get_object(Space* space) {
   if (space == NULL || space->objects == NULL) {
     return NULL;
   }
@@ -221,7 +222,7 @@ Status space_print(Space* space) {
   }
 
   /* 3. Print if there is an object in the space or not */
-  if (space_get_objects(space) == NULL) {
+  if (space_get_object(space) == NULL) {
     for(i=0; i< set_get_n_ids(space->objects); i++){
       fprintf(stdout, "---> Object%d: %ld.\n", i+1, space->id);
     }
