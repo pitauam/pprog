@@ -99,6 +99,44 @@ Status player_set_object(Player* player, Id id);
 Id player_get_object(Player* player);
 
 /**
+ * @brief sets the desription of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param descrp description on the player
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status player_set_description(Player *player, char *descrp);
+
+/**
+ * @brief gets the description of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return a string with the player's description
+ */
+const char *player_get_description(Player *player);
+
+/**
+ * @brief sets the health of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param heatlh int with the hp of the player
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status player_set_health(Player *player, int health);
+
+/**
+ * @brief gets the health of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return int with the player's health
+ */
+int player_get_health(Player *player);
+
+/**
  * @brief Prints information about the player
  * @author Mario Rodriguez
  *
