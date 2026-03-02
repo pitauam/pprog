@@ -12,13 +12,12 @@
 
 #define SIZE 256 /*64 Ids */
 
-
-
 struct _Set
 {
     Id ids[SIZE];   /*Array of static Ids*/
     int n_ids;      /*Keeps track of the number of ids in the Set*/
 };
+
 
 Set* set_create()
 {
@@ -37,22 +36,20 @@ Set* set_create()
     return new_set;
 }
 
+
 Status set_destroy(Set* set)
 {
-    if (!set){
-        return ERROR;
-    }
+    if (!set){return ERROR;}
 
     free(set);
     return OK;
 }
 
+
 Status set_add_value(Set* set, Id value)
 {
     int i;
-    if (!set){
-        return ERROR;
-    }
+    if (!set){return ERROR;}
 
     for (i = 0; i < SIZE; i++)
     {
@@ -64,6 +61,7 @@ Status set_add_value(Set* set, Id value)
     }
     return ERROR;
 }
+
 
 Status set_del_value(Set* set, Id value) {
     int i;
@@ -79,12 +77,11 @@ Status set_del_value(Set* set, Id value) {
     return ERROR;
 }
 
+
 Status set_find_id(Set* set, Id id)
 {
     int i;
-    if (!set) {
-        return ERROR; 
-    }
+    if (!set) {return ERROR;}
 
     for (i = 0; i < SIZE; i++) {
         if (set->ids[i] == id) {
@@ -96,7 +93,20 @@ Status set_find_id(Set* set, Id id)
     return ERROR; 
 }
 
-Status set_print(Set *set, FILE *pf);
+
+Status set_print(Set *set)
+{
+    int i;
+    if (!set) {return ERROR;}
+
+    for (i = 0; i < set->n_ids;i++)
+    {
+        fprintf(stdout, "%li\n", set->ids[i]);
+    }
+
+    return OK;
+}
+
 
 int set_get_n_ids(Set *set)
 {
@@ -104,5 +114,3 @@ int set_get_n_ids(Set *set)
 
     return set->n_ids;
 }
-
-

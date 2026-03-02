@@ -11,7 +11,7 @@
  * @param filename pointer to a tring with the file name
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status game_load_spaces(Game *game, char *filename);
+Status game_reader_load_spaces(Game *game, char *filename);
 
 /**
  * @brief reeds the file and creates the game based on the information
@@ -21,7 +21,7 @@ Status game_load_spaces(Game *game, char *filename);
  * @param filename pointer to a tring with the file name
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Game* game_create_from_file(char *filename);
+Game* game_reader_create_from_file(char *filename);
 
 
 #endif

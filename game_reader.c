@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-Status game_load_spaces(Game *game, char *filename) {
+Status game_reader_load_spaces(Game *game, char *filename) {
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
@@ -68,14 +68,14 @@ Status game_load_spaces(Game *game, char *filename) {
 
   return status;
 }
-Game* game_create_from_file(char *filename) {
+Game* game_reader_create_from_file(char *filename) {
   Game *game;
   game = game_create();
   if (game == NULL) {
     return NULL;
   }
 
-  if (game_load_spaces(game, filename) == ERROR) {
+  if (game_reader_load_spaces(game, filename) == ERROR) {
     return NULL;
   }
 

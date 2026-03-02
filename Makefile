@@ -11,7 +11,7 @@
  #CC stands for compilation command
 
 EXE = castle
-OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o
+OBJS= game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o character.o
 CFLAGS = -Wall -ansi -pedantic -g
 CC = gcc
 CLIB = -lscreen -L.
@@ -49,6 +49,9 @@ space.o: space.c space.h types.h set.h
 	$(CC) -c $(CFLAGS) $<
 
 set.o: set.c set.h types.h
+	$(CC) -c $(CFLAGS) $<
+
+character.o: character.c character.h types.h
 	$(CC) -c $(CFLAGS) $<
 
  #cleans the .o and .exe files (used before uploading to git)

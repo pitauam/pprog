@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
 int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name) {
   
-  *game = game_create_from_file(file_name);
+  *game = game_reader_create_from_file(file_name);
   if (*game == NULL) {
     return 1;
   }

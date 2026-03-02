@@ -124,7 +124,7 @@ Status character_set_friendly(Character *character, Bool *friendly){
 
 Bool Character_get_friendly(Character *character){
     if(character == NULL){
-        return NULL;
+        return ERROR;
     }
 
     return character->friendly;
@@ -149,8 +149,6 @@ const char *character_get_message(Character *character){
 }
 
 Status character_print(Character *character){
-    Id idaux = NO_ID;
-
     /* Error Control */
     if (!character) {
         return ERROR;

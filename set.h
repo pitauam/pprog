@@ -23,6 +23,7 @@ typedef struct _Set Set;
  */
 Set* set_create();
 
+
 /**
  * @brief Destroys a new set, freeing its memory
  * @author Santiago Pita
@@ -31,6 +32,7 @@ Set* set_create();
  * @return OK if success ERROR if error
  */
 Status set_destroy(Set* set);
+
 
 /**
  * @brief Adds a value to a set
@@ -42,6 +44,7 @@ Status set_destroy(Set* set);
  */
 Status set_add_value(Set* set, Id value);
 
+
 /**
  * @brief Deletes a value from a set
  * @author Santiago Pita
@@ -51,6 +54,7 @@ Status set_add_value(Set* set, Id value);
  * @return OK if success ERROR if error
  */
 Status set_del_value(Set* set, Id value);
+
 
 /**
  * @brief Finds an id inside a set
@@ -62,15 +66,16 @@ Status set_del_value(Set* set, Id value);
  */
 Status set_find_id(Set* set, Id id); /*no se si poner Status o Id de return*/
 
+
 /**
  * @brief Prints the Ids inside a set
  * @author Santiago Pita
  *
  * @param set pointer to the set structure
- * @param value Id to find
- * @return OK if found, ERROR if not found
+ * @param pf pointer to the file where the function will print
+ * @return OK if print went well, ERROR if function couldn't print
  */
-Status set_print(Set *set, FILE *pf); /*le paso FILE *pf o lo imrpimo en pantalla directamene?*/
+Status set_print(Set *set); /*le paso FILE *pf o lo imrpimo en pantalla directamene?*/
 
 
 /**
