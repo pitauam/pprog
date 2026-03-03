@@ -78,6 +78,7 @@ Status game_set_player_location(Game *game, Id id);
  * @author Santiago Pita
  *
  * @param game pointer to game
+ * @param object_id id of the object to search
  * @return the id of the space where the object is located at
  */
 Id game_get_object_location(Game *game, Id object_id);
@@ -87,7 +88,8 @@ Id game_get_object_location(Game *game, Id object_id);
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @param id id of the object location
+ * @param new_space_id id of the object location where the object will be added
+ * @param object_id id of the object to add
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status game_set_object_location(Game *game, Id new_space_id, Id object_id);
@@ -174,6 +176,6 @@ Player* game_get_player(Game *game);
  * @param game pointer to game
  * @return Id of the object if every thing has gone correctly or NO_ID if something was wrong
  */
-Object* game_get_object(Game *game);
-
+Object* game_get_object_at(Game *game, int space_position);
+/*hay que hacer esta funcion*/
 #endif

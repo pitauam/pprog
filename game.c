@@ -130,7 +130,6 @@ Id game_get_object_location(Game *game, Id object_id)
 }
 
 Status game_set_object_location(Game *game, Id space_id, Id object_id) {
-  int i;
   Space *space;
 
   if (!game || space_id == NO_ID || object_id == NO_ID ) return ERROR;
@@ -201,7 +200,7 @@ Status game_add_space(Game *game, Space *space) {
 }
 
 Id game_get_space_id_at(Game *game, int position) {
-  if (position < 0 || position >= game->n_spaces) {
+  if (!game || position < 0 || position >= game->n_spaces) {
     return NO_ID;
   }
 
@@ -215,9 +214,12 @@ Player* game_get_player(Game *game)
   return game->player;
 }
 
-Object* game_get_object(Game *game)
+Object* game_get_object_at(Game *game, int space_position)
 {
-  if (!game) {return NULL;}
+    if (!game || space_position < 0 || space_position >= game->n_spaces) {
+    return NULL;
+  }
 
-  return game->object;
-}
+  return space_find_object(game->spaces[space_position]);
+} /*esta funcion hay que hacerla*/
+/*hay que usar n_ids del set para cuando se saquen del space, y hay que sacar el de arriba del todo como una pila*/

@@ -108,7 +108,7 @@ Status set_print(Set *set)
 }
 
 
-int set_get_n_ids(Set *set)
+int set_get_n_ids(Set *set) /*esta hay que usarla para recorrer el Set que returnee el space*/
 {
     if (!set){return -1;}
 

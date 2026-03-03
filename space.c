@@ -174,15 +174,9 @@ Status space_remove_object(Space* space, Id id) {
   }
 
   return ERROR;
-}
-
-Set* space_get_object(Space* space) {
-  if (space == NULL || space->objects == NULL) {
-    return NULL;
-  }
-
-  return space->objects;
-}
+} /*Mejor que returnee Bool */
+/*NO hay que hacer esta: Set* space_get_object(Space* space
+No hace falta esa*/
 
 Status space_find_object(Space* space, Id id){
   if (space == NULL || space->objects == NULL || id == NO_ID) {
