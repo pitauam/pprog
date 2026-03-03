@@ -68,23 +68,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
 
   return status;
 }
-Game* game_reader_create_from_file(char *filename) {
-  Game *game;
-  game = game_create();
-  if (game == NULL) {
-    return NULL;
-  }
 
-  if (game_reader_load_spaces(game, filename) == ERROR) {
-    return NULL;
-  }
-
-  /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
-
-  return game;
-}
 Status game_reader_load_objects(Game *game, char *filename){
 
   FILE *file = NULL;
@@ -92,7 +76,7 @@ Status game_reader_load_objects(Game *game, char *filename){
   char name[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, location = NO_ID;
-  Space *object = NULL;
+  Object *object = NULL;
   Status status = OK;
 
   if (!filename) {
@@ -118,7 +102,8 @@ Status game_reader_load_objects(Game *game, char *filename){
       object = object_create(id);
       if (object != NULL) {
         object_set_name(object, name);
-        game_set_object_location(game, location);
+        game_set_object_location(game, location, id);
+        /*tengo que crear game_add_object y que esa funcion añada el objeto al array de game*/
       }
     }
   }
@@ -131,4 +116,26 @@ Status game_reader_load_objects(Game *game, char *filename){
 
   return status;
 
+}
+
+Game* game_reader_create_from_file(char *filename) {
+  Game *game;
+  game = game_create();
+  if (game == NULL) {
+    return NULL;
+  }
+
+  if (game_reader_load_spaces(game, filename) == ERROR) {
+    return NULL;
+  }
+
+  if (game_reader_load_objects(game, filename) == ERROR) {
+    return NULL;
+  }
+
+  /* The player and the object are located in the first space */
+  game_set_player_location(game, game_get_space_id_at(game, 0));
+
+
+  return game;
 }
