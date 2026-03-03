@@ -20,8 +20,9 @@
 struct _Game {
   Player *player;                             /*pointer to the player structure*/
   Object *object[MAX_OBJECTS];                /*pointer to the array of objects*/
-  int n_objects;
+  int n_objects;                              /*number of objects*/
   Character *characters[MAX_CHARACTERS];      /*pointer to the array of characters*/
+  int n_characters;                           /*number of characters*/
   Space *spaces[MAX_SPACES];                  /*pointer to the spaces structure*/
   int n_spaces;                               /*number of spaces in castle*/
   Command *last_cmd;                          /*pointer to the last command executed*/
@@ -112,14 +113,14 @@ Status game_set_player_location(Game *game, Id id) {
   return player_set_location(game->player, id);
 }
 
-Id game_get_object_location(Game *game) 
+Id game_get_object_location(Game *game, Id object_id) 
 {
   int i;
   if (!game) {return NO_ID;}
   
   for (i = 0; i < game->n_spaces; i++)
   {
-    if (space_get_object(game->spaces[i]) != NULL)
+    if (space_find_object(game->spaces[i], object_id) == OK)
     {
       return game_get_space_id_at(game, i);
     }
@@ -128,24 +129,14 @@ Id game_get_object_location(Game *game)
   return NO_ID; 
 }
 
-Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
+Status game_set_object_location(Game *game, Id space_id, Id object_id) {
   int i;
   Space *space;
 
-  if (!game || new_space_id == NO_ID || object_id == NO_ID ) return ERROR;
+  if (!game || space_id == NO_ID || object_id == NO_ID ) return ERROR;
 
-  /* takes out the object of the space */
-  for (i = 0; i < game->n_spaces; i++) {
-    space = game->spaces[i];
-    if (space_get_object(space) != NULL) {
-      space_remove_object(space, object_id);
-      break;
-    }
-  }
-
-
-  /* Places the object in the new space */
-  space = game_get_space(game, new_space_id);
+  /* Places the object in thespace */
+  space = game_get_space(game, space_id);
   if (!space) return ERROR;
 
   space_add_object(space, object_id);
@@ -178,9 +169,20 @@ void game_print(Game *game) {
   for (i = 0; i < game->n_spaces; i++) {
     space_print(game->spaces[i]);
   }
-
-  printf("=> Object location: %d\n", (int)game_get_object_location(game));
+  printf("Objects: \n");
+  for (i = 0; i < game->n_objects;i++)
+  {
+      printf("  ");
+    object_print(game->object[i]);
+  }
   printf("=> Player location: %d\n", (int)game_get_player_location(game));
+  printf("Characters: \n");
+  for (i = 0; i < game->n_characters;i++)
+  {
+    printf("  ");
+    character_print(game->characters[i]);
+  }
+
 }
 
 /**

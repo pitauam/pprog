@@ -173,7 +173,7 @@ Set *space_get_object(Space* space);
  * @param space a pointer to the space
  * @return an Id, specifying if in the space there is an object (Id) or not (NO_ID)
  */
-Status *space_find_object(Space* space, Id id);
+Status space_find_object(Space* space, Id id);
 
 /**
  * @brief It prints the space information

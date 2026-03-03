@@ -80,7 +80,7 @@ Status game_set_player_location(Game *game, Id id);
  * @param game pointer to game
  * @return the id of the space where the object is located at
  */
-Id game_get_object_location(Game *game);
+Id game_get_object_location(Game *game, Id object_id);
 
 /**
  * @brief Gets the id of the object location

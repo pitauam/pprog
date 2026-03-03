@@ -184,7 +184,7 @@ Set* space_get_object(Space* space) {
   return space->objects;
 }
 
-Status *space_find_object(Space* space, Id id){
+Status space_find_object(Space* space, Id id){
   if (space == NULL || space->objects == NULL || id == NO_ID) {
     return ERROR;
   }
