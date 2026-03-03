@@ -95,7 +95,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
       sprintf(str, "        ^");
       screen_area_puts(ge->map, str);
     }
-
+    /*habra que usar game_get_object_id_at para encontrar si hay un objeto en el espacio que estes*/
     if (game_get_object_location(game) == id_act)
       obj = '+';
     else
