@@ -90,8 +90,9 @@ Id game_get_object_location(Game *game);
  * @param id id of the object location
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status game_set_object_location(Game *game, Id id);
-/**
+Status game_set_object_location(Game *game, Id new_space_id, Id object_id);
+
+/*
  * @brief Gets the last command
  * @author Profesores PPROG
  *

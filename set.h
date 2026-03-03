@@ -64,7 +64,7 @@ Status set_del_value(Set* set, Id value);
  * @param value Id to find
  * @return OK if found, ERROR if not found
  */
-Status set_find_id(Set* set, Id id); /*no se si poner Status o Id de return*/
+Status set_find_id(Set* set, Id id); 
 
 
 /**

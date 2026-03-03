@@ -18,12 +18,13 @@
 
 /*Opaque Game struct*/
 struct _Game {
-  Player *player;             /*pointer to the player structure*/
-  Object *object[MAX_OBJECTS];             /*pointer to the array of objects*/
+  Player *player;                             /*pointer to the player structure*/
+  Object *object[MAX_OBJECTS];                /*pointer to the array of objects*/
+  int n_objects;
   Character *characters[MAX_CHARACTERS];      /*pointer to the array of characters*/
-  Space *spaces[MAX_SPACES];  /*pointer to the spaces structure*/
-  int n_spaces;               /*number of spaces in castle*/
-  Command *last_cmd;          /*pointer to the last command executed*/
+  Space *spaces[MAX_SPACES];                  /*pointer to the spaces structure*/
+  int n_spaces;                               /*number of spaces in castle*/
+  Command *last_cmd;                          /*pointer to the last command executed*/
   Bool finished;    
 };
 
@@ -42,10 +43,16 @@ Game* game_create() {
     game->spaces[i] = NULL;
   }
 
+  for (i = 0; i < MAX_CHARACTERS; i++) {
+    game->characters[i] = NULL;
+  }
+
+  for (i = 0; i < MAX_OBJECTS; i++) {
+    game->object[i] = NULL;
+  }
+
   game->n_spaces = 0;
-  game->player = player_create(PLAYER_ID); /*Temporary hard-coded values*/
-  game->object[0] = '\0';
-  game->characters[0] = '\0';
+  game->player = player_create(PLAYER_ID); /*Hard coded value*/
   game->last_cmd = command_create();
   game->finished = FALSE;
 
@@ -62,7 +69,11 @@ Status game_destroy(Game *game) {
   command_destroy(game->last_cmd);
   
   player_destroy(game->player);
-  object_destroy(game->object);
+
+  for (i = 0; i < game->n_objects;i++)
+  {
+    object_destroy(game->object[i]);
+  }
 
   free(game);
 
@@ -117,26 +128,27 @@ Id game_get_object_location(Game *game)
   return NO_ID; 
 }
 
-Status game_set_object_location(Game *game, Id new_space_id) {
+Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
   int i;
   Space *space;
 
-  if (!game || new_space_id == NO_ID) return ERROR;
+  if (!game || new_space_id == NO_ID || object_id == NO_ID ) return ERROR;
 
   /* takes out the object of the space */
   for (i = 0; i < game->n_spaces; i++) {
     space = game->spaces[i];
     if (space_get_object(space) != NULL) {
-      space_remove_object(space, NO_ID);
+      space_remove_object(space, object_id);
       break;
     }
   }
+
 
   /* Places the object in the new space */
   space = game_get_space(game, new_space_id);
   if (!space) return ERROR;
 
-  space_add_object(space, object_get_id(game->object));
+  space_add_object(space, object_id);
 
   return OK;
 }
