@@ -247,7 +247,7 @@ Status space_print(Space* space) {
   }
 
   /* 3. Print if there is an object in the space or not */
-  if (space_get_object(space) == NULL) {
+  if (space_get_object(space) == TRUE) {
     for(i=0; i< set_get_n_ids(space->objects); i++){
       fprintf(stdout, "---> Object%d: %ld.\n", i+1, space->id);
     }
