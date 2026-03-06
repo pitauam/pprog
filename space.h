@@ -162,9 +162,9 @@ Status space_remove_object(Space* space, Id id);
  * @author Profesores PPROG
  *
  * @param space a pointer to the space
- * @return an Id, specifying if in the space there is an object (Id) or not (NO_ID)
+ * @return True if there is an object, False if there is no object
  */
-Set *space_get_object(Space* space);
+Bool space_get_object(Space* space);
 
 /**
  * @brief It gets whether the space has an object or not

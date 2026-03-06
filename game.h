@@ -74,12 +74,12 @@ Id game_get_player_location(Game *game);
 Status game_set_player_location(Game *game, Id id);
 
 /**
- * @brief Gets the id of the object location
+ * @brief Gets the id of the space where the object is located
  * @author Santiago Pita
  *
  * @param game pointer to game
  * @param object_id id of the object to search
- * @return the id of the space where the object is located at
+ * @return the id of the space where the object is located
  */
 Id game_get_object_location(Game *game, Id object_id);
 
@@ -88,7 +88,7 @@ Id game_get_object_location(Game *game, Id object_id);
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @param new_space_id id of the object location where the object will be added
+ * @param new_space_id id of the space where the object will be added
  * @param object_id id of the object to add
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
@@ -161,13 +161,14 @@ Status game_add_space(Game *game, Space *space);
 Id game_get_space_id_at(Game *game, int position);
 
 /**
- * @brief gets the Id of the player
+ * @brief gets the pointer to the player
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @return Id of the player if every thing has gone correctly or NO_ID if something was wrong
+ * @return pointer of the player if everything has gone correctly or NULL if something was wrong
  */
 Player* game_get_player(Game *game);
+
 
 /**
  * @brief gets the pointer to the object at the top of the set in a specific location
@@ -176,13 +177,13 @@ Player* game_get_player(Game *game);
  * @param game pointer to game
  * @param space_position position of the space where the obejct is located at
  * @return pointer to the object if every thing has gone correctly or NULL if something went wrong
- */
+ 
 Object* game_get_object_at(Game *game, int space_position);
-/*hay que hacer esta funcion*/
-#endif
+
+hay que hacer esta funcion*/
 
 /**
- * @brief adds an object to the set of all the objects in the game
+ * @brief adds an object to the array of pointers to object
  * @author Santiago Pita
  *
  * @param game pointer to game
@@ -192,7 +193,7 @@ Object* game_get_object_at(Game *game, int space_position);
 Status game_add_object(Game *game, Object *object);
 
 /**
- * @brief adds a character to the set of all the characters in the game
+ * @brief adds a character to the array of pointers to characters
  * @author Santiago Pita
  *
  * @param game pointer to game
@@ -202,7 +203,7 @@ Status game_add_object(Game *game, Object *object);
 Status game_add_character(Game *game, Character *character);
 
 /**
- * @brief Gets the pointer of the object with that id
+ * @brief Gets the pointer of the object said id
  * @author Santiago Pita
  *
  * @param game pointer to game
@@ -221,14 +222,23 @@ Object *game_get_object(Game *game, Id id);
 int game_get_number_of_objects(Game *game);
 
 /**
- * @brief 
+ * @brief returns the id of an object in the position pos
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @return 
+ * @param pos position of the object
+ * @return the id of the object in said position
  */
-Id game_get_object_if(Game *game, int pos);
+Id game_get_object_id(Game *game, int pos);
 
-
-
+/**
+ * @brief returns the name of an object
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param object pointer to the object
+ * @return name of the object
+ */
 const char* game_get_object_name(Game *game, Object *object);
+
+#endif

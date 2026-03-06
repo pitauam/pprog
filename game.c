@@ -215,21 +215,7 @@ Player* game_get_player(Game *game)
   return game->player;
 }
 
-Object *game_get_object(Game *game, Id id) {
-  int i = 0;
 
-  if (id == NO_ID) {
-    return NULL;
-  }
-
-  for (i = 0; i < game->n_objects; i++) {
-    if (id == object_get_id(game->object[i])) {
-      return game->object[i];
-    }
-  }
-
-  return NULL;
-}
 /*
 Object* game_get_object_at(Game *game, int space_position)
 {
@@ -266,6 +252,22 @@ Status game_add_character(Game *game, Character *character) {
   return OK;
 }
 
+Object *game_get_object(Game *game, Id id) {
+  int i = 0;
+
+  if (id == NO_ID) {
+    return NULL;
+  }
+
+  for (i = 0; i < game->n_objects; i++) {
+    if (id == object_get_id(game->object[i])) {
+      return game->object[i];
+    }
+  }
+
+  return NULL;
+}
+
 int game_get_number_of_objects(Game *game)
 {
   if (!game) {return -1;}
@@ -273,7 +275,7 @@ int game_get_number_of_objects(Game *game)
   return game->n_objects;
 }
 
-Id game_get_object_if(Game *game, int pos)
+Id game_get_object_id(Game *game, int pos)
 {
   if (!game || pos < 0) {return NO_ID;}
 
