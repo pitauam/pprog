@@ -134,11 +134,12 @@ Status game_set_object_location(Game *game, Id space_id, Id object_id) {
 
   if (!game || space_id == NO_ID || object_id == NO_ID ) return ERROR;
 
-  /* Places the object in thespace */
+  /* Places the object in the space */
   space = game_get_space(game, space_id);
   if (!space) return ERROR;
 
-  space_add_object(space, object_id);
+  
+  if (space_add_object(space, object_id) == ERROR) {return ERROR;}
 
   return OK;
 }
@@ -270,4 +271,18 @@ int game_get_number_of_objects(Game *game)
   if (!game) {return -1;}
 
   return game->n_objects;
+}
+
+Id game_get_object_if(Game *game, int pos)
+{
+  if (!game || pos < 0) {return NO_ID;}
+
+  return object_get_id(game->object[pos]);
+}
+
+const char * game_get_object_name(Game *game, Object *object) 
+{
+  if (!game || !object) {return NULL;}
+
+  return object_get_name(object);
 }

@@ -84,7 +84,7 @@ Status game_set_player_location(Game *game, Id id);
 Id game_get_object_location(Game *game, Id object_id);
 
 /**
- * @brief Gets the id of the object location
+ * @brief Sets the location of an object
  * @author Santiago Pita
  *
  * @param game pointer to game
@@ -211,4 +211,24 @@ Status game_add_character(Game *game, Character *character);
  */
 Object *game_get_object(Game *game, Id id);
 
+/**
+ * @brief gets the total number of objects
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return number of objects or -1 if something went wrong
+ */
 int game_get_number_of_objects(Game *game);
+
+/**
+ * @brief 
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return 
+ */
+Id game_get_object_if(Game *game, int pos);
+
+
+
+const char* game_get_object_name(Game *game, Object *object);
