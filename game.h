@@ -180,3 +180,23 @@ Player* game_get_player(Game *game);
 Object* game_get_object_at(Game *game, int space_position);
 /*hay que hacer esta funcion*/
 #endif
+
+/**
+ * @brief adds an object to the set of all the objects in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param character pointer to the new object
+ * @return pointer to the object if every thing has gone correctly or NULL if something went wrong
+ */
+Status game_add_object(Game *game, Set *set);
+
+/**
+ * @brief adds a character to the set of all the characters in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param character pointer to the new character
+ * @return pointer to the character if every thing has gone correctly or NULL if something went wrong
+ */
+Status game_add_character(Game *game, Character *character);
