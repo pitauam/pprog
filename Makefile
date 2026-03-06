@@ -70,8 +70,8 @@ runv:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
 
 
-spacetest: space_test.o
-	$(CC) -o $@ $^
+spacetest: space_test.o space.o set.o
+	$(CC) -o $@ $<
 
 space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) -c $<

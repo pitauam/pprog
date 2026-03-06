@@ -56,6 +56,7 @@ Status set_add_value(Set* set, Id value)
         if (set->ids[i] == NO_ID)
         {
             set->ids[i] = value;
+            set->n_ids++;
             return OK;
         }
     }
@@ -85,7 +86,6 @@ Status set_find_id(Set* set, Id id)
 
     for (i = 0; i < SIZE; i++) {
         if (set->ids[i] == id) {
-            return i;
             return OK;
         }
     }

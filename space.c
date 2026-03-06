@@ -181,12 +181,8 @@ Bool space_get_object(Space* space){
     return FALSE;
   }
 
-  if (space->objects == NULL)
-  {
-    return FALSE;
-  }
-
-  return TRUE;
+  if (set_get_n_ids(space->objects) > 0) return TRUE;
+  return FALSE;
 }
 
 Bool space_find_object(Space* space, Id id){

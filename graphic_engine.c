@@ -89,21 +89,16 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     if (id_back != NO_ID) {
       sprintf(str, "  |         %2d|", (int)id_back);
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |     ");
-
-      for(i=0; i < n_objects; i++){
-      if (game_get_object_location(game, game_get_object_id(game, i) ) == id_back){
-        strcpy(obj , game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        sprintf(str, "%s ", obj);
-      }
-      else{
-        obj[0] = '\0';
-        obj[0] = ' ';
-        sprintf(str, "%s", obj);
-      }
+      strcpy(str, "  |     "); 
+for(i=0; i < n_objects; i++){
+    if (game_get_object_location(game, game_get_object_id(game, i)) == id_back){
+        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+        strcat(str, obj); 
+        strcat(str, " "); 
     }
-      sprintf(str, "     |");
-      screen_area_puts(ge->map, str);
+}
+strcat(str, "     |"); 
+screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
       sprintf(str, "        ^");
@@ -116,20 +111,16 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
       screen_area_puts(ge->map, str);
       sprintf(str, "  | :D      %2d|", (int)id_act);
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |     ");
-
-      for(i=0; i < n_objects; i++){
-      if (game_get_object_location(game, game_get_object_id(game, i) ) == id_act){
-        strcpy(obj , game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        sprintf(str, "%s ", obj);
-      }
-      else{
-        obj[0] = '\0';
-        obj[0] = ' ';
-        sprintf(str, "%s", obj);
-      }
+      strcpy(str, "  |     "); 
+for(i=0; i < n_objects; i++){
+    if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
+        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+        strcat(str, obj); 
+        strcat(str, " "); 
     }
-      sprintf(str, "     |");
+}
+strcat(str, "     |"); 
+
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
@@ -145,20 +136,16 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
       screen_area_puts(ge->map, str);
       sprintf(str, "  |         %2d|", (int)id_next);
       screen_area_puts(ge->map, str);
-        sprintf(str, "  |     ");
-
-      for(i=0; i < n_objects; i++){
-      if (game_get_object_location(game, game_get_object_id(game, i) ) == id_next){
-        strcpy(obj , game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        sprintf(str, "%s ", obj);
-      }
-      else{
-        obj[0] = '\0';
-        obj[0] = ' ';
-        sprintf(str, "%s", obj);
-      }
+        strcpy(str, "  |     "); 
+for(i=0; i < n_objects; i++){
+    if (game_get_object_location(game, game_get_object_id(game, i)) == id_next){
+        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+        strcat(str, obj); 
+        strcat(str, " "); 
     }
-      sprintf(str, "     |");
+}
+strcat(str, "     |"); 
+screen_area_puts(ge->map, str);
       screen_area_puts(ge->map, str);
     }
   }

@@ -142,11 +142,11 @@ Status game_actions_update(Game *game, Command *command) {
       break;
 
     case ATTACK:
-      game_actions_left(game);
+      game_actions_attack(game);
       break;
 
     case CHAT:
-      game_actions_right(game);
+      game_actions_chat(game);
       break;
 
     default:
