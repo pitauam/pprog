@@ -264,3 +264,10 @@ Status game_add_character(Game *game, Character *character) {
 
   return OK;
 }
+
+int game_get_number_of_objects(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_objects;
+}

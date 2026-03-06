@@ -210,3 +210,5 @@ Status game_add_character(Game *game, Character *character);
  * @return pointer to the object or NULL if something went wrong
  */
 Object *game_get_object(Game *game, Id id);
+
+int game_get_number_of_objects(Game *game);
