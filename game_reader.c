@@ -103,7 +103,7 @@ Status game_reader_load_objects(Game *game, char *filename){
       if (object != NULL) {
         object_set_name(object, name);
         game_set_object_location(game, location, id);
-        /*tengo que crear game_add_object y que esa funcion añada el objeto al array de game*/
+        game_add_object(game, object);
       }
     }
   }
