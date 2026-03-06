@@ -168,12 +168,22 @@ Set *space_get_object(Space* space);
 
 /**
  * @brief It gets whether the space has an object or not
- * @author Profesores PPROG
+ * @author Mario Rodriguez
+ *
+ * @param space a pointer to the space
+ * @param id id of the object you want to find
+ * @return True if it finds the object, otherwise False
+ */
+Bool space_find_object(Space* space, Id id);
+
+/**
+ * @brief It gets the number of the objects of the space
+ * @author Mario Rodriguez
  *
  * @param space a pointer to the space
  * @return an Id, specifying if in the space there is an object (Id) or not (NO_ID)
  */
-Status space_find_object(Space* space, Id id);
+int space_get_n_objects(Space* space);
 
 /**
  * @brief It prints the space information

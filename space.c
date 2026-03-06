@@ -178,16 +178,25 @@ Status space_remove_object(Space* space, Id id) {
 /*NO hay que hacer esta: Set* space_get_object(Space* space
 No hace falta esa*/
 
-Status space_find_object(Space* space, Id id){
+Bool space_find_object(Space* space, Id id){
   if (space == NULL || space->objects == NULL || id == NO_ID) {
-    return ERROR;
+    return FALSE;
   }
 
   if(set_find_id(space, id) == ERROR){
-    return ERROR;
+    return FALSE;
   }
 
-  return OK;
+  return TRUE;
+}
+
+int space_get_n_objects(Space* space){
+
+  if(space == NULL){
+    return -1;
+  }
+
+  return set_get_n_ids(space->objects);
 }
 Status space_print(Space* space) {
   Id idaux = NO_ID;
