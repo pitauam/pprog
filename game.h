@@ -186,10 +186,10 @@ Object* game_get_object_at(Game *game, int space_position);
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @param character pointer to the new object
- * @return pointer to the object if every thing has gone correctly or NULL if something went wrong
+ * @param object pointer to the new object
+ * @return Ok if every thing has gone correctly or ERROR if something was wrong
  */
-Status game_add_object(Game *game, Set *set);
+Status game_add_object(Game *game, Object *object);
 
 /**
  * @brief adds a character to the set of all the characters in the game
@@ -197,6 +197,16 @@ Status game_add_object(Game *game, Set *set);
  *
  * @param game pointer to game
  * @param character pointer to the new character
- * @return pointer to the character if every thing has gone correctly or NULL if something went wrong
+ * @return Ok if every thing has gone correctly or ERROR if something was wrong
  */
 Status game_add_character(Game *game, Character *character);
+
+/**
+ * @brief Gets the pointer of the object with that id
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id id of the object
+ * @return pointer to the object or NULL if something went wrong
+ */
+Object *game_get_object(Game *game, Id id);
