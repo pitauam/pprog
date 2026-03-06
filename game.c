@@ -220,6 +220,29 @@ Object* game_get_object_at(Game *game, int space_position)
     return NULL;
   }
 
-  return space_find_object(game->spaces[space_position]);
+  return space_get_object(game->spaces[space_position]);
 } /*esta funcion hay que hacerla*/
 /*hay que usar n_ids del set para cuando se saquen del space, y hay que sacar el de arriba del todo como una pila*/
+/*creo que esta funcion deberia estar o en space o en otro lado pero en game no*/
+
+Status game_add_object(Game *game, Set *set) {
+  if ((!game) || (!set) || (game->n_objects >= MAX_OBJECTS)) {
+    return ERROR;
+  }
+
+  game->object[game->n_objects] = set;
+  game->n_objects++;
+
+  return OK;
+}
+
+Status game_add_character(Game *game, Character *character) {
+  if ((!game) || (!character) || (game->n_characters >= MAX_CHARACTERS)) {
+    return ERROR;
+  }
+
+  game->characters[game->n_characters] = character;
+  game->n_characters++;
+
+  return OK;
+}

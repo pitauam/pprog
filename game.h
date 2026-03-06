@@ -170,11 +170,12 @@ Id game_get_space_id_at(Game *game, int position);
 Player* game_get_player(Game *game);
 
 /**
- * @brief gets the Id of an object in a specific location
+ * @brief gets the pointer to the object at the top of the set in a specific location
  * @author Santiago Pita
  *
  * @param game pointer to game
- * @return Id of the object if every thing has gone correctly or NO_ID if something was wrong
+ * @param space_position position of the space where the obejct is located at
+ * @return pointer to the object if every thing has gone correctly or NULL if something went wrong
  */
 Object* game_get_object_at(Game *game, int space_position);
 /*hay que hacer esta funcion*/

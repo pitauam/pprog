@@ -183,7 +183,7 @@ Bool space_find_object(Space* space, Id id){
     return FALSE;
   }
 
-  if(set_find_id(space, id) == ERROR){
+  if(set_find_id(space->objects, id) == ERROR){
     return FALSE;
   }
 
