@@ -285,13 +285,17 @@ void game_actions_drop(Game *game){
 }
 
 void game_actions_attack(Game *game){
-  Player* player;
+  /*Player* player;
   Id player_location = NO_ID;
   Id character_location = NO_ID;
 
 
   player = game_get_player(game);
 
-  player_location = player_get_location(player);
+  player_location = player_get_location(player);*/
 
+}
+
+void game_actions_chat(Game *game){
+  /* Aquí irá la lógica para hablar con los personajes */
 }
