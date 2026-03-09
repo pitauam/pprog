@@ -297,10 +297,29 @@ Id game_get_character_id(Game *game, Id id)
   return space_get_character(game_get_space(game, id)); /*esta se usa en gameactions .c para attack*/
 }
 
-Id game_get_character_location(Game *game, Id character_id) /*esta todavia falta por hacerla*/
+Character *game_get_character(Game *game, Id id)
 {
   int i;
-  if (!game || character_id == NO_ID) {return NO_ID;}
+  if (!game || id == NO_ID) {return NULL;}
+
+  for (i = 0; i < game->n_characters;i++)
+  {
+    /*if the id given as an argument is found inside a space*/
+    if ((game_get_character_id(game, game_get_space_id_at(game, i))) == id)
+    {
+      /*returns the character at the place i in the array, which must have id i*/
+      return game->characters[i];
+    }
+  }
+  /*if the character isn't found*/
+  return NULL;
+}
+
+/*
+Id game_get_character_location(Game *game, Id id) esta todavia falta por hacerla
+{
+  int i;
+  if (!game || id == NO_ID) {return NO_ID;}
 
   space_get_character(game->characters[i]);
   
@@ -313,4 +332,4 @@ Id game_get_character_location(Game *game, Id character_id) /*esta todavia falta
   }
   
   return NO_ID; 
-}
+}*/

@@ -241,8 +241,37 @@ Id game_get_object_id(Game *game, int pos);
  */
 const char* game_get_object_name(Game *game, Object *object);
 
-
+/**
+ * @brief returns the id of a character in the given space
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id id of the space where the character is
+ * @return the id of the character in said space or NO_ID if there is no character
+ */
 Id game_get_character_id(Game *game, Id id);
+
+/**
+ * @brief Gets the id of the space where the character is located
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id id of the space where 
+ * @return the id of the space where the object is located
+
+Id game_get_character_location(Game *game, Id id) 
+esta todavia falta por hacerla*/
+
+/**
+ * @brief Gets the pointer to a character
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id id the character
+ * @return NULL if something goes wrong or the pointer of the character
+ */
+Character *game_get_character(Game *game, Id id);
+
 
 
 #endif

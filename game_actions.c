@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <time.h>
+
 /**
    Private functions
 */
@@ -83,15 +85,15 @@ void game_actions_take(Game *game);
 void game_actions_drop(Game *game);
 
 /**
- * @brief let's the player attack
- * @author Mario Rodriguez
+ * @brief lets the player attack
+ * @author Santiago Pita
  *
  * @param game pointer to game
  */
 void game_actions_attack(Game *game);
 
 /**
- * @brief let's the player chat
+ * @brief lets the player chat
  * @author Mario Rodriguez
  *
  * @param game pointer to game
@@ -264,7 +266,6 @@ void game_actions_drop(Game *game){
   Id object_id = NO_ID;
   Player* player;
 
-
   /*gets the id of the space where the player is*/
   space_id = game_get_player_location(game);
   if(space_id == NO_ID){
@@ -285,19 +286,67 @@ void game_actions_drop(Game *game){
 }
 
 void game_actions_attack(Game *game){
-
   Id player_location; 
-  Id character_location;
+  Id character_at_player_location;
+  Character *character = NULL; 
+  Player *player = NULL;
 
+  int character_health;
+  int player_health;
+  int random_number;
 
+   if (!game) {return;}
+
+  /*generates a seed for the random number (later should be moved to game.c)*/
+  srand(time(NULL));
+
+  /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
-  if (g)
+  if (player_location == NO_ID) {return;}
+  /*gets the id of the character located at the same space as the player*/
+  character_at_player_location = game_get_character_id(game, player_location);
+  if (character_at_player_location == NO_ID) {return;}
 
+  /*if character is friendly, return*/
+  if (Character_get_friendly(character) == TRUE) {return;}
 
+  character = game_get_character(game, character_at_player_location);
+  if (character == NULL) {return;}
 
+  character_health = character_get_health(character);
+  player_health = player_get_health(game_get_player(game));
 
+  /*if character or player is dead, return*/
+  if (character_health <= 0 || player_health <= 0) {return;}
 
+  /*generates a random number between 0 and 9*/
+  random_number = (rand() % 10);
 
+  player = game_get_player(game);
+
+  /*if the player loses*/
+  if (random_number < 5)
+  {
+    player_set_health(player, player_health -1);
+  }
+  else 
+  {
+    character_set_health(character, character_health - 1);
+  }
+
+  if (character_health <= 0)
+  {
+    /*character dies*/
+    character_destroy(character);
+    game_actions_exit(game); /*nota: en realidad no tiene que salirse del juego, tiene que entrar a un estado de juego finalizado*/
+  }
+  if (player_health <= 0)
+  {
+    /*player dies*/
+    player_destroy(player);
+  }
+
+  return;
 }
 
 
