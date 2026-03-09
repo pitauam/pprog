@@ -31,7 +31,7 @@ Character *character_create(Id id);
  * @param character pointer to the structure of a character
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status character_desrtoy(Character *character);
+Status character_destroy(Character *character);
 /**
  * @brief gets the id of a character
  * @author Mario Rodriguez
@@ -39,7 +39,7 @@ Status character_desrtoy(Character *character);
  * @param character pointer to the structure of a character
  * @return the id of the character
  */
-Id character_get_Id(Character *character);
+Id character_get_id(Character *character);
 
 /**
  * @brief Sets the name of a character

@@ -288,3 +288,29 @@ const char * game_get_object_name(Game *game, Object *object)
 
   return object_get_name(object);
 }
+
+
+Id game_get_character_id(Game *game, Id id)
+{
+  if (!game || id == NO_ID) {return NO_ID;}
+ 
+  return space_get_character(game_get_space(game, id)); /*esta se usa en gameactions .c para attack*/
+}
+
+Id game_get_character_location(Game *game, Id character_id) /*esta todavia falta por hacerla*/
+{
+  int i;
+  if (!game || character_id == NO_ID) {return NO_ID;}
+
+  space_get_character(game->characters[i]);
+  
+  for (i = 0; i < game->n_characters; i++)
+  {
+    if ()
+    {
+      return game_get_space_id_at(game, i);
+    }
+  }
+  
+  return NO_ID; 
+}

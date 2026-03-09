@@ -52,6 +52,7 @@ Space* space_create(Id id) {
   new_space->south = NO_ID;
   new_space->east = NO_ID;
   new_space->west = NO_ID;
+  new_space->character = NO_ID;
   new_space->objects = set_create();
 
   return new_space;
@@ -196,6 +197,23 @@ Bool space_find_object(Space* space, Id id){
 
   return TRUE;
 }
+
+Id space_get_character(Space* space){
+  if (space == NULL || space->character == NO_ID) {
+    return NO_ID;
+  }
+
+  return space->character;
+}
+ /*funciones nuevas la de arriba y la de abajo*/
+Status space_set_character(Space* space, Id id) {
+  if (!space || id == NO_ID) {
+    return ERROR;
+  }
+  space->character = id;
+  return OK;
+}
+
 
 int space_get_n_objects(Space* space){
 

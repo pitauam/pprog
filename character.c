@@ -40,7 +40,7 @@ Character *character_create(Id id){
     return new_character;
 }
 
-Status character_desrtoy(Character *character){
+Status character_destroy(Character *character){
     if(character == NULL){
         return ERROR;
     }
@@ -50,7 +50,7 @@ Status character_desrtoy(Character *character){
     return OK;
 }
 
-Id character_get_Id(Character *character){
+Id character_get_id(Character *character){
     if(character == NULL){
         return NO_ID;
     }

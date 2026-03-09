@@ -241,4 +241,8 @@ Id game_get_object_id(Game *game, int pos);
  */
 const char* game_get_object_name(Game *game, Object *object);
 
+
+Id game_get_character_id(Game *game, Id id);
+
+
 #endif

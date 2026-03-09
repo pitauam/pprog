@@ -68,4 +68,14 @@ CommandCode command_get_code(Command* command);
  */
 Status command_get_user_input(Command* command);
 
+/**
+ * @brief It gets the argument of the command
+ * @author Santiago Pita
+ *
+ * @param command a pointer to the argument of the command
+ * @return the argument code
+ */
+CommandCode command_get_code(Command* command);
+
+
 #endif

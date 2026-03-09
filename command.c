@@ -9,7 +9,7 @@
  */
 
 #include "command.h"
-
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +26,8 @@ char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "E
  */
 struct _Command {
   CommandCode code; /*!< Name of the command */
+  char *arg;        /*Argument introduced with the command*/
+
 };
 
 /** space_create allocates memory for a new space
@@ -41,7 +43,7 @@ Command* command_create() {
 
   /* Initialization of an empty command*/
   newCommand->code = NO_CMD;
-
+  newCommand->arg = NULL;
   return newCommand;
 }
 
@@ -72,6 +74,13 @@ CommandCode command_get_code(Command* command) {
   return command->code;
 }
 
+char *command_get_arg(Command* command) {
+  if (!command || !command->arg) {
+    return NULL;
+  }
+  return command->arg;
+}
+
 Status command_get_user_input(Command* command) {
   char input[CMD_LENGHT] = "", *token = NULL;
   int i = UNKNOWN - NO_CMD + 1;
@@ -79,6 +88,12 @@ Status command_get_user_input(Command* command) {
 
   if (!command) {
     return ERROR;
+  }
+
+  if (command->arg)
+  {
+    free(command->arg);
+    command->arg = NULL;
   }
 
   if (fgets(input, CMD_LENGHT, stdin)) {
@@ -94,6 +109,11 @@ Status command_get_user_input(Command* command) {
       } else {
         i++;
       }
+    }
+    token = strtok(NULL, " \n");
+    if (token)
+    {
+      command->arg = (char *) strdup(token);
     }
     return command_set_code(command, cmd);
   }

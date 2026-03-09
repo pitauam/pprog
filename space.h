@@ -177,6 +177,25 @@ Bool space_get_object(Space* space);
 Bool space_find_object(Space* space, Id id);
 
 /**
+ * @brief It gets the id of the character in the given space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @return the id number of the character in the given space
+ */
+Id space_get_character(Space* space);
+
+/**
+ * @brief It sets the id of the character in the given space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param id the id number of the character in said space
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_set_character(Space* space, Id id);
+
+/**
  * @brief It gets the number of the objects of the space
  * @author Mario Rodriguez
  *
