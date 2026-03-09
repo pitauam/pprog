@@ -19,10 +19,10 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 48
+#define WIDTH_MAP 60
 #define WIDTH_DES 29
 #define WIDTH_BAN 25
-#define HEIGHT_MAP 13
+#define HEIGHT_MAP 21
 #define HEIGHT_BAN 1
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
@@ -67,7 +67,7 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 }
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, /*id_right = NO_ID, id_left = NO_ID,*/ obj_loc = NO_ID;
   Space *space_act = NULL;
   char obj[MAX_CHARACTERS];
   char str[255];
@@ -82,45 +82,57 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     space_act = game_get_space(game, id_act);
     id_back = space_get_north(space_act);
     id_next = space_get_south(space_act);
+    /*id_right = space_get_east(space_act);
+    id_left = space_get_west(space_act);*/
 
     n_objects = game_get_number_of_objects(game);
 
-
+    /*imprime el anterior*/
     if (id_back != NO_ID) {
-      sprintf(str, "  |         %2d|", (int)id_back);
-      screen_area_puts(ge->map, str);
-      strcpy(str, "  |     "); 
-for(i=0; i < n_objects; i++){
-    if (game_get_object_location(game, game_get_object_id(game, i)) == id_back){
-        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        strcat(str, obj); 
-        strcat(str, " "); 
-    }
-}
-strcat(str, "     |"); 
-screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
-      sprintf(str, "        ^");
+      sprintf(str, "  |         %2d|", (int)id_back);
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  |           |");
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      strcpy(str, "  |     "); 
+      for(i=0; i < n_objects; i++){
+          if (game_get_object_location(game, game_get_object_id(game, i)) == id_back){
+            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+            strcat(str, obj); 
+          }else{
+            strcat(str, " "); 
+          }
+      }
+      strcat(str, "     |"); 
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
     }
-    /*habra que usar game_get_object_id_at para encontrar si hay un objeto en el espacio que estes*/
-
+    }
+    /*Imprime el actual*/
     if (id_act != NO_ID) {
+      
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
       sprintf(str, "  | :D      %2d|", (int)id_act);
       screen_area_puts(ge->map, str);
+      sprintf(str, "  |           |");
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
       strcpy(str, "  |     "); 
-for(i=0; i < n_objects; i++){
-    if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
-        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        strcat(str, obj); 
-        strcat(str, " "); 
-    }
-}
-strcat(str, "     |"); 
-
+      for(i=0; i < n_objects; i++){
+          if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
+              strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+              strcat(str, obj); 
+          }else{
+              strcat(str, " "); 
+          }
+      }
+      strcat(str, "     |"); 
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
@@ -128,27 +140,32 @@ strcat(str, "     |");
 
     /*^C>*/
 
-
+/*Imprime la siguiente*/
     if (id_next != NO_ID) {
-      sprintf(str, "        v");
-      screen_area_puts(ge->map, str);
+      
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
       sprintf(str, "  |         %2d|", (int)id_next);
       screen_area_puts(ge->map, str);
-        strcpy(str, "  |     "); 
-for(i=0; i < n_objects; i++){
-    if (game_get_object_location(game, game_get_object_id(game, i)) == id_next){
-        strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-        strcat(str, obj); 
-        strcat(str, " "); 
-    }
-}
-strcat(str, "     |"); 
-screen_area_puts(ge->map, str);
+      sprintf(str, "  |           |");
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      strcpy(str, "  |     "); 
+      for(i=0; i < n_objects; i++){
+          if (game_get_object_location(game, game_get_object_id(game, i)) == id_next){
+            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+            strcat(str, obj); 
+          }else{
+            strcat(str, " "); 
+          }
+      }
+      strcat(str, "     |"); 
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
     }
-  }
+
 
   /* Paint in the description area */
   screen_area_clear(ge->descript);
@@ -176,7 +193,7 @@ screen_area_puts(ge->map, str);
   /* Dump to the terminal */
   screen_paint();
   printf("prompt:> ");
-}
+  }
 /*funcion original:
 
 if (game_get_object_location(game) == id_next)
@@ -194,3 +211,52 @@ if (game_get_object_location(game) == id_next)
       sprintf(str, "  |     %s     |", obj);
       screen_area_puts(ge->map, str);
       */
+/* funcion derexha izquierda
+   
+  if (id_right != NO_ID) {
+      sprintf(str, "  +-----------+");
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  |         %2d|", (int)id_right);
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  |            |");
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      for(i=0; i < n_objects; i++){
+          if (game_get_object_location(game, game_get_object_id(game, i)) == id_right){
+            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+            strcat(str, obj); 
+          }else{
+            strcat(str, ""); 
+          }
+      }
+      strcat(str, "     |"); 
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  +-----------+");
+      screen_area_puts(ge->map, str);
+    }
+
+    if (id_left != NO_ID) {
+      sprintf(str, "  +-----------+");
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  |         %2d|", (int)id_left);
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  |            |");
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      screen_area_puts(ge->map, str);
+      strcpy(str, "  |     "); 
+      for(i=0; i < n_objects; i++){
+          if (game_get_object_location(game, game_get_object_id(game, i)) == id_left){
+            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+            strcat(str, obj); 
+          }else{
+            strcat(str, ""); 
+          }
+      }
+      strcat(str, "     |"); 
+      screen_area_puts(ge->map, str);
+      sprintf(str, "  +-----------+");
+      screen_area_puts(ge->map, str);
+    }
+*/
