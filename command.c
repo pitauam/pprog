@@ -25,9 +25,8 @@ char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "E
  * This struct stores all the information related to a command.
  */
 struct _Command {
-  CommandCode code; /*!< Name of the command */
-  char *arg;        /*Argument introduced with the command*/
-
+  CommandCode code;            /*!< Name of the command */
+  char arg[CMD_LENGHT];        /*Argument introduced with the command*/
 };
 
 /** space_create allocates memory for a new space
@@ -43,7 +42,7 @@ Command* command_create() {
 
   /* Initialization of an empty command*/
   newCommand->code = NO_CMD;
-  newCommand->arg = NULL;
+  newCommand->arg[0] = '\0';
   return newCommand;
 }
 
@@ -74,8 +73,8 @@ CommandCode command_get_code(Command* command) {
   return command->code;
 }
 
-char *command_get_arg(Command* command) {
-  if (!command || !command->arg) {
+const char *command_get_arg(Command* command) {
+  if (!command) {
     return NULL;
   }
   return command->arg;
@@ -90,11 +89,6 @@ Status command_get_user_input(Command* command) {
     return ERROR;
   }
 
-  if (command->arg)
-  {
-    free(command->arg);
-    command->arg = NULL;
-  }
 
   if (fgets(input, CMD_LENGHT, stdin)) {
     token = strtok(input, " \n");
@@ -111,12 +105,21 @@ Status command_get_user_input(Command* command) {
       }
     }
     token = strtok(NULL, " \n");
-    if (token)
-    {
-      command->arg = (char *) strdup(token);
+    
+    if (token != NULL) {
+      command_set_arg(command, token);
+    } else {
+      command_set_arg(command, "");
     }
+
     return command_set_code(command, cmd);
   }
   else
     return command_set_code(command, EXIT);
+}
+
+Status command_set_arg(Command* command, char* arg) {
+  if (!command || !arg) {return ERROR;}
+  strcpy(command->arg, arg);
+  return OK;
 }

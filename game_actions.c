@@ -237,19 +237,23 @@ void game_actions_take(Game *game){
   Object *object;
   Player *player;
 
+  /*object = game_get_object(game, game_get_object_id_at(game, ))
+
+  object_id = object_get_id(object);*/
+
+
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
   if(player_location == NO_ID){
     return;
   }
   /*gets the id of the space where the object is*/
-  object_location = game_get_object_location(game, object_location);
+  object_location = game_get_object_location(game, object_id);
 
   /*checks if the player is in the same space as the object*/
   if(object_location != NO_ID && object_location == player_location){
     /*gets the object id*/
     object = game_get_object(game, object_id);
-    object_id = object_get_id(object);
     /*sets the object to the player*/
     player = game_get_player(game);
     player_set_object(player, object_id);
@@ -342,7 +346,6 @@ void game_actions_attack(Game *game){
   if (player_get_health(game_get_player(game)) <= 0)
   {
     /*player dies*/
-    player_destroy(player);
     game_set_finished(game, TRUE); /*if player dies, game ends*/
   }
 
@@ -356,7 +359,7 @@ void game_actions_chat(Game *game){
   Id character_at_player_location;
   Character *character = NULL; 
 
-   if (!game) {return;}
+  if (!game) {return;}
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
@@ -372,10 +375,5 @@ void game_actions_chat(Game *game){
   if (character_get_friendly(character) == FALSE) {return;}
 
   character_print(character);
-
-
   return;
-
-
-  /* Aquí irá la lógica para hablar con los personajes */
 }

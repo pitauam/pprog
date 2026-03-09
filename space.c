@@ -27,8 +27,8 @@ struct _Space {
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
-  Set *objects;         /*!< Stores the Id of an object. NO_ID (-1) means there is no object in the player*/
-  Id character; /*Stores the ID of the character in the space, or NO_ID if there is no character*/
+  Set *objects;             /*!< Stores the Id of an object. NO_ID (-1) means there is no object*/
+  Id character;             /*Stores the ID of the character in the space, or NO_ID if there is no character*/
 };
 
 /** space_create allocates memory for a new space

@@ -68,14 +68,25 @@ CommandCode command_get_code(Command* command);
  */
 Status command_get_user_input(Command* command);
 
+
+/**
+ * @brief It sets the argument of the command
+ * @author Santiago Pita
+ *
+ * @param command a pointer to the command
+ * @param code the command to set
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status command_set_arg(Command* command, char* arg);
+
+
 /**
  * @brief It gets the argument of the command
  * @author Santiago Pita
  *
- * @param command a pointer to the argument of the command
+ * @param command a pointer to the command
  * @return the argument code
  */
-CommandCode command_get_code(Command* command);
-
+const char* command_get_arg(Command* command);
 
 #endif

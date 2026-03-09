@@ -314,7 +314,18 @@ Character *game_get_character(Game *game, Id id)
   /*if the character isn't found*/
   return NULL;
 }
+/*
+Id game_get_object_id_at(Game *game, Space* space)
+{
+  if (!game || !space){return NO_ID;}
 
+    return object_get_id(space_get_object(space));
+
+
+
+
+}
+*/
 /*
 Id game_get_character_location(Game *game, Id id) esta todavia falta por hacerla
 {
