@@ -122,7 +122,7 @@ Status character_set_friendly(Character *character, Bool *friendly){
     return OK;   
 }
 
-Bool Character_get_friendly(Character *character){
+Bool character_get_friendly(Character *character){
     if(character == NULL){
         return ERROR;
     }
@@ -166,7 +166,7 @@ Status character_print(Character *character){
         fprintf(stdout, "---> Message: %s.\n", character->message);
     }
    /* 3. Prints if the player has an object */
-  if (Character_get_friendly(character)) {
+  if (character_get_friendly(character)) {
     fprintf(stdout, "---> Character is friendly.\n");
   } else {
     fprintf(stdout, "---> Character is not friendly.\n");

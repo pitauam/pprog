@@ -98,7 +98,7 @@ Status character_set_health(Character *character, int health);
  */
 int character_get_health(Character *character);
 /**
- * @brief sets if the character is friendly ot nor
+ * @brief sets if the character is friendly ot not
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
@@ -107,14 +107,14 @@ int character_get_health(Character *character);
  */
 Status character_set_friendly(Character *character, Bool *friendly);
 /**
- * @brief gets if the character is friendly ot nor
+ * @brief gets if the character is friendly ot not
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
  * @param fiendly int with the state of the character
  * @return if its friendly
  */
-Bool Character_get_friendly(Character *character);
+Bool character_get_friendly(Character *character);
 
 /**
  * @brief sets the message of the character

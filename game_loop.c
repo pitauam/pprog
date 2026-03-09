@@ -16,6 +16,7 @@
 #include "game_actions.h"
 #include "graphic_engine.h"
 #include "game_reader.h"
+#include <time.h>
 
 int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name);
 
@@ -43,6 +44,9 @@ int main(int argc, char *argv[]) {
   }
 
   last_cmd = game_get_last_command(game);
+
+  /*generates a seed for the random number (later should be moved to game.c)*/
+  srand(time(NULL));
 
   while ((command_get_code(last_cmd) != EXIT) && (game_get_finished(game) == FALSE)) {
     graphic_engine_paint_game(gengine, game);

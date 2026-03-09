@@ -297,8 +297,6 @@ void game_actions_attack(Game *game){
 
    if (!game) {return;}
 
-  /*generates a seed for the random number (later should be moved to game.c)*/
-  srand(time(NULL));
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
@@ -307,11 +305,13 @@ void game_actions_attack(Game *game){
   character_at_player_location = game_get_character_id(game, player_location);
   if (character_at_player_location == NO_ID) {return;}
 
-  /*if character is friendly, return*/
-  if (Character_get_friendly(character) == TRUE) {return;}
-
   character = game_get_character(game, character_at_player_location);
   if (character == NULL) {return;}
+
+  /*if character is friendly, return*/
+  if (character_get_friendly(character) == TRUE) {return;}
+
+  character_print(character);
 
   character_health = character_get_health(character);
   player_health = player_get_health(game_get_player(game));
@@ -334,16 +334,16 @@ void game_actions_attack(Game *game){
     character_set_health(character, character_health - 1);
   }
 
-  if (character_health <= 0)
+  if (character_get_health(character) <= 0)
   {
     /*character dies*/
-    character_destroy(character);
-    game_actions_exit(game); /*nota: en realidad no tiene que salirse del juego, tiene que entrar a un estado de juego finalizado*/
+    space_set_character(game_get_space(game, player_location), NO_ID);  
   }
-  if (player_health <= 0)
+  if (player_get_health(game_get_player(game)) <= 0)
   {
     /*player dies*/
     player_destroy(player);
+    game_set_finished(game, TRUE); /*if player dies, game ends*/
   }
 
   return;
@@ -351,5 +351,31 @@ void game_actions_attack(Game *game){
 
 
 void game_actions_chat(Game *game){
+
+  Id player_location; 
+  Id character_at_player_location;
+  Character *character = NULL; 
+
+   if (!game) {return;}
+
+  /*gets the id of the space where the player is located*/
+  player_location = game_get_player_location(game);
+  if (player_location == NO_ID) {return;}
+  /*gets the id of the character located at the same space as the player*/
+  character_at_player_location = game_get_character_id(game, player_location);
+  if (character_at_player_location == NO_ID) {return;}
+
+  character = game_get_character(game, character_at_player_location);
+  if (character == NULL) {return;}
+
+  /*if character is not friendly, return*/
+  if (character_get_friendly(character) == FALSE) {return;}
+
+  character_print(character);
+
+
+  return;
+
+
   /* Aquí irá la lógica para hablar con los personajes */
 }
