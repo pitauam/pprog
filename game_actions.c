@@ -386,6 +386,6 @@ void game_actions_chat(Game *game){
   /*if character is not friendly, return*/
   if (character_get_friendly(character) == FALSE) {return;}
 
-  character_print(character);
+  character_get_message(character);
   return;
 }
