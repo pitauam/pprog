@@ -305,7 +305,7 @@ Character *game_get_character(Game *game, Id id)
   for (i = 0; i < game->n_characters;i++)
   {
     /*if the id given as an argument is found inside a space*/
-    if ((game_get_character_id(game, game_get_space_id_at(game, i))) == id)
+    if ((character_get_id(game->characters[i]) == id))
     {
       /*returns the character at the place i in the array, which must have id i*/
       return game->characters[i];

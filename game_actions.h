@@ -15,6 +15,8 @@
 #include "game.h"
 #include "types.h"
 
+#define MAX_ARG 32 /*maximum number of characters for the argument*/
+
 /**
  * @brief reads the command and finds what to do
  * @author Profesores PPROG

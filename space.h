@@ -149,11 +149,11 @@ Id space_get_west(Space* space);
  */
 Status space_add_object(Space* space, Id id);
 /**
- * @brief It removes a object from the space
+ * @brief It removes an object from the space
  * @author Mario Rodriguez
  *
  * @param space a pointer to the space
- * @param id an Id, specifying if in the space there is an object (Id) or not (NO_ID)
+ * @param id Id of the object that will be deleted
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_remove_object(Space* space, Id id);

@@ -234,34 +234,49 @@ void game_actions_take(Game *game){
   Id player_location = NO_ID;
   Id object_location = NO_ID;
   Id object_id = NO_ID;
+
+  int i;
+
+  char object_name[MAX_ARG];
+  
   Object *object;
   Player *player;
 
-  /*object = game_get_object(game, game_get_object_id_at(game, ))
-
-  object_id = object_get_id(object);*/
-
-
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
-  if(player_location == NO_ID){
-    return;
-  }
+  if(player_location == NO_ID) {return;}
+
   /*gets the id of the space where the object is*/
-  object_location = game_get_object_location(game, object_id);
+  
 
-  /*checks if the player is in the same space as the object*/
-  if(object_location != NO_ID && object_location == player_location){
+  /*saves the last command argument*/
+  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+
+  for (i = 0; i < game_get_number_of_objects(game) ; i++)
+  {
     /*gets the object id*/
-    object = game_get_object(game, object_id);
-    /*sets the object to the player*/
-    player = game_get_player(game);
-    player_set_object(player, object_id);
-    /*deletes the object from the space*/
-    space_remove_object(game_get_space(game, player_location), NO_ID);
+    object_id = game_get_object_id(game, i);
 
+    /*if the name in the argument is the same as the name of one of the objects, then it exists*/
+    if ((game_get_object_name(game, game_get_object(game, object_id))) == object_name)
+    {
+      object_location = game_get_object_location(game, object_id);
+      /*if the object is in the same place as the player, then it can take it*/
+      if (object_location != NO_ID && object_location == player_location)
+      {
+        /*sets the object to the player*/
+        player = game_get_player(game);
+        player_set_object(player, object_id);
+
+        /*deletes the object from the space*/
+        space_remove_object(game_get_space(game, player_location), object_id);
+      }
+    }
+    else
+    {
+      return;
+    }
   }
-
   return;
 }
 
@@ -299,8 +314,7 @@ void game_actions_attack(Game *game){
   int player_health;
   int random_number;
 
-   if (!game) {return;}
-
+  if (!game) {return;}
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
