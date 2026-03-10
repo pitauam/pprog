@@ -30,6 +30,8 @@
 #define WIDTH 3 
 #define HEIGHT 7 -2 /*-3 is to fix incorrections*/
 
+#define ROOM_HEIGHT 1
+
 struct _Graphic_engine {
   Area *map, *descript, *banner, *help, *feedback;
 };
@@ -176,6 +178,9 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   int i;
   int j;
   int len;
+
+  if (ge == NULL) {return;}
+  if (id_act == NO_ID){return;}
   
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
@@ -191,15 +196,12 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   {
     sprintf(str, "                  |%13d|", (int)id_act);
   }
-
   
   screen_area_puts(ge->map, str);
-
-
   sprintf(str, "                  |             |");
 
   /*height's -2 is because of the 2 minimum screen_area_puts above*/
-  for (j = 0; j < HEIGHT; j++)
+  for (j = 0; j < ROOM_HEIGHT; j++)
   {
     screen_area_puts(ge->map, str);
   }
@@ -213,22 +215,14 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
       strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
       strcat(str, obj);
       strcat(str, " "); 
-      len+= strlen(obj);
+      len+= strlen(obj) + 1;
     }
   }
   
-  if (len <= 0)
-  {
-    strcat(str, "        |"); 
+  for (j = 0; j < 8 - len; j++) {
+    strcat(str, " ");
   }
-  else
-  {
-    for (j = 0; j < 7-len; j++)
-    {
-      strcat(str, " ");
-    }
-    strcat(str, "|"); 
-  }
+  strcat(str, "|");
 
   screen_area_puts(ge->map, str);
   sprintf(str, "                  +-------------+");
