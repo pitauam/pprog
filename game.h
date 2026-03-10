@@ -281,7 +281,7 @@ Character *game_get_character(Game *game, Id id);
  * @param game pointer to game
  * @return number of characters or -1 if something went wrong
  */
-int game_get_number_of_characters(Game *game)
+int game_get_number_of_characters(Game *game);
 
 
 
