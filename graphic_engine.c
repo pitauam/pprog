@@ -27,6 +27,9 @@
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
 
+#define WIDTH 3 
+#define HEIGHT 7 -2 /*-3 is to fix incorrections*/
+
 struct _Graphic_engine {
   Area *map, *descript, *banner, *help, *feedback;
 };
@@ -171,38 +174,64 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   Id player_location;
   int n_objects;
   int i;
-
+  int j;
+  int len;
+  
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
   /*divididos por 3*/
-  sprintf(str, "                +-----------+");
+  sprintf(str, "                  +-------------+");
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/
-  if(player_location == id_act){
-    sprintf(str, "                | :D      %2d|", (int)id_act);
-  }else{
-    sprintf(str, "                |         %2d|", (int)id_act);
+  if (player_location == id_act) 
+  {
+    sprintf(str, "                  | :D%10d|", (int)id_act);
+  } 
+  else 
+  {
+    sprintf(str, "                  |%13d|", (int)id_act);
   }
+
+  
   screen_area_puts(ge->map, str);
-  sprintf(str, "                |           |");
-  screen_area_puts(ge->map, str);
-  strcpy(str, "                | ");
-  strcat(str, "        |");
-  screen_area_puts(ge->map, str);
-  screen_area_puts(ge->map, str);
-  strcpy(str, "                |     ");
+
+
+  sprintf(str, "                  |             |");
+
+  /*height's -2 is because of the 2 minimum screen_area_puts above*/
+  for (j = 0; j < HEIGHT; j++)
+  {
+    screen_area_puts(ge->map, str);
+  }
+  strcpy(str, "                  |     ");
+
+  len = 0;
   /*prints first place objects*/
   for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
-            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-            strcat(str, obj); 
-          }else{
-            strcat(str, " "); 
-          }
+    if (game_get_object_location(game, game_get_object_id(game, i)) == id_act)
+    {
+      strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+      strcat(str, obj);
+      strcat(str, " "); 
+      len+= strlen(obj);
+    }
   }
-  strcat(str, "     |"); 
+  
+  if (len <= 0)
+  {
+    strcat(str, "        |"); 
+  }
+  else
+  {
+    for (j = 0; j < 7-len; j++)
+    {
+      strcat(str, " ");
+    }
+    strcat(str, "|"); 
+  }
+
   screen_area_puts(ge->map, str);
-  sprintf(str, "                +-----------+");
+  sprintf(str, "                  +-------------+");
   screen_area_puts(ge->map, str);
 
 }
@@ -213,47 +242,72 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   Id player_location;
   int n_objects;
   int i;
-
+  int j;
+  int len;
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
 
-  sprintf(str, "+-----------+   +-----------+");
+  sprintf(str, "+-------------+   +-------------+");
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/
-   if(player_location == id_act){
-    sprintf(str, "|         %2d|   | :D      %2d|", (int)id_left, (int)id_act);
-  }else{
-    sprintf(str, "|         %2d|   |         %2d|", (int)id_left, (int)id_act);
+  if (player_location == id_act) 
+  {
+    sprintf(str, "|          %-3d|   | :D%10d|", (int)id_left, (int)id_act);
+  } 
+  else 
+  {
+    sprintf(str, "|        %d|   |%13d|", (int)id_left, (int)id_act);
   }
   screen_area_puts(ge->map, str);
-  sprintf(str, "|           |   |           |");
-  screen_area_puts(ge->map, str);
-  screen_area_puts(ge->map, str);
-  screen_area_puts(ge->map, str);
+  sprintf(str, "|             |   |             |");
+
+  /*height's -2 is because of the 2 minimum screen_area_puts above*/
+  for (j = 0; j < HEIGHT; j++)
+  {
+    screen_area_puts(ge->map, str);
+  }
+  
   /*prints first place objects*/
   strcpy(str, "|     "); 
   for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_left){
-            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-            strcat(str, obj); 
-          }else{
-            strcat(str, " "); 
-          }
+    if (game_get_object_location(game, game_get_object_id(game, i)) == id_left)
+    {
+      strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
+      strcat(str, obj); 
+    }
+    else
+    {
+      strcat(str, " "); 
+    }
   }
   strcat(str, "     |   ");
   /*prints second place objects*/
   strcat(str, "|     "); 
+  len = 0;
   for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
+  if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
             strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
             strcat(str, obj); 
           }else{
             strcat(str, " "); 
           }
   }
-  strcat(str, "     |   ");
+  
+  if (len <= 0)
+  {
+    strcat(str, "     |"); 
+  }
+  else
+  {
+    for (j = 0; j < 7-len; j++)
+    {
+      strcat(str, " ");
+    }
+    strcat(str, "|"); 
+  }
+
   screen_area_puts(ge->map, str);
-  sprintf(str, "+-----------+   +-----------+");
+  sprintf(str, "+-------------+   +-------------+");
   screen_area_puts(ge->map, str);
   
 }
