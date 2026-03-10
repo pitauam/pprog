@@ -23,6 +23,8 @@
 #define MAX_CHARACTERS 100
 
 #define PLAYER_ID 100
+#define CHARACTER1 31
+#define CHARACTER2 32
 
 /*Defines the struct Game*/
 typedef struct _Game Game;
