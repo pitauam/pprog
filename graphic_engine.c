@@ -3,8 +3,8 @@
  *
  * @file graphic_engine.c
  * @author Profesores PPROG
- * @version 0
- * @date 24-01-2026
+ * @version 3
+ * @date 10-03-2026
  * @copyright GNU Public License
  */
 
@@ -163,6 +163,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   printf("prompt:> ");
   }
 }
+
 /*prints -x-*/
 void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   char str[255];
@@ -173,7 +174,7 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
 
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
-
+  /*divididos por 3*/
   sprintf(str, "                +-----------+");
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/
@@ -185,9 +186,12 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   screen_area_puts(ge->map, str);
   sprintf(str, "                |           |");
   screen_area_puts(ge->map, str);
+  strcpy(str, "                | ");
+  strcat(str, "        |");
   screen_area_puts(ge->map, str);
   screen_area_puts(ge->map, str);
-  strcpy(str, "                |     "); 
+  strcpy(str, "                |     ");
+  /*prints first place objects*/
   for(i=0; i < n_objects; i++){
           if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
             strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
