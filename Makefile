@@ -67,7 +67,7 @@ run:
 #	./$(EXE) nuevomapa.dat
 
 runv:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(EXE) castle.dat
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) castle.dat
 
 
 spacetest: space_test.o space.o set.o

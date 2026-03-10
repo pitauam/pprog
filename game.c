@@ -57,14 +57,14 @@ Game* game_create() {
   /*Creates character1*/
   game->characters[0] = character_create(CHARACTER1);
   character_set_name(game->characters[0], "kevin");
-  character_set_description(game->characters[0], "(K)");
+  character_set_description(game->characters[0], "O_o");
   character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a tods los enemigos por mi :)");
   space_set_character(game->spaces[2], CHARACTER1);
   /*Creates character2*/
   game->characters[1] = character_create(CHARACTER2);
   character_set_name(game->characters[1], "Guardia");
   character_set_description(game->characters[1], ">:O");
-  character_set_message(game->characters[1], " Desafiame si te atreves. Solo los valientes aceptan luchar contra mi");
+  /*character_set_message(game->characters[1], " Desafiame si te atreves. Solo los valientes aceptan luchar contra mi");*/
   character_set_friendly(game->characters[1], 0);
   space_set_character(game->spaces[3], CHARACTER2);
   game->last_cmd = command_create();
@@ -327,6 +327,14 @@ Character *game_get_character(Game *game, Id id)
   /*if the character isn't found*/
   return NULL;
 }
+
+int game_get_number_of_characters(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_characters;
+}
+
 /*
 Id game_get_object_id_at(Game *game, Space* space)
 {

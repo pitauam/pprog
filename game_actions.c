@@ -94,11 +94,12 @@ void game_actions_attack(Game *game);
 
 /**
  * @brief lets the player chat
- * @author Mario Rodriguez
+ * @author Santiago Pita
  *
  * @param game pointer to game
  */
 void game_actions_chat(Game *game);
+
 /**
    Game actions implementation
 */
