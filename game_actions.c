@@ -239,18 +239,19 @@ void game_actions_take(Game *game){
 
   char object_name[MAX_ARG];
   
-  Object *object;
   Player *player;
 
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
   if(player_location == NO_ID) {return;}
 
-  /*gets the id of the space where the object is*/
-  
+  player = game_get_player(game);
+
 
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
+
+  if (player_get_object(player) != NO_ID) {return;}
 
   for (i = 0; i < game_get_number_of_objects(game) ; i++)
   {
@@ -258,25 +259,22 @@ void game_actions_take(Game *game){
     object_id = game_get_object_id(game, i);
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
-    if ((game_get_object_name(game, game_get_object(game, object_id))) == object_name)
+
+    if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
     {
       object_location = game_get_object_location(game, object_id);
       /*if the object is in the same place as the player, then it can take it*/
       if (object_location != NO_ID && object_location == player_location)
       {
         /*sets the object to the player*/
-        player = game_get_player(game);
         player_set_object(player, object_id);
 
         /*deletes the object from the space*/
         space_remove_object(game_get_space(game, player_location), object_id);
       }
     }
-    else
-    {
-      return;
-    }
   }
+
   return;
 }
 
