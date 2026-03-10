@@ -33,7 +33,7 @@ Character *character_create(Id id){
     new_character->id = id;
     new_character->name[0] = '\0';
     new_character->gdesc[0] = '\0';
-    new_character->health = 10;
+    new_character->health = 5;
     new_character->friendly = 1;
     new_character->message[0] = '\0';
 

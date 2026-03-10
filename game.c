@@ -54,6 +54,19 @@ Game* game_create() {
 
   game->n_spaces = 0;
   game->player = player_create(PLAYER_ID); /*Hard coded value*/
+  /*Creates character1*/
+  game->characters[0] = character_create(CHARACTER1);
+  character_set_name(game->characters[0], "kevin");
+  character_set_description(game->characters[0], "(K)");
+  character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a tods los enemigos por mi :)");
+  space_set_character(game->spaces[2], CHARACTER1);
+  /*Creates character2*/
+  game->characters[1] = character_create(CHARACTER2);
+  character_set_name(game->characters[1], "Guardia");
+  character_set_description(game->characters[1], ">:O");
+  character_set_message(game->characters[1], " Desafiame si te atreves. Solo los valientes aceptan luchar contra mi");
+  character_set_friendly(game->characters[1], 0);
+  space_set_character(game->spaces[3], CHARACTER2);
   game->last_cmd = command_create();
   game->finished = FALSE;
 

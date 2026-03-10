@@ -46,7 +46,7 @@ Player* player_create(Id id) {
   new_player->name[0] = '\0';
   new_player->location = NO_ID;
   new_player->object = NO_ID;
-  new_player->health = 100;
+  new_player->health = 5;
   new_player->gdesc[0] = '\0';
 
   return new_player;
