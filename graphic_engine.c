@@ -22,7 +22,7 @@
 #define WIDTH_MAP 60
 #define WIDTH_DES 29
 #define WIDTH_BAN 25
-#define HEIGHT_MAP 21
+#define HEIGHT_MAP 27
 #define HEIGHT_BAN 1
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
