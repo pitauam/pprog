@@ -335,18 +335,12 @@ int game_get_number_of_characters(Game *game)
   return game->n_characters;
 }
 
-/*
-Id game_get_object_id_at(Game *game, Space* space)
-{
-  if (!game || !space){return NO_ID;}
+int game_get_number_of_spaces(Game *game){
+  if (!game) {return -1;}
 
-    return object_get_id(space_get_object(space));
-
-
-
-
+  return game->n_spaces;
 }
-*/
+
 
 Id game_get_character_location(Game *game, Id id){
   int i;

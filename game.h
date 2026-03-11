@@ -282,6 +282,15 @@ Character *game_get_character(Game *game, Id id);
  */
 int game_get_number_of_characters(Game *game);
 
+/**
+ * @brief gets the total number of spaces
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ * @return number of characters or -1 if something went wrong
+ */
+int game_get_number_of_spaces(Game *game);
+
 
 
 
