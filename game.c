@@ -347,21 +347,19 @@ Id game_get_object_id_at(Game *game, Space* space)
 
 }
 */
-/*
-Id game_get_character_location(Game *game, Id id) esta todavia falta por hacerla
-{
-  int i;
-  if (!game || id == NO_ID) {return NO_ID;}
 
-  space_get_character(game->characters[i]);
+Id game_get_character_location(Game *game, Id id){
+  int i;
+
+  if (!game || id == NO_ID) {return NO_ID;}
   
-  for (i = 0; i < game->n_characters; i++)
+  for (i = 0; i < game->n_spaces; i++)
   {
-    if ()
+    if (space_get_character(game->spaces[i]) == id)
     {
       return game_get_space_id_at(game, i);
     }
   }
   
   return NO_ID; 
-}*/
+}

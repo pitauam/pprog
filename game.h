@@ -255,14 +255,13 @@ Id game_get_character_id(Game *game, Id id);
 
 /**
  * @brief Gets the id of the space where the character is located
- * @author Santiago Pita
+ * @author Mario Rodriguez
  *
  * @param game pointer to game
- * @param id id of the space where 
- * @return the id of the space where the object is located
-
-Id game_get_character_location(Game *game, Id id) 
-esta todavia falta por hacerla*/
+ * @param id id of the character
+ * @return the id of the space where the character is located
+*/
+Id game_get_character_location(Game *game, Id id);
 
 /**
  * @brief Gets the pointer to a character
