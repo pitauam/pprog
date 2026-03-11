@@ -83,11 +83,11 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_loc = NO_ID;
   Space *space_act = NULL;
+  Character *character;
   char str[255];
   CommandCode last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
   int n_objects;
-  int n_characters;
   int i = 0; 
 
   /* Paint the in the map area */
@@ -100,8 +100,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     id_left = space_get_west(space_act);
 
     n_objects = game_get_number_of_objects(game);
-    n_characters = game_get_number_of_characters(game);
-
+    
     /*imprime el anterior*/
     if (id_back != NO_ID) {
       graphic_engine_space_place(ge, game, id_back);
@@ -151,16 +150,22 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     screen_area_puts(ge->descript, str);
     }
   }
+
   
   sprintf(str, "Characters:");
-  printf("%li", char_loc);
-
   screen_area_puts(ge->descript, str);
-  for(i=0; i < n_characters; i++){
+  for(i=0; i < game_get_number_of_spaces(game); i++){
     /*char_loc = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
 
-    if ((char_loc = game_get_character_id(game, game_get_space_id_at(game, i) )) != NO_ID) {
-    sprintf(str, "%9s:% 3d", (game_get_object_name(game, game_get_object(game, game_get_object_id(game, i)))), (int)obj_loc);
+    char_loc = game_get_character_id(game, game_get_space_id_at(game, i));
+    printf("%li", char_loc);
+
+
+    if (char_loc != NO_ID) {
+    
+    character = game_get_character(game, char_loc);
+
+    sprintf(str, "%9s:% 3d (%i)", (character_get_name(character)), (int)char_loc, character_get_health(character));
     
     screen_area_puts(ge->descript, str);
     }
