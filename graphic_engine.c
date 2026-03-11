@@ -144,20 +144,22 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   sprintf(str, "Objects:");
   screen_area_puts(ge->descript, str);
   for(i=0; i < n_objects; i++){
-    if ((char_loc = game_get_character_id(game, game_get_space_id_at(game, i) )) != NO_ID) {
+    if ((obj_loc = game_get_object_location(game, game_get_object_id(game, i) )) != NO_ID) {
     
-    sprintf(str, "%9s:% 3d", (game_get_object_name(game, game_get_object(game, game_get_object_id(game, i)))), (int)obj_loc);
+    sprintf(str, "    %5s:% 3d", (game_get_object_name(game, game_get_object(game, game_get_object_id(game, i)))), (int)obj_loc);
     
     screen_area_puts(ge->descript, str);
     }
   }
-  sprintf(str,"\n");
+  
+  sprintf(str, "Characters:");
+  printf("%li", char_loc);
+
   screen_area_puts(ge->descript, str);
-
-
   for(i=0; i < n_characters; i++){
-    if ((obj_loc = game_get_object_location(game, game_get_object_id(game, i) )) != NO_ID) {
-    
+    /*char_loc = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
+
+    if ((char_loc = game_get_character_id(game, game_get_space_id_at(game, i) )) != NO_ID) {
     sprintf(str, "%9s:% 3d", (game_get_object_name(game, game_get_object(game, game_get_object_id(game, i)))), (int)obj_loc);
     
     screen_area_puts(ge->descript, str);
@@ -188,18 +190,23 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 /*prints -x-*/
 void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   char str[255];
-  char obj[MAX_CHARACTERS];
+  char obj[100];
+  char name_char[100];
   Id player_location;
   int n_objects;
+  int n_characters;
   int i;
   int j;
   int len;
 
   if (ge == NULL) {return;}
   if (id_act == NO_ID){return;}
+
   
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
+  n_characters = game_get_number_of_characters(game);
+
   /*divididos por 3*/
   sprintf(str, "                       +------------------+");
   screen_area_puts(ge->map, str);
@@ -213,6 +220,22 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
     sprintf(str, "                       |%18d|", (int)id_act);
   }
   
+  screen_area_puts(ge->map, str);
+  strcpy(str, "                       |          ");
+
+  for (i = 0; i < n_characters;i++)
+  {
+    if (game_get_character_id(game, id_act) != NO_ID)
+    {
+      strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
+      strcat(str, name_char);
+    }
+    else {
+      strcat(str, "   ");
+    }
+  }
+
+  strcat(str, "        |");
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |");
 
