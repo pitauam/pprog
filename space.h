@@ -214,4 +214,24 @@ int space_get_n_objects(Space* space);
  */
 Status space_print(Space* space);
 
+/**
+ * @brief It sets the graphic description of a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param gdesc graphic description
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_set_gdesc(Space *space, char *gdesc);
+
+/**
+ * @brief It gets the graphic description of a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param line graphic description of line line
+ * @return graphic description, or NULL if there isn't one
+ */
+char* space_get_gdesc_line(Space *space, int line);
+
 #endif

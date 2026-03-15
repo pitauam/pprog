@@ -45,6 +45,9 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       south = atol(toks);
       toks = strtok(NULL, "|");
       west = atol(toks);
+
+      toks = strtok(NULL, "\r\n");      /*space graphic description*/
+
 #ifdef DEBUG
       printf("Leido: s:%ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
 #endif
@@ -56,6 +59,10 @@ Status game_reader_load_spaces(Game *game, char *filename) {
         space_set_south(space, south);
         space_set_west(space, west);
         game_add_space(game, space);
+        if (toks != NULL)             /*if there is a graphic description it is inserted into the space*/
+        {
+          space_set_gdesc(space, toks); 
+        }
       }
     }
   }

@@ -15,6 +15,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define GDESC_WIDTH (9+1) /*+1 to store the '\0' character*/
+#define GDESC_HEIGHT 5
+
 /**
  * @brief Space
  *
@@ -29,6 +32,7 @@ struct _Space {
   Id west;                  /*!< Id of the space at the west */
   Set *objects;             /*!< Stores the Id of an object. NO_ID (-1) means there is no object*/
   Id character;             /*Stores the ID of the character in the space, or NO_ID if there is no character*/
+  char gdesc[GDESC_HEIGHT][GDESC_WIDTH];         /*Stores the graphic description of a space (5x9 characters)*/
 };
 
 /** space_create allocates memory for a new space
@@ -36,6 +40,7 @@ struct _Space {
  */
 Space* space_create(Id id) {
   Space* new_space = NULL;
+  int i;
 
   /* Error control */
   if (id == NO_ID) return NULL;
@@ -54,6 +59,10 @@ Space* space_create(Id id) {
   new_space->west = NO_ID;
   new_space->character = NO_ID;
   new_space->objects = set_create();
+  for (i = 0; i < GDESC_HEIGHT; i++)
+  {
+    new_space->gdesc[i][0] = '\0'; /*initializes graphic description*/
+  } 
 
   return new_space;
 }
@@ -270,4 +279,29 @@ Status space_print(Space* space) {
   }
 
   return OK;
+}
+
+Status space_set_gdesc(Space *space, char *gdesc) {
+  int i;
+  int j;
+  int string_index;
+  
+  if (!space || !gdesc) return ERROR;
+
+  for (i = 0; i < GDESC_HEIGHT; i++)
+  {
+    for (j = 0; j < GDESC_WIDTH - 1; j++)
+    {
+      string_index = (i * (GDESC_WIDTH - 1)) + j;
+      space->gdesc[i][j] = gdesc[string_index];
+    }
+    space->gdesc[i][GDESC_WIDTH - 1] = '\0';
+  }
+  return OK;
+}
+
+char* space_get_gdesc_line(Space *space, int line) {
+  if (!space || line < 0 || line >= GDESC_HEIGHT) {return NULL;}
+  
+  return space->gdesc[line]; 
 }

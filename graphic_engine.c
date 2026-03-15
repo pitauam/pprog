@@ -203,6 +203,7 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   int i;
   int j;
   int len;
+  char *gdesc;
 
   if (ge == NULL) {return;}
   if (id_act == NO_ID){return;}
@@ -244,11 +245,22 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |");
 
-  /*height's -2 is because of the 2 minimum screen_area_puts above*/
-  for (j = 0; j < ROOM_HEIGHT; j++)
+
+
+  for (j = 0; j < 5; j++) 
   {
+    gdesc = space_get_gdesc_line(game_get_space(game, id_act),j);
+
+    if (gdesc != NULL) 
+    {
+        sprintf(str, "                       | %s        |", gdesc);
+    } else {
+        sprintf(str, "                       |                  |");; /* Espacio vacío por defecto */
+    }
     screen_area_puts(ge->map, str);
   }
+    
+
   strcpy(str, "                       |          ");
 
   len = 0;
