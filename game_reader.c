@@ -22,6 +22,10 @@ Status game_reader_load_spaces(Game *game, char *filename) {
   Space *space = NULL;
   Status status = OK;
 
+  char gdesc_str[50] = ""; /* AÑADIDO: Buffer para juntar los 45 caracteres del dibujo */
+  char *p = NULL;          /* AÑADIDO: Puntero auxiliar */
+  int i;
+
   if (!filename) {
     return ERROR;
   }
@@ -33,6 +37,8 @@ Status game_reader_load_spaces(Game *game, char *filename) {
 
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#s:", line, 3) == 0) {
+      gdesc_str[0] = '\0';
+
       toks = strtok(line + 3, "|");
       id = atol(toks);
       toks = strtok(NULL, "|");
@@ -45,8 +51,23 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       south = atol(toks);
       toks = strtok(NULL, "|");
       west = atol(toks);
+      
+      
+      
+      p = strchr(toks, ' ');
+      if (p != NULL) 
+      {
+        strncat(gdesc_str, p + 1, 9); 
+      }
 
       toks = strtok(NULL, "\r\n");      /*space graphic description*/
+
+      for (i = 1; i < 5; i++) {
+        toks = strtok(NULL, "|");
+        if (toks != NULL) {
+          strncat(gdesc_str, toks, 9);
+        }
+      }
 
 #ifdef DEBUG
       printf("Leido: s:%ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
@@ -58,11 +79,12 @@ Status game_reader_load_spaces(Game *game, char *filename) {
         space_set_east(space, east);
         space_set_south(space, south);
         space_set_west(space, west);
-        game_add_space(game, space);
-        if (toks != NULL)             /*if there is a graphic description it is inserted into the space*/
-        {
-          space_set_gdesc(space, toks); 
+        
+        if (strlen(gdesc_str) > 0) {          /*if there is a graphic description it is inserted into the space*/
+          space_set_gdesc(space, gdesc_str);
         }
+        game_add_space(game, space);
+
       }
     }
   }

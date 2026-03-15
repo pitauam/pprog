@@ -247,19 +247,22 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
 
 
 
-  for (j = 0; j < 5; j++) 
+for (j = 0; j < 5; j++) 
   {
-    gdesc = space_get_gdesc_line(game_get_space(game, id_act),j);
+    gdesc = space_get_gdesc_line(game_get_space(game, id_act), j);
 
-    if (gdesc != NULL) 
+    /* Comprobamos que el string no sea NULL y que no esté vacío */
+    if (gdesc != NULL && gdesc[0] != '\0') 
     {
-        sprintf(str, "                       | %s        |", gdesc);
+        /* %-9.9s obliga a que ocupe EXACTAMENTE 9 caracteres. 
+           (4 espacios previos + 9 del dibujo + 5 posteriores = 18 en total) */
+        sprintf(str, "                       |    %-9.9s     |", gdesc);
     } else {
-        sprintf(str, "                       |                  |");; /* Espacio vacío por defecto */
+        /* Si no hay dibujo, pintamos la caja vacía de siempre (18 espacios) */
+        sprintf(str, "                       |                  |");
     }
     screen_area_puts(ge->map, str);
-  }
-    
+  }    
 
   strcpy(str, "                       |          ");
 
