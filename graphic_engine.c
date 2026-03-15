@@ -104,6 +104,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     /*imprime el anterior*/
     if (id_back != NO_ID) {
       graphic_engine_space_place(ge, game, id_back);
+      sprintf(str, "                                ^");
+      screen_area_puts(ge->map, str);
     }
     /*Imprime el actual*/
     if (id_act != NO_ID) {
@@ -134,6 +136,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
 /*Imprime la siguiente*/
     if (id_next != NO_ID) {
+      sprintf(str, "                                v");
+      screen_area_puts(ge->map, str);
       graphic_engine_space_place(ge, game, id_next);
     }
 
@@ -296,6 +300,7 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   char *gdesc_act;
   char part_left[35];
   char part_act[35];
+  char sep[4] = "   ";
 
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
@@ -329,9 +334,18 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
           sprintf(part_act, "|                  |");
       }
 
-      sprintf(str, "%s   %s", part_left, part_act);
+      strcpy(sep, "   ");
+      /*if it is in the middle of the drawing*/
+      if (j == 2) 
+      {
+        strcpy(sep, " < "); 
+      }
+      
+      sprintf(str, "%s%s%s", part_left, sep, part_act);
       screen_area_puts(ge->map, str);
   }
+  
+      
   
   /*prints first place objects*/
   strcpy(str, "|             "); 
@@ -395,6 +409,8 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   char p_l[35];
   char p_a[35];
   char p_r[35];
+  char sep_l[4];
+  char sep_r[4];
 
 
   player_location = game_get_player_location(game);
@@ -427,9 +443,18 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
       if (gdesc_r != NULL && gdesc_r[0] != '\0') sprintf(p_r, "| %-9.9s        |", gdesc_r);
       else sprintf(p_r, "|                  |");
 
+      strcpy(sep_l, "   ");
+      strcpy(sep_r, "   ");
+
+      /* if it is drawing the middle of the drawing*/
+      if (j == 2) {
+          strcpy(sep_l, " < ");
+          strcpy(sep_r, " > ");
+      }
       /* Joins together all spaces and prints them*/
-      sprintf(str, "%s   %s   %s", p_l, p_a, p_r);
+      sprintf(str, "%s%s%s%s%s", p_l, sep_l, p_a, sep_r, p_r);
       screen_area_puts(ge->map, str);
+      
   }
 
   /*prints first place objects*/
@@ -502,6 +527,7 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   char *gdesc_right;
   char p_a[35];
   char p_r[35];
+  char sep[4];
 
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
@@ -527,7 +553,14 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
       if (gdesc_right != NULL && gdesc_right[0] != '\0') sprintf(p_r, "| %-9.9s        |", gdesc_right);
       else sprintf(p_r, "|                  |");
 
-      sprintf(str, "                       %s   %s", p_a, p_r);
+      
+      strcpy(sep, "   ");
+      if (j == 2) 
+      {
+        strcpy(sep, " > ");
+      }
+      
+      sprintf(str, "                       %s%s%s", p_a, sep, p_r);
       screen_area_puts(ge->map, str);
   }
 
