@@ -22,7 +22,7 @@
 #define WIDTH_MAP 90
 #define WIDTH_DES 29
 #define WIDTH_BAN 25
-#define HEIGHT_MAP 27
+#define HEIGHT_MAP 30
 #define HEIGHT_BAN 1
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
@@ -292,6 +292,11 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   int j;
   int len1;
   int len2;
+  char *gdesc_left;
+  char *gdesc_act;
+  char part_left[35];
+  char part_act[35];
+
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
 
@@ -308,10 +313,24 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   screen_area_puts(ge->map, str);
   sprintf(str, "|                  |   |                  |");
 
-  /*height's -2 is because of the 2 minimum screen_area_puts above*/
-  for (j = 0; j < ROOM_HEIGHT; j++)
-  {
-    screen_area_puts(ge->map, str);
+  for (j = 0; j < 5; j++) {
+      gdesc_left = space_get_gdesc_line(game_get_space(game, id_left), j);
+      gdesc_act = space_get_gdesc_line(game_get_space(game, id_act), j);
+      
+      if (gdesc_left != NULL && gdesc_left[0] != '\0') {
+          sprintf(part_left, "| %-9.9s        |", gdesc_left);
+      } else {
+          sprintf(part_left, "|                  |");
+      }
+
+      if (gdesc_act != NULL && gdesc_act[0] != '\0') {
+          sprintf(part_act, "| %-9.9s        |", gdesc_act);
+      } else {
+          sprintf(part_act, "|                  |");
+      }
+
+      sprintf(str, "%s   %s", part_left, part_act);
+      screen_area_puts(ge->map, str);
   }
   
   /*prints first place objects*/
@@ -370,6 +389,12 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   int n_objects;
   int i;
   int j;
+  char *gdesc_l;
+  char *gdesc_a;
+  char *gdesc_r;
+  char p_l[35];
+  char p_a[35];
+  char p_r[35];
 
 
   player_location = game_get_player_location(game);
@@ -388,8 +413,23 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   screen_area_puts(ge->map, str);
   sprintf(str, "|                |   |                |   |                |");
 
-  for (j = 0; j < ROOM_HEIGHT; j++) {
-    screen_area_puts(ge->map, "|                  |   |                  |   |                  |");
+  for (j = 0; j < 5; j++) {
+      gdesc_l = space_get_gdesc_line(game_get_space(game, id_left), j);
+      gdesc_a = space_get_gdesc_line(game_get_space(game, id_act), j);
+      gdesc_r = space_get_gdesc_line(game_get_space(game, id_right), j);
+
+      if (gdesc_l != NULL && gdesc_l[0] != '\0') sprintf(p_l, "| %-9.9s        |", gdesc_l);
+      else sprintf(p_l, "|                  |");
+
+      if (gdesc_a != NULL && gdesc_a[0] != '\0') sprintf(p_a, "| %-9.9s        |", gdesc_a);
+      else sprintf(p_a, "|                  |");
+
+      if (gdesc_r != NULL && gdesc_r[0] != '\0') sprintf(p_r, "| %-9.9s        |", gdesc_r);
+      else sprintf(p_r, "|                  |");
+
+      /* Joins together all spaces and prints them*/
+      sprintf(str, "%s   %s   %s", p_l, p_a, p_r);
+      screen_area_puts(ge->map, str);
   }
 
   /*prints first place objects*/
@@ -458,6 +498,10 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   int j;
   int len1;
   int len2;
+  char *gdesc_act;
+  char *gdesc_right;
+  char p_a[35];
+  char p_r[35];
 
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
@@ -472,10 +516,21 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   }
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |   |                  |");
-  for (j = 0; j < ROOM_HEIGHT; j++)
-  {
-    screen_area_puts(ge->map, str);
+
+  for (j = 0; j < 5; j++) {
+      gdesc_act = space_get_gdesc_line(game_get_space(game, id_act), j);
+      gdesc_right = space_get_gdesc_line(game_get_space(game, id_right), j);
+      
+      if (gdesc_act != NULL && gdesc_act[0] != '\0') sprintf(p_a, "| %-9.9s        |", gdesc_act);
+      else sprintf(p_a, "|                  |");
+
+      if (gdesc_right != NULL && gdesc_right[0] != '\0') sprintf(p_r, "| %-9.9s        |", gdesc_right);
+      else sprintf(p_r, "|                  |");
+
+      sprintf(str, "                       %s   %s", p_a, p_r);
+      screen_area_puts(ge->map, str);
   }
+
   strcpy(str, "                       ");
   len1 = 0;
   /*prints first place objects*/
