@@ -57,8 +57,8 @@ int main(int argc, char** argv) {
   if (all || test == 11) test2_space_set_east();
   if (all || test == 12) test1_space_set_west();
   if (all || test == 13) test2_space_set_west();
-  if (all || test == 14) test1_space_set_object();
-  if (all || test == 15) test2_space_set_object();
+  if (all || test == 14) test1_space_add_object();
+  if (all || test == 15) test2_space_add_object();
   if (all || test == 16) test1_space_get_id();
   if (all || test == 17) test2_space_get_id();
   if (all || test == 18) test1_space_get_name();
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
 
   PRINT_PASSED_PERCENTAGE;
 
-  return 1;
+  return 0;
 }
 
 void test1_space_create() {
@@ -163,16 +163,16 @@ void test2_space_set_west() {
   PRINT_TEST_RESULT(space_set_west(s, 4) == ERROR);
 }
 
-void test1_space_set_object() {
+void test1_space_add_object() {
   Space *s;
   s = space_create(1);
-  PRINT_TEST_RESULT(space_set_object(s,TRUE) == OK);
+  PRINT_TEST_RESULT(space_add_object(s, 10) == OK);
   space_destroy(s);
 }
 
-void test2_space_set_object() {
+void test2_space_add_object() {
   Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_object(s,TRUE) == ERROR);
+  PRINT_TEST_RESULT(space_add_object(s, 10) == ERROR);
 }
 
 void test1_space_get_name() {
@@ -198,7 +198,7 @@ void test1_space_get_object() {
 void test2_space_get_object() {
   Space *s;
   s = space_create(1);
-  space_set_object(s,TRUE);
+  space_add_object(s,TRUE);
   PRINT_TEST_RESULT(space_get_object(s) == TRUE);
   space_destroy(s);  
 }
@@ -271,3 +271,51 @@ void test2_space_get_id() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_id(s) == NO_ID);
 }
+
+void test1_space_remove_object() {
+  Space *s = space_create(1);
+  space_add_object(s, 10);
+  PRINT_TEST_RESULT(space_remove_object(s, 10) == OK);
+  space_destroy(s);
+}
+void test2_space_remove_object() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_remove_object(s, 10) == ERROR); /* Falla porque el 10 no está */
+  space_destroy(s);
+}
+
+void test1_space_set_character() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_set_character(s, 5) == OK);
+  space_destroy(s);
+}
+
+void test2_space_set_character() {
+  Space *s = NULL;
+  PRINT_TEST_RESULT(space_set_character(s, 5) == ERROR);
+}
+
+void test1_space_get_character() {
+  Space *s = space_create(1);
+  space_set_character(s, 5);
+  PRINT_TEST_RESULT(space_get_character(s) == 5);
+  space_destroy(s);
+}
+
+void test2_space_get_character() {
+  Space *s = NULL;
+  PRINT_TEST_RESULT(space_get_character(s) == NO_ID);
+}
+
+void test1_space_set_gdesc() {
+  Space *s = space_create(1);
+  char dibujo[46] = "5234623464222537524321342542356354675463756474";
+  PRINT_TEST_RESULT(space_set_gdesc(s, dibujo) == OK);
+  space_destroy(s);
+}
+
+void test2_space_set_gdesc() {
+  Space *s = NULL;
+  PRINT_TEST_RESULT(space_set_gdesc(s, ":D:(>:(:o") == ERROR);
+}
+

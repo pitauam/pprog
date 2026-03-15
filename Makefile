@@ -54,9 +54,7 @@ set.o: set.c set.h types.h
 character.o: character.c character.h types.h
 	$(CC) -c $(CFLAGS) $<
 
- #cleans the .o and .exe files (used before uploading to git)
-clean: 
-	rm -f *.o $(EXE)
+
 
  #runs Iteration 1 map
 run:
@@ -71,7 +69,7 @@ runv:
 
 
 spacetest: space_test.o space.o set.o
-	$(CC) -o $@ $<
+	$(CC) -o $@ $^
 
 space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) -c $<
@@ -80,6 +78,10 @@ runspacetest:
 	./spacetest
 
 #@echo ">>>>>>Running castle with valgrind"
+
+ #cleans the .o and .exe files (used before uploading to git)
+clean: 
+	rm -f *.o $(EXE) spacetest
 
 	
 	
