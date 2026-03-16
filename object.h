@@ -52,7 +52,7 @@ Id object_get_id(Object* object);
 Status object_set_name(Object* object, char* name);
 
 /**
- * @brief Gives the id of an object
+ * @brief Gives the name of an object
  * @author Santiago Pita
  *
  * @param object pointer to the structure of the object

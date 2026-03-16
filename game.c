@@ -154,13 +154,13 @@ Id game_get_object_location(Game *game, Id object_id)
   return NO_ID; 
 }
 
-Status game_set_object_location(Game *game, Id space_id, Id object_id) {
+Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
   Space *space;
 
-  if (!game || space_id == NO_ID || object_id == NO_ID ) return ERROR;
+  if (!game || new_space_id == NO_ID || object_id == NO_ID ) return ERROR;
 
   /* Places the object in the space */
-  space = game_get_space(game, space_id);
+  space = game_get_space(game, new_space_id);
   if (!space) return ERROR;
 
   

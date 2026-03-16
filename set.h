@@ -61,7 +61,7 @@ Status set_del_value(Set* set, Id value);
  * @author Santiago Pita
  *
  * @param set pointer to the set structure
- * @param value Id to find
+ * @param id Id to find
  * @return OK if found, ERROR if not found
  */
 Status set_find_id(Set* set, Id id); 

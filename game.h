@@ -96,12 +96,12 @@ Id game_get_object_location(Game *game, Id object_id);
  */
 Status game_set_object_location(Game *game, Id new_space_id, Id object_id);
 
-/*
+/**
  * @brief Gets the last command
  * @author Profesores PPROG
  *
  * @param game pointer to game
- * @return the las command of the cmd
+ * @return the last command of the cmd
  */
 Command* game_get_last_command(Game *game);
 
@@ -296,10 +296,10 @@ int game_get_number_of_spaces(Game *game);
  * @author Mario Rodriguez
  *
  * @param game pointer to game
- * @param mesage of the game
+ * @param message of the game
  * @return OK if it went smoothly ERROR otherwise
  */
-Status game_set_message(Game *game, const char* mesage);
+Status game_set_message(Game *game, const char* message);
 
 /**
  * @brief gets the mesage in game

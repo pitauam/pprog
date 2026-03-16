@@ -102,7 +102,7 @@ int character_get_health(Character *character);
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
- * @param friendly int with the state of the character
+ * @param friendly Bool with the state of the character
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status character_set_friendly(Character *character, Bool friendly);
