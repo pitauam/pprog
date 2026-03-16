@@ -45,8 +45,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
   Space *space = NULL;
   Status status = OK;
 
-  char gdesc_str[50] = ""; /* AÑADIDO: Buffer para juntar los 45 caracteres del dibujo */
-  char *p = NULL;          /* AÑADIDO: Puntero auxiliar */
+  char gdesc_str[50] = ""; /* Buffer to store the graphic description */
   int i;
 
   if (!filename) {
@@ -74,12 +73,6 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       south = atol(toks);
       toks = strtok(NULL, "|");
       west = atol(toks);
-
-      p = strchr(toks, '|');
-      if (p != NULL) 
-      {
-        strncat(gdesc_str, p + 1, 9); 
-      }
 
       for (i = 0; i < 5; i++) {
         toks = strtok(NULL, "|");
