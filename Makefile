@@ -104,5 +104,3 @@ runcharactertest: charactertest
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
 	rm -f *.o $(EXE) spacetest settest charactertest
-	
-	

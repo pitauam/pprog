@@ -212,10 +212,6 @@ void game_print(Game *game) {
 
 }
 
-/**
-   Implementation of private functions
-*/
-
 Status game_add_space(Game *game, Space *space) {
   if ((!game) || (!space) || (game->n_spaces >= MAX_SPACES)) {
     return ERROR;
@@ -241,21 +237,6 @@ Player* game_get_player(Game *game)
 
   return game->player;
 }
-
-
-/*
-Object* game_get_object_at(Game *game, int space_position)
-{
-    if (!game || space_position < 0 || space_position >= game->n_spaces) {
-    return NULL;
-  }
-
-  return space_get_object(game->spaces[space_position]);
-} */
-
-/*esta funcion hay que hacerla*/
-/*hay que usar n_ids del set para cuando se saquen del space, y hay que sacar el de arriba del todo como una pila*/
-/*creo que esta funcion deberia estar o en space o en otro lado pero en game no*/
 
 Status game_add_object(Game *game, Object *object) {
   if ((!game) || (!object) || (game->n_objects >= MAX_OBJECTS)) {
@@ -321,7 +302,7 @@ Id game_get_character_id(Game *game, Id id)
 {
   if (!game || id == NO_ID) {return NO_ID;}
  
-  return space_get_character(game_get_space(game, id)); /*esta se usa en gameactions .c para attack*/
+  return space_get_character(game_get_space(game, id)); 
 }
 
 Character *game_get_character(Game *game, Id id)
