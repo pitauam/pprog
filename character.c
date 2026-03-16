@@ -25,6 +25,7 @@ struct _Character{
 
 Character *character_create(Id id){
     Character *new_character = NULL;
+    if (id == NO_ID) return NULL;
 
     if(!(new_character = (Character*)calloc(1,sizeof(Character)))){
         return NULL;

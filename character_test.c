@@ -4,6 +4,8 @@
 #include "character.h"
 #include "test.h"
 
+#include "character_test.h"
+
 #define MAX_TESTS 12
 
 void test1_character_create();

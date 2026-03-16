@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "set.h"
 #include "test.h"
+#include "set_test.h"
 
 #define MAX_TESTS 10
 
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
   if (all || test == 10) test2_set_get_n_ids();
 
   PRINT_PASSED_PERCENTAGE;
-  return 0; /* ¡Devuelve 0 para evitar el Error 1 de Make! */
+  return 0; 
 }
 
 void test1_set_create() {
