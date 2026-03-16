@@ -13,6 +13,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define SPACE_ID1 11
+#define SPACE_ID2 12
+
+/**
+ * @brief loads the spaces of the game
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ * @param filename pointer to a tring with the file name
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_reader_load_objects(Game *game, char *filename);
+
+/**
+ * @brief loads the spaces of the game
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ * @param filename pointer to a tring with the file name
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_reader_load_spaces(Game *game, char *filename);
+
 Status game_reader_load_spaces(Game *game, char *filename) {
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
@@ -51,14 +74,14 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       south = atol(toks);
       toks = strtok(NULL, "|");
       west = atol(toks);
-      
-      p = strchr(toks, ' ');
+
+      p = strchr(toks, '|');
       if (p != NULL) 
       {
         strncat(gdesc_str, p + 1, 9); 
       }
 
-      for (i = 1; i < 5; i++) {
+      for (i = 0; i < 5; i++) {
         toks = strtok(NULL, "|");
         if (toks != NULL) {
           strncat(gdesc_str, toks, 9);
@@ -161,9 +184,8 @@ Game* game_reader_create_from_file(char *filename) {
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
   /*places the characters*/
-  space_set_character(game_get_space(game, 11), CHARACTER1);
-  space_set_character(game_get_space(game, 13), CHARACTER2);
-
+  space_set_character(game_get_space(game, SPACE_ID1), CHARACTER1);
+  space_set_character(game_get_space(game, SPACE_ID2), CHARACTER2);
 
   return game;
 }

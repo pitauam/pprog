@@ -178,9 +178,10 @@ Status player_print(Player* player) {
   } else {
     fprintf(stdout, "---> No location link.\n");
   }
-  /* 3. Prints if the player has an object */
-  if (player_get_object(player)) {
-    fprintf(stdout, "---> Object in the player.\n");
+  /* 3. Prints the object ID */
+  idaux = player_get_object(player);
+  if (idaux != NO_ID) {
+    fprintf(stdout, "---> Player carries object: %ld.\n", idaux);
   } else {
     fprintf(stdout, "---> No object in the player.\n");
   }
@@ -188,7 +189,7 @@ Status player_print(Player* player) {
   if (player_get_description(player)) {
     fprintf(stdout, "---> Description: %s.\n", player->gdesc);
   } else {
-    fprintf(stdout, "---> No descrioption in the player.\n");
+    fprintf(stdout, "---> No description in the player.\n");
   }
   return OK;
 }

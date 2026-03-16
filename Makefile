@@ -61,7 +61,7 @@ run:
 	./$(EXE) castle.dat
 
 runanthill:
-	./$(EXE) castle.dat
+	./$(EXE) anthill.dat
 
  #runs Iteration 2 map
 #runmap:

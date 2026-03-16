@@ -15,20 +15,19 @@
 #include <string.h>
 
 
-
 /*Opaque Game struct*/
 struct _Game {
-  Player *player;                             /*pointer to the player structure*/
-  Object *object[MAX_OBJECTS];                /*pointer to the array of objects*/
-  int n_objects;                              /*number of objects*/
-  Character *characters[MAX_CHARACTERS];      /*pointer to the array of characters*/
-  int n_characters;                           /*number of characters*/
-  Space *spaces[MAX_SPACES];                  /*pointer to the spaces structure*/
-  int n_spaces;                               /*number of spaces in castle*/
-  Command *last_cmd;                          /*pointer to the last command executed*/
-  Bool finished;  
-  char msg[WORD_SIZE+1];
-  char name_msg[WORD_SIZE];
+  Player *player;                             /*!< pointer to the player structure*/
+  Object *object[MAX_OBJECTS];                /*!< pointer to the array of objects*/
+  int n_objects;                              /*!< number of objects*/
+  Character *characters[MAX_CHARACTERS];      /*!< pointer to the array of characters*/
+  int n_characters;                           /*!< number of characters*/
+  Space *spaces[MAX_SPACES];                  /*!< pointer to the spaces structure*/
+  int n_spaces;                               /*!< number of spaces in castle*/
+  Command *last_cmd;                          /*!< pointer to the last command executed*/
+  Bool finished;                              /*!< whether the game has finished or not*/
+  char msg[WORD_SIZE+1];                      /*!< message that will be printed in the description section*/
+  char name_msg[WORD_SIZE];                   /*!< name of who is sending the message*/
 };
 
 /**
@@ -201,7 +200,9 @@ void game_print(Game *game) {
       printf("  ");
     object_print(game->object[i]);
   }
-  printf("=> Player location: %d\n", (int)game_get_player_location(game));
+  printf("=> Player: \n");
+  player_print(game->player);
+
   printf("Characters: \n");
   for (i = 0; i < game->n_characters;i++)
   {
