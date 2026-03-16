@@ -3,8 +3,8 @@
  *
  * @file game_reader.c
  * @author Santiago Pita
- * @version 0
- * @date 03-02-2025
+ * @version 2
+ * @date 10-02-2025
  * @copyright GNU Public License
  */
 #include "game.h"

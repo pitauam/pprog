@@ -3,8 +3,8 @@
  *
  * @file space.c
  * @author Profesores PPROG
- * @version 1
- * @date 09-02-2026
+ * @version 3
+ * @date 16-03-2026
  * @copyright GNU Public License
  */
 

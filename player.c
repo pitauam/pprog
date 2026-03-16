@@ -3,8 +3,8 @@
  *
  * @file player.c
  * @author Mario Rodriguez
- * @version 0
- * @date 03-02-2026
+ * @version 1
+ * @date 02-03-2026
  * @copyright GNU Public License
  */
 #include <stdio.h>

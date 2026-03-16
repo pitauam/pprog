@@ -3,8 +3,8 @@
  *
  * @file game.c
  * @author Profesores PPROG
- * @version 1
- * @date 09-02-2025
+ * @version 4
+ * @date 16-03-2026
  * @copyright GNU Public License
  */
 
@@ -62,7 +62,7 @@ Game* game_create() {
   game->characters[0] = character1;
   character_set_name(game->characters[0], "kevin");
   character_set_description(game->characters[0], "O_o");
-  character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a tods los enemigos por mi :)");
+  character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a todos los enemigos por mi :)");
   /*Creates character2*/
   character2 = character_create(CHARACTER2);
   game->characters[1] = character2;
