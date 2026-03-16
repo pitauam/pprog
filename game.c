@@ -26,7 +26,8 @@ struct _Game {
   Space *spaces[MAX_SPACES];                  /*pointer to the spaces structure*/
   int n_spaces;                               /*number of spaces in castle*/
   Command *last_cmd;                          /*pointer to the last command executed*/
-  Bool finished;    
+  Bool finished;  
+  char msg[WORD_SIZE+1];
 };
 
 /**
@@ -366,4 +367,19 @@ Id game_get_character_location(Game *game, Id id){
   }
   
   return NO_ID; 
+}
+
+Status game_set_mesage(Game *game, char mesage){
+
+  if(!game || mesage == NULL) {return ERROR;}
+
+  strcpy(game->msg, mesage);
+
+  return OK;
+}
+
+const char game_get_mesage(Game *game){
+  if(!game) {return NULL;}
+
+  return game->msg;
 }
