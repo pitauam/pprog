@@ -204,13 +204,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   
   /*prints the message of a character*/
 
-  strcpy(message,game_get_message(game));
-
   if (id_act == char_loc && char_id != NO_ID) /*if there is a character in the same space as the player and the character exists*/
   {
     sprintf(str, " ");
     screen_area_puts(ge->descript, str);
-    sprintf(str, " Message from %s: %s",character_get_name(character), message);
+    sprintf(str, " Message from %s: %s",character_get_name(character), game_get_message(game));
     screen_area_puts(ge->descript, str);
 
     game_set_message(game, "\0"); /*removes the message*/

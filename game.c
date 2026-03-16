@@ -369,16 +369,16 @@ Id game_get_character_location(Game *game, Id id){
   return NO_ID; 
 }
 
-Status game_set_mesage(Game *game, char mesage){
+Status game_set_message(Game *game, char* message){
 
-  if(!game || mesage == NULL) {return ERROR;}
+  if(!game || message == NULL) {return ERROR;}
 
-  strcpy(game->msg, mesage);
+  strcpy(game->msg, message);
 
   return OK;
 }
 
-const char game_get_mesage(Game *game){
+const char* game_get_message(Game *game){
   if(!game) {return NULL;}
 
   return game->msg;
