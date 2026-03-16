@@ -60,12 +60,18 @@ character.o: character.c character.h types.h
 run:
 	./$(EXE) castle.dat
 
+runanthill:
+	./$(EXE) castle.dat
+
  #runs Iteration 2 map
 #runmap:
 #	./$(EXE) nuevomapa.dat
 
 runv:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) castle.dat
+
+runvanthill:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) anthill.dat
 
 
 spacetest: space_test.o space.o set.o
