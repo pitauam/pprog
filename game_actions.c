@@ -482,12 +482,11 @@ void game_actions_chat(Game *game){
     return;
   }}
 
-  character_get_message(character);
-  {
-    command_set_return(game_get_last_command(game), ERROR);
+  if(game_set_message(game, character_get_message(character)) == OK){
+    command_set_return(game_get_last_command(game), OK);
     return;
   }
 
-  command_set_return(game_get_last_command(game), OK);
+  command_set_return(game_get_last_command(game), ERROR);
   return;
 }

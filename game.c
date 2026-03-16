@@ -378,7 +378,7 @@ Status game_set_message(Game *game, char* message){
   return OK;
 }
 
-const char* game_get_message(Game *game){
+char* game_get_message(Game *game){
   if(!game) {return NULL;}
 
   return game->msg;

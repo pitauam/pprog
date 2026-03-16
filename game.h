@@ -307,7 +307,7 @@ Status game_set_message(Game *game, char* mesage);
  * @param game pointer to game
  * @return the mesage if it went smoothly NULL otherwise
  */
-const char* game_get_message(Game *game);
+char* game_get_message(Game *game);
 
 
 
