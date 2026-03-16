@@ -90,7 +90,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   extern char *cmd_to_str[N_CMD][N_CMDT];
   int n_objects;
   int i = 0; 
-  char message[255];
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);

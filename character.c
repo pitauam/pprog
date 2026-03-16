@@ -26,7 +26,7 @@ struct _Character{
 Character *character_create(Id id){
     Character *new_character = NULL;
 
-    if(!(new_character = (Character*)malloc(1*sizeof(Character)))){
+    if(!(new_character = (Character*)calloc(1,sizeof(Character)))){
         return NULL;
     }
 
@@ -35,6 +35,7 @@ Character *character_create(Id id){
     new_character->gdesc[0] = '\0';
     new_character->health = 5;
     new_character->friendly = TRUE; /*TRUE if its firendly FALSE otherwise, hardcoded friendly*/
+    new_character->message[0] = '\0';
     new_character->message[0] = '\0';
 
     return new_character;

@@ -77,11 +77,26 @@ space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 runspacetest: 
 	./spacetest
 
-#@echo ">>>>>>Running castle with valgrind"
+settest: set_test.o set.o
+	$(CC) -o $@ $^
+
+set_test.o: set_test.c set.h types.h test.h
+	$(CC) -c $(CFLAGS) $<
+
+runsettest: settest
+	./settest
+
+charactertest: character_test.o character.o
+	$(CC) -o $@ $^
+
+character_test.o: character_test.c character.h types.h test.h
+	$(CC) -c $(CFLAGS) $<
+
+runcharactertest: charactertest
+	./charactertest
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
-	rm -f *.o $(EXE) spacetest
-
+	rm -f *.o $(EXE) spacetest settest charactertest
 	
 	
