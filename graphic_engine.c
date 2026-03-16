@@ -90,6 +90,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   extern char *cmd_to_str[N_CMD][N_CMDT];
   int n_objects;
   int i = 0; 
+  char message[255];
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);
@@ -189,20 +190,31 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   if (player_object != NO_ID)
   {
-    
     if (player_object == 23) /*if the object is a rose (easter egg)*/
     {
       sprintf(str, " Player has a %s <3", object_get_name(game_get_object(game, player_get_object(player))));
     }
     else sprintf(str, " Player has '%s'", object_get_name(game_get_object(game, player_get_object(player))));
-
-    
   }
   else
   {
     sprintf(str, " Player has no objects");
   }
   screen_area_puts(ge->descript, str);
+  
+  /*prints the message of a character*/
+
+  strcpy(message,game_get_message(game));
+
+  if (id_act == char_loc && char_id != NO_ID) /*if there is a character in the same space as the player and the character exists*/
+  {
+    sprintf(str, " ");
+    screen_area_puts(ge->descript, str);
+    sprintf(str, " Message from %s: %s",character_get_name(character), message);
+    screen_area_puts(ge->descript, str);
+
+    game_set_message(game, "\0"); /*removes the message*/
+  }
   
   /* Paint in the banner area */
   screen_area_puts(ge->banner, " The haunted castle game ");
