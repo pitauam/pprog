@@ -287,7 +287,7 @@ int game_get_number_of_characters(Game *game);
  * @author Mario Rodriguez
  *
  * @param game pointer to game
- * @return number of characters or -1 if something went wrong
+ * @return number of spaces or -1 if something went wrong
  */
 int game_get_number_of_spaces(Game *game);
 

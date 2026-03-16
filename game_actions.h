@@ -1,10 +1,10 @@
 /**
  * @brief It defines the game update interface
  *
- * @file game.h
+ * @file game_actions.h
  * @author Profesores PPROG
- * @version 0
- * @date 27-01-2025
+ * @version 5
+ * @date 16-03-2026
  * @copyright GNU Public License
  */
 

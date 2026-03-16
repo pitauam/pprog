@@ -74,7 +74,7 @@ Status command_get_user_input(Command* command);
  * @author Santiago Pita
  *
  * @param command a pointer to the command
- * @param code the command to set
+ * @param arg a string with the argument to set
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status command_set_arg(Command* command, char* arg);

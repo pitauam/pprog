@@ -200,7 +200,7 @@ Status space_set_character(Space* space, Id id);
  * @author Mario Rodriguez
  *
  * @param space a pointer to the space
- * @return an Id, specifying if in the space there is an object (Id) or not (NO_ID)
+ * @return an int with the number of objects in the space
  */
 int space_get_n_objects(Space* space);
 
@@ -229,7 +229,7 @@ Status space_set_gdesc(Space *space, char *gdesc);
  * @author Santiago Pita
  *
  * @param space a pointer to the space
- * @param line graphic description of line line
+ * @param line index of the line to be returned (0 to 4)
  * @return graphic description, or NULL if there isn't one
  */
 char* space_get_gdesc_line(Space *space, int line);

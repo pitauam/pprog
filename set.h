@@ -72,10 +72,9 @@ Status set_find_id(Set* set, Id id);
  * @author Santiago Pita
  *
  * @param set pointer to the set structure
- * @param pf pointer to the file where the function will print
  * @return OK if print went well, ERROR if function couldn't print
  */
-Status set_print(Set *set); /*le paso FILE *pf o lo imrpimo en pantalla directamene?*/
+Status set_print(Set *set);
 
 
 /**
@@ -83,9 +82,8 @@ Status set_print(Set *set); /*le paso FILE *pf o lo imrpimo en pantalla directam
  * @author Santiago Pita
  *
  * @param set pointer to the set structure
- * @return number of sets it ok, -1 if error
+ * @return number of ids in the set, or -1 if error
  */
 int set_get_n_ids(Set *set);
-
 
 #endif

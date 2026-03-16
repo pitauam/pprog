@@ -16,7 +16,7 @@
 typedef struct _Character Character;
 
 /**
- * @brief Creates a new Character, allocating memory and initialazing all of its parameters
+ * @brief Creates a new Character, allocating memory and initializing all of its parameters
  * @author Mario Rodriguez
  *
  * @param id identification number of the character
@@ -84,7 +84,7 @@ const char *character_get_description(Character *character);
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
- * @param heatlh int with the hp of the character
+ * @param health int with the hp of the character
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status character_set_health(Character *character, int health);
@@ -102,7 +102,7 @@ int character_get_health(Character *character);
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
- * @param fiendly int with the state of the character
+ * @param friendly int with the state of the character
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status character_set_friendly(Character *character, Bool friendly);
@@ -111,8 +111,7 @@ Status character_set_friendly(Character *character, Bool friendly);
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
- * @param fiendly int with the state of the character
- * @return 1 if its friendly, 0 if not
+ * @return TRUE if its friendly, FALSE if not
  */
 Bool character_get_friendly(Character *character);
 
