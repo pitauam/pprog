@@ -26,8 +26,8 @@ char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "E
  */
 struct _Command {
   CommandCode code;            /*!< Name of the command */
-  char arg[CMD_LENGHT];        /*Argument introduced with the command*/
-  Status result;               /*result of the command (error or ok)*/
+  char arg[CMD_LENGHT];        /*!<Argument introduced with the command*/
+  Status result;               /*!<result of the command (error or ok)*/
 };
 
 /** space_create allocates memory for a new space
