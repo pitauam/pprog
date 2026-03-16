@@ -216,7 +216,7 @@ Id space_get_character(Space* space){
 }
  /*funciones nuevas la de arriba y la de abajo*/
 Status space_set_character(Space* space, Id id) {
-  if (!space || id == NO_ID) {
+  if (!space) {
     return ERROR;
   }
   space->character = id;
