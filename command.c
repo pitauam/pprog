@@ -3,7 +3,7 @@
  *
  * @file command.c
  * @author Profesores PPROG
- * @version 0
+ * @version 1
  * @date 24-01-2026
  * @copyright GNU Public License
  */
