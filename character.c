@@ -15,12 +15,12 @@
 #include <string.h>
 
 struct _Character{
-    Id id;
-    char name[WORD_SIZE +1 ];
-    char gdesc[7];
-    int health;
-    Bool friendly;
-    char message[WORD_SIZE +1];
+    Id id;                          /*!< Id number of the character, it must be unique */
+    char name[WORD_SIZE +1 ];       /*!< Name of the character*/
+    char gdesc[7];                  /*!< Description of the character*/
+    int health;                     /*!< Health of the character*/
+    Bool friendly;                  /*!< TRUE if its firendly FALSE otherwise, hardcoded friendly*/
+    char message[WORD_SIZE +1];     /*!< Message of the character*/
 };
 
 Character *character_create(Id id){
@@ -35,7 +35,7 @@ Character *character_create(Id id){
     new_character->name[0] = '\0';
     new_character->gdesc[0] = '\0';
     new_character->health = 5;
-    new_character->friendly = TRUE; /*TRUE if its firendly FALSE otherwise, hardcoded friendly*/
+    new_character->friendly = TRUE; 
     new_character->message[0] = '\0';
     new_character->message[0] = '\0';
 
