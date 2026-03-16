@@ -89,4 +89,24 @@ Status command_set_arg(Command* command, char* arg);
  */
 const char* command_get_arg(Command* command);
 
+/**
+ * @brief It sets the return result of the command
+ * @author Santiago Pita
+ *
+ * @param command a pointer to the command
+ * @param s the return state
+ * @return void
+ */
+void command_set_return(Command *command, Status s);
+
+/**
+ * @brief It gets the return result of the command
+ * @author Santiago Pita
+ *
+ * @param command a pointer to the command
+ * @return the return state
+ */
+char* command_get_return(Command *command);
+
+
 #endif
