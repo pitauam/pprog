@@ -20,7 +20,7 @@
 #include "types.h"
 
 #define WIDTH_MAP 90
-#define WIDTH_DES 29
+#define WIDTH_DES 37
 #define WIDTH_BAN 25
 #define HEIGHT_MAP 34
 #define HEIGHT_BAN 1
@@ -203,14 +203,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   
   /*prints the message of a character*/
 
-  
-    sprintf(str, " ");
-    screen_area_puts(ge->descript, str);
-    sprintf(str, " Message from %s: %s",game_get_name_message(game), game_get_message(game));
-    screen_area_puts(ge->descript, str);
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " Message from %s: %s",game_get_name_message(game), game_get_message(game));
+  screen_area_puts(ge->descript, str);
 
-    game_set_message(game, "\0"); /*removes the message*/
-    game_set_message(game, "\0"); /*removes the name*/
+  game_set_message(game, "\0"); /*removes the message*/
+  game_set_name_message(game, "\0"); /*removes the name*/
   
   
   /* Paint in the banner area */
