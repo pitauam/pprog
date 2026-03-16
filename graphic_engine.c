@@ -22,7 +22,7 @@
 #define WIDTH_MAP 90
 #define WIDTH_DES 29
 #define WIDTH_BAN 25
-#define HEIGHT_MAP 30
+#define HEIGHT_MAP 34
 #define HEIGHT_BAN 1
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
@@ -203,7 +203,6 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   char name_char[100];
   Id player_location;
   int n_objects;
-  int n_characters;
   int i;
   int j;
   int len;
@@ -215,7 +214,6 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   
   player_location = game_get_player_location(game);
   n_objects = game_get_number_of_objects(game);
-  n_characters = game_get_number_of_characters(game);
 
   /*divididos por 3*/
   sprintf(str, "                       +------------------+");
@@ -229,23 +227,20 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   {
     sprintf(str, "                       |%18d|", (int)id_act);
   }
-  
   screen_area_puts(ge->map, str);
+  /*prints the characters*/
   strcpy(str, "                       |          ");
-
-  for (i = 0; i < n_characters;i++)
+  if (game_get_character_id(game, id_act) != NO_ID)
   {
-    if (game_get_character_id(game, id_act) != NO_ID)
-    {
-      strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
-      strcat(str, name_char);
-    }
-    else {
-      strcat(str, "   ");
-    }
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
+    strcat(str, name_char);
   }
+  else {
+    strcat(str, "   ");
+  }
+  
 
-  strcat(str, "        |");
+  strcat(str, "     |");
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |");
 
@@ -290,6 +285,7 @@ for (j = 0; j < 5; j++)
 void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act){
   char str[255];
   char obj[MAX_CHARACTERS];
+  char name_char[100];
   Id player_location;
   int n_objects;
   int i;
@@ -315,6 +311,21 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   {
     sprintf(str, "|%18d|   |%18d|", (int)id_left, (int)id_act);
   }
+  screen_area_puts(ge->map, str);
+  /*prints the characters*/
+  
+  strcpy(str, "|          ");
+  if (game_get_character_id(game, id_left) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_left))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  
+
+  strcat(str, "     |   |          ");
   screen_area_puts(ge->map, str);
   sprintf(str, "|                  |   |                  |");
 

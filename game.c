@@ -36,6 +36,8 @@ struct _Game {
 Game* game_create() {
   int i;
   Game *game;
+  Character *character1;
+  Character *character2;
 
   game = (Game *)calloc(1, sizeof(Game));
   if (!game) {return NULL;}
@@ -55,19 +57,18 @@ Game* game_create() {
   game->n_spaces = 0;
   game->player = player_create(PLAYER_ID); /*Hard coded value*/
   /*Creates character1*/
-  game->characters[0] = character_create(CHARACTER1);
-
+  character1 = character_create(CHARACTER1);
+  game->characters[0] = character1;
   character_set_name(game->characters[0], "kevin");
   character_set_description(game->characters[0], "O_o");
   character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a tods los enemigos por mi :)");
-  space_set_character(game_get_space(game, 11), CHARACTER1);
   /*Creates character2*/
-  game->characters[1] = character_create(CHARACTER2);
+  character2 = character_create(CHARACTER2);
+  game->characters[1] = character2;
   character_set_name(game->characters[1], "Guardia");
   character_set_description(game->characters[1], ">:O");
   /*character_set_message(game->characters[1], " Desafiame si te atreves. Solo los valientes aceptan luchar contra mi");*/
   character_set_friendly(game->characters[1], 0);
-  space_set_character(game->spaces[3], CHARACTER2);
   game->last_cmd = command_create();
   game->finished = FALSE;
 

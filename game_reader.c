@@ -160,6 +160,9 @@ Game* game_reader_create_from_file(char *filename) {
 
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
+  /*places the characters*/
+  space_set_character(game_get_space(game, 11), CHARACTER1);
+  space_set_character(game_get_space(game, 13), CHARACTER2);
 
 
   return game;
