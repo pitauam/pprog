@@ -355,6 +355,15 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   
 
   strcat(str, "     |   |          ");
+  if (game_get_character_id(game, id_act) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  strcat(str, "     |");
   screen_area_puts(ge->map, str);
   sprintf(str, "|                  |   |                  |");
 
@@ -439,6 +448,7 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
 void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act, Id id_right){
   char str[255];
   char obj[MAX_CHARACTERS];
+  char name_char[100];
   Id player_location;
   int n_objects;
   int i;
@@ -466,6 +476,38 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   }else{
     sprintf(str, "|%18d|   |%15d|   |%18d|", (int)id_left, (int)id_act, (int)id_right);
   }
+  screen_area_puts(ge->map, str);
+  /*prints the characters*/
+  strcpy(str, "|          ");
+  if (game_get_character_id(game, id_left) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_left))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  
+
+  strcat(str, "     |   |          ");
+  if (game_get_character_id(game, id_act) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  strcat(str, "     |   |          ");
+  if (game_get_character_id(game, id_right) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_right))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  strcat(str, "     |");
   screen_area_puts(ge->map, str);
   sprintf(str, "|                |   |                |   |                |");
 
@@ -557,6 +599,7 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
 void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id_right){
   char str[255];
   char obj[MAX_CHARACTERS];
+  char name_char[100];
   Id player_location;
   int n_objects;
   int i;
@@ -580,6 +623,28 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   }else{
     sprintf(str, "                     |%15d|   |%18d|", (int)id_act, (int)id_right);
   }
+  screen_area_puts(ge->map, str);
+  /*prints the characters*/
+  sprintf(str, "                       |             ");
+  if (game_get_character_id(game, id_act) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_act))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  strcat(str, "  |   |             ");
+
+  if (game_get_character_id(game, id_right) != NO_ID)
+  {
+    strcpy(name_char, character_get_description(game_get_character(game, game_get_character_id(game, id_right))));
+    strcat(str, name_char);
+  }
+  else {
+    strcat(str, "   ");
+  }
+  strcat(str, "  |");
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |   |                  |");
 
