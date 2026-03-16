@@ -27,6 +27,7 @@ char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "E
 struct _Command {
   CommandCode code;            /*!< Name of the command */
   char arg[CMD_LENGHT];        /*Argument introduced with the command*/
+  Status result;               /*result of the command (error or ok)*/
 };
 
 /** space_create allocates memory for a new space
@@ -122,4 +123,22 @@ Status command_set_arg(Command* command, char* arg) {
   if (!command || !arg) {return ERROR;}
   strcpy(command->arg, arg);
   return OK;
+}
+
+void command_set_return(Command *command, Status s)
+{
+  if (!command) {return;}
+
+  command->result = s;
+}
+
+char* command_get_return(Command *command)
+{
+  if (!command) {return NULL;}
+
+  if (command->result == OK)
+  {
+    return "OK";
+  }
+  return "ERROR";
 }

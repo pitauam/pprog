@@ -94,6 +94,11 @@ Status game_destroy(Game *game) {
     object_destroy(game->object[i]);
   }
 
+  for (i = 0; i < game->n_characters; i++)
+  {
+    character_destroy(game->characters[i]);
+  }
+
   free(game);
 
   return OK;

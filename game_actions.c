@@ -173,15 +173,20 @@ void game_actions_next(Game *game) {
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   current_id = space_get_south(game_get_space(game, space_id));
-  if (current_id != NO_ID) {
+  if (current_id != NO_ID) 
+  {
     game_set_player_location(game, current_id);
   }
 
+  
+  command_set_return(game_get_last_command(game), OK);
   return;
+  
 }
 
 void game_actions_back(Game *game) {
@@ -190,7 +195,10 @@ void game_actions_back(Game *game) {
 
   space_id = game_get_player_location(game);
   if (NO_ID == space_id) {
+    {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
   }
 
   current_id = space_get_north(game_get_space(game, space_id));
@@ -198,7 +206,10 @@ void game_actions_back(Game *game) {
     game_set_player_location(game, current_id);
   }
 
-  return;
+  {
+    command_set_return(game_get_last_command(game), OK);
+    return;
+  }
 }
 void game_actions_left(Game *game){
   Id current_id = NO_ID;
@@ -206,7 +217,10 @@ void game_actions_left(Game *game){
 
   space_id = game_get_player_location(game);
   if (NO_ID == space_id) {
+    {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
   }
 
   current_id = space_get_west(game_get_space(game, space_id));
@@ -214,6 +228,8 @@ void game_actions_left(Game *game){
     game_set_player_location(game, current_id);
   }
 
+  command_set_return(game_get_last_command(game), OK);
+  return;
 }
 
 void game_actions_right(Game *game){
@@ -222,13 +238,19 @@ void game_actions_right(Game *game){
 
   space_id = game_get_player_location(game);
   if (NO_ID == space_id) {
+    {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
   }
 
   current_id = space_get_east(game_get_space(game, space_id));
   if (current_id != NO_ID) {
     game_set_player_location(game, current_id);
   }
+
+  command_set_return(game_get_last_command(game), OK);
+  return;
 }
 
 void game_actions_take(Game *game){
@@ -244,7 +266,10 @@ void game_actions_take(Game *game){
 
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
-  if(player_location == NO_ID) {return;}
+  if(player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   player = game_get_player(game);
 
@@ -252,7 +277,10 @@ void game_actions_take(Game *game){
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
 
-  if (player_get_object(player) != NO_ID) {return;}
+  if (player_get_object(player) != NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   for (i = 0; i < game_get_number_of_objects(game) ; i++)
   {
@@ -276,6 +304,7 @@ void game_actions_take(Game *game){
     }
   }
 
+  command_set_return(game_get_last_command(game), OK);
   return;
 }
 
@@ -287,7 +316,10 @@ void game_actions_drop(Game *game){
   /*gets the id of the space where the player is*/
   space_id = game_get_player_location(game);
   if(space_id == NO_ID){
+    {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
   }
   /*checks if the player has an object*/
   player = game_get_player(game);
@@ -300,6 +332,7 @@ void game_actions_drop(Game *game){
     /*deletes the object from the player*/
     player_set_object(player, NO_ID);    
   }
+  command_set_return(game_get_last_command(game), OK);
   return;
 }
 
@@ -313,20 +346,35 @@ void game_actions_attack(Game *game){
   int player_health;
   int random_number;
 
-  if (!game) {return;}
+  if (!game) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
-  if (player_location == NO_ID) {return;}
+  if (player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
   /*gets the id of the character located at the same space as the player*/
   character_at_player_location = game_get_character_id(game, player_location);
-  if (character_at_player_location == NO_ID) {return;}
+  if (character_at_player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   character = game_get_character(game, character_at_player_location);
-  if (character == NULL) {return;}
+  if (character == NULL) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   /*if character is friendly, return*/
-  if (character_get_friendly(character) == TRUE) {return;}
+  if (character_get_friendly(character) == TRUE) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   character_print(character);
 
@@ -334,7 +382,10 @@ void game_actions_attack(Game *game){
   player_health = player_get_health(game_get_player(game));
 
   /*if character or player is dead, return*/
-  if (character_health <= 0 || player_health <= 0) {return;}
+  if (character_health <= 0 || player_health <= 0) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   /*generates a random number between 0 and 9*/
   random_number = (rand() % 10);
@@ -362,6 +413,7 @@ void game_actions_attack(Game *game){
     game_set_finished(game, TRUE); /*if player dies, game ends*/
   }
 
+  command_set_return(game_get_last_command(game), OK);
   return;
 }
 
@@ -372,21 +424,42 @@ void game_actions_chat(Game *game){
   Id character_at_player_location;
   Character *character = NULL; 
 
-  if (!game) {return;}
+  if (!game) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
-  if (player_location == NO_ID) {return;}
+  if (player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
   /*gets the id of the character located at the same space as the player*/
   character_at_player_location = game_get_character_id(game, player_location);
-  if (character_at_player_location == NO_ID) {return;}
+  if (character_at_player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   character = game_get_character(game, character_at_player_location);
-  if (character == NULL) {return;}
+  if (character == NULL) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   /*if character is not friendly, return*/
-  if (character_get_friendly(character) == FALSE) {return;}
+  if (character_get_friendly(character) == FALSE) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
 
   character_get_message(character);
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  command_set_return(game_get_last_command(game), OK);
   return;
 }

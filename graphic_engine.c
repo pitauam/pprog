@@ -81,9 +81,10 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 }
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_loc = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object = NO_ID;
   Space *space_act = NULL;
   Character *character;
+  Player *player;
   char str[255];
   CommandCode last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
@@ -144,7 +145,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the description area */
   screen_area_clear(ge->descript);
-  sprintf(str, "Objects:");
+  sprintf(str, " Objects :");
   screen_area_puts(ge->descript, str);
   for(i=0; i < n_objects; i++){
     if ((obj_loc = game_get_object_location(game, game_get_object_id(game, i) )) != NO_ID) {
@@ -155,25 +156,53 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     }
   }
 
-  
-  sprintf(str, "Characters:");
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " Characters :");
   screen_area_puts(ge->descript, str);
   for(i=0; i < game_get_number_of_spaces(game); i++){
-    /*char_loc = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
+    /*char_id = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
 
-    char_loc = game_get_character_id(game, game_get_space_id_at(game, i));
-    printf("%li", char_loc);
-
-
-    if (char_loc != NO_ID) {
+    char_id = game_get_character_id(game, game_get_space_id_at(game, i));
     
-    character = game_get_character(game, char_loc);
+    if (char_id != NO_ID) 
+    {
+      char_loc = game_get_space_id_at(game,i);
 
-    sprintf(str, "%9s:% 3d (%i)", (character_get_name(character)), (int)char_loc, character_get_health(character));
+      character = game_get_character(game, char_id);
+
+      sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(character)),character_get_description(character), (int)char_loc, character_get_health(character));
     
-    screen_area_puts(ge->descript, str);
+      screen_area_puts(ge->descript, str);
     }
   }
+
+  player = game_get_player(game);
+
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " Player : %3d (%d)", (int)id_act, player_get_health(player));
+
+  screen_area_puts(ge->descript, str);
+
+  player_object = player_get_object(player);
+
+  if (player_object != NO_ID)
+  {
+    
+    if (player_object == 23) /*if the object is a rose (easter egg)*/
+    {
+      sprintf(str, " Player has a %s <3", object_get_name(game_get_object(game, player_get_object(player))));
+    }
+    else sprintf(str, " Player has '%s'", object_get_name(game_get_object(game, player_get_object(player))));
+
+    
+  }
+  else
+  {
+    sprintf(str, " Player has no objects");
+  }
+  screen_area_puts(ge->descript, str);
   
   /* Paint in the banner area */
   screen_area_puts(ge->banner, " The haunted castle game ");
@@ -187,7 +216,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the feedback area */
   last_cmd = command_get_code(game_get_last_command(game));
-  sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
+  sprintf(str, " %s (%s): %s", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS], command_get_return(game_get_last_command(game)));
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
