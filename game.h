@@ -299,7 +299,8 @@ int game_get_number_of_spaces(Game *game);
  * @param mesage of the game
  * @return OK if it went smoothly ERROR otherwise
  */
-Status game_set_message(Game *game, char* mesage);
+Status game_set_message(Game *game, const char* mesage);
+
 /**
  * @brief gets the mesage in game
  * @author Mario Rodriguez
@@ -307,8 +308,24 @@ Status game_set_message(Game *game, char* mesage);
  * @param game pointer to game
  * @return the mesage if it went smoothly NULL otherwise
  */
-char* game_get_message(Game *game);
+const char* game_get_message(Game *game);
 
+/**
+ * @brief set the name of the messenger
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ * @param name of the messenger
+ * @return OK if it went smoothly ERROR otherwise
+ */
+Status game_set_name_message(Game *game, const char* name);
 
-
+/**
+ * @brief gets the messenger's name
+ * @author Mario Rodriguez
+ *
+ * @param game pointer to game
+ * @return the name if it went smoothly NULL otherwise
+ */
+const char* game_get_name_message(Game *game);
 #endif

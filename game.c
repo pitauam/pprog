@@ -28,6 +28,7 @@ struct _Game {
   Command *last_cmd;                          /*pointer to the last command executed*/
   Bool finished;  
   char msg[WORD_SIZE+1];
+  char name_msg[WORD_SIZE];
 };
 
 /**
@@ -72,8 +73,9 @@ Game* game_create() {
   character_set_friendly(game->characters[1], FALSE);
   game->last_cmd = command_create();
   game->finished = FALSE;
-
   game->n_characters = 2;
+  game->msg[0] = '\0';
+  game->name_msg[0] = '\0';
 
 
   return game;
@@ -369,7 +371,7 @@ Id game_get_character_location(Game *game, Id id){
   return NO_ID; 
 }
 
-Status game_set_message(Game *game, char* message){
+Status game_set_message(Game *game, const char* message){
 
   if(!game || message == NULL) {return ERROR;}
 
@@ -378,8 +380,23 @@ Status game_set_message(Game *game, char* message){
   return OK;
 }
 
-char* game_get_message(Game *game){
+const char* game_get_message(Game *game){
   if(!game) {return NULL;}
 
   return game->msg;
+}
+
+Status game_set_name_message(Game *game, const char* name){
+
+  if(!game || name == NULL) {return ERROR;}
+
+  strcpy(game->name_msg, name);
+
+  return OK;
+}
+
+const char* game_get_name_message(Game *game){
+  if(!game) {return NULL;}
+
+  return game->name_msg;
 }

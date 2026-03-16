@@ -203,15 +203,15 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   
   /*prints the message of a character*/
 
-  if (id_act == char_loc && char_id != NO_ID) /*if there is a character in the same space as the player and the character exists*/
-  {
+  
     sprintf(str, " ");
     screen_area_puts(ge->descript, str);
-    sprintf(str, " Message from %s: %s",character_get_name(character), game_get_message(game));
+    sprintf(str, " Message from %s: %s",game_get_name_message(game), game_get_message(game));
     screen_area_puts(ge->descript, str);
 
     game_set_message(game, "\0"); /*removes the message*/
-  }
+    game_set_message(game, "\0"); /*removes the name*/
+  
   
   /* Paint in the banner area */
   screen_area_puts(ge->banner, " The haunted castle game ");

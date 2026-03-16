@@ -483,6 +483,7 @@ void game_actions_chat(Game *game){
   }}
 
   if(game_set_message(game, character_get_message(character)) == OK){
+    game_set_name_message(game, character_get_name(character));
     command_set_return(game_get_last_command(game), OK);
     return;
   }
