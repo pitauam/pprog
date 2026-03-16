@@ -34,7 +34,7 @@ Character *character_create(Id id){
     new_character->name[0] = '\0';
     new_character->gdesc[0] = '\0';
     new_character->health = 5;
-    new_character->friendly = 1;
+    new_character->friendly = TRUE; /*TRUE if its firendly FALSE otherwise, hardcoded friendly*/
     new_character->message[0] = '\0';
 
     return new_character;
@@ -112,12 +112,12 @@ int character_get_health(Character *character){
     return character->health;
 }
 
-Status character_set_friendly(Character *character, Bool *friendly){
-    if(character == NULL || friendly == NULL){
+Status character_set_friendly(Character *character, Bool friendly){
+    if(character == NULL){
         return ERROR;
     }
 
-    character->friendly = *(friendly);
+    character->friendly = friendly;
 
     return OK;   
 }

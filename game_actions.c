@@ -326,20 +326,21 @@ void game_actions_attack(Game *game){
   if (character == NULL) {return;}
 
   /*if character is friendly, return*/
+  
   if (character_get_friendly(character) == TRUE) {return;}
 
   character_print(character);
+  player = game_get_player(game);
 
   character_health = character_get_health(character);
-  player_health = player_get_health(game_get_player(game));
-
+  player_health = player_get_health(player);
+  
   /*if character or player is dead, return*/
   if (character_health <= 0 || player_health <= 0) {return;}
 
   /*generates a random number between 0 and 9*/
   random_number = (rand() % 10);
-
-  player = game_get_player(game);
+  printf("%d", random_number);
 
   /*if the player loses*/
   if (random_number < 5)

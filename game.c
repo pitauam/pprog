@@ -68,7 +68,7 @@ Game* game_create() {
   character_set_name(game->characters[1], "Guardia");
   character_set_description(game->characters[1], ">:O");
   /*character_set_message(game->characters[1], " Desafiame si te atreves. Solo los valientes aceptan luchar contra mi");*/
-  character_set_friendly(game->characters[1], 0);
+  character_set_friendly(game->characters[1], FALSE);
   game->last_cmd = command_create();
   game->finished = FALSE;
 

@@ -105,14 +105,14 @@ int character_get_health(Character *character);
  * @param fiendly int with the state of the character
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status character_set_friendly(Character *character, Bool *friendly);
+Status character_set_friendly(Character *character, Bool friendly);
 /**
  * @brief gets if the character is friendly ot not
  * @author Mario Rodriguez
  *
  * @param character pointer to the structure of the character
  * @param fiendly int with the state of the character
- * @return if its friendly
+ * @return 1 if its friendly, 0 if not
  */
 Bool character_get_friendly(Character *character);
 
