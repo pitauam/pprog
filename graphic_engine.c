@@ -228,7 +228,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
-  screen_paint();
+  screen_paint(RED);
   printf("prompt:> ");
   }
 }

@@ -15,8 +15,20 @@ OBJS = game.o command.o game_loop.o game_reader.o graphic_engine.o object.o play
 CFLAGS = -Wall -ansi -pedantic -g
 CC = gcc
 CLIB = -lscreen -L.
+TESTS = spacetest settest charactertest
 
 all: $(EXE)
+
+runaux:
+	./$(EXE) anthill.dat
+
+#runs all tests
+runtests: 
+	./spacetest && ./settest && ./charactertest
+
+#makes all tests
+alltests:
+	make spacetest && make settest && make charactertest
 
 $(EXE) : $(OBJS)
 	$(CC) -o $@ $^ $(CLIB)
@@ -54,18 +66,9 @@ set.o: set.c set.h types.h
 character.o: character.c character.h types.h
 	$(CC) -c $(CFLAGS) $<
 
-
-
  #runs Iteration 1 map
 run:
 	./$(EXE) castle.dat
-
-runanthill:
-	./$(EXE) anthill.dat
-
- #runs Iteration 2 map
-#runmap:
-#	./$(EXE) nuevomapa.dat
 
 runv:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) castle.dat
@@ -73,34 +76,34 @@ runv:
 runvanthill:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) anthill.dat
 
-
+#makes tests .o
 spacetest: space_test.o space.o set.o
+	$(CC) -o $@ $^
+	
+settest: set_test.o set.o
+	$(CC) -o $@ $^
+
+charactertest: character_test.o character.o
 	$(CC) -o $@ $^
 
 space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) -c $<
 	
-runspacetest: 
-	./spacetest
-
-settest: set_test.o set.o
-	$(CC) -o $@ $^
-
 set_test.o: set_test.c set.h types.h test.h
 	$(CC) -c $(CFLAGS) $<
 
-runsettest: settest
-	./settest
-
-charactertest: character_test.o character.o
-	$(CC) -o $@ $^
-
 character_test.o: character_test.c character.h types.h test.h
 	$(CC) -c $(CFLAGS) $<
+
+runspacetest: 
+	./spacetest
+
+runsettest: settest
+	./settest
 
 runcharactertest: charactertest
 	./charactertest
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
-	rm -f *.o $(EXE) spacetest settest charactertest
+	rm -f *.o $(EXE) $(TESTS)
