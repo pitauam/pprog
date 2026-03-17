@@ -2,23 +2,26 @@
  #
  # @file Makefile
  # @author Santiago Pita and Mario Rodriguez
- # @version 1
- # @date 07-02-2025
+ # @version 5
+ # @date 17-03-2025
 
- #EXE is the name the .exe will have
- #OBJS references .o files
- #CFLAGS flags used for warnings and style
- #CC stands for compilation command
-
+#EXE is the name the .exe will have
 EXE = castle
+#OBJS references .o files
 OBJS = game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o character.o
+#CFLAGS flags used for warnings and style
 CFLAGS = -Wall -ansi -pedantic -g
+#CC stands for compilation command
 CC = gcc
+#CLIB are the libraries used when compiling
 CLIB = -lscreen -L.
+#TESTS is used when cleaning
 TESTS = spacetest settest charactertest
 
+#by default it makes the castle game executable
 all: $(EXE)
 
+#runs auxiliary map
 runaux:
 	./$(EXE) anthill.dat
 
@@ -30,9 +33,11 @@ runtests:
 alltests:
 	make spacetest && make settest && make charactertest
 
+#makes main game exe file
 $(EXE) : $(OBJS)
 	$(CC) -o $@ $^ $(CLIB)
 
+#makes all .o game files
 game.o: game.c game.h object.h player.h game_reader.h command.h space.h types.h set.h
 	$(CC) -c $(CFLAGS) game.c
 
@@ -66,17 +71,19 @@ set.o: set.c set.h types.h
 character.o: character.c character.h types.h
 	$(CC) -c $(CFLAGS) $<
 
- #runs Iteration 1 map
+#runs Iteration 3 map
 run:
 	./$(EXE) castle.dat
 
+#runs Iteration 3 map with valgrind
 runv:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) castle.dat
 
+#runs anthill map with valgrind
 runvanthill:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) anthill.dat
 
-#makes tests .o
+#makes tests .exe
 spacetest: space_test.o space.o set.o
 	$(CC) -o $@ $^
 	
@@ -86,6 +93,7 @@ settest: set_test.o set.o
 charactertest: character_test.o character.o
 	$(CC) -o $@ $^
 
+#makes tests .o
 space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) -c $<
 	
@@ -95,6 +103,7 @@ set_test.o: set_test.c set.h types.h test.h
 character_test.o: character_test.c character.h types.h test.h
 	$(CC) -c $(CFLAGS) $<
 
+#runs each test
 runspacetest: 
 	./spacetest
 
