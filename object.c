@@ -22,7 +22,8 @@
 
 struct _Object {
   Id id;                    /*!< Object's id, must be unique */
-  char name[WORD_SIZE + 1]; /*!< Object's name */
+  char name[WORD_SIZE + 1];
+  char description[WORD_SIZE + 1]; /*!< Object's description */
 };
 
 /** object_create allocates memory and initializes all variables*/

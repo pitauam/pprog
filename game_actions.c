@@ -101,6 +101,14 @@ void game_actions_attack(Game *game);
 void game_actions_chat(Game *game);
 
 /**
+ * @brief lets the player inspect an object
+ * @author Fernando Pina
+ *
+ * @param game pointer to game
+ */
+void game_actions_inspect(Game *game);
+
+/**
    Game actions implementation
 */
 
@@ -489,5 +497,53 @@ void game_actions_chat(Game *game){
   }
 
   command_set_return(game_get_last_command(game), ERROR);
+  return;
+}
+
+
+void game_actions_inspect(Game *game){
+  Id player_location; 
+  Id object_at_player_location;
+  Object *object = NULL; 
+  Player *player = NULL;
+  Space *current_space = NULL;
+  char object_name[MAX_ARG];
+
+  if (!game)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
+  /*gets the id of the space where the player is*/
+  player_location = game_get_player_location(game);
+  if(player_location == NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
+
+  player = game_get_player(game);
+
+
+  /*saves the last command argument*/
+  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+
+  
+
+  if (player_get_object(player) != NO_ID) {{
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }}
+
+
+  if (inventory_find_object(player_get_inventory(player), object_at_player_location))
+  {
+    /* code */
+  }
+  
+
+  
+
+
   return;
 }
