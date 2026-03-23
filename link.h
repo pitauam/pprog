@@ -129,4 +129,14 @@ Status link_set_open(Link* link, Bool bool);
  */
 Id link_get_open(Link* link);
 
+/**
+ * @brief It prints the link information
+ * @author Santiago Pita
+ *
+ * This fucntion shows the id and name of the link, the origin and destination spaces and whether it is open or not.
+ * @param link a pointer to the link
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status link_print(Link* space);
+
 #endif
