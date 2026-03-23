@@ -26,10 +26,12 @@
 struct _Space {
   Id id;                    /*!< Id number of the space, it must be unique */
   char name[WORD_SIZE + 1]; /*!< Name of the space */
+
   Id north;                 /*!< Id of the space at the north */
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
+  
   Set *objects;             /*!< Stores the Id of an object. NO_ID (-1) means there is no object*/
   Id character;             /*Stores the ID of the character in the space, or NO_ID if there is no character*/
   char gdesc[GDESC_HEIGHT][GDESC_WIDTH];         /*Stores the graphic description of a space (5x9 characters)*/
