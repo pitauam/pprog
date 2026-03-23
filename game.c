@@ -28,6 +28,7 @@ struct _Game {
   Bool finished;                              /*!< whether the game has finished or not*/
   char msg[WORD_SIZE+1];                      /*!< message that will be printed in the description section*/
   char name_msg[WORD_SIZE];                   /*!< name of who is sending the message*/
+  Link *link[MAX_LINKS];
 };
 
 /**
@@ -381,4 +382,23 @@ const char* game_get_name_message(Game *game){
   if(!game) {return NULL;}
 
   return game->name_msg;
+}
+
+/*falta hacer estas dos funciones de abajo y ponerlas en el .h*/
+Id *game_get_connection(Game *game, Id id_act, Id link_direction){
+  if (!game || id_act == NO_ID || !link){
+    return NO_ID;
+  }
+
+  return link_get_destination(link);
+}
+
+Bool game_connection_is_open(Game *game, Id id_act, Id link_direction){
+  
+  Bool b;
+  if (!game || id_act == NO_ID || !link){
+    return FALSE;
+  }
+
+  return b;
 }

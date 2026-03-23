@@ -22,6 +22,7 @@
 #define MAX_SPACES 100
 #define MAX_OBJECTS 100
 #define MAX_CHARACTERS 100
+#define MAX_LINKS 100
 
 #define PLAYER_ID 100
 #define CHARACTER1 31
@@ -329,4 +330,28 @@ Status game_set_name_message(Game *game, const char* name);
  * @return the name if it went smoothly NULL otherwise
  */
 const char* game_get_name_message(Game *game);
+
+/**
+ * @brief gets the id of the destination space
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id_act id of the current space
+ * @param link_direction direction of the link
+ * @return the id of the destination space
+ */
+Id *game_get_connection(Game *game, Id id_act, Id link_direction);
+
+/**
+ * @brief gets the if the link is open or not
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param id_act id of the current space
+ * @param link_direction direction of the link
+ * @return whether the link is open or not
+ */
+Bool game_connection_is_open(Game *game, Id id_act, Id link_direction);
+
+
 #endif
