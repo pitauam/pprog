@@ -12,6 +12,7 @@
 #include <string.h>
 
 #include "player.h"
+#include "inventory.h"
 
 /**
  * @brief Player
@@ -23,9 +24,9 @@ struct _Player
     Id id; /*!< Id number of the player, must be unique */
     char name [WORD_SIZE +1]; /*!< Player's name */
     Id location; /*!< Id of the location */
-    Id object; /*!< Id of the object */
     int health; /*!< Health of the player */
     char gdesc[7]; /*!< Gives a graphic description */
+    Inventory *backpack; /*!< Inventory of the player */
 };
 
 /** player_create allocates memory and initializes all variables*/
@@ -45,7 +46,7 @@ Player* player_create(Id id) {
   new_player->id = id;
   new_player->name[0] = '\0';
   new_player->location = NO_ID;
-  new_player->object = NO_ID;
+  new_player->backpack = inventory_create();
   new_player->health = 5;
   new_player->gdesc[0] = '\0';
 
@@ -57,7 +58,10 @@ Status player_destroy(Player* player) {
   if (!player) {
     return ERROR;
   }
-  
+  if(inventory_destroy(player->backpack)){
+    return ERROR;
+  }
+
   free(player);
   return OK;
 }
@@ -107,22 +111,57 @@ Id player_get_location(Player* player) {
   return player->location;
 }
 
-Status player_set_object(Player* player, Id id) {
+Status player_add_object(Player* player, Id id) {
 
   if (!player) {
     return ERROR;
   }
-  player->object = id;
+   if(inventory_add_object(player->backpack, id) == ERROR){
+    return ERROR;
+   }
+
   return OK;
 }
 
-Id player_get_object(Player* player) {
+Status player_remove_object(Player* player, Id id){
 
-  if (!player) {
-    return NO_ID;
+  if(!player|| !player->backpack || id == NO_ID){
+    return ERROR;
   }
-  return player->object;
+
+  if(inventory_remove_object(player->backpack, id) == ERROR){
+    return ERROR;
+   }
+
+   return OK;
 }
+
+Status player_get_object(Player* player) {
+
+  if (!player || !player->backpack) {
+    return ERROR;
+  }
+
+  if(inventory_get_n_objects(player->backpack) > 0){
+    return OK;
+  }
+  
+  return ERROR;
+}
+
+Status player_find_object(Player* player, Id id){
+
+   if(!player || !player->backpack || id == NO_ID){
+    return ERROR;
+   }
+
+   if(inventory_find_object(player->backpack, id) == TRUE){
+    return OK;
+   }
+
+   return FALSE;
+}
+
 
 Status player_set_health(Player *player, int health){
     if(player == NULL || health < 0 || health > 100){

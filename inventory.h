@@ -54,7 +54,7 @@ int inventory_get_max_obj(Inventory* inventory);
  * @param id an Id, specifying the object to place in the inventory
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status invetory_add_object(Inventory* inventory, Id id);
+Status inventory_add_object(Inventory* inventory, Id id);
 
 /**
  * @brief It removes a object to the inventory
@@ -64,7 +64,7 @@ Status invetory_add_object(Inventory* inventory, Id id);
  * @param id an Id, specifying the object to place in the inventory
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status invetory_remove_object(Inventory* inventory, Id id);
+Status inventory_remove_object(Inventory* inventory, Id id);
 
 /**
  * @brief It gets whether the inventory has an object or not

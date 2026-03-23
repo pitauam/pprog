@@ -80,23 +80,52 @@ Status player_set_location(Player* player, Id id);
 Id player_get_location(Player* player);
 
 /**
- * @brief Sets an object to the player
+ * @brief adds an object to the players inventory
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
  * @param id id of the object
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status player_set_object(Player* player, Id id);
+Status player_add_object(Player* player, Id id);
 
 /**
- * @brief Gets the id of the object the player is carrying
+ * @brief removes an object from the players inventory
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
+ * @param id id of the object
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status player_remove_object(Player* player, Id id);
+
+/**
+ * @brief gets the number of objects in the backpack
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return n_objects if everything goes well, -1 if something went wrong
+ */
+int player_get_n_objects(Player* player);
+
+/**
+ * @brief Gets if the player has an object
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status player_get_object(Player* player);
+
+/**
+ * @brief Finds id the player has an object with id(id)
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param id id of the object
  * @return id of the object the player is carrying
  */
-Id player_get_object(Player* player);
+Status player_find_object(Player* player, Id id);
 
 /**
  * @brief sets the desription of the player
