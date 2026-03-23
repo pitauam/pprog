@@ -167,7 +167,7 @@ Status space_remove_object(Space* space, Id id);
 Bool space_get_object(Space* space);
 
 /**
- * @brief It gets whether the space has an object or not
+ * @brief It finds the id of an object in a space
  * @author Mario Rodriguez
  *
  * @param space a pointer to the space
