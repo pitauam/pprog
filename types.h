@@ -20,6 +20,6 @@ typedef enum { FALSE, TRUE } Bool;          /*!< whether it is true or false, us
 
 typedef enum { ERROR, OK } Status;          /*!< whether a function goes well or has an error*/
 
-typedef enum { N, S, E, W } Direction;      /*!< whether a space is connected north, south, east or west*/
+typedef enum { UNKNOWN, N, S, E, W } Direction;      /*!< whether a space is connected north, south, east or west*/
 
 #endif

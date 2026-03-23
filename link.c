@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct _Link{
   Id id;                           /*!< Id number of the link, it must be unique */
@@ -22,26 +23,113 @@ struct _Link{
   Bool open;                       /*!< Whether the connection between origin and destination spaces is open or not*/
 };
 
-Link* link_create(Id id);
+Link* link_create(Id id){
+  Link* new_link = NULL;
+  int i;
 
-Status link_destroy(Link* link);
+  /* Error control */
+  if (id == NO_ID) return NULL;
 
-Status link_set_name(Link* link, char* name);
+  new_link = (Link*)calloc(1, sizeof(Link));
+  if (new_link == NULL) {
+    return NULL;
+  }
 
-const char* link_get_name(Link* link);
+  /* Initialization of an empty link*/
+  new_link->id = id;
+  new_link->name[0] = '\0';
+  new_link->origin = NO_ID;
+  new_link->destination = NO_ID;
+  new_link->direction = UNKNOWN;  
+  new_link->open = FALSE;           /*defaults to closed link*/
 
-Status link_set_origin(Link* link, Id id);
+  return new_link;
+}
 
-Id link_get_origin(Link* link);
+Status link_destroy(Link* link){
+    if (!link) {
+    return ERROR;
+    }
 
-Status link_set_destination(Link* link, Id id);
+  free(link);
 
-Id link_get_destination(Link* link);
+  return OK;
+}
 
-Status link_set_direction(Link* link, Direction direction);
+Status link_set_name(Link* link, char* name){
+  if (!link || !name) {
+    return ERROR;
+  }
 
-Id link_get_direction(Link* link);
+  if (!strcpy(link->name, name)) {
+    return ERROR;
+  }
+  return OK;
+}
 
-Status link_set_open(Link* link, Bool bool);
+const char* link_get_name(Link* link){
+  if (!link) {
+    return NULL;
+  }
+  return link->name;
+}
 
-Id link_get_open(Link* link);
+Status link_set_origin(Link* link, Id id){
+  if (!link) {
+    return ERROR;
+  }
+  link->origin = id;
+  return OK;
+}
+
+Id link_get_origin(Link* link){
+  if (!link) {
+    return NO_ID;
+  }
+  return link->origin;
+}
+
+Status link_set_destination(Link* link, Id id){
+  if (!link) {
+    return ERROR;
+  }
+  link->destination = id;
+  return OK;
+}
+
+Id link_get_destination(Link* link){
+  if (!link) {
+    return NO_ID;
+  }
+  return link->destination;
+}
+
+Status link_set_direction(Link* link, Direction direction){
+  if (!link) {
+    return ERROR;
+  }
+  link->direction = direction;
+  return OK;
+}
+
+Id link_get_direction(Link* link){
+  if (!link) {
+    return NO_ID;
+  }
+  return link->direction;
+}
+
+Status link_set_open(Link* link, Bool bool){
+  if (!link) {
+    return ERROR;
+  }
+  link->open = bool;
+  return OK;
+}
+
+Id link_get_open(Link* link){
+  if (!link) {
+    return NO_ID;
+  }
+  return link->open;
+}

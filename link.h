@@ -7,8 +7,8 @@
  * @date 23-03-2026
  */
 
- #ifndef LINK_H
-#define LINKH_H
+#ifndef LINK_H
+#define LINK_H
 
 
 #include "types.h"
