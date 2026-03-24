@@ -383,20 +383,26 @@ const char* game_get_name_message(Game *game){
 
   return game->name_msg;
 }
-
 /*falta hacer estas dos funciones de abajo y ponerlas en el .h*/
-Id *game_get_connection(Game *game, Id id_act, Id link_direction){
-  if (!game || id_act == NO_ID || !link){
+
+Id game_get_connection(Game *game, Id id_act, Id link_direction){
+  Link *link = NULL;
+  if (!game || id_act == NO_ID || !link_direction){
     return NO_ID;
   }
 
-  return link_get_destination(link);
+
+  
+  link;
+
+
+  return link_get_direction(link);
 }
 
 Bool game_connection_is_open(Game *game, Id id_act, Id link_direction){
   
-  Bool b;
-  if (!game || id_act == NO_ID || !link){
+  Bool b = FALSE;
+  if (!game || id_act == NO_ID || !link_direction){
     return FALSE;
   }
 

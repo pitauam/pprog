@@ -340,7 +340,7 @@ const char* game_get_name_message(Game *game);
  * @param link_direction direction of the link
  * @return the id of the destination space
  */
-Id *game_get_connection(Game *game, Id id_act, Id link_direction);
+Id game_get_connection(Game *game, Id id_act, Id link_direction);
 
 /**
  * @brief gets the if the link is open or not

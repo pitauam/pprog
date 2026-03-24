@@ -11,8 +11,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define WORD_SIZE 1000 /*size of the words*/
-#define NO_ID -1       /*used when an ID */
+#define WORD_SIZE 1000 /*!< size of the words*/
+#define NO_ID -1       /*!< used when an ID does not exist*/
 
 typedef long Id;
 
