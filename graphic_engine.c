@@ -81,7 +81,7 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 }
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object = NO_ID, idaux= NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object_id = NO_ID;
   Space *space_act = NULL;
   Character *character;
   Player *player;
@@ -188,33 +188,34 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   if(player_inventory_empty(player) == FALSE){
   sprintf(str,"Player carries object: ");
     for(i=0; i < player_get_n_objects(player); i++){
-      idaux = player_get_object_id(player, i);
-      if (idaux != NO_ID) {
-        sprintf(str, "%ld", idaux);
+      player_object_id = player_get_object_id(player, i);
+      if (player_object_id != NO_ID) {
+        sprintf(str, "%ld", player_object_id);
       } else {
-        fprintf(stdout, "---> No object in the player.\n");
-        }
+      sprintf(str, "No object in the player's inventory.\n");
       }
-      fprintf(stdout, "\n");
+    }
+    
   }
 
-
+/*funcion original*/
+/*
   if (player_inventory_empty(player) == FALSE)
   {
-    for(i=0; i < player_get_n_objects(player); i++){
 
-    
-    if (player_object == 23) /*if the object is a rose (easter egg)*/
+    if (player_object == 23) if the object is a rose (easter egg)
     {
       sprintf(str, " Player has a %s <3", object_get_name(game_get_object(game, player_get_object(player))));
     }
     else sprintf(str, " Player has '%s'", object_get_name(game_get_object(game, player_get_object(player))));
     }
-  }
+  
+    }
   else
   {
     sprintf(str, " Player has no objects");
   }
+*/
   screen_area_puts(ge->descript, str);
   
   /*prints the message of a character*/
@@ -727,123 +728,3 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   screen_area_puts(ge->map, str);
 
 }
-/*original
-
- Paint the in the map area 
-  screen_area_clear(ge->map);
-  if ((id_act = game_get_player_location(game)) != NO_ID) {
-    space_act = game_get_space(game, id_act);
-    id_back = space_get_north(space_act);
-    id_next = space_get_south(space_act);
-    id_right = space_get_east(space_act);
-    id_left = space_get_west(space_act);
-
-    n_objects = game_get_number_of_objects(game);
-
-    imprime el anterior*
-    if (id_back != NO_ID) {
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  |         %2d |", (int)id_back);
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  |           |");
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      strcpy(str, "  |     "); 
-      for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_back){
-            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-            strcat(str, obj); 
-          }else{
-            strcat(str, " "); 
-          }
-      }
-      strcat(str, "     |"); 
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-    }
-    }
-    Imprime el actual
-    if (id_act != NO_ID) {
-      
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  | :D      %2d |", (int)id_act);
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  |           |");
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      strcpy(str, "  |     "); 
-      for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_act){
-              strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-              strcat(str, obj); 
-          }else{
-              strcat(str, " "); 
-          }
-      }
-      strcat(str, "     |"); 
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-    }
-
-    ^C>
-
-  Imprime la siguiente*
-    if (id_next != NO_ID) {
-      
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  |         %2d |", (int)id_next);
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  |           |");
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      screen_area_puts(ge->map, str);
-      strcpy(str, "  |     "); 
-      for(i=0; i < n_objects; i++){
-          if (game_get_object_location(game, game_get_object_id(game, i)) == id_next){
-            strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-            strcat(str, obj); 
-          }else{
-            strcat(str, " "); 
-          }
-      }
-      strcat(str, "     |"); 
-      screen_area_puts(ge->map, str);
-      sprintf(str, "  +-----------+");
-      screen_area_puts(ge->map, str);
-    }
-
-
-  Paint in the description area *
-  screen_area_clear(ge->descript);
-  for(i=0; i < n_objects; i++){
-    if ((obj_loc = game_get_object_location(game, game_get_object_id(game, i) )) != NO_ID) {
-    sprintf(str, "  Object location:%d", (int)obj_loc);
-    screen_area_puts(ge->descript, str);
-    }
-  }
-  Paint in the banner area *
-  screen_area_puts(ge->banner, " The haunted castle game ");
-
-  /Paint in the help area *
-  screen_area_clear(ge->help);
-  sprintf(str, " The commands you can use are:");
-  screen_area_puts(ge->help, str);
-  sprintf(str, "     next or n, back or b, left or l, right or r, attack or a, chat or c, take or t, drop or d, exit or e,");
-  screen_area_puts(ge->help, str);
-
-  Paint in the feedback area *
-  last_cmd = command_get_code(game_get_last_command(game));
-  sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
-  screen_area_puts(ge->feedback, str);
-
-  Dump to the terminal *
-  screen_paint();
-  printf("prompt:> ");
-*/

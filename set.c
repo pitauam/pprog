@@ -117,11 +117,9 @@ int set_get_n_ids(Set *set)
 
 Id set_get_id(Set *set, int pos){
 
-    int i;
-
     if (!set || pos < 0){
         return NO_ID;
     }
 
-    return ids[pos];
+    return set->ids[pos];
 }
