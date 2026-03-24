@@ -109,13 +109,22 @@ Status player_remove_object(Player* player, Id id);
 int player_get_n_objects(Player* player);
 
 /**
- * @brief Gets if the player has an object
+ * @brief Gets the player object
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status player_get_object(Player* player);
+/*Id player_get_object_id(Player* player);*/
+
+/**
+ * @brief Gets if the players inventory is empty
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return TRUE if empty, FALSE otherwise
+ */
+Bool player_inventory_empty(Player* player);
 
 /**
  * @brief Finds id the player has an object with id(id)

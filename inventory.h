@@ -73,7 +73,17 @@ Status inventory_remove_object(Inventory* inventory, Id id);
  * @param inventory a pointer to the inventory
  * @return True if there is an object, False if there is no object
  */
-Bool inventory_get_object(Inventory* inventory);
+Bool inventory_is_empty(Inventory* inventory);
+
+/**
+ * @brief It gets the object from an inventory
+ * @author Mario Rodriguez
+ *
+ * @param inventory a pointer to the inventory
+ * @param pos position in the array
+ * @return id of the object or NO_ID
+ */
+/*Id inventory_get_object(Inventory* inventory, int pos);*/
 
 /**
  * @brief It finds the id of an object in a inventory

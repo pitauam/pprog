@@ -85,18 +85,27 @@ Status invetory_remove_object(Inventory* inventory, Id id){
 
     return ERROR;
 }
+/*lo mismo que en player*/
+/*Bool inventory_get_object(Inventory* inventory, int pos){
 
-Bool inventory_get_object(Inventory* inventory){
-
-    if (inventory == NULL || inventory->obj == NULL) {
+    if (inventory == NULL || inventory->obj == NULL || pos < 0) {
         return FALSE;
     }
 
-    if (set_get_n_ids(inventory->obj) > 0){
+    return set_get_id(inventory->obj, pos);
+}
+*/
+Bool inventory_is_empty(Inventory* inventory){
+
+    if (inventory == NULL || inventory->obj == NULL) {
         return TRUE;
+    }
+
+    if (set_get_n_ids(inventory->obj) > 0){
+        return FALSE;
     } 
 
-    return FALSE;
+    return TRUE;
 }
 
 Bool inventory_find_object(Inventory* inventory, Id id){

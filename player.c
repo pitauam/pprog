@@ -136,19 +136,42 @@ Status player_remove_object(Player* player, Id id){
    return OK;
 }
 
-Status player_get_object(Player* player) {
+int player_get_n_objects(Player* player){
+  if(!player || !player->backpack){
+    return -1;
+  }
+
+  return inventory_get_n_objects(player->backpack)
+}
+/*de momento la dejo asi creo que no se puede hacer de esta manera*/
+/*Id player_get_object_id(Player* player, int pos){
+    if (!player || !player->backpack|| pos < 0) {
+      return NO_ID;
+    }
+
+    return inventory_get_object(player->backpack, pos);
+}
+*/
+Bool player_inventory_empty(Player* player) {
 
   if (!player || !player->backpack) {
-    return ERROR;
+    return TRUE;
   }
 
   if(inventory_get_n_objects(player->backpack) > 0){
-    return OK;
+    return FALSE;
   }
   
-  return ERROR;
+  return TRUE;
 }
 
+int player_inventory_size(Player *player){
+   if (!player || !player->backpack){
+    return -1;
+   }
+
+   return inventory_get_n_objects(player->backpack);
+}
 Status player_find_object(Player* player, Id id){
 
    if(!player || !player->backpack || id == NO_ID){
