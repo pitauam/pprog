@@ -184,16 +184,19 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   sprintf(str, " Player : %3d (%d)", (int)id_act, player_get_health(player));
 
   screen_area_puts(ge->descript, str);
+  for(i=0; i < player_get_n_objects(player))
 
-  player_object = player_get_object(player);
-
-  if (player_object != NO_ID)
+  if (player_inventory_empty(player) == FALSE)
   {
+    for(i=0; i < player_get_n_objects(player)){
+
+    
     if (player_object == 23) /*if the object is a rose (easter egg)*/
     {
       sprintf(str, " Player has a %s <3", object_get_name(game_get_object(game, player_get_object(player))));
     }
     else sprintf(str, " Player has '%s'", object_get_name(game_get_object(game, player_get_object(player))));
+    }
   }
   else
   {

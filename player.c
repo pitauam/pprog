@@ -19,8 +19,7 @@
  *
  * This structure conatins all the information of a player
  */
-struct _Player 
-{
+struct _Player {
     Id id; /*!< Id number of the player, must be unique */
     char name [WORD_SIZE +1]; /*!< Player's name */
     Id location; /*!< Id of the location */
@@ -141,7 +140,7 @@ int player_get_n_objects(Player* player){
     return -1;
   }
 
-  return inventory_get_n_objects(player->backpack)
+  return inventory_get_n_objects(player->backpack);
 }
 
 Id player_get_object_id(Player* player, int pos){
@@ -183,7 +182,7 @@ Status player_find_object(Player* player, Id id){
     return OK;
    }
 
-   return FALSE;
+   return ERROR;
 }
 
 
