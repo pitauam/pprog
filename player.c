@@ -222,8 +222,9 @@ const char *player_get_description(Player *player){
     return player->gdesc;
 }
 /**player_print prints the information of the player*/
-Status player_print(Player* player) {
+  Status player_print(Player* player) {
   Id idaux = NO_ID;
+  int i;
 
   /* Error Control */
   if (!player) {
@@ -241,12 +242,20 @@ Status player_print(Player* player) {
     fprintf(stdout, "---> No location link.\n");
   }
   /* 3. Prints the object ID */
-  idaux = player_get_object(player);
-  if (idaux != NO_ID) {
-    fprintf(stdout, "---> Player carries object: %ld.\n", idaux);
-  } else {
-    fprintf(stdout, "---> No object in the player.\n");
+  if(player_inventory_empty(player) == FALSE){
+    fprintf(stdout, "---> Player carries object: ");
+      for(i=0; i < player_get_n_objects(player); i++){
+        idaux = player_get_object_id(player, i);
+        if (idaux != NO_ID) {
+          fprintf(stdout, "%ld", idaux);
+        } else {
+          fprintf(stdout, "---> No object in the player.\n");
+        }
+      }
+      fprintf(stdout, "\n");
   }
+
+ 
   /* 3. Prints if the player has an object */
   if (player_get_description(player)) {
     fprintf(stdout, "---> Description: %s.\n", player->gdesc);

@@ -81,7 +81,7 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 }
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object = NO_ID, idaux= NO_ID;
   Space *space_act = NULL;
   Character *character;
   Player *player;
@@ -184,11 +184,24 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   sprintf(str, " Player : %3d (%d)", (int)id_act, player_get_health(player));
 
   screen_area_puts(ge->descript, str);
-  for(i=0; i < player_get_n_objects(player))
+  
+  if(player_inventory_empty(player) == FALSE){
+  sprintf(str,"Player carries object: ");
+    for(i=0; i < player_get_n_objects(player); i++){
+      idaux = player_get_object_id(player, i);
+      if (idaux != NO_ID) {
+        sprintf(str, "%ld", idaux);
+      } else {
+        fprintf(stdout, "---> No object in the player.\n");
+        }
+      }
+      fprintf(stdout, "\n");
+  }
+
 
   if (player_inventory_empty(player) == FALSE)
   {
-    for(i=0; i < player_get_n_objects(player)){
+    for(i=0; i < player_get_n_objects(player); i++){
 
     
     if (player_object == 23) /*if the object is a rose (easter egg)*/
