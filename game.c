@@ -28,7 +28,8 @@ struct _Game {
   Bool finished;                              /*!< whether the game has finished or not*/
   char msg[WORD_SIZE+1];                      /*!< message that will be printed in the description section*/
   char name_msg[WORD_SIZE];                   /*!< name of who is sending the message*/
-  Link *link[MAX_LINKS];
+  Link *link[MAX_LINKS];                      /*!< links between spaces*/
+  int n_links;                                /*!< number of links*/
 };
 
 /**
@@ -48,6 +49,10 @@ Game* game_create() {
     game->spaces[i] = NULL;
   }
 
+  for (i = 0; i < MAX_LINKS; i++){
+    game->link[i] = NULL;
+  }
+
   for (i = 0; i < MAX_CHARACTERS; i++) {
     game->characters[i] = NULL;
   }
@@ -57,6 +62,7 @@ Game* game_create() {
   }
 
   game->n_spaces = 0;
+  game->n_links = 0;
   game->player = player_create(PLAYER_ID); /*Hard coded value*/
   /*Creates character1*/
   character1 = character_create(CHARACTER1);
@@ -86,6 +92,10 @@ Status game_destroy(Game *game) {
 
   for (i = 0; i < game->n_spaces; i++) {
     space_destroy(game->spaces[i]);
+  }
+
+  for (i = 0; i < game->n_links; i++) {
+    link_destroy(game->link[i]);
   }
 
   command_destroy(game->last_cmd);
@@ -198,7 +208,7 @@ void game_print(Game *game) {
   printf("Objects: \n");
   for (i = 0; i < game->n_objects;i++)
   {
-      printf("  ");
+    printf("  ");
     object_print(game->object[i]);
   }
   printf("=> Player: \n");
@@ -211,6 +221,13 @@ void game_print(Game *game) {
     character_print(game->characters[i]);
   }
 
+  printf("Links: \n");
+  for (i = 0; i < game->n_links; i++)
+  {
+    printf("  ");
+    link_print(game->link[i]);
+  }
+
 }
 
 Status game_add_space(Game *game, Space *space) {
@@ -220,6 +237,18 @@ Status game_add_space(Game *game, Space *space) {
 
   game->spaces[game->n_spaces] = space;
   game->n_spaces++;
+
+  return OK;
+}
+/*FALTA DOCUMENTAR vvv */
+
+Status game_add_link(Game *game, Link *link) {
+  if ((!game) || (!link) || (game->n_links >= MAX_SPACES)) {
+    return ERROR;
+  }
+
+  game->spaces[game->n_links] = link;
+  game->n_links++;
 
   return OK;
 }
@@ -298,7 +327,6 @@ const char * game_get_object_name(Game *game, Object *object)
   return object_get_name(object);
 }
 
-
 Id game_get_character_id(Game *game, Id id)
 {
   if (!game || id == NO_ID) {return NO_ID;}
@@ -335,6 +363,14 @@ int game_get_number_of_spaces(Game *game){
   if (!game) {return -1;}
 
   return game->n_spaces;
+}
+
+/*FALTA COMENTAR vvv */
+
+int game_get_number_of_links(Game *game){
+  if (!game) {return -1;}
+
+  return game->n_links;
 }
 
 
@@ -383,28 +419,45 @@ const char* game_get_name_message(Game *game){
 
   return game->name_msg;
 }
-/*falta hacer estas dos funciones de abajo y ponerlas en el .h*/
 
-Id game_get_connection(Game *game, Id id_act, Id link_direction){
-  Link *link = NULL;
-  if (!game || id_act == NO_ID || !link_direction){
+Id game_get_connection(Game *game, Id id_act, Direction link_direction){
+  int i;
+
+  if (!game || id_act == NO_ID ||  link_direction == NO_DIR){
     return NO_ID;
   }
 
+  for (i = 0; i < game->n_links; i++)
+  {
+    if (link_get_origin(game->link[i]) == id_act)
+    {
+      if (link_get_direction(game->link[i]) == link_direction)
+      {
+        return link_get_destination(game->link[i]);
+      }
+    }
+  }
 
-  
-  link;
-
-
-  return link_get_direction(link);
+  return NO_ID;
 }
 
-Bool game_connection_is_open(Game *game, Id id_act, Id link_direction){
-  
-  Bool b = FALSE;
-  if (!game || id_act == NO_ID || !link_direction){
+Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction){
+  int i;
+
+  if (!game || id_act == NO_ID || link_direction == NO_DIR){
     return FALSE;
   }
 
-  return b;
+  for (i = 0; i < game->n_links; i++)
+  {
+    if (link_get_origin(game->link[i]) == id_act)
+    {
+      if (link_get_direction(game->link[i]) == link_direction)
+      {
+        return link_get_open(game->link[i]);
+      }
+    }
+  }
+
+  return FALSE;
 }

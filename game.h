@@ -22,7 +22,7 @@
 #define MAX_SPACES 100
 #define MAX_OBJECTS 100
 #define MAX_CHARACTERS 100
-#define MAX_LINKS 100
+#define MAX_LINKS 400
 
 #define PLAYER_ID 100
 #define CHARACTER1 31
@@ -172,19 +172,6 @@ Id game_get_space_id_at(Game *game, int position);
  * @return pointer of the player if everything has gone correctly or NULL if something was wrong
  */
 Player* game_get_player(Game *game);
-
-
-/**
- * @brief gets the pointer to the object at the top of the set in a specific location
- * @author Santiago Pita
- *
- * @param game pointer to game
- * @param space_position position of the space where the obejct is located at
- * @return pointer to the object if every thing has gone correctly or NULL if something went wrong
- 
-Object* game_get_object_at(Game *game, int space_position);
-
-hay que hacer esta funcion*/
 
 /**
  * @brief adds an object to the array of pointers to object
@@ -340,7 +327,7 @@ const char* game_get_name_message(Game *game);
  * @param link_direction direction of the link
  * @return the id of the destination space
  */
-Id game_get_connection(Game *game, Id id_act, Id link_direction);
+Id game_get_connection(Game *game, Id id_act, Direction link_direction);
 
 /**
  * @brief gets the if the link is open or not
@@ -351,7 +338,11 @@ Id game_get_connection(Game *game, Id id_act, Id link_direction);
  * @param link_direction direction of the link
  * @return whether the link is open or not
  */
-Bool game_connection_is_open(Game *game, Id id_act, Id link_direction);
+Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction);
+
+Status game_add_link(Game *game, Link *link);
+
+int game_get_number_of_links(Game *game);
 
 
 #endif

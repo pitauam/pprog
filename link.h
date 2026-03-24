@@ -127,7 +127,7 @@ Status link_set_open(Link* link, Bool bool);
  * @param link a pointer to the link
  * @return whether the link is open (true) or closed (false)
  */
-Id link_get_open(Link* link);
+Bool link_get_open(Link* link);
 
 /**
  * @brief It prints the link information

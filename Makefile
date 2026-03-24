@@ -8,7 +8,7 @@
 #EXE is the name the .exe will have
 EXE = castle
 #OBJS references .o files
-OBJS = game.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o space.o game_actions.o set.o character.o
+OBJS = game.o space.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o  game_actions.o set.o character.o
 #CFLAGS flags used for warnings and style
 CFLAGS = -Wall -ansi -pedantic -g
 #CC stands for compilation command

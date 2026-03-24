@@ -127,9 +127,9 @@ Status link_set_open(Link* link, Bool bool){
   return OK;
 }
 
-Id link_get_open(Link* link){
+Bool link_get_open(Link* link){
   if (!link) {
-    return NO_ID;
+    return FALSE;
   }
   return link->open;
 }
