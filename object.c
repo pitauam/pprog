@@ -80,6 +80,30 @@ const char* object_get_name(Object* object) {
   return object->name;
 }
 
+Status object_set_desc(Object* object, char* desc)
+{
+  if (!object || !desc)
+  {
+    return ERROR;
+  }
+  
+ if (!strcpy(object->description, desc))
+ {
+    return ERROR;
+ }
+  
+  return OK;
+}
+
+const char* object_get_name(Object* object) 
+{
+  if (!object) 
+  {
+    return NULL;
+  }
+  return object->description;
+}
+
 Status object_print(Object* object) {
   /*Id idaux = NO_ID;*/
 

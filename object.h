@@ -41,6 +41,8 @@ Status object_destroy(Object* object);
  */
 Id object_get_id(Object* object);
 
+
+
 /**
  * @brief Sets the name of an object
  * @author Santiago Pita
@@ -59,6 +61,25 @@ Status object_set_name(Object* object, char* name);
  * @return a string with the name of an object
  */
 const char* object_get_name(Object* object);
+
+/**
+ * @brief Sets the description of an object
+ * @author Fernando Pina
+ *
+ * @param object pointer to the structure of the object
+ * @param name pointer to the name of the object
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status object_set_desc(Object* object, char* desc);
+
+/**
+ * @brief Gives the description of an object
+ * @author Fernando Pina
+ *
+ * @param object pointer to the structure of the object
+ * @return a string with the name of an object
+ */
+const char* object_get_desc(Object* object);
 
 /**
  * @brief Prints the information of an object (shows its Id)

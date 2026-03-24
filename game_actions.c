@@ -502,12 +502,14 @@ void game_actions_chat(Game *game){
 
 
 void game_actions_inspect(Game *game){
-  Id player_location; 
-  Id object_at_player_location;
+  Id player_location = NO_ID;
+  Bool object_exists = FALSE; 
+  Id Id_object_player = NO_ID;
   Object *object = NULL; 
   Player *player = NULL;
   Space *current_space = NULL;
   char object_name[MAX_ARG];
+  Id buffer = NO_ID;
 
   if (!game)
   {
@@ -524,26 +526,80 @@ void game_actions_inspect(Game *game){
 
   player = game_get_player(game);
 
+  if (!player)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
+  current_space = game_get_space(game, player_location);
+
+  if (!current_space)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
 
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
 
-  
+  for (int i = 0; i < game_get_number_of_objects(game); i++)
+  {
+    /*gets the object id*/
+    buffer = game_get_object_id(game, i);
 
-  if (player_get_object(player) != NO_ID) {{
+    /*if the name in the argument is the same as the name of one of the objects, then it exists*/
+
+    if (strcmp((game_get_object_name(game, game_get_object(game, buffer))), object_name) == 0)
+    {
+      object_exists = TRUE;
+      Id_object_player = buffer;
+      break;
+    }
+    
+  }
+
+  if (object_exists == FALSE) {{
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }}
+  
+  if (player_inventory_empty(player) == TRUE) {{
 
+    if (space_find_object(current_space, Id_object_player) == FALSE)
+    {
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
+    }else
+    {
+      for (int i = 0; i < space_get_n_objects(current_space); i++)
+      {
+        if (space_get_object_id(current_space, i) == Id_object_player)
+        {
+          object = game_get_object(game, Id_object_player);
+          game_set_message(game, object_get_desc(object));
+          command_set_return(game_get_last_command(game), OK);
+          return;
+        }
+      }
+      
+    }
 
-  if (inventory_find_object(player_get_inventory(player), object_at_player_location))
+  }}else
   {
-    /* code */
+    for (int i = 0; i < player_get_n_objects(player); i++)
+  {
+    if (player_find_object(player,Id_object_player) == TRUE)
+    {
+      object = game_get_object(game, Id_object_player);
+      game_set_message(game, object_get_desc(object));
+      command_set_return(game_get_last_command(game), OK);
+      return;
+    }
+    
   }
-  
+  }
 
-  
-
-
-  return;
+    return;
 }
