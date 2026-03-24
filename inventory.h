@@ -83,7 +83,7 @@ Bool inventory_is_empty(Inventory* inventory);
  * @param pos position in the array
  * @return id of the object or NO_ID
  */
-/*Id inventory_get_object(Inventory* inventory, int pos);*/
+Id inventory_get_object_id(Inventory* inventory, int pos)
 
 /**
  * @brief It finds the id of an object in a inventory

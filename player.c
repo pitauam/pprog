@@ -143,15 +143,16 @@ int player_get_n_objects(Player* player){
 
   return inventory_get_n_objects(player->backpack)
 }
-/*de momento la dejo asi creo que no se puede hacer de esta manera*/
-/*Id player_get_object_id(Player* player, int pos){
+
+Id player_get_object_id(Player* player, int pos){
+
     if (!player || !player->backpack|| pos < 0) {
       return NO_ID;
     }
 
-    return inventory_get_object(player->backpack, pos);
+    return inventory_get_object_id(player->backpack, pos);
 }
-*/
+
 Bool player_inventory_empty(Player* player) {
 
   if (!player || !player->backpack) {

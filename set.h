@@ -86,4 +86,13 @@ Status set_print(Set *set);
  */
 int set_get_n_ids(Set *set);
 
+/**
+ * @brief gets the id in a set position
+ * @author Mario Rodriguez
+ *
+ * @param set pointer to the set structure
+ * @return number of ids in the set, or -1 if error
+ */
+Id set_get_id(Set *set, int pos);
+
 #endif

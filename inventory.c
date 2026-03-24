@@ -85,8 +85,8 @@ Status invetory_remove_object(Inventory* inventory, Id id){
 
     return ERROR;
 }
-/*lo mismo que en player*/
-/*Bool inventory_get_object(Inventory* inventory, int pos){
+
+Id inventory_get_object_id(Inventory* inventory, int pos){
 
     if (inventory == NULL || inventory->obj == NULL || pos < 0) {
         return FALSE;
@@ -94,7 +94,7 @@ Status invetory_remove_object(Inventory* inventory, Id id){
 
     return set_get_id(inventory->obj, pos);
 }
-*/
+
 Bool inventory_is_empty(Inventory* inventory){
 
     if (inventory == NULL || inventory->obj == NULL) {

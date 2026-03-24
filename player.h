@@ -115,7 +115,7 @@ int player_get_n_objects(Player* player);
  * @param player pointer to the structure of the player
  * @return OK if everything goes well, ERROR if something went wrong
  */
-/*Id player_get_object_id(Player* player);*/
+Id player_get_object_id(Player* player, int pos);
 
 /**
  * @brief Gets if the players inventory is empty
