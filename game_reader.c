@@ -36,6 +36,16 @@ Status game_reader_load_objects(Game *game, char *filename);
  */
 Status game_reader_load_spaces(Game *game, char *filename);
 
+/**
+ * @brief loads the links of the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param filename pointer to a string with the file name
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_reader_load_links(Game *game, char *filename);
+
 Status game_reader_load_spaces(Game *game, char *filename) {
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
@@ -62,6 +72,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       gdesc_str[0] = '\0';
 
       toks = strtok(line + 3, "|");
+      /*id of the space*/
       id = atol(toks);
       toks = strtok(NULL, "|");
       strcpy(name, toks);
@@ -86,12 +97,13 @@ Status game_reader_load_spaces(Game *game, char *filename) {
 #endif
       space = space_create(id);
       if (space != NULL) {
+        /*
         space_set_name(space, name);
         space_set_north(space, north);
         space_set_east(space, east);
         space_set_south(space, south);
         space_set_west(space, west);
-        
+        */
         if (strlen(gdesc_str) > 0) {          /*if there is a graphic description it is inserted into the space*/
           space_set_gdesc(space, gdesc_str);
         }
@@ -182,3 +194,30 @@ Game* game_reader_create_from_file(char *filename) {
 
   return game;
 }
+
+/*in progress*/
+Status game_reader_load_links(Game *game, char *filename){
+  FILE *file = NULL;
+  Link *link = NULL;
+  int i;
+
+
+  if (!filename) {
+    return ERROR;
+  }
+
+  file = fopen(filename, "r");
+  if (file == NULL) {
+    return ERROR;
+  }
+  /*creates 4 links to replace space_set_north..*/
+    for (i = 0; i < 4; i++)
+      {
+        /*link = link_create()*/
+
+
+      }
+
+    return OK;
+}
+
