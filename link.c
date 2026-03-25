@@ -25,7 +25,6 @@ struct _Link{
 
 Link* link_create(Id id){
   Link* new_link = NULL;
-  int i;
 
   /* Error control */
   if (id == NO_ID) return NULL;
@@ -136,7 +135,6 @@ Bool link_get_open(Link* link){
 
 Status link_print(Link* link){
     Id idaux = NO_ID;
-    Direction diraux;
     Bool b;
 
     if (!link){

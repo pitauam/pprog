@@ -42,6 +42,8 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "Error while initializing graphic engine.\n");
     return 1;
   }
+  /*prints game data for debugging purposes*/
+  game_print(game); 
 
   last_cmd = game_get_last_command(game);
 
