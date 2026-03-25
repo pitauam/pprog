@@ -88,7 +88,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   CommandCode last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
   int n_objects;
-  int i = 0; 
+  int i = 0;
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);
@@ -100,7 +100,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     id_next = game_get_connection(game, id_act, 1);
     id_right = game_get_connection(game, id_act, 2);
     id_left = game_get_connection(game, id_act, 3);
-
 
       /*imprime el anterior*/
     if (id_back != NO_ID) {

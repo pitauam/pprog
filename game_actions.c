@@ -175,7 +175,8 @@ void game_actions_unknown(Game *game) {}
 
 void game_actions_exit(Game *game) {}
 
-void game_actions_next(Game *game) {
+/*
+void game_actions_move(Game *game){
   Id current_id = NO_ID;
   Id space_id = NO_ID;
 
@@ -186,6 +187,38 @@ void game_actions_next(Game *game) {
   }
 
   current_id = game_get_connection(game, space_id, 1);
+
+
+  if (current_id != NO_ID) if there is nothing below
+  {
+    game_set_player_location(game, current_id);
+  }
+  else
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
+  command_set_return(game_get_last_command(game), OK);
+  return;
+
+}
+*/
+
+void game_actions_next(Game *game) {
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
+  Bool open = FALSE;
+
+  space_id = game_get_player_location(game);
+  if (space_id == NO_ID) {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  current_id = game_get_connection(game, space_id, 1);
+  open = game_connection_is_open(game, space_id, 1);
+
 
   if (current_id != NO_ID) /*if there is nothing below*/
   {
@@ -232,6 +265,7 @@ void game_actions_back(Game *game) {
 void game_actions_left(Game *game){
   Id current_id = NO_ID;
   Id space_id = NO_ID;
+  Bool open = FALSE;
 
   space_id = game_get_player_location(game);
   if (NO_ID == space_id) {
@@ -240,11 +274,14 @@ void game_actions_left(Game *game){
     return;
   }
   }
-  current_id = game_get_connection(game, space_id, 3);
 
-  if (current_id != NO_ID) {
+  current_id = game_get_connection(game, space_id, 3);
+  open = game_connection_is_open(game, space_id, 3);
+
+  if (current_id != NO_ID && open == TRUE) {
     game_set_player_location(game, current_id);
   }
+  
   else
   {
     command_set_return(game_get_last_command(game), ERROR);

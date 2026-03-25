@@ -77,6 +77,8 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       toks = strtok(NULL, "|");
       strcpy(name, toks);
 
+
+
       for (i = 0; i < 5; i++) {
         toks = strtok(NULL, "|");
         if (toks != NULL) {
@@ -92,6 +94,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
         if (strlen(gdesc_str) > 0) {          /*if there is a graphic description it is inserted into the space*/
           space_set_gdesc(space, gdesc_str);
         }
+        space_set_name(space, name);
         game_add_space(game, space);
 
       }
@@ -239,12 +242,10 @@ Status game_reader_load_links(Game *game, char *filename){
         link_set_destination(link, destination_id);
         link_set_direction(link, dir);
         link_set_open(link, open);
-
+        link_set_name(link, name);
         game_add_link(game, link);
       }
     }
-
-    
   }
   
   if (ferror(file)) 
