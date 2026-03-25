@@ -118,11 +118,22 @@ Id link_get_direction(Link* link){
   return link->direction;
 }
 
-Status link_set_open(Link* link, Bool bool){
+Status link_set_open(Link* link, int bool){
   if (!link) {
     return ERROR;
   }
-  link->open = bool;
+
+  if (bool == 1)
+  {
+    link->open = TRUE;
+  }
+  
+  else 
+  {
+    link->open = FALSE;
+  }
+
+  
   return OK;
 }
 

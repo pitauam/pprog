@@ -51,7 +51,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char *toks = NULL;
-  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
+  Id id = NO_ID;
   Space *space = NULL;
   Status status = OK;
 
@@ -76,14 +76,6 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       id = atol(toks);
       toks = strtok(NULL, "|");
       strcpy(name, toks);
-      toks = strtok(NULL, "|");
-      north = atol(toks);
-      toks = strtok(NULL, "|");
-      east = atol(toks);
-      toks = strtok(NULL, "|");
-      south = atol(toks);
-      toks = strtok(NULL, "|");
-      west = atol(toks);
 
       for (i = 0; i < 5; i++) {
         toks = strtok(NULL, "|");
@@ -97,13 +89,6 @@ Status game_reader_load_spaces(Game *game, char *filename) {
 #endif
       space = space_create(id);
       if (space != NULL) {
-        /*
-        space_set_name(space, name);
-        space_set_north(space, north);
-        space_set_east(space, east);
-        space_set_south(space, south);
-        space_set_west(space, west);
-        */
         if (strlen(gdesc_str) > 0) {          /*if there is a graphic description it is inserted into the space*/
           space_set_gdesc(space, gdesc_str);
         }
@@ -198,9 +183,18 @@ Game* game_reader_create_from_file(char *filename) {
 /*in progress*/
 Status game_reader_load_links(Game *game, char *filename){
   FILE *file = NULL;
-  Link *link = NULL;
-  int i;
+  char line[WORD_SIZE] = "";
+  char name[WORD_SIZE] = "";
+  char *toks = NULL;
 
+  Id id = NO_ID;
+  Id origin_id = NO_ID;
+  Id destination_id = NO_ID;
+
+  Direction dir = NO_DIR;
+  Link *link;
+  Status status;
+  int open;
 
   if (!filename) {
     return ERROR;
@@ -210,14 +204,50 @@ Status game_reader_load_links(Game *game, char *filename){
   if (file == NULL) {
     return ERROR;
   }
-  /*creates 4 links to replace space_set_north..*/
-    for (i = 0; i < 4; i++)
-      {
-        /*link = link_create()*/
+
+  while (fgets(line, WORD_SIZE, file)) {
+    if (strncmp("#l:", line, 3) == 0) {
+
+      toks = strtok(line + 3, "|");
+      /*id of the link*/
+      id = atol(toks);
+      /*name of the origin space*/
+      toks = strtok(NULL, "|");
+      strcpy(name, toks);
+      toks = strtok(NULL, "|");
+      /*id of the origin space*/
+      origin_id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*id of the destination space*/
+      destination_id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*direction of the link*/
+      dir = atol(toks);
+      toks = strtok(NULL, "|");
+      /*wheter the link is open or closed*/
+      open = atol(toks);
 
 
+      link = link_create(id);
+      if (link != NULL) {
+
+        link_set_origin(link, origin_id);
+        link_set_destination(link, destination_id);
+        link_set_direction(link, dir);
+        link_set_open(link, open);
+
+        game_add_link(game, link);
       }
+    }
 
-    return OK;
+    
+  }
+  
+  if (ferror(file)) 
+  {
+    status = ERROR;
+  }
+
+  fclose(file);
+  return status;
 }
-

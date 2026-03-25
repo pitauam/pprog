@@ -43,6 +43,6 @@
 
 
 
-#l:id|name|origin_id|destination_id|north,south..|open|
+#links:id|name|origin_id|destination_id|north,south..|open|
 directions: NO_DIR,N,S,E,W
               -1,  0,1,2,3
