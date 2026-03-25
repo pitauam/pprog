@@ -461,3 +461,26 @@ Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction){
 
   return FALSE;
 }
+
+/*
+Bool game_connection_get_direction(Game *game, Id id_act){
+  int i;
+
+  if (!game || id_act == NO_ID){
+    return FALSE;
+  }
+
+  for (i = 0; i < game->n_links; i++)
+  {
+    if (link_get_origin(game->link[i]) == id_act)
+    {
+      if (link_get_direction(game->link[i]) == link_direction)
+      {
+        return link_get_open(game->link[i]);
+      }
+    }
+  }
+
+  return FALSE;
+}
+  */
