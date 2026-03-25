@@ -304,7 +304,7 @@ void game_actions_take(Game *game){
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
 
-  if (player_get_object(player) != NO_ID) {{
+  if (player_get_object_id(player, 0) != NO_ID) {{
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }}
@@ -323,7 +323,7 @@ void game_actions_take(Game *game){
       if (object_location != NO_ID && object_location == player_location)
       {
         /*sets the object to the player*/
-        player_set_object(player, object_id);
+        player_add_object(player, object_id);
 
         /*deletes the object from the space*/
         space_remove_object(game_get_space(game, player_location), object_id);
@@ -511,6 +511,8 @@ void game_actions_inspect(Game *game){
   char object_name[MAX_ARG];
   Id buffer = NO_ID;
 
+  int i;
+
   if (!game)
   {
     command_set_return(game_get_last_command(game), ERROR);
@@ -544,7 +546,7 @@ void game_actions_inspect(Game *game){
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
 
-  for (int i = 0; i < game_get_number_of_objects(game); i++)
+  for (i = 0; i < game_get_number_of_objects(game); i++)
   {
     /*gets the object id*/
     buffer = game_get_object_id(game, i);
@@ -573,7 +575,7 @@ void game_actions_inspect(Game *game){
       return;
     }else
     {
-      for (int i = 0; i < space_get_n_objects(current_space); i++)
+      for (i = 0; i < space_get_n_objects(current_space); i++)
       {
         if (space_get_object_id(current_space, i) == Id_object_player)
         {
@@ -588,9 +590,9 @@ void game_actions_inspect(Game *game){
 
   }}else
   {
-    for (int i = 0; i < player_get_n_objects(player); i++)
+    for (i = 0; i < player_get_n_objects(player); i++)
   {
-    if (player_find_object(player,Id_object_player) == TRUE)
+    if (player_find_object(player,Id_object_player) == OK)
     {
       object = game_get_object(game, Id_object_player);
       game_set_message(game, object_get_desc(object));

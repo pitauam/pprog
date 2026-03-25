@@ -247,7 +247,7 @@ Status game_add_link(Game *game, Link *link) {
     return ERROR;
   }
 
-  game->spaces[game->n_links] = link;
+  game->link[game->n_links] = link;
   game->n_links++;
 
   return OK;
