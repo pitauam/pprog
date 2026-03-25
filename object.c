@@ -95,7 +95,7 @@ Status object_set_desc(Object* object, char* desc)
   return OK;
 }
 
-const char* object_get_description(Object* object) 
+const char* object_get_desc(Object* object) 
 {
   if (!object) 
   {

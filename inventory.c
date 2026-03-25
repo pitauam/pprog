@@ -59,7 +59,7 @@ int inventory_get_max_obj(Inventory* inventory){
     return inventory->max_obj;
 }
 
-Status invetory_add_object(Inventory* inventory, Id id){
+Status inventory_add_object(Inventory* inventory, Id id){
 
     if(!inventory || !inventory->obj || id < 0 || inventory_get_n_objects(inventory)==inventory_get_max_obj(inventory)){
         return ERROR;
@@ -73,7 +73,7 @@ Status invetory_add_object(Inventory* inventory, Id id){
     return OK;
 }
 
-Status invetory_remove_object(Inventory* inventory, Id id){
+Status inventory_remove_object(Inventory* inventory, Id id){
     if(!inventory || !inventory->obj || id < 0 || id == NO_ID ){                                  /*falta compribar si esta vacio*/
         return ERROR;
     }
@@ -132,11 +132,10 @@ int inventory_get_n_objects(Inventory* inventory){
 
 Status inventory_print(Inventory* inventory){
 
-    int i;
     if(!inventory || !inventory->obj){
         return ERROR;
     }
-    if (inventory_get_object(inventory) == TRUE) {
+    if (inventory_is_empty(inventory) == FALSE) {
         fprintf(stdout, "---> There's %d objects in the inventory.\n", set_get_n_ids(inventory->obj));
     } else {
         fprintf(stdout, "---> No object in the inventory.\n");

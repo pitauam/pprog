@@ -354,13 +354,13 @@ void game_actions_drop(Game *game){
   /*checks if the player has an object*/
   player = game_get_player(game);
 
-  object_id = player_get_object(player);
+  object_id = player_get_object_id(player, 0);
   /*if the player has no object with him*/
   if(object_id != NO_ID ){
     /*places the object on the space*/
     game_set_object_location(game, space_id, object_id);
     /*deletes the object from the player*/
-    player_set_object(player, NO_ID);    
+    player_remove_object(player, object_id);
     command_set_return(game_get_last_command(game), OK);
     return;
   }
@@ -575,17 +575,10 @@ void game_actions_inspect(Game *game){
       return;
     }else
     {
-      for (i = 0; i < space_get_n_objects(current_space); i++)
-      {
-        if (space_get_object_id(current_space, i) == Id_object_player)
-        {
-          object = game_get_object(game, Id_object_player);
-          game_set_message(game, object_get_desc(object));
-          command_set_return(game_get_last_command(game), OK);
-          return;
-        }
-      }
-      
+      object = game_get_object(game, Id_object_player);
+      game_set_message(game, object_get_desc(object));
+      command_set_return(game_get_last_command(game), OK);
+      return;
     }
 
   }}else

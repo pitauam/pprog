@@ -27,12 +27,12 @@ struct _Space {
   Id id;                    /*!< Id number of the space, it must be unique */
   char name[WORD_SIZE + 1]; /*!< Name of the space */
 
-  /*
+  /*comentar*/
   Id north;                 
   Id south;                 
   Id east;                  
   Id west;                  
-  */
+  /*comentar*/
 
   Set *objects;             /*!< Stores the Id of an object. NO_ID (-1) means there is no object*/
   Id character;             /*Stores the ID of the character in the space, or NO_ID if there is no character*/
@@ -57,6 +57,10 @@ Space* space_create(Id id) {
   /* Initialization of an empty space*/
   new_space->id = id;
   new_space->name[0] = '\0';
+  new_space->north = NO_ID;
+  new_space->south = NO_ID;
+  new_space->east = NO_ID;
+  new_space->west = NO_ID;
   new_space->character = NO_ID;
   new_space->objects = set_create();
   for (i = 0; i < GDESC_HEIGHT; i++)
@@ -102,7 +106,7 @@ const char* space_get_name(Space* space) {
   }
   return space->name;
 }
-/*
+/*comentar esto*/
 Status space_set_north(Space* space, Id id) {
   if (!space || id == NO_ID) {
     return ERROR;
@@ -162,7 +166,7 @@ Id space_get_west(Space* space) {
   }
   return space->west;
 }
-*/
+/*comentar*/
 
 Status space_add_object(Space* space, Id id) {
   if (space == NULL || id == NO_ID) {
