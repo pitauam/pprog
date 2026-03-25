@@ -82,7 +82,6 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object_id = NO_ID;
-  Space *space_act = NULL;
   Character *character;
   Player *player;
   char str[255];
@@ -94,21 +93,23 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   /* Paint the in the map area */
   screen_area_clear(ge->map);
   if ((id_act = game_get_player_location(game)) != NO_ID) {
-    space_act = game_get_space(game, id_act);
-    id_back = space_get_north(space_act);
-    id_next = space_get_south(space_act);
-    id_right = space_get_east(space_act);
-    id_left = space_get_west(space_act);
-
     n_objects = game_get_number_of_objects(game);
-    
-    /*imprime el anterior*/
+
+    /*0 for north, previous space*/
+    id_back = game_get_connection(game, id_act, 0);
+    id_next = game_get_connection(game, id_act, 1);
+    id_right = game_get_connection(game, id_act, 2);
+    id_left = game_get_connection(game, id_act, 3);
+
+
+      /*imprime el anterior*/
     if (id_back != NO_ID) {
       graphic_engine_space_place(ge, game, id_back);
       sprintf(str, "                                ^");
       screen_area_puts(ge->map, str);
     }
-    /*Imprime el actual*/
+
+      /*Imprime el actual*/
     if (id_act != NO_ID) {
       
       if(id_left != NO_ID && id_right != NO_ID){
@@ -135,7 +136,9 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
     /*^C>*/
 
-/*Imprime la siguiente*/
+
+    
+    /*Imprime la siguiente*/
     if (id_next != NO_ID) {
       sprintf(str, "                                v");
       screen_area_puts(ge->map, str);
