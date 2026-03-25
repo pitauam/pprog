@@ -185,7 +185,7 @@ void game_actions_next(Game *game) {
     return;
   }
 
-  current_id = space_get_south(game_get_space(game, space_id));
+  current_id = game_get_connection(game, space_id, 1);
 
   if (current_id != NO_ID) /*if there is nothing below*/
   {
@@ -214,7 +214,8 @@ void game_actions_back(Game *game) {
   }
   }
 
-  current_id = space_get_north(game_get_space(game, space_id));
+  current_id = game_get_connection(game, space_id, 0);
+
   if (current_id != NO_ID) {
     game_set_player_location(game, current_id);
   }else
@@ -239,8 +240,8 @@ void game_actions_left(Game *game){
     return;
   }
   }
+  current_id = game_get_connection(game, space_id, 3);
 
-  current_id = space_get_west(game_get_space(game, space_id));
   if (current_id != NO_ID) {
     game_set_player_location(game, current_id);
   }
@@ -265,8 +266,8 @@ void game_actions_right(Game *game){
     return;
   }
   }
+  current_id = game_get_connection(game, space_id, 2);
 
-  current_id = space_get_east(game_get_space(game, space_id));
   if (current_id != NO_ID) {
     game_set_player_location(game, current_id);
   }
