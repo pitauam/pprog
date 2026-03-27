@@ -185,19 +185,19 @@ void game_actions_move(Game *game){
 
   strcpy(direction, command_get_arg(game_get_last_command(game)));
 
-  if (strcmp(direction, "b") == 0 || strcmp(direction, "back") == 0)
+  if (strcmp(direction, "n") == 0 || strcmp(direction, "north") == 0)
   {
     dir = 0;
   }
-  else if (strcmp(direction, "n") == 0 || strcmp(direction, "next") == 0)
+  else if (strcmp(direction, "s") == 0 || strcmp(direction, "south") == 0)
   {
     dir = 1;
   }
-  else if (strcmp(direction, "r") == 0 || strcmp(direction, "right") == 0)
+  else if (strcmp(direction, "w") == 0 || strcmp(direction, "west") == 0)
   {
     dir = 2;
   }
-  else if (strcmp(direction, "l") == 0 || strcmp(direction, "left") == 0)
+  else if (strcmp(direction, "e") == 0 || strcmp(direction, "east") == 0)
   {
     dir = 3;
   }
@@ -292,6 +292,10 @@ void game_actions_drop(Game *game){
   Id space_id = NO_ID;
   Id object_id = NO_ID;
   Player* player;
+  char object_name[MAX_ARG];
+  Id buffer = NO_ID;
+  int i;
+  Bool object_exists = FALSE;
 
   /*gets the id of the space where the player is*/
   space_id = game_get_player_location(game);
@@ -304,17 +308,46 @@ void game_actions_drop(Game *game){
   /*checks if the player has an object*/
   player = game_get_player(game);
 
-  object_id = player_get_object_id(player, 0);
-  /*if the player has no object with him*/
-  if(object_id != NO_ID ){
-    /*places the object on the space*/
-    game_set_object_location(game, space_id, object_id);
-    /*deletes the object from the player*/
-    player_remove_object(player, object_id);
-    command_set_return(game_get_last_command(game), OK);
+  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+
+  for (i = 0; i < game_get_number_of_objects(game); i++)
+  {
+    /*gets the object id*/
+    buffer = game_get_object_id(game, i);
+
+    /*if the name in the argument is the same as the name of one of the objects, then it exists*/
+
+    if (strcmp((game_get_object_name(game, game_get_object(game, buffer))), object_name) == 0)
+    {
+      object_exists = TRUE;
+      object_id = buffer;
+      break;
+    }
+    
+  }
+
+  if (object_exists == FALSE)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
     return;
   }
-  command_set_return(game_get_last_command(game), ERROR);
+
+  if (player_find_object(player, object_id) == ERROR)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }else
+  {
+      /*removes the object from the player*/
+    player_remove_object(player, object_id);
+    /*adds the object to the space*/
+    space_add_object(game_get_space(game, space_id), object_id);
+  }
+  
+  
+  
+
+  command_set_return(game_get_last_command(game), OK);
   return;
 }
 
