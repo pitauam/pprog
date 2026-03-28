@@ -16,7 +16,7 @@ CC = gcc
 #CLIB are the libraries used when compiling
 CLIB = -lscreen -L.
 #TESTS is used when cleaning
-TESTS = spacetest settest charactertest
+TESTS = spacetest settest charactertest linktest inventorytest
 
 #by default it makes the castle game executable
 all: $(EXE)
@@ -27,11 +27,11 @@ runaux:
 
 #runs all tests
 runtests: 
-	./spacetest && ./settest && ./charactertest
+	./spacetest && ./settest && ./charactertest && ./linktest && ./inventorytest
 
 #makes all tests
 alltests:
-	make spacetest && make settest && make charactertest
+	make spacetest && make settest && make charactertest && make linktest && make inventorytest
 
 #makes main game exe file
 $(EXE) : $(OBJS)
@@ -100,6 +100,12 @@ settest: set_test.o set.o
 charactertest: character_test.o character.o
 	$(CC) -o $@ $^
 
+linktest: link_test.o link.o
+	$(CC) -o $@ $^
+
+inventorytest: inventory_test.o inventory.o set.o
+	$(CC) -o $@ $^
+
 #makes tests .o
 space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) -c $<
@@ -108,6 +114,12 @@ set_test.o: set_test.c set.h types.h test.h
 	$(CC) -c $(CFLAGS) $<
 
 character_test.o: character_test.c character.h types.h test.h
+	$(CC) -c $(CFLAGS) $<
+
+link_test.o: link_test.c link.h types.h link_test.h test.h
+	$(CC) -c $(CFLAGS) $<
+
+inventory_test.o: inventory_test.c inventory.h types.h set.h inventory_test.h test.h
 	$(CC) -c $(CFLAGS) $<
 
 #runs each test
@@ -119,6 +131,12 @@ runsettest: settest
 
 runcharactertest: charactertest
 	./charactertest
+
+runlinktest: linktest
+	./linktest
+
+runinventorytest: inventorytest
+	./inventorytest
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 

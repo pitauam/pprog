@@ -49,6 +49,7 @@ int main(int argc, char** argv) {
   if (all || test == 3) test1_space_set_name();
   if (all || test == 4) test2_space_set_name();
   if (all || test == 5) test3_space_set_name();
+  /*
   if (all || test == 6) test1_space_set_north();
   if (all || test == 7) test2_space_set_north();
   if (all || test == 8) test1_space_set_south();
@@ -57,12 +58,14 @@ int main(int argc, char** argv) {
   if (all || test == 11) test2_space_set_east();
   if (all || test == 12) test1_space_set_west();
   if (all || test == 13) test2_space_set_west();
+  */
   if (all || test == 14) test1_space_add_object();
   if (all || test == 15) test2_space_add_object();
   if (all || test == 16) test1_space_get_id();
   if (all || test == 17) test2_space_get_id();
   if (all || test == 18) test1_space_get_name();
   if (all || test == 19) test2_space_get_name();
+  /*
   if (all || test == 20) test1_space_get_north();
   if (all || test == 21) test2_space_get_north();
   if (all || test == 22) test1_space_get_south();
@@ -71,6 +74,7 @@ int main(int argc, char** argv) {
   if (all || test == 25) test2_space_get_east();
   if (all || test == 26) test1_space_get_west();
   if (all || test == 27) test2_space_get_west();
+  */
   if (all || test == 28) test1_space_get_object();
   if (all || test == 29) test2_space_get_object();
   if (all || test == 30) test3_space_get_object();
@@ -114,7 +118,7 @@ void test3_space_set_name() {
   PRINT_TEST_RESULT(space_set_name(s, NULL) == ERROR);
   space_destroy(s);
 }
-
+/*
 void test1_space_set_north() {
   Space *s;
   s = space_create(5);
@@ -162,6 +166,7 @@ void test2_space_set_west() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_west(s, 4) == ERROR);
 }
+*/
 
 void test1_space_add_object() {
   Space *s;
@@ -208,6 +213,7 @@ void test3_space_get_object() {
   PRINT_TEST_RESULT(space_get_object(s) == FALSE);
 }
 
+/*
 void test1_space_get_north() {
   Space *s;
   s = space_create(5);
@@ -259,6 +265,7 @@ void test2_space_get_west() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_west(s) == NO_ID);
 }
+*/
 
 void test1_space_get_id() {
   Space *s;

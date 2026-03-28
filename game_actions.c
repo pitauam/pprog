@@ -185,19 +185,19 @@ void game_actions_move(Game *game){
 
   strcpy(direction, command_get_arg(game_get_last_command(game)));
 
-  if (strcmp(direction, "n") == 0 || strcmp(direction, "north") == 0)
+  if (strcmp(direction, "b") == 0 || strcmp(direction, "back") == 0)
   {
     dir = 0;
   }
-  else if (strcmp(direction, "s") == 0 || strcmp(direction, "south") == 0)
+  else if (strcmp(direction, "n") == 0 || strcmp(direction, "next") == 0)
   {
     dir = 1;
   }
-  else if (strcmp(direction, "w") == 0 || strcmp(direction, "west") == 0)
+  else if (strcmp(direction, "r") == 0 || strcmp(direction, "right") == 0)
   {
     dir = 2;
   }
-  else if (strcmp(direction, "e") == 0 || strcmp(direction, "east") == 0)
+  else if (strcmp(direction, "l") == 0 || strcmp(direction, "left") == 0)
   {
     dir = 3;
   }
