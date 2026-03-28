@@ -46,6 +46,26 @@ Status game_reader_load_spaces(Game *game, char *filename);
  */
 Status game_reader_load_links(Game *game, char *filename);
 
+/**
+ * @brief loads the characters of the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param filename pointer to a string with the file name
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_reader_load_characters(Game *game, char *filename);
+
+/**
+ * @brief loads the players of the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param filename pointer to a string with the file name
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_reader_load_players(Game *game, char *filename);
+
 Status game_reader_load_spaces(Game *game, char *filename) {
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
@@ -187,7 +207,7 @@ Game* game_reader_create_from_file(char *filename) {
   return game;
 }
 
-/*in progress*/
+
 Status game_reader_load_links(Game *game, char *filename){
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
@@ -224,6 +244,77 @@ Status game_reader_load_links(Game *game, char *filename){
       toks = strtok(NULL, "|");
       /*id of the origin space*/
       origin_id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*id of the destination space*/
+      destination_id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*direction of the link*/
+      dir = atol(toks);
+      toks = strtok(NULL, "|");
+      /*wheter the link is open or closed*/
+      open = atol(toks);
+
+
+      link = link_create(id);
+      if (link != NULL) {
+
+        link_set_origin(link, origin_id);
+        link_set_destination(link, destination_id);
+        link_set_direction(link, dir);
+        link_set_open(link, open);
+        link_set_name(link, name);
+        game_add_link(game, link);
+      }
+    }
+  }
+  
+  if (ferror(file)) 
+  {
+    status = ERROR;
+  }
+
+  fclose(file);
+  return status;
+}
+
+Status game_reader_load_characters(Game *game, char *filename){
+  FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char name[WORD_SIZE] = "";
+  char gdesc_str[10] = ""; 
+  char message[50] = ""; 
+
+  int i = 0;
+  char *toks = NULL;
+
+  Id id = NO_ID;
+  Id space_id = NO_ID;
+  int health_points;
+  int friendly;
+
+  Status status;
+
+  if (!filename) {
+    return ERROR;
+  }
+
+  file = fopen(filename, "r");
+  if (file == NULL) {
+    return ERROR;
+  }
+
+  while (fgets(line, WORD_SIZE, file)) {
+    if (strncmp("#c:", line, 3) == 0) {
+
+      toks = strtok(line + 3, "|");
+      /*id of the character*/
+      id = atol(toks);
+      /*name of the character*/
+      toks = strtok(NULL, "|");
+      strcpy(name, toks);
+      toks = strtok(NULL, "|");
+      /*graphic description of the character*/
+      toks = atol(toks);
       toks = strtok(NULL, "|");
       /*id of the destination space*/
       destination_id = atol(toks);

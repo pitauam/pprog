@@ -103,13 +103,13 @@ void test2_space_create() {
 void test1_space_set_name() {
   Space *s;
   s = space_create(5);
-  PRINT_TEST_RESULT(space_set_name(s, "hola") == OK);
+  PRINT_TEST_RESULT(space_set_name(s, "nameforspace") == OK);
   space_destroy(s);
 }
 
 void test2_space_set_name() {
   Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_name(s, "hola") == ERROR);
+  PRINT_TEST_RESULT(space_set_name(s, "nameforspace") == ERROR);
 }
 
 void test3_space_set_name() {
@@ -183,8 +183,8 @@ void test2_space_add_object() {
 void test1_space_get_name() {
   Space *s;
   s = space_create(1);
-  space_set_name(s, "adios");
-  PRINT_TEST_RESULT(strcmp(space_get_name(s), "adios") == 0);
+  space_set_name(s, "name");
+  PRINT_TEST_RESULT(strcmp(space_get_name(s), "name") == 0);
   space_destroy(s);
 }
 
@@ -287,7 +287,7 @@ void test1_space_remove_object() {
 }
 void test2_space_remove_object() {
   Space *s = space_create(1);
-  PRINT_TEST_RESULT(space_remove_object(s, 10) == ERROR); /* Falla porque el 10 no está */
+  PRINT_TEST_RESULT(space_remove_object(s, 10) == ERROR);
   space_destroy(s);
 }
 
@@ -316,8 +316,8 @@ void test2_space_get_character() {
 
 void test1_space_set_gdesc() {
   Space *s = space_create(1);
-  char dibujo[46] = "5234623464222537524321342542356354675463756474";
-  PRINT_TEST_RESULT(space_set_gdesc(s, dibujo) == OK);
+  char drawing[46] = "5234623464222537524321342542356354675463756474";
+  PRINT_TEST_RESULT(space_set_gdesc(s, drawing) == OK);
   space_destroy(s);
 }
 
