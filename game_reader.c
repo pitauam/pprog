@@ -13,9 +13,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SPACE_ID1 11
-#define SPACE_ID2 12
-
 /**
  * @brief loads the spaces of the game
  * @author Mario Rodriguez
@@ -197,12 +194,18 @@ Game* game_reader_create_from_file(char *filename) {
   if (game_reader_load_links(game, filename) == ERROR) {
     return NULL;
   }
+  if (game_reader_load_characters(game, filename) == ERROR){
+    return NULL;
+  }
 
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
   /*places the characters*/
+
+  /*
   space_set_character(game_get_space(game, SPACE_ID1), CHARACTER1);
   space_set_character(game_get_space(game, SPACE_ID2), CHARACTER2);
+  */
 
   return game;
 }
@@ -284,7 +287,6 @@ Status game_reader_load_characters(Game *game, char *filename){
   char gdesc_str[10] = ""; 
   char message[50] = ""; 
 
-  int i = 0;
   char *toks = NULL;
 
   Id id = NO_ID;
@@ -293,6 +295,7 @@ Status game_reader_load_characters(Game *game, char *filename){
   int friendly;
 
   Status status;
+  Character *character = NULL;
 
   if (!filename) {
     return ERROR;
@@ -315,26 +318,37 @@ Status game_reader_load_characters(Game *game, char *filename){
       toks = strtok(NULL, "|");
       /*graphic description of the character*/
       toks = atol(toks);
+      strcpy(gdesc_str, toks);
       toks = strtok(NULL, "|");
-      /*id of the destination space*/
-      destination_id = atol(toks);
+      /*id of the space where it will spawn*/
+      space_id = atol(toks);
       toks = strtok(NULL, "|");
-      /*direction of the link*/
-      dir = atol(toks);
+      /*health points*/
+      health_points = atol(toks);
       toks = strtok(NULL, "|");
-      /*wheter the link is open or closed*/
-      open = atol(toks);
+      /*wheter the character is friendly or not*/
+      friendly = atol(toks);
+      toks = strtok(NULL, "|");
+      /*message the character has*/
+      toks = strtok(NULL, "|");
+      strcpy(message, toks);
 
+      character = character_create(id);
+      if (character != NULL) {
 
-      link = link_create(id);
-      if (link != NULL) {
-
-        link_set_origin(link, origin_id);
-        link_set_destination(link, destination_id);
-        link_set_direction(link, dir);
-        link_set_open(link, open);
-        link_set_name(link, name);
-        game_add_link(game, link);
+        character_set_name(character, name);
+        character_set_description(character, gdesc_str);
+        space_set_character(game_get_space(game, space_id), id);
+        character_set_health(character, health_points);
+        if (friendly == 1)
+        {
+          character_set_friendly(character, TRUE);
+        }
+        else
+        {
+          character_set_friendly(character, FALSE);
+        }
+        character_set_message(character, message);
       }
     }
   }
