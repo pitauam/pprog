@@ -71,6 +71,16 @@ const char* player_get_name(Player* player);
 Status player_set_location(Player* player, Id id);
 
 /**
+ * @brief Sets the maximum number of objects the player can carry in his backpack
+ * @author Santiago Pita
+ *
+ * @param player pointer to the structure of the player
+ * @param max_objects maximum backpack size
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status player_set_max_objects(Player *player, int max_objects);
+
+/**
  * @brief Gives the location of the player
  * @author Mario Rodriguez
  *

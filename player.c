@@ -102,6 +102,14 @@ Status player_set_location(Player* player, Id id) {
   return OK;
 }
 
+Status player_set_max_objects(Player *player, int max_objects) {
+  if (!player || !player->backpack) {
+    return ERROR;
+  }
+
+  return inventory_set_max_obj(player->backpack, max_objects);
+}
+
 Id player_get_location(Player* player) {
 
   if (!player) {

@@ -76,6 +76,16 @@ Id game_get_player_location(Game *game);
 Status game_set_player_location(Game *game, Id id);
 
 /**
+ * @brief Sets the player who has a turn in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param player pointer to the player that will be stored in the game
+ * @return OK if everything goes well or ERROR if there was some mistake
+ */
+Status game_set_player(Game *game, Player *player);
+
+/**
  * @brief Gets the id of the space where the object is located
  * @author Santiago Pita
  *

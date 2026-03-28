@@ -44,10 +44,10 @@ directions: NO_DIR,N,S,E,W
 #l:316|Garden|16|15|0|1|
 
 
-#c:2|phantom|(o)|123|5|0|I won't talk to you!|
+#c:2|phantom|*_*|121|5|0|I won't talk to you!|
 
 #c:41|kevin|O_o|11|5|1|Hola soy kevin. Necesito tu ayuda, mata a todos los enemigos por mi :)|
 #c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ vuelve cuando seas mas fuerte plebeyo|
 
-#p:100|knigth|^C>|11|5|3|
-#p:101|happy|:D|12|5|3|
+#_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
+#p:100|happyknight|:D|12|5|3|

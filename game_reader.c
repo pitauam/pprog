@@ -178,34 +178,50 @@ Status game_reader_load_objects(Game *game, char *filename){
 
 Game* game_reader_create_from_file(char *filename) {
   Game *game;
+
   game = game_create();
   if (game == NULL) {
     return NULL;
   }
 
   if (game_reader_load_spaces(game, filename) == ERROR) {
+    game_destroy(game);
     return NULL;
   }
 
   if (game_reader_load_objects(game, filename) == ERROR) {
+    game_destroy(game);
     return NULL;
   }
 
   if (game_reader_load_links(game, filename) == ERROR) {
-    return NULL;
-  }
-  if (game_reader_load_characters(game, filename) == ERROR){
+    game_destroy(game);
     return NULL;
   }
 
-  /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0));
-  /*places the characters*/
+  if (game_reader_load_players(game, filename) == ERROR) {
+    game_destroy(game);
+    return NULL;
+  }
 
-  /*
-  space_set_character(game_get_space(game, SPACE_ID1), CHARACTER1);
-  space_set_character(game_get_space(game, SPACE_ID2), CHARACTER2);
-  */
+  if (game_reader_load_characters(game, filename) == ERROR) {
+    game_destroy(game);
+    return NULL;
+  }
+
+  if (game_get_player(game) == NULL) {
+    Player *player = player_create(PLAYER_ID);
+
+    if (player == NULL || game_set_player(game, player) == ERROR) {
+      player_destroy(player);
+      game_destroy(game);
+      return NULL;
+    }
+
+    if (game_get_space_id_at(game, 0) != NO_ID) {
+      game_set_player_location(game, game_get_space_id_at(game, 0));
+    }
+  }
 
   return game;
 }
@@ -223,7 +239,7 @@ Status game_reader_load_links(Game *game, char *filename){
 
   Direction dir = NO_DIR;
   Link *link;
-  Status status;
+  Status status = OK;
   int open;
 
   if (!filename) {
@@ -280,13 +296,13 @@ Status game_reader_load_links(Game *game, char *filename){
   return status;
 }
 
+
 Status game_reader_load_characters(Game *game, char *filename){
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char gdesc_str[10] = ""; 
-  char message[50] = ""; 
-
+  char message[WORD_SIZE] = "";
   char *toks = NULL;
 
   Id id = NO_ID;
@@ -294,8 +310,8 @@ Status game_reader_load_characters(Game *game, char *filename){
   int health_points;
   int friendly;
 
-  Status status;
   Character *character = NULL;
+  Status status = OK;
 
   if (!filename) {
     return ERROR;
@@ -308,7 +324,6 @@ Status game_reader_load_characters(Game *game, char *filename){
 
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#c:", line, 3) == 0) {
-
       toks = strtok(line + 3, "|");
       /*id of the character*/
       id = atol(toks);
@@ -317,7 +332,6 @@ Status game_reader_load_characters(Game *game, char *filename){
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       /*graphic description of the character*/
-      toks = atol(toks);
       strcpy(gdesc_str, toks);
       toks = strtok(NULL, "|");
       /*id of the space where it will spawn*/
@@ -330,12 +344,10 @@ Status game_reader_load_characters(Game *game, char *filename){
       friendly = atol(toks);
       toks = strtok(NULL, "|");
       /*message the character has*/
-      toks = strtok(NULL, "|");
       strcpy(message, toks);
 
       character = character_create(id);
       if (character != NULL) {
-
         character_set_name(character, name);
         character_set_description(character, gdesc_str);
         space_set_character(game_get_space(game, space_id), id);
@@ -349,6 +361,7 @@ Status game_reader_load_characters(Game *game, char *filename){
           character_set_friendly(character, FALSE);
         }
         character_set_message(character, message);
+        game_add_character(game, character);
       }
     }
   }
@@ -359,5 +372,71 @@ Status game_reader_load_characters(Game *game, char *filename){
   }
 
   fclose(file);
+  return status;
+}
+
+
+Status game_reader_load_players(Game *game, char *filename) {
+  FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char name[WORD_SIZE] = "";
+  char gdesc_str[10] = "";
+  char *toks = NULL;
+  
+  Id id = NO_ID;
+  Id space_id = NO_ID;
+  int health_points;
+  int max_objects;
+  Player *player = NULL;
+  Status status = OK;
+
+  if (!filename) {
+    return ERROR;
+  }
+
+  file = fopen(filename, "r");
+  if (file == NULL) {
+    return ERROR;
+  }
+
+  while (fgets(line, WORD_SIZE, file)) {
+    if (strncmp("#p:", line, 3) == 0 && game_get_player(game) == NULL) {
+      toks = strtok(line + 3, "|");
+      /*id of the player*/
+      id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*name of the player*/
+      strcpy(name, toks);
+      toks = strtok(NULL, "|");
+      /*graphic description of the player*/
+      strcpy(gdesc_str, toks);
+      toks = strtok(NULL, "|");
+      /*id of the space where it will spawn*/
+      space_id = atol(toks);
+      toks = strtok(NULL, "|");
+      /*health points*/
+      health_points = atol(toks);
+      toks = strtok(NULL, "|");
+      /*maximum number of objects in the backpack*/
+      max_objects = atol(toks);
+
+      player = player_create(id);
+      if (player != NULL) {
+        player_set_name(player, name);
+        player_set_description(player, gdesc_str);
+        player_set_location(player, space_id);
+        player_set_health(player, health_points);
+        player_set_max_objects(player, max_objects);
+        game_set_player(game, player);
+      }
+    }
+  }
+
+  if (ferror(file)) {
+    status = ERROR;
+  }
+
+  fclose(file);
+
   return status;
 }

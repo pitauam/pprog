@@ -60,30 +60,13 @@ Game* game_create() {
   }
 
   game->n_spaces = 0;
+  game->n_objects = 0;
   game->n_links = 0;
   game->n_characters = 0;
 
-  game->player = player_create(PLAYER_ID); /*Hard coded value*/
-  /*Creates character1
-  
-  character1 = character_create(CHARACTER1);
-  game->characters[game->n_characters] = character1;
-  game->n_characters++;
-  character_set_name(game->characters[0], "kevin");
-  character_set_description(game->characters[0], "O_o");
-  character_set_message(game->characters[0], " Hola soy kevin. Necesito tu ayuda, mata a todos los enemigos por mi :)");
-  Creates character2
-  character2 = character_create(CHARACTER2);
-  game->characters[game->n_characters] = character2;
-  game->n_characters++;
-  character_set_name(game->characters[1], "Guardia");
-  character_set_description(game->characters[1], ">:O");
-  character_set_message(game->characters[1], " JASJAJSJAJSJAJ vuelve cuando seas mas fuerte plebeyo");
-  character_set_friendly(game->characters[1], FALSE);
- */
+  game->player = NULL;
   game->last_cmd = command_create();
   game->finished = FALSE;
-  game->n_characters = 2;
   game->msg[0] = '\0';
   game->name_msg[0] = '\0';
 
@@ -151,6 +134,20 @@ Status game_set_player_location(Game *game, Id id) {
   }
 
   return player_set_location(game->player, id);
+}
+
+Status game_set_player(Game *game, Player *player) {
+  if (!game || !player) {
+    return ERROR;
+  }
+
+  if (game->player != NULL) {
+    player_destroy(game->player);
+  }
+
+  game->player = player;
+
+  return OK;
 }
 
 Id game_get_object_location(Game *game, Id object_id) 

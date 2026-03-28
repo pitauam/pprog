@@ -183,23 +183,35 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
-  sprintf(str, " Player : %3d (%d)", (int)id_act, player_get_health(player));
+  sprintf(str, " Player : %3d (%dhp)", (int)id_act, player_get_health(player));
 
   screen_area_puts(ge->descript, str);
   
   if(player_inventory_empty(player) == FALSE){
-  sprintf(str,"Player carries object: ");
+  sprintf(str," Player carries: ");
+  screen_area_puts(ge->descript, str);
     for(i=0; i < player_get_n_objects(player); i++){
       player_object_id = player_get_object_id(player, i);
       if (player_object_id != NO_ID) {
-        sprintf(str, "%ld", player_object_id);
-      } else {
-      sprintf(str, "No object in the player's inventory.\n");
-      }
+        if (player_object_id == 23) /*if the object is a rose (easter egg)*/
+        {
+          sprintf(str, " a lovely %s <3!", object_get_name(game_get_object(game, player_object_id)));
+        }
+        else 
+        {
+        sprintf(str, " %12s (%ld)", object_get_name(game_get_object(game, player_object_id)), player_object_id);
+        }
+        screen_area_puts(ge->descript, str);
+      } 
     }
     
   }
-
+  else 
+  {
+    sprintf(str, " Inventory is empty.");
+    screen_area_puts(ge->descript, str);
+  }
+  
 /*funcion original*/
 /*
   if (player_inventory_empty(player) == FALSE)
@@ -218,13 +230,12 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     sprintf(str, " Player has no objects");
   }
 */
-  screen_area_puts(ge->descript, str);
   
   /*prints the message of a character*/
 
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
-  sprintf(str, " Message from %s: %s",game_get_name_message(game), game_get_message(game));
+  sprintf(str, " Message from%s: %s",game_get_name_message(game), game_get_message(game));
   screen_area_puts(ge->descript, str);
 
   game_set_message(game, "\0"); /*removes the message*/
