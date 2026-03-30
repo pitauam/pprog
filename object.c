@@ -42,6 +42,7 @@ Object* object_create(Id id) {
   /* Initialization of an empty object*/
   new_object->id = id;
   new_object->name[0] = '\0';
+  new_object->description[0] = '\0';
 
   return new_object;
 }
@@ -113,7 +114,7 @@ Status object_print(Object* object) {
   }
 
   /* 1. Prints object's id and name */
-  fprintf(stdout, "--> object (Id: %ld; Name: %s)\n", object->id, object->name);
+  fprintf(stdout, "--> object (Id: %ld; Name: %s; Description: %s)\n", object->id, object->name, object->description);
 
   return OK;
 }

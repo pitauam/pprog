@@ -234,11 +234,8 @@ void game_actions_take(Game *game){
   Id player_location = NO_ID;
   Id object_location = NO_ID;
   Id object_id = NO_ID;
-  
   int i;
-
   char object_name[MAX_ARG];
-  
   Player *player;
 
   /*gets the id of the space where the player is*/
