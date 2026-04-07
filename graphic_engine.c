@@ -41,6 +41,18 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
 
 void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act, Id id_right);
 
+/**
+ * @brief prints a link and its destination space in the description area
+ * @author Iker Diaz
+ *
+ * @param ge pointer to the graphic engine
+ * @param game pointer to the game
+ * @param origin_id id of the current space
+ * @param direction direction of the link
+ * @param direction_name string with the name of the direction
+ */
+void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id, Direction direction, const char *direction_name);
+
 
 /*defines place-place*/
 
@@ -211,6 +223,15 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     sprintf(str, " Inventory is empty.");
     screen_area_puts(ge->descript, str);
   }
+
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " Links :");
+  screen_area_puts(ge->descript, str);
+  graphic_engine_print_link_info(ge, game, id_act, N, "North");
+  graphic_engine_print_link_info(ge, game, id_act, S, "South");
+  graphic_engine_print_link_info(ge, game, id_act, E, "East");
+  graphic_engine_print_link_info(ge, game, id_act, W, "West");
   
 /*funcion original*/
 /*
@@ -261,6 +282,39 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_paint(RED);
   printf("prompt:> ");
   }
+}
+
+/**
+ * @brief prints a link and its destination space
+ * @author Iker Diaz
+ *
+ * @param ge pointer to the graphic engine
+ * @param game pointer to the game
+ * @param origin_id id of the current space
+ * @param direction direction of the link
+ * @param direction_name string with the name of the direction
+ */
+void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id, Direction direction, const char *direction_name){
+  Id destination_id = NO_ID;
+  Space *destination_space = NULL;
+  char str[255];
+
+  if (!ge || !game || origin_id == NO_ID || !direction_name) {
+    return;
+  }
+
+  destination_id = game_get_connection(game, origin_id, direction);
+  if (destination_id == NO_ID) {
+    return;
+  }
+
+  destination_space = game_get_space(game, destination_id);
+  if (!destination_space) {
+    return;
+  }
+
+  sprintf(str, "    %s -> %3ld %.16s", direction_name, (long)destination_id, space_get_name(destination_space));
+  screen_area_puts(ge->descript, str);
 }
 
 /*prints -x-*/
