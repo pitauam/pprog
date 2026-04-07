@@ -19,7 +19,7 @@ Inventory *inventory_create(){
     }
 
     new_inventory->obj = set_create();
-    new_inventory->max_obj = MAX_OBJECTS;
+    new_inventory->max_obj = 0;
 
     return new_inventory;
 }

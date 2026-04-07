@@ -5,7 +5,6 @@
 #include "set.h"
 
 
-#define MAX_OBJECTS 2
 
 typedef struct _Inventory Inventory;
 
