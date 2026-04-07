@@ -69,7 +69,7 @@ void test2_inventory_create() {
   Inventory *inventory;
 
   inventory = inventory_create();
-  PRINT_TEST_RESULT(inventory_get_max_obj(inventory) == MAX_OBJECTS);
+  PRINT_TEST_RESULT(inventory_get_max_obj(inventory) == MAX_OBJ);
   inventory_destroy(inventory);
 }
 

@@ -3,6 +3,8 @@
 
 #include "inventory.h"
 
+
+
 struct _Inventory
 {
     Set *obj;

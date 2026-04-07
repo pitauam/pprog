@@ -241,7 +241,6 @@ int space_get_n_objects(Space* space){
   return set_get_n_ids(space->objects);
 }
 Status space_print(Space* space) {
-  int i;
   /* Error Control */
   if (!space) {
     return ERROR;

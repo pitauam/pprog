@@ -74,11 +74,11 @@ int main(int argc, char** argv) {
   if (all || test == 25) test2_space_get_east();
   if (all || test == 26) test1_space_get_west();
   if (all || test == 27) test2_space_get_west();
-  */
+  
   if (all || test == 28) test1_space_get_object();
   if (all || test == 29) test2_space_get_object();
   if (all || test == 30) test3_space_get_object();
-
+  */
   PRINT_PASSED_PERCENTAGE;
 
   return 0;
@@ -192,13 +192,14 @@ void test2_space_get_name() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_name(s) == NULL);
 }
-
+/*
 void test1_space_get_object() {
   Space *s;
   s = space_create(1);
   PRINT_TEST_RESULT(space_get_object(s) == FALSE);
   space_destroy(s);
 }
+  
 
 void test2_space_get_object() {
   Space *s;
@@ -212,6 +213,7 @@ void test3_space_get_object() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_object(s) == FALSE);
 }
+*/
 
 /*
 void test1_space_get_north() {

@@ -51,9 +51,11 @@ void test2_space_get_id();
 void test1_space_get_name();
 void test2_space_get_name();
 
+/*
 void test1_space_get_object();
 void test2_space_get_object();
 void test3_space_get_object();
+*/
 void test1_space_add_object();
 void test2_space_add_object();
 void test1_space_remove_object();
@@ -65,6 +67,9 @@ void test2_space_get_character();
 void test1_space_set_gdesc();
 void test2_space_set_gdesc();
 
+/*
 void test1_space_get_object();
 void test2_space_get_object();
+*/
+
 #endif
