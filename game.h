@@ -20,6 +20,7 @@
 #include "link.h"
 
 #define MAX_SPACES 100
+#define MAX_PLAYERS 8
 #define MAX_OBJECTS 100
 #define MAX_CHARACTERS 100
 #define MAX_LINKS 400
@@ -28,6 +29,9 @@
 
 /*Defines the struct Game*/
 typedef struct _Game Game;
+
+/*Defines the struct InterfaceData*/
+typedef struct _InterfaceData InterfaceData;
 
 /**
  * @brief creates the game, initializing all the variables
@@ -351,6 +355,13 @@ Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction);
 Status game_add_link(Game *game, Link *link);
 
 int game_get_number_of_links(Game *game);
+
+/*bla*/
+Status game_command_create(Game* game);
+
+int game_get_turn(Game *game);
+
+Status game_next_turn(Game *game);
 
 
 #endif

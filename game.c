@@ -17,19 +17,25 @@
 
 /*Opaque Game struct*/
 struct _Game {
-  Player *player;                             /*!< pointer to the player structure*/
+  Player *player[MAX_PLAYERS];                /*!< pointer to the player structure*/
+  int n_players;                              /*!< number of players in the game*/
   Object *object[MAX_OBJECTS];                /*!< pointer to the array of objects*/
   int n_objects;                              /*!< number of objects*/
   Character *characters[MAX_CHARACTERS];      /*!< pointer to the array of characters*/
   int n_characters;                           /*!< number of characters*/
   Space *spaces[MAX_SPACES];                  /*!< pointer to the spaces structure*/
-  int n_spaces;                               /*!< number of spaces in castle*/
+  int n_spaces;                               /*!< number of spaces in castle*/ 
+  Link *link[MAX_LINKS];                      /*!< links between spaces*/
+  int n_links;                                /*!< number of links*/
+  int turn;                                   /*!< indicates the index of the player that has a turn*/
+  InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player*/
+};
+
+struct _InterfaceData {
   Command *last_cmd;                          /*!< pointer to the last command executed*/
   Bool finished;                              /*!< whether the game has finished or not*/
   char msg[WORD_SIZE+1];                      /*!< message that will be printed in the description section*/
   char name_msg[WORD_SIZE];                   /*!< name of who is sending the message*/
-  Link *link[MAX_LINKS];                      /*!< links between spaces*/
-  int n_links;                                /*!< number of links*/
 };
 
 /**
@@ -59,17 +65,21 @@ Game* game_create() {
     game->object[i] = NULL;
   }
 
+  for (i = 0; i < MAX_PLAYERS; i++) {
+    game->player[i] = NULL;
+    
+    game->interface_data[i]->finished = FALSE;
+    game->interface_data[i]->msg[0] = '\0';
+    game->interface_data[i]->name_msg[0] = '\0';
+  }
+
   game->n_spaces = 0;
+  game->n_players = 0;
   game->n_objects = 0;
   game->n_links = 0;
   game->n_characters = 0;
 
-  game->player = NULL;
-  game->last_cmd = command_create();
-  game->finished = FALSE;
-  game->msg[0] = '\0';
-  game->name_msg[0] = '\0';
-
+  game->turn = 0;
 
   return game;
 }
@@ -85,10 +95,6 @@ Status game_destroy(Game *game) {
     link_destroy(game->link[i]);
   }
 
-  command_destroy(game->last_cmd);
-  
-  player_destroy(game->player);
-
   for (i = 0; i < game->n_objects;i++)
   {
     object_destroy(game->object[i]);
@@ -97,6 +103,12 @@ Status game_destroy(Game *game) {
   for (i = 0; i < game->n_characters; i++)
   {
     character_destroy(game->characters[i]);
+  }
+
+  for (i = 0; i < game->n_players; i++)
+  { 
+    player_destroy(game->player[i]);
+    command_destroy(game->interface_data[i]->last_cmd);
   }
 
   free(game);
@@ -146,6 +158,7 @@ Status game_set_player(Game *game, Player *player) {
   }
 
   game->player = player;
+  game->n_players++;
 
   return OK;
 }
@@ -461,6 +474,37 @@ Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction){
   }
 
   return FALSE;
+}
+
+Status game_command_create(Game* game){
+  if (!game){return ERROR;}
+
+  Command *com = NULL;
+
+  game->interface_data[game->n_players]->last_cmd = command_create();
+
+  return OK;
+}
+
+int game_get_turn(Game *game){
+  if (!game) {return -1;}
+
+  return game->turn;
+}
+
+Status game_next_turn(Game *game){
+  if (!game) {return ERROR;}
+
+  if (game->turn >= game->n_players)
+  {
+    game->turn = 0;
+  }
+  else 
+  {
+    game->turn++;
+  }
+
+  return OK;
 }
 
 /*
