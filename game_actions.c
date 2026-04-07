@@ -251,10 +251,10 @@ void game_actions_take(Game *game){
   /*saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game)));
 
-  if (player_get_object_id(player, 0) != NO_ID) {{
+  if (player_inventory_full(player) == TRUE) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   for (i = 0; i < game_get_number_of_objects(game) ; i++)
   {

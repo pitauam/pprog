@@ -137,6 +137,15 @@ Id player_get_object_id(Player* player, int pos);
 Bool player_inventory_empty(Player* player);
 
 /**
+ * @brief Gets if the players inventory is full
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @return TRUE if full, FALSE otherwise
+ */
+Bool player_inventory_full(Player* player);
+
+/**
  * @brief Finds id the player has an object with id(id)
  * @author Mario Rodriguez
  *
