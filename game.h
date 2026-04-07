@@ -352,15 +352,50 @@ Id game_get_connection(Game *game, Id id_act, Direction link_direction);
  */
 Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction);
 
+/**
+ * @brief It adds a link to the array of links
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param link a pointer to the link
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
 Status game_add_link(Game *game, Link *link);
 
+/**
+ * @brief It gets the number of links in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return number of links in the game or -1 if there was an error
+ */
 int game_get_number_of_links(Game *game);
 
-/*bla*/
+/**
+ * @brief It creates a command in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
 Status game_command_create(Game* game);
 
+/**
+ * @brief It gets the current turn in the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return turn of the game, or -1 if there was an error
+ */
 int game_get_turn(Game *game);
 
+/**
+ * @brief It changes the turn to make it the next one
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
 Status game_next_turn(Game *game);
 
 

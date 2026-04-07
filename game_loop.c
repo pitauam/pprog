@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "command.h"
 #include "game.h"
@@ -59,7 +60,10 @@ int main(int argc, char *argv[]) {
     {
       break;
     }
-
+    
+    /*shows the player the result of their action*/
+    graphic_engine_paint_game(gengine, game);
+    sleep(1);
     /*advances the turn to the next player*/
     game_next_turn(game);
     last_cmd = game_get_last_command(game);

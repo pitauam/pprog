@@ -94,8 +94,6 @@ Status game_reader_load_spaces(Game *game, char *filename) {
       toks = strtok(NULL, "|");
       strcpy(name, toks);
 
-
-
       for (i = 0; i < 5; i++) {
         toks = strtok(NULL, "|");
         if (toks != NULL) {
