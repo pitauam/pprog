@@ -209,11 +209,6 @@ Game* game_reader_create_from_file(char *filename) {
     return NULL;
   }
 
-  if (game_reader_load_players(game, filename) == ERROR) {
-    game_destroy(game);
-    return NULL;
-  }
-
   /*
   if (game_get_player(game) == NULL) {
     Player *player = player_create(PLAYER_ID);
@@ -407,7 +402,7 @@ Status game_reader_load_players(Game *game, char *filename) {
   }
 
   while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#p:", line, 3) == 0 && game_get_player(game) == NULL) {
+    if (strncmp("#p:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
       /*id of the player*/
       id = atol(toks);

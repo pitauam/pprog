@@ -44,6 +44,7 @@ struct _InterfaceData {
 
 Game* game_create() {
   int i;
+  int j;
   Game *game;
 
   game = (Game *)calloc(1, sizeof(Game));
@@ -67,7 +68,17 @@ Game* game_create() {
 
   for (i = 0; i < MAX_PLAYERS; i++) {
     game->player[i] = NULL;
-    
+
+    game->interface_data[i] = (InterfaceData *)calloc(1, sizeof(InterfaceData));
+    if (game->interface_data[i] == NULL) {
+      for (j = 0; j < i; j++) {
+        free(game->interface_data[j]);
+      }
+      free(game);
+      return NULL;
+    }
+
+    game->interface_data[i]->last_cmd = NULL;
     game->interface_data[i]->finished = FALSE;
     game->interface_data[i]->msg[0] = '\0';
     game->interface_data[i]->name_msg[0] = '\0';
@@ -86,6 +97,8 @@ Game* game_create() {
 
 Status game_destroy(Game *game) {
   int i = 0;
+
+  if (!game) {return ERROR;}
 
   for (i = 0; i < game->n_spaces; i++) {
     space_destroy(game->spaces[i]);
@@ -109,6 +122,11 @@ Status game_destroy(Game *game) {
   { 
     player_destroy(game->player[i]);
     command_destroy(game->interface_data[i]->last_cmd);
+  }
+
+  for (i = 0; i < MAX_PLAYERS; i++) 
+  {
+    free(game->interface_data[i]);
   }
 
   free(game);
@@ -149,15 +167,15 @@ Status game_set_player_location(Game *game, Id id) {
 }
 
 Status game_set_player(Game *game, Player *player) {
-  if (!game || !player) {
+  if (!game || !player || game->n_players >= MAX_PLAYERS) {
     return ERROR;
   }
 
-  if (game->player[game->turn] != NULL) {
-    player_destroy(game->player[game->turn]);
+  if (game->player[game->n_players] != NULL) {
+    player_destroy(game->player[game->n_players]);
   }
 
-  game->player[game->turn] = player;
+  game->player[game->n_players] = player;
   game->n_players++;
 
   return OK;
@@ -195,22 +213,36 @@ Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
 }
 
 Command* game_get_last_command(Game *game) {
-
-
-
-
-   return game->interface_data[game->turn]->last_cmd; 
+  if (!game || game->turn < 0 || game->turn >= game->n_players) {
+    return NULL;
   }
 
+  return game->interface_data[game->turn]->last_cmd; 
+}
+
 Status game_set_last_command(Game *game, Command *command) {
+  if (!game || game->turn < 0 || game->turn >= MAX_PLAYERS) {
+    return ERROR;
+  }
+
   game->interface_data[game->turn]->last_cmd = command;
 
   return OK;
 }
 
-Bool game_get_finished(Game *game) { return game->interface_data[game->turn]->finished; }
+Bool game_get_finished(Game *game) {
+  if (!game || game->turn < 0 || game->turn >= game->n_players) {
+    return FALSE;
+  }
+
+  return game->interface_data[game->turn]->finished;
+}
 
 Status game_set_finished(Game *game, Bool finished) {
+  if (!game || game->turn < 0 || game->turn >= MAX_PLAYERS) {
+    return ERROR;
+  }
+
   game->interface_data[game->turn]->finished = finished;
 
   return OK;
@@ -416,7 +448,7 @@ Id game_get_character_location(Game *game, Id id){
 
 Status game_set_message(Game *game, const char* message){
 
-  if(!game || message == NULL) {return ERROR;}
+  if(!game || message == NULL || game->turn < 0 || game->turn >= game->n_players) {return ERROR;}
 
   strcpy(game->interface_data[game->turn]->msg, message);
 
@@ -424,14 +456,14 @@ Status game_set_message(Game *game, const char* message){
 }
 
 const char* game_get_message(Game *game){
-  if(!game) {return NULL;}
+  if(!game || game->turn < 0 || game->turn >= game->n_players) {return NULL;}
 
   return game->interface_data[game->turn]->msg;
 }
 
 Status game_set_name_message(Game *game, const char* name){
 
-  if(!game || name == NULL) {return ERROR;}
+  if(!game || name == NULL || game->turn < 0 || game->turn >= game->n_players) {return ERROR;}
 
   strcpy(game->interface_data[game->turn]->name_msg, name);
 
@@ -439,7 +471,7 @@ Status game_set_name_message(Game *game, const char* name){
 }
 
 const char* game_get_name_message(Game *game){
-  if(!game) {return NULL;}
+  if(!game || game->turn < 0 || game->turn >= game->n_players) {return NULL;}
 
   return game->interface_data[game->turn]->name_msg;
 }
@@ -487,9 +519,13 @@ Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction){
 }
 
 Status game_command_create(Game* game){
-  if (!game){return ERROR;}
+  if (!game || game->n_players < 0 || game->n_players >= MAX_PLAYERS || game->interface_data[game->n_players] == NULL) {return ERROR;}
 
   game->interface_data[game->n_players]->last_cmd = command_create();
+
+  if (game->interface_data[game->n_players]->last_cmd == NULL) {
+    return ERROR;
+  }
 
   return OK;
 }
@@ -501,9 +537,9 @@ int game_get_turn(Game *game){
 }
 
 Status game_next_turn(Game *game){
-  if (!game) {return ERROR;}
+  if (!game || game->n_players <= 0) {return ERROR;}
 
-  if (game->turn >= game->n_players)
+  if (game->turn >= game->n_players - 1)
   {
     game->turn = 0;
   }

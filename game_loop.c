@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   Game *game = NULL;
   Graphic_engine *gengine;
   int result;
-  Command *last_cmd;
+  Command *last_cmd = NULL;
 
   if (argc < 2) {
     fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
@@ -46,8 +46,6 @@ int main(int argc, char *argv[]) {
   game_print(game); 
 
   last_cmd = game_get_last_command(game);
-  /*advances the turn to the next player*/
-  game_next_turn(game);
 
   /*generates a seed for the random number (later should be moved to game.c)*/
   srand(time(NULL));
@@ -56,6 +54,14 @@ int main(int argc, char *argv[]) {
     graphic_engine_paint_game(gengine, game);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
+
+    if (command_get_code(last_cmd) == EXIT || game_get_finished(game) == TRUE) 
+    {
+      break;
+    }
+
+    /*advances the turn to the next player*/
+    game_next_turn(game);
   }
 
   game_loop_cleanup(game, gengine);
