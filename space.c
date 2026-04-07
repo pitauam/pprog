@@ -193,6 +193,7 @@ Status space_remove_object(Space* space, Id id) {
   return ERROR;
 }
 
+/*
 Bool space_get_object(Space* space){
   if (space == NULL || space->objects == NULL) {
     return FALSE;
@@ -201,6 +202,7 @@ Bool space_get_object(Space* space){
   if (set_get_n_ids(space->objects) > 0) return TRUE;
   return FALSE;
 }
+  */
 
 Bool space_find_object(Space* space, Id id){
   if (space == NULL || space->objects == NULL || id == NO_ID) {
@@ -246,7 +248,11 @@ Status space_print(Space* space) {
   }
 
   /* 1. Print the id and the name of the space */
-  fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", space->id, space->name);
+  fprintf(stdout, "--> Space (Id: %ld; Name: %s). Object(s) in space: ", space->id, space->name);
+  
+  set_print(space->objects);
+
+  fprintf(stdout, "\n");
 
   /* 2. For each direction, print its link 
   idaux = space_get_north(space);
@@ -275,14 +281,15 @@ Status space_print(Space* space) {
   }
   */
 
-  /* 3. Print if there is an object in the space or not */
+  /* 3. Print if there is an object in the space or not 
   if (space_get_object(space) == TRUE) {
     for(i=0; i< set_get_n_ids(space->objects); i++){
       fprintf(stdout, "---> Object%d: %ld.\n", i+1, space->id);
     }
   } else {
     fprintf(stdout, "---> No object in the space.\n");
-  }
+  }*/
+
 
   return OK;
 }

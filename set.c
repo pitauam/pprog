@@ -10,7 +10,7 @@
 #include "set.h"
 #include <stdlib.h>
 
-#define SIZE 256 /*64 Ids */
+#define SIZE 256 /*Max ids Ids */
 
 struct _Set
 {
@@ -99,9 +99,12 @@ Status set_print(Set *set)
     int i;
     if (!set) {return ERROR;}
 
-    for (i = 0; i < set->n_ids;i++)
+    for (i = 0; i < SIZE ;i++)
     {
-        fprintf(stdout, "%li\n", set->ids[i]);
+        if (set->ids[i] != NO_ID) 
+        {
+            fprintf(stdout, "%li", set->ids[i]); 
+        }
     }
 
     return OK;

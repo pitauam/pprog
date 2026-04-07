@@ -114,7 +114,7 @@ Status object_print(Object* object) {
   }
 
   /* 1. Prints object's id and name */
-  fprintf(stdout, "--> object (Id: %ld; Name: %s; Description: %s)\n", object->id, object->name, object->description);
+  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Description: %s)\n", object->id, object->name, object->description);
 
   return OK;
 }

@@ -251,38 +251,41 @@ Status game_set_finished(Game *game, Bool finished) {
 void game_print(Game *game) {
   int i = 0;
 
-  printf("\n\n-------------\n\n");
+  printf("\n\n+--------------------------------------------------------------+\n\n");
 
   printf("=> Spaces: \n");
   for (i = 0; i < game->n_spaces; i++) {
     space_print(game->spaces[i]);
   }
-  printf("Objects: \n");
+  printf("\n");
+
+  printf("=> Objects: \n");
   for (i = 0; i < game->n_objects;i++)
   {
-    printf("  ");
     object_print(game->object[i]);
   }
+  printf("\n");
+  
   printf("=> Players: \n");
   for (i = 0; i < game->n_players; i++)
   {
     player_print(game->player[i]);
   }
-  
+  printf("\n");
 
-  printf("Characters: \n");
+  printf("=> Characters: \n");
   for (i = 0; i < game->n_characters;i++)
   {
-    printf("  ");
     character_print(game->characters[i]);
   }
+  printf("\n");
 
-  printf("Links: \n");
+  printf("=> Links: \n");
   for (i = 0; i < game->n_links; i++)
   {
-    printf("  ");
     link_print(game->link[i]);
   }
+  printf("\n");
 
 }
 

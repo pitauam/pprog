@@ -153,35 +153,35 @@ Status link_print(Link* link){
     }
 
     /* 1. Print the id and the name of the Link */
-    fprintf(stdout, "--> Link (Id: %ld; Name: %s)\n", link->id, link->name);
+    fprintf(stdout, "---> Link (Id: %ld; Name: %s)\n", link->id, link->name);
 
     /* 2. For each direction, print its link */
     idaux = link_get_origin(link);
     if (idaux != NO_ID) {
-      fprintf(stdout, "---> Origin link: %ld.\n", idaux);
+      fprintf(stdout, "- Origin link: %ld.\n", idaux);
     } else {
-        fprintf(stdout, "---> No origin link.\n");
+        fprintf(stdout, "- No origin link.\n");
     }
 
     idaux = link_get_destination(link);
     if (idaux != NO_ID) {
-        fprintf(stdout, "---> Destination link: %ld.\n", idaux);
+        fprintf(stdout, "- Destination link: %ld.\n", idaux);
     } else {
-        fprintf(stdout, "---> No destination link.\n");
+        fprintf(stdout, "- No destination link.\n");
     }
   
     idaux = link_get_direction(link);
     if (idaux != NO_DIR) {
-        fprintf(stdout, "---> Direction of the link: %ld.\n", idaux);
+        fprintf(stdout, "- Direction of the link: %ld.\n", idaux);
     } else {
-        fprintf(stdout, "---> No direction in the link.\n");
+        fprintf(stdout, "- No direction in the link.\n");
     }
 
     b = link_get_open(link);
     if (b == TRUE) {
-        fprintf(stdout, "---> Link is open\n");
+        fprintf(stdout, "- Link is open\n");
     } else {
-        fprintf(stdout, "---> Link is not open.\n");
+        fprintf(stdout, "- Link is not open.\n");
     }
 
   return OK;

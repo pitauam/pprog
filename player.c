@@ -253,24 +253,24 @@ const char *player_get_description(Player *player){
   }
 
   /* 1. Prints the player's id name and health */
-  fprintf(stdout, "--> player (Id: %ld; Name: %s; Health: %d)\n", player->id, player->name, player->health);
+  fprintf(stdout, "--> Player (Id: %ld; Name: %s; Health: %d)\n", player->id, player->name, player->health);
 
   /* 2. Prints the id and the location*/
   idaux = player_get_location(player);
   if (idaux != NO_ID) {
-    fprintf(stdout, "---> Location link: %ld.\n", idaux);
+    fprintf(stdout, "- Location link: %ld\n", idaux);
   } else {
-    fprintf(stdout, "---> No location link.\n");
+    fprintf(stdout, "- No location link\n");
   }
   /* 3. Prints the object ID */
   if(player_inventory_empty(player) == FALSE){
-    fprintf(stdout, "---> Player carries object: ");
+    fprintf(stdout, "- Player carries object: ");
       for(i=0; i < player_get_n_objects(player); i++){
         idaux = player_get_object_id(player, i);
         if (idaux != NO_ID) {
           fprintf(stdout, "%ld", idaux);
         } else {
-          fprintf(stdout, "---> No object in the player.\n");
+          fprintf(stdout, "- No object in the player\n");
         }
       }
       fprintf(stdout, "\n");
@@ -279,9 +279,9 @@ const char *player_get_description(Player *player){
  
   /* 3. Prints if the player has an object */
   if (player_get_description(player)) {
-    fprintf(stdout, "---> Description: %s.\n", player->gdesc);
+    fprintf(stdout, "- Description: %s\n", player->gdesc);
   } else {
-    fprintf(stdout, "---> No description in the player.\n");
+    fprintf(stdout, "- No description in the player\n");
   }
   return OK;
 }

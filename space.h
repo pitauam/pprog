@@ -157,14 +157,15 @@ Status space_add_object(Space* space, Id id);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_remove_object(Space* space, Id id);
-/**
+/*
  * @brief It gets whether the space has an object or not
  * @author Profesores PPROG
  *
  * @param space a pointer to the space
  * @return True if there is an object, False if there is no object
- */
+ 
 Bool space_get_object(Space* space);
+*/
 
 /**
  * @brief It finds the id of an object in a space
