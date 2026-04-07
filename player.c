@@ -57,7 +57,7 @@ Status player_destroy(Player* player) {
   if (!player) {
     return ERROR;
   }
-  if(inventory_destroy(player->backpack)){
+  if (inventory_destroy(player->backpack) == ERROR) {
     return ERROR;
   }
 

@@ -328,12 +328,14 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   int j;
   int len;
   char *gdesc;
+  const char *player_gdesc;
 
   if (ge == NULL) {return;}
   if (id_act == NO_ID){return;}
 
-  
   player_location = game_get_player_location(game);
+  player_gdesc = player_get_description(game_get_player(game));
+
   n_objects = game_get_number_of_objects(game);
 
   /*divididos por 3*/
@@ -342,7 +344,7 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   /*checks if the player is in this space*/
   if (player_location == id_act) 
   {
-    sprintf(str, "                       | :D%15d|", (int)id_act);
+    sprintf(str, "                       | %-3.3s%14d|", player_gdesc, (int)id_act);
   } 
   else 
   {
@@ -418,8 +420,10 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   char part_left[35];
   char part_act[35];
   char sep[4] = "   ";
+  const char *player_gdesc;
 
   player_location = game_get_player_location(game);
+  player_gdesc = player_get_description(game_get_player(game));
   n_objects = game_get_number_of_objects(game);
 
   sprintf(str, "+------------------+   +------------------+");
@@ -427,7 +431,7 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   /*checks if the player is in this space*/
   if (player_location == id_act) 
   {
-    sprintf(str, "|%18d|   | :D%15d|", (int)id_left, (int)id_act);  } 
+    sprintf(str, "|%18d|   | %-3.3s%14d|", (int)id_left, player_gdesc, (int)id_act);  } 
   else 
   {
     sprintf(str, "|%18d|   |%18d|", (int)id_left, (int)id_act);
@@ -553,9 +557,10 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   char p_r[35];
   char sep_l[4];
   char sep_r[4];
-
+  const char *player_gdesc;
 
   player_location = game_get_player_location(game);
+  player_gdesc = player_get_description(game_get_player(game));
   n_objects = game_get_number_of_objects(game);
 
   sprintf(str, "  |%18d| | :D%15d| |%18d|", (int)id_left, (int)id_act, (int)id_right);
@@ -564,7 +569,7 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/
   if(player_location == id_act){
-    sprintf(str, "|%18d|   | :D%15d|   |%18d|", (int)id_left, (int)id_act, (int)id_right);
+    sprintf(str, "|%18d|   | %-3.3s%14d|   |%18d|", (int)id_left, player_gdesc, (int)id_act, (int)id_right);
   }else{
     sprintf(str, "|%18d|   |%15d|   |%18d|", (int)id_left, (int)id_act, (int)id_right);
   }
@@ -703,15 +708,17 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
   char p_a[35];
   char p_r[35];
   char sep[4];
+  const char *player_gdesc;
 
   player_location = game_get_player_location(game);
+  player_gdesc = player_get_description(game_get_player(game));
   n_objects = game_get_number_of_objects(game);
 
   sprintf(str, "                       +------------------+   +------------------+");
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/
   if(player_location == id_act){
-    sprintf(str, "                       | :D%15d|   |%18d|", (int)id_act, (int)id_right);
+    sprintf(str, "                       | %-3.3s%14d|   |%18d|", player_gdesc, (int)id_act, (int)id_right);
   }else{
     sprintf(str, "                     |%15d|   |%18d|", (int)id_act, (int)id_right);
   }

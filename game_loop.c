@@ -85,6 +85,6 @@ int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name) {
 }
 
 void game_loop_cleanup(Game* game, Graphic_engine *gengine) {
-  game_destroy(game);
   graphic_engine_destroy(gengine);
+  game_destroy(game);
 }
