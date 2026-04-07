@@ -5,7 +5,6 @@
 #include "set.h"
 
 
-#define MAX_OBJECTS 2
 
 typedef struct _Inventory Inventory;
 
@@ -74,6 +73,15 @@ Status inventory_remove_object(Inventory* inventory, Id id);
  * @return True if there is an object, False if there is no object
  */
 Bool inventory_is_empty(Inventory* inventory);
+
+/**
+ * @brief It gets whether the inventory is full or not
+ * @author Mario Rodriguez
+ *
+ * @param inventory a pointer to the inventory
+ * @return True if is full, False if otherwise
+ */
+Bool inventory_is_full(Inventory* inventory);
 
 /**
  * @brief It gets the object from an inventory

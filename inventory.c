@@ -19,7 +19,7 @@ Inventory *inventory_create(){
     }
 
     new_inventory->obj = set_create();
-    new_inventory->max_obj = MAX_OBJECTS;
+    new_inventory->max_obj = 0;
 
     return new_inventory;
 }
@@ -107,6 +107,19 @@ Bool inventory_is_empty(Inventory* inventory){
 
     return TRUE;
 }
+
+Bool inventory_is_full(Inventory* inventory){
+     if (inventory == NULL || inventory->obj == NULL) {
+        return FALSE;
+    }
+
+    if (set_get_n_ids(inventory->obj) == inventory_get_max_obj(inventory)){
+        return TRUE;
+    } 
+
+    return FALSE;
+}
+
 
 Bool inventory_find_object(Inventory* inventory, Id id){
 

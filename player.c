@@ -173,6 +173,19 @@ Bool player_inventory_empty(Player* player) {
   return TRUE;
 }
 
+Bool player_inventory_full(Player* player){
+
+  if (!player || !player->backpack) {
+    return FALSE;
+  }
+
+  if(inventory_is_full(player->backpack) == TRUE){
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
 int player_inventory_size(Player *player){
    if (!player || !player->backpack){
     return -1;

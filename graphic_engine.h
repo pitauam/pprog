@@ -35,6 +35,7 @@ void graphic_engine_destroy(Graphic_engine *ge);
 /**
  * @brief displays the visuals of the map creating the diferent areas
  * @author Profesores PPROG
+ * @author Iker Diaz
  *
  * @param ge pointer to the graphic engine
  * @param game pointer to the game
