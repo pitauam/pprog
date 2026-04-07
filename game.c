@@ -489,8 +489,6 @@ Bool game_connection_is_open(Game *game, Id id_act, Direction link_direction){
 Status game_command_create(Game* game){
   if (!game){return ERROR;}
 
-  Command *com = NULL;
-
   game->interface_data[game->n_players]->last_cmd = command_create();
 
   return OK;

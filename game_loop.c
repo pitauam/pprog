@@ -46,6 +46,8 @@ int main(int argc, char *argv[]) {
   game_print(game); 
 
   last_cmd = game_get_last_command(game);
+  /*advances the turn to the next player*/
+  game_next_turn(game);
 
   /*generates a seed for the random number (later should be moved to game.c)*/
   srand(time(NULL));

@@ -209,6 +209,12 @@ Game* game_reader_create_from_file(char *filename) {
     return NULL;
   }
 
+  if (game_reader_load_players(game, filename) == ERROR) {
+    game_destroy(game);
+    return NULL;
+  }
+
+  /*
   if (game_get_player(game) == NULL) {
     Player *player = player_create(PLAYER_ID);
 
@@ -222,6 +228,7 @@ Game* game_reader_create_from_file(char *filename) {
       game_set_player_location(game, game_get_space_id_at(game, 0));
     }
   }
+    */
 
   return game;
 }
