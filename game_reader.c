@@ -429,7 +429,9 @@ Status game_reader_load_players(Game *game, char *filename) {
         player_set_location(player, space_id);
         player_set_health(player, health_points);
         player_set_max_objects(player, max_objects);
+
         game_command_create(game);
+
         game_set_player(game, player);
     
       }
