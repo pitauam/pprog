@@ -133,19 +133,19 @@ Space *game_get_space(Game *game, Id id) {
 }
 
 Id game_get_player_location(Game *game) { 
-  if(game == NULL || game->player == NULL){
+  if(game == NULL || game->player[game->turn] == NULL){
     return NO_ID;
   }
 
-  return player_get_location(game->player);
+  return player_get_location(game->player[game->turn]);
 }
 
 Status game_set_player_location(Game *game, Id id) {
-  if (id == NO_ID || game == NULL || game->player == NULL) {
+  if (id == NO_ID || game == NULL || game->player[game->turn] == NULL) {
     return ERROR;
   }
 
-  return player_set_location(game->player, id);
+  return player_set_location(game->player[game->turn], id);
 }
 
 Status game_set_player(Game *game, Player *player) {
@@ -153,11 +153,11 @@ Status game_set_player(Game *game, Player *player) {
     return ERROR;
   }
 
-  if (game->player != NULL) {
-    player_destroy(game->player);
+  if (game->player[game->turn] != NULL) {
+    player_destroy(game->player[game->turn]);
   }
 
-  game->player = player;
+  game->player[game->turn] = player;
   game->n_players++;
 
   return OK;
@@ -194,18 +194,24 @@ Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
   return OK;
 }
 
-Command* game_get_last_command(Game *game) { return game->last_cmd; }
+Command* game_get_last_command(Game *game) {
+
+
+
+
+   return game->interface_data[game->turn]->last_cmd; 
+  }
 
 Status game_set_last_command(Game *game, Command *command) {
-  game->last_cmd = command;
+  game->interface_data[game->turn]->last_cmd = command;
 
   return OK;
 }
 
-Bool game_get_finished(Game *game) { return game->finished; }
+Bool game_get_finished(Game *game) { return game->interface_data[game->turn]->finished; }
 
 Status game_set_finished(Game *game, Bool finished) {
-  game->finished = finished;
+  game->interface_data[game->turn]->finished = finished;
 
   return OK;
 }
@@ -225,8 +231,12 @@ void game_print(Game *game) {
     printf("  ");
     object_print(game->object[i]);
   }
-  printf("=> Player: \n");
-  player_print(game->player);
+  printf("=> Players: \n");
+  for (i = 0; i < game->n_players; i++)
+  {
+    player_print(game->player[i]);
+  }
+  
 
   printf("Characters: \n");
   for (i = 0; i < game->n_characters;i++)
@@ -277,9 +287,9 @@ Id game_get_space_id_at(Game *game, int position) {
 
 Player* game_get_player(Game *game)
 {
-  if (!game || game->player == NULL) {return NULL;}
+  if (!game || game->player[game->turn] == NULL) {return NULL;}
 
-  return game->player;
+  return game->player[game->turn];
 }
 
 Status game_add_object(Game *game, Object *object) {
@@ -408,7 +418,7 @@ Status game_set_message(Game *game, const char* message){
 
   if(!game || message == NULL) {return ERROR;}
 
-  strcpy(game->msg, message);
+  strcpy(game->interface_data[game->turn]->msg, message);
 
   return OK;
 }
@@ -416,14 +426,14 @@ Status game_set_message(Game *game, const char* message){
 const char* game_get_message(Game *game){
   if(!game) {return NULL;}
 
-  return game->msg;
+  return game->interface_data[game->turn]->msg;
 }
 
 Status game_set_name_message(Game *game, const char* name){
 
   if(!game || name == NULL) {return ERROR;}
 
-  strcpy(game->name_msg, name);
+  strcpy(game->interface_data[game->turn]->name_msg, name);
 
   return OK;
 }
@@ -431,7 +441,7 @@ Status game_set_name_message(Game *game, const char* name){
 const char* game_get_name_message(Game *game){
   if(!game) {return NULL;}
 
-  return game->name_msg;
+  return game->interface_data[game->turn]->name_msg;
 }
 
 Id game_get_connection(Game *game, Id id_act, Direction link_direction){
