@@ -53,3 +53,9 @@ directions: NO_DIR,N,S,E,W
 
 #p:100|happyknight|:D|11|5|3|
 #p:101|knight|^C>|12|5|3|
+#ptest:102|knight2|^D>|13|3|1|
+#ptest:103|knight3|^X>|14|1|0|
+#ptest:104|knight3|^J>|14|1|0|
+#ptest:105|knight3|^Y>|14|1|0|
+#ptest:106|knight3|^Z>|14|1|0|
+#ptest:107|knight3|^Q>|14|1|0|

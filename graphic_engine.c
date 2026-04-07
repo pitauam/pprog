@@ -279,7 +279,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
-  screen_paint(RED);
+  screen_paint((game_get_turn(game)+5)%MAX_PLAYERS);
   printf("prompt:> ");
   }
 }
