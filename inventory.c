@@ -21,7 +21,7 @@ Inventory *inventory_create(){
     }
 
     new_inventory->obj = set_create();
-    new_inventory->max_obj = 0;
+    new_inventory->max_obj = MAX_OBJ;
 
     return new_inventory;
 }
@@ -63,7 +63,7 @@ int inventory_get_max_obj(Inventory* inventory){
 
 Status inventory_add_object(Inventory* inventory, Id id){
 
-    if(!inventory || !inventory->obj || id < 0 || inventory_get_n_objects(inventory)==inventory_get_max_obj(inventory)){
+    if(!inventory || !inventory->obj || id < 0 || inventory_is_full(inventory)){
         return ERROR;
     }
 

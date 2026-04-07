@@ -4,7 +4,7 @@
 #include "types.h"
 #include "set.h"
 
-#define MAX_OBJ 10
+#define MAX_OBJ 2
 
 typedef struct _Inventory Inventory;
 
