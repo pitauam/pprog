@@ -1,0 +1,9 @@
+move left: ERROR
+move left: ERROR
+take Stew: ERROR
+inspect Sword: ERROR
+drop Sword: ERROR
+chat: ERROR
+attack: ERROR
+move next: OK
+exit: ERROR

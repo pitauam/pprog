@@ -1,0 +1,52 @@
+#s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|
+#s:12|Corridor|-------'-|l[o] [o]l|l   $   l|l  -$-  l|---------
+#s:121|Dungeon|---------|l l l l l|l l l l l|l l l l l|---------|
+#s:13|Dining room| .-===-. | ! . . ! | ! .'. ! |()_____()|II_____II|
+#s:131|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|
+#s:132|Bathroom|         |         |         |         |         |
+#s:14|Kitchen|         |         |         |         |         |
+#s:15|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|
+#s:16|Garden|         |         |         |         |         |
+
+#o:21|Sword|11|It deals damage!|
+#o:22|Steak|14|Tasty stew..|
+#o:23|Rose|16|Looks spiky|
+#o:24|Stew|132|Smellls.. weird|
+
+#links:id|name|origin_id|destination_id|north,south..|open|
+directions: NO_DIR,N,S,E,W
+              -1,  0,1,2,3
+
+#l:31|Entry|11|12|1|1|
+#l:32|Corridor|12|11|0|1|
+#l:33|Corridor|12|13|1|1|
+#l:34|Corridor|12|121|3|0|
+#l:35|Dungeon|121|16|-1|1|
+#l:36|Dining room|13|12|0|1|
+#l:37|Dining room|13|131|2|1|
+#l:38|Dining room|13|14|1|1|
+#l:39|Bedroom|131|13|3|1|
+#l:310|Bedroom|131|132|2|1|
+#l:311|Bathroom|132|131|3|1|
+#l:312|Kitchen|14|13|0|1|
+#l:313|Kitchen|14|15|1|1|
+#l:314|Inner countryard|15|14|0|1|
+#l:315|Inner countryard|15|16|1|1|
+#l:316|Garden|16|15|0|1|
+
+#c:41|kevin|O_o|11|5|1|Hola soy kevin. Necesito tu ayuda, mata a todos los enemigos por mi :)|
+#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ vuelve cuando seas mas fuerte plebeyo|
+#c:43|inmate|*_*|121|1|0|I've been stuck here for so long..|
+
+#_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
+
+#p:100|juan|:D|11|5|3|
+#p:101|knight|^C>|12|5|3|
+
+#ptest:102|knight2|^D>|13|3|1|
+#ptest:103|knight3|^X>|14|1|0|
+#ptest:104|knight3|^J>|14|1|0|
+#ptest:105|knight3|^Y>|14|1|0|
+#ptest:106|knight3|^Z>|14|1|0|
+#ptest:107|knight3|^Q>|14|1|0|
+#bad:this|line|is|not|valid
