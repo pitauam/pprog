@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #include "command.h"
@@ -23,18 +24,72 @@ int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name);
 
 void game_loop_cleanup(Game *game, Graphic_engine *gengine);
 
+static const char *game_loop_command_to_str(CommandCode code) {
+  switch (code) {
+    case UNKNOWN:
+      return "unknown";
+    case EXIT:
+      return "exit";
+    case MOVE:
+      return "move";
+    case TAKE:
+      return "take";
+    case DROP:
+      return "drop";
+    case ATTACK:
+      return "attack";
+    case CHAT:
+      return "chat";
+    case INSPECT:
+      return "inspect";
+    case NO_CMD:
+    default:
+      return "";
+  }
+}
+
+static void game_loop_log_command(FILE *log_fp, Command *cmd) {
+  const char *cmd_str = NULL;
+  const char *arg = NULL;
+  
+  if (!log_fp || !cmd) {
+    return;
+  }
+
+  cmd_str = game_loop_command_to_str(command_get_code(cmd));
+  arg = command_get_arg(cmd);
+
+  if (arg && arg[0] != '\0') {
+    fprintf(log_fp, "%s %s: %s\n", cmd_str, arg, command_get_return(cmd));
+  } else {
+    fprintf(log_fp, "%s: %s\n", cmd_str, command_get_return(cmd));
+  }
+}
+
 int main(int argc, char *argv[]) {
   Game *game = NULL;
   Graphic_engine *gengine;
   int result;
   Command *last_cmd = NULL;
+  FILE *log_fp = NULL;
+  const char *data_file = NULL;
+  const char *log_file = NULL;
 
-  if (argc < 2) {
-    fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
+  if (argc != 2 && argc != 4) {
+    fprintf(stderr, "Use: %s <game_data_file> [-l <log_file>]\n", argv[0]);
     return 1;
   }
+
+  data_file = argv[1];
+  if (argc == 4) {
+    if (strcmp(argv[2], "-l") != 0) {
+      fprintf(stderr, "Use: %s <game_data_file> [-l <log_file>]\n", argv[0]);
+      return 1;
+    }
+    log_file = argv[3];
+  }
   
-  result = game_loop_init(&game, &gengine, argv[1]);
+  result = game_loop_init(&game, &gengine, (char *)data_file);
 
   if (result == 1) {
     fprintf(stderr, "Error while initializing game.\n");
@@ -42,6 +97,15 @@ int main(int argc, char *argv[]) {
   } else if (result == 2){
     fprintf(stderr, "Error while initializing graphic engine.\n");
     return 1;
+  }
+
+  if (log_file != NULL) {
+    log_fp = fopen(log_file, "w");
+    if (!log_fp) {
+      fprintf(stderr, "Error opening log file %s\n", log_file);
+      game_loop_cleanup(game, gengine);
+      return 1;
+    }
   }
   /*prints game data for debugging purposes*/
   game_print(game); 
@@ -55,6 +119,9 @@ int main(int argc, char *argv[]) {
     graphic_engine_paint_game(gengine, game);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
+    if (log_fp) {
+      game_loop_log_command(log_fp, last_cmd);
+    }
 
     if (command_get_code(last_cmd) == EXIT || game_get_finished(game) == TRUE) 
     {
@@ -69,6 +136,9 @@ int main(int argc, char *argv[]) {
     last_cmd = game_get_last_command(game);
   }
 
+  if (log_fp) {
+    fclose(log_fp);
+  }
   game_loop_cleanup(game, gengine);
 
   return 0;
