@@ -47,9 +47,9 @@ obj/command.o : src/command.c include/command.h include/types.h
 obj/game_actions.o: src/game_actions.c include/game_actions.h include/command.h include/types.h include/game.h include/space.h include/object.h include/player.h include/set.h include/link.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-obj/game_loop.o: src/game_loop.c include/command.h include/game.h include/game_actions.h include/graphic_engine.h include/types.h include/space.h include/set.h
+obj/game_loop.o: src/game_loop.c include/command.h include/game.h include/game_actions.h include/graphic_engine.h include/types.h include/space.h include/set.h include/game_reader.h
 	$(CC) -c $(CFLAGS) $< -o $@
-
+	
 obj/game_reader.o: src/game_reader.c include/game.h include/command.h include/types.h include/space.h include/set.h include/link.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
@@ -77,13 +77,13 @@ obj/link.o: src/link.c include/link.h include/types.h
 obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
 	$(CC) -c $(CFLAGS) $< -o $@
     
-#runs Iteration 3 map
-run:
-	./$(EXE) dat/castle.dat
+#runs Iteration 3 map and generates a log file
+runlog: $(EXE)
+	./$(EXE) dat/castle.dat -l log.txt
 
-#runs Iteration 3 map with valgrind
-runv:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat
+#runs Iteration 3 map with valgrind and generates a log file
+runvlog: $(EXE)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l log.txt
 
 #runs anthill map with valgrind
 runvanthill:
@@ -143,4 +143,4 @@ doc:
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
-	rm -f obj/*.o $(EXE) $(TESTS)
+	rm -f obj/*.o $(EXE) $(TESTS) log.txt
