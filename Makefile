@@ -138,8 +138,12 @@ runinventorytest: inventorytest
 	./inventorytest
 
 #documentation with Doxygen
+
+#.phony is used to let makefile know the following instruction is a command
+.PHONY: doc
 doc:
 	doxygen Doxyfile
+	@echo "Doxygen documentation created. open the .html file in html/"
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 

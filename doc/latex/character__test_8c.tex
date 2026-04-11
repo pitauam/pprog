@@ -1,0 +1,230 @@
+\doxysection{src/character\+\_\+test.c File Reference}
+\hypertarget{character__test_8c}{}\label{character__test_8c}\index{src/character\_test.c@{src/character\_test.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}character.\+h"{}}\newline
+{\ttfamily \#include "{}test.\+h"{}}\newline
+{\ttfamily \#include "{}character\+\_\+test.\+h"{}}\newline
+Include dependency graph for character\+\_\+test.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{character__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709}{MAX\+\_\+\+TESTS}}~12
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{character__test_8c_a2241f1b02a851ed9d52312fb311353b7}{test1\+\_\+character\+\_\+create}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_af34c287530289519f39a8c676ab1f296}{test2\+\_\+character\+\_\+create}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a334203c3ea83a67f7c6e1f992ef199a6}{test1\+\_\+character\+\_\+set\+\_\+name}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a74b160bc91661973b864acec8b9a16ce}{test2\+\_\+character\+\_\+set\+\_\+name}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a924318e8acfd9a7e5517bae6e80c11aa}{test1\+\_\+character\+\_\+get\+\_\+name}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a01ef678eee58465bbdc52094838a65f7}{test2\+\_\+character\+\_\+get\+\_\+name}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_afb4339e93579a493cfbf9a5cb756970c}{test1\+\_\+character\+\_\+set\+\_\+health}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_ac5e97fabc0591e9b2021d0ced0b39300}{test2\+\_\+character\+\_\+set\+\_\+health}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_af2a24f3a83deae35d9e2f32b5cf08ed4}{test1\+\_\+character\+\_\+get\+\_\+health}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a73548b592b58d36e2c9579512396444c}{test2\+\_\+character\+\_\+get\+\_\+health}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_a050aa06e22892176bcb01b13879a302c}{test1\+\_\+character\+\_\+get\+\_\+id}} ()
+\item 
+void \mbox{\hyperlink{character__test_8c_acc183175913712e7f2b0e98a9b55bc2b}{test2\+\_\+character\+\_\+get\+\_\+id}} ()
+\item 
+int \mbox{\hyperlink{character__test_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{character__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709}\label{character__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709} 
+\index{character\_test.c@{character\_test.c}!MAX\_TESTS@{MAX\_TESTS}}
+\index{MAX\_TESTS@{MAX\_TESTS}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_TESTS}{MAX\_TESTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+TESTS~12}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{character__test_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{character__test_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{character\_test.c@{character\_test.c}!main@{main}}
+\index{main@{main}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+\Hypertarget{character__test_8c_a2241f1b02a851ed9d52312fb311353b7}\label{character__test_8c_a2241f1b02a851ed9d52312fb311353b7} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_create@{test1\_character\_create}}
+\index{test1\_character\_create@{test1\_character\_create}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_create()}{test1\_character\_create()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000001}{Test}}]Test character creation \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Character ID 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Non NULL pointer to character 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_af2a24f3a83deae35d9e2f32b5cf08ed4}\label{character__test_8c_af2a24f3a83deae35d9e2f32b5cf08ed4} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_get\_health@{test1\_character\_get\_health}}
+\index{test1\_character\_get\_health@{test1\_character\_get\_health}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_get\_health()}{test1\_character\_get\_health()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+get\+\_\+health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000009}{Test}}]Test getting character health \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is valid and health is set to 100 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == 100 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a050aa06e22892176bcb01b13879a302c}\label{character__test_8c_a050aa06e22892176bcb01b13879a302c} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_get\_id@{test1\_character\_get\_id}}
+\index{test1\_character\_get\_id@{test1\_character\_get\_id}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_get\_id()}{test1\_character\_get\_id()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+get\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000011}{Test}}]Test getting character ID \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is valid with ID 25 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == 25 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a924318e8acfd9a7e5517bae6e80c11aa}\label{character__test_8c_a924318e8acfd9a7e5517bae6e80c11aa} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_get\_name@{test1\_character\_get\_name}}
+\index{test1\_character\_get\_name@{test1\_character\_get\_name}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_get\_name()}{test1\_character\_get\_name()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+get\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000005}{Test}}]Test getting character name \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is valid and name is set 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == "{}\+Mario"{} 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_afb4339e93579a493cfbf9a5cb756970c}\label{character__test_8c_afb4339e93579a493cfbf9a5cb756970c} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_set\_health@{test1\_character\_set\_health}}
+\index{test1\_character\_set\_health@{test1\_character\_set\_health}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_set\_health()}{test1\_character\_set\_health()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+set\+\_\+health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000007}{Test}}]Test setting character health \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is valid 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == OK 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a334203c3ea83a67f7c6e1f992ef199a6}\label{character__test_8c_a334203c3ea83a67f7c6e1f992ef199a6} 
+\index{character\_test.c@{character\_test.c}!test1\_character\_set\_name@{test1\_character\_set\_name}}
+\index{test1\_character\_set\_name@{test1\_character\_set\_name}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_character\_set\_name()}{test1\_character\_set\_name()}}
+{\footnotesize\ttfamily void test1\+\_\+character\+\_\+set\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000003}{Test}}]Test setting character name \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is valid 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == OK 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_af34c287530289519f39a8c676ab1f296}\label{character__test_8c_af34c287530289519f39a8c676ab1f296} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_create@{test2\_character\_create}}
+\index{test2\_character\_create@{test2\_character\_create}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_create()}{test2\_character\_create()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000002}{Test}}]Test character creation \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Character ID is NO\+\_\+\+ID 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+NULL pointer to character 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a73548b592b58d36e2c9579512396444c}\label{character__test_8c_a73548b592b58d36e2c9579512396444c} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_get\_health@{test2\_character\_get\_health}}
+\index{test2\_character\_get\_health@{test2\_character\_get\_health}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_get\_health()}{test2\_character\_get\_health()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+get\+\_\+health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000010}{Test}}]Test getting character health \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is NULL 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output is less than or equal to 0 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_acc183175913712e7f2b0e98a9b55bc2b}\label{character__test_8c_acc183175913712e7f2b0e98a9b55bc2b} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_get\_id@{test2\_character\_get\_id}}
+\index{test2\_character\_get\_id@{test2\_character\_get\_id}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_get\_id()}{test2\_character\_get\_id()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+get\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000012}{Test}}]Test getting character ID \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is NULL 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == NO\+\_\+\+ID 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a01ef678eee58465bbdc52094838a65f7}\label{character__test_8c_a01ef678eee58465bbdc52094838a65f7} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_get\_name@{test2\_character\_get\_name}}
+\index{test2\_character\_get\_name@{test2\_character\_get\_name}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_get\_name()}{test2\_character\_get\_name()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+get\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000006}{Test}}]Test getting character name \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is NULL 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == NULL 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_ac5e97fabc0591e9b2021d0ced0b39300}\label{character__test_8c_ac5e97fabc0591e9b2021d0ced0b39300} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_set\_health@{test2\_character\_set\_health}}
+\index{test2\_character\_set\_health@{test2\_character\_set\_health}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_set\_health()}{test2\_character\_set\_health()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+set\+\_\+health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000008}{Test}}]Test setting character health \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is NULL 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == ERROR 
+\end{DoxyPostcond}
+\Hypertarget{character__test_8c_a74b160bc91661973b864acec8b9a16ce}\label{character__test_8c_a74b160bc91661973b864acec8b9a16ce} 
+\index{character\_test.c@{character\_test.c}!test2\_character\_set\_name@{test2\_character\_set\_name}}
+\index{test2\_character\_set\_name@{test2\_character\_set\_name}!character\_test.c@{character\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_character\_set\_name()}{test2\_character\_set\_name()}}
+{\footnotesize\ttfamily void test2\+\_\+character\+\_\+set\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000004}{Test}}]Test setting character name \end{DoxyRefDesc}
+\begin{DoxyPrecond}{Precondition}
+Pointer to character is NULL 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Output == ERROR 
+\end{DoxyPostcond}

@@ -1,0 +1,186 @@
+\doxysection{src/game\+\_\+reader.c File Reference}
+\hypertarget{game__reader_8c}{}\label{game__reader_8c}\index{src/game\_reader.c@{src/game\_reader.c}}
+
+
+Reads the information of the .dat.  
+
+
+{\ttfamily \#include "{}game.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for game\+\_\+reader.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__reader_8c_a64489ad2551f477b9a2496697bc36fa9}{game\+\_\+reader\+\_\+load\+\_\+objects}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em loads the spaces of the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__reader_8c_a70e1ab8e805fb12edcb77dcf542cb699}{game\+\_\+reader\+\_\+load\+\_\+spaces}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em loads the spaces of the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__reader_8c_a00cc7cb1731d6ea69ac880d654ba66e5}{game\+\_\+reader\+\_\+load\+\_\+links}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em loads the links of the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__reader_8c_a34a48925df4fcfe71fc0c3af38034c5b}{game\+\_\+reader\+\_\+load\+\_\+characters}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em loads the characters of the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__reader_8c_a5060525810704f10a6a1772981b207a5}{game\+\_\+reader\+\_\+load\+\_\+players}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em loads the players of the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{game__reader_8c_ab91c66b7cd359e40190ebd630a0f7d29}{game\+\_\+reader\+\_\+create\+\_\+from\+\_\+file}} (char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em reeds the file and creates the game based on the information \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reads the information of the .dat. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/02-\/2025 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Public License 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{game__reader_8c_ab91c66b7cd359e40190ebd630a0f7d29}\label{game__reader_8c_ab91c66b7cd359e40190ebd630a0f7d29} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_create\_from\_file@{game\_reader\_create\_from\_file}}
+\index{game\_reader\_create\_from\_file@{game\_reader\_create\_from\_file}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_create\_from\_file()}{game\_reader\_create\_from\_file()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*} game\+\_\+reader\+\_\+create\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+reeds the file and creates the game based on the information 
+
+\begin{DoxyAuthor}{Author}
+Profesores PPROG
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a tring with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}
+\Hypertarget{game__reader_8c_a34a48925df4fcfe71fc0c3af38034c5b}\label{game__reader_8c_a34a48925df4fcfe71fc0c3af38034c5b} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_load\_characters@{game\_reader\_load\_characters}}
+\index{game\_reader\_load\_characters@{game\_reader\_load\_characters}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_load\_characters()}{game\_reader\_load\_characters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+reader\+\_\+load\+\_\+characters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+loads the characters of the game 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a string with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}
+\Hypertarget{game__reader_8c_a00cc7cb1731d6ea69ac880d654ba66e5}\label{game__reader_8c_a00cc7cb1731d6ea69ac880d654ba66e5} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_load\_links@{game\_reader\_load\_links}}
+\index{game\_reader\_load\_links@{game\_reader\_load\_links}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_load\_links()}{game\_reader\_load\_links()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+reader\+\_\+load\+\_\+links (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+loads the links of the game 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a string with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}
+\Hypertarget{game__reader_8c_a64489ad2551f477b9a2496697bc36fa9}\label{game__reader_8c_a64489ad2551f477b9a2496697bc36fa9} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_load\_objects@{game\_reader\_load\_objects}}
+\index{game\_reader\_load\_objects@{game\_reader\_load\_objects}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_load\_objects()}{game\_reader\_load\_objects()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+reader\+\_\+load\+\_\+objects (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+loads the spaces of the game 
+
+\begin{DoxyAuthor}{Author}
+Mario Rodriguez
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a tring with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}
+\Hypertarget{game__reader_8c_a5060525810704f10a6a1772981b207a5}\label{game__reader_8c_a5060525810704f10a6a1772981b207a5} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_load\_players@{game\_reader\_load\_players}}
+\index{game\_reader\_load\_players@{game\_reader\_load\_players}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_load\_players()}{game\_reader\_load\_players()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+reader\+\_\+load\+\_\+players (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+loads the players of the game 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a string with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}
+\Hypertarget{game__reader_8c_a70e1ab8e805fb12edcb77dcf542cb699}\label{game__reader_8c_a70e1ab8e805fb12edcb77dcf542cb699} 
+\index{game\_reader.c@{game\_reader.c}!game\_reader\_load\_spaces@{game\_reader\_load\_spaces}}
+\index{game\_reader\_load\_spaces@{game\_reader\_load\_spaces}!game\_reader.c@{game\_reader.c}}
+\doxysubsubsection{\texorpdfstring{game\_reader\_load\_spaces()}{game\_reader\_load\_spaces()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+reader\+\_\+load\+\_\+spaces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+loads the spaces of the game 
+
+\begin{DoxyAuthor}{Author}
+Profesores PPROG
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em filename} & pointer to a tring with the file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake 
+\end{DoxyReturn}

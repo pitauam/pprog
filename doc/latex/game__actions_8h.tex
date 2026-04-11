@@ -1,0 +1,77 @@
+\doxysection{include/game\+\_\+actions.h File Reference}
+\hypertarget{game__actions_8h}{}\label{game__actions_8h}\index{include/game\_actions.h@{include/game\_actions.h}}
+
+
+It defines the game update interface.  
+
+
+{\ttfamily \#include "{}command.\+h"{}}\newline
+{\ttfamily \#include "{}game.\+h"{}}\newline
+{\ttfamily \#include "{}types.\+h"{}}\newline
+Include dependency graph for game\+\_\+actions.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{game__actions_8h_a2e7620041ccf5bc13755c9f28524d22e}{MAX\+\_\+\+ARG}}~32 /\texorpdfstring{$\ast$}{*}maximum number of characters for the argument\texorpdfstring{$\ast$}{*}/
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{game__actions_8h_a6d17438d8156e3671bd4c90a14860a3a}{game\+\_\+actions\+\_\+update}} (\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}game, \mbox{\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command}} \texorpdfstring{$\ast$}{*}cmd)
+\begin{DoxyCompactList}\small\item\em reads the command and finds what to do \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It defines the game update interface. 
+
+\begin{DoxyAuthor}{Author}
+Profesores PPROG 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2026 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Public License 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{game__actions_8h_a2e7620041ccf5bc13755c9f28524d22e}\label{game__actions_8h_a2e7620041ccf5bc13755c9f28524d22e} 
+\index{game\_actions.h@{game\_actions.h}!MAX\_ARG@{MAX\_ARG}}
+\index{MAX\_ARG@{MAX\_ARG}!game\_actions.h@{game\_actions.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_ARG}{MAX\_ARG}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ARG~32 /\texorpdfstring{$\ast$}{*}maximum number of characters for the argument\texorpdfstring{$\ast$}{*}/}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{game__actions_8h_a6d17438d8156e3671bd4c90a14860a3a}\label{game__actions_8h_a6d17438d8156e3671bd4c90a14860a3a} 
+\index{game\_actions.h@{game\_actions.h}!game\_actions\_update@{game\_actions\_update}}
+\index{game\_actions\_update@{game\_actions\_update}!game\_actions.h@{game\_actions.h}}
+\doxysubsubsection{\texorpdfstring{game\_actions\_update()}{game\_actions\_update()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} game\+\_\+actions\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}} \texorpdfstring{$\ast$}{*}}]{game,  }\item[{\mbox{\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command}} \texorpdfstring{$\ast$}{*}}]{command }\end{DoxyParamCaption})}
+
+
+
+reads the command and finds what to do 
+
+\begin{DoxyAuthor}{Author}
+Profesores PPROG
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to game \\
+\hline
+{\em cmd} & pointer to the comand of the cmd \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK, if everything goes well or ERROR if there was some mistake
+\end{DoxyReturn}
+Game actions implementation 

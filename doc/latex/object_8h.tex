@@ -1,0 +1,237 @@
+\doxysection{include/object.h File Reference}
+\hypertarget{object_8h}{}\label{object_8h}\index{include/object.h@{include/object.h}}
+
+
+Defines the module "{}object"{}.  
+
+
+{\ttfamily \#include "{}types.\+h"{}}\newline
+Include dependency graph for object.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct__Object}{\+\_\+\+Object}} \mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{object_8h_a8957c5ad32a83df414b44361d2833c1d}{object\+\_\+create}} (\mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}} id)
+\begin{DoxyCompactList}\small\item\em Creates a new object, allocating memory and initialazing all of its parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{object_8h_aab2d9fe61ae9c48522635d006dd50396}{object\+\_\+destroy}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object)
+\begin{DoxyCompactList}\small\item\em Destroys an object, freeing its memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}} \mbox{\hyperlink{object_8h_ac5af152381a21853c6a28cc120e8e7fe}{object\+\_\+get\+\_\+id}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object)
+\begin{DoxyCompactList}\small\item\em Gives the id of an object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{object_8h_a14bf659f3055f0243d1af4b246d062b4}{object\+\_\+set\+\_\+name}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object, char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Sets the name of an object. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{object_8h_ae7279c442aab51c0818bd008b31f9816}{object\+\_\+get\+\_\+name}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object)
+\begin{DoxyCompactList}\small\item\em Gives the name of an object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{object_8h_a46dfe13b76a3ade55a1d8f478b4793f8}{object\+\_\+set\+\_\+desc}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object, char \texorpdfstring{$\ast$}{*}desc)
+\begin{DoxyCompactList}\small\item\em Sets the description of an object. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{object_8h_a7675829af58481ecebd6a1c46ed7126d}{object\+\_\+get\+\_\+desc}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object)
+\begin{DoxyCompactList}\small\item\em Gives the description of an object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} \mbox{\hyperlink{object_8h_a6488ec3cfebebfdeef4a43b9eebf8642}{object\+\_\+print}} (\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}object)
+\begin{DoxyCompactList}\small\item\em Prints the information of an object (shows its Id) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the module "{}object"{}. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03-\/01-\/2026 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Public License 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}\label{object_8h_a7f8bbcda919b65ce67f92fba08e0212f} 
+\index{object.h@{object.h}!Object@{Object}}
+\index{Object@{Object}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{Object}{Object}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct__Object}{\+\_\+\+Object}} \mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}}}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{object_8h_a8957c5ad32a83df414b44361d2833c1d}\label{object_8h_a8957c5ad32a83df414b44361d2833c1d} 
+\index{object.h@{object.h}!object\_create@{object\_create}}
+\index{object\_create@{object\_create}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_create()}{object\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*} object\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}}}]{id }\end{DoxyParamCaption})}
+
+
+
+Creates a new object, allocating memory and initialazing all of its parameters. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identification number of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new initialized object
+\end{DoxyReturn}
+object\+\_\+create allocates memory and initializes all variables \Hypertarget{object_8h_aab2d9fe61ae9c48522635d006dd50396}\label{object_8h_aab2d9fe61ae9c48522635d006dd50396} 
+\index{object.h@{object.h}!object\_destroy@{object\_destroy}}
+\index{object\_destroy@{object\_destroy}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_destroy()}{object\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} object\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object }\end{DoxyParamCaption})}
+
+
+
+Destroys an object, freeing its memory. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object to destroy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK if everything goes well, ERROR if something went wrong 
+\end{DoxyReturn}
+\Hypertarget{object_8h_a7675829af58481ecebd6a1c46ed7126d}\label{object_8h_a7675829af58481ecebd6a1c46ed7126d} 
+\index{object.h@{object.h}!object\_get\_desc@{object\_get\_desc}}
+\index{object\_get\_desc@{object\_get\_desc}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_get\_desc()}{object\_get\_desc()}}
+{\footnotesize\ttfamily const char \texorpdfstring{$\ast$}{*} object\+\_\+get\+\_\+desc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object }\end{DoxyParamCaption})}
+
+
+
+Gives the description of an object. 
+
+\begin{DoxyAuthor}{Author}
+Fernando Pina
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string with the name of an object 
+\end{DoxyReturn}
+\Hypertarget{object_8h_ac5af152381a21853c6a28cc120e8e7fe}\label{object_8h_ac5af152381a21853c6a28cc120e8e7fe} 
+\index{object.h@{object.h}!object\_get\_id@{object\_get\_id}}
+\index{object\_get\_id@{object\_get\_id}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_get\_id()}{object\_get\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}} object\+\_\+get\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object }\end{DoxyParamCaption})}
+
+
+
+Gives the id of an object. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object\textquotesingle{}s id 
+\end{DoxyReturn}
+\Hypertarget{object_8h_ae7279c442aab51c0818bd008b31f9816}\label{object_8h_ae7279c442aab51c0818bd008b31f9816} 
+\index{object.h@{object.h}!object\_get\_name@{object\_get\_name}}
+\index{object\_get\_name@{object\_get\_name}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_get\_name()}{object\_get\_name()}}
+{\footnotesize\ttfamily const char \texorpdfstring{$\ast$}{*} object\+\_\+get\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object }\end{DoxyParamCaption})}
+
+
+
+Gives the name of an object. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string with the name of an object 
+\end{DoxyReturn}
+\Hypertarget{object_8h_a6488ec3cfebebfdeef4a43b9eebf8642}\label{object_8h_a6488ec3cfebebfdeef4a43b9eebf8642} 
+\index{object.h@{object.h}!object\_print@{object\_print}}
+\index{object\_print@{object\_print}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_print()}{object\_print()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} object\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object }\end{DoxyParamCaption})}
+
+
+
+Prints the information of an object (shows its Id) 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK if everything goes well, ERROR if something went wrong 
+\end{DoxyReturn}
+\Hypertarget{object_8h_a46dfe13b76a3ade55a1d8f478b4793f8}\label{object_8h_a46dfe13b76a3ade55a1d8f478b4793f8} 
+\index{object.h@{object.h}!object\_set\_desc@{object\_set\_desc}}
+\index{object\_set\_desc@{object\_set\_desc}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_set\_desc()}{object\_set\_desc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} object\+\_\+set\+\_\+desc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object,  }\item[{char \texorpdfstring{$\ast$}{*}}]{desc }\end{DoxyParamCaption})}
+
+
+
+Sets the description of an object. 
+
+\begin{DoxyAuthor}{Author}
+Fernando Pina
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+{\em name} & pointer to the name of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK if everything goes well, ERROR if something went wrong 
+\end{DoxyReturn}
+\Hypertarget{object_8h_a14bf659f3055f0243d1af4b246d062b4}\label{object_8h_a14bf659f3055f0243d1af4b246d062b4} 
+\index{object.h@{object.h}!object\_set\_name@{object\_set\_name}}
+\index{object\_set\_name@{object\_set\_name}!object.h@{object.h}}
+\doxysubsubsection{\texorpdfstring{object\_set\_name()}{object\_set\_name()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}} object\+\_\+set\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object}} \texorpdfstring{$\ast$}{*}}]{object,  }\item[{char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
+
+
+
+Sets the name of an object. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & pointer to the structure of the object \\
+\hline
+{\em name} & pointer to the name of the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK if everything goes well, ERROR if something went wrong 
+\end{DoxyReturn}

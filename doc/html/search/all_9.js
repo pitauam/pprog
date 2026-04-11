@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['id_0',['id',['../struct__Character.html#a6e1672c83f75d4b27acf56a54fca5f68',1,'_Character::id'],['../struct__Link.html#a151212e7a8e8274c2a1ee991ba95878b',1,'_Link::id'],['../struct__Object.html#a3cff7a0e8dc4e9d23895ed9af1b7653a',1,'_Object::id'],['../struct__Player.html#a60d635cd063816a9c1bd873f4868bb90',1,'_Player::id'],['../struct__Space.html#a70cb461deb9ac073e401b607339b567f',1,'_Space::id'],['../types_8h.html#a845e604fb28f7e3d97549da3448149d3',1,'Id:&#160;types.h']]],
+  ['ids_1',['ids',['../struct__Set.html#a0b9206a2d8010b9bef55430741cbf56e',1,'_Set']]],
+  ['inspect_2',['INSPECT',['../command_8h.html#a805cf38fd2b6d5604bf1f1036b80fde2aab933f64fcaa285df294e1420f6f1b07',1,'command.h']]],
+  ['interface_5fdata_3',['interface_data',['../struct__Game.html#a4652da51c331688c9c0eefe27fabb0cc',1,'_Game']]],
+  ['interfacedata_4',['InterfaceData',['../game_8h.html#ac5f67eb0c5b8103fcbd00d9324396024',1,'game.h']]],
+  ['inventory_5',['Inventory',['../inventory_8h.html#a2253bf64ac4ce6a9c1d6f39c0b0d32a3',1,'inventory.h']]],
+  ['inventory_2ec_6',['inventory.c',['../inventory_8c.html',1,'']]],
+  ['inventory_2eh_7',['inventory.h',['../inventory_8h.html',1,'']]],
+  ['inventory_5fadd_5fobject_8',['inventory_add_object',['../inventory_8c.html#acbe7dee8a75a2ab8a17ec446bf22b325',1,'inventory_add_object(Inventory *inventory, Id id):&#160;inventory.c'],['../inventory_8h.html#acbe7dee8a75a2ab8a17ec446bf22b325',1,'inventory_add_object(Inventory *inventory, Id id):&#160;inventory.c']]],
+  ['inventory_5fcreate_9',['inventory_create',['../inventory_8c.html#a21084df415242116205e60d348c148fb',1,'inventory_create():&#160;inventory.c'],['../inventory_8h.html#a21084df415242116205e60d348c148fb',1,'inventory_create():&#160;inventory.c']]],
+  ['inventory_5fdestroy_10',['inventory_destroy',['../inventory_8c.html#ae23961749b6ed45fd5fe1c18941fe586',1,'inventory_destroy(Inventory *inventory):&#160;inventory.c'],['../inventory_8h.html#ae23961749b6ed45fd5fe1c18941fe586',1,'inventory_destroy(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5ffind_5fobject_11',['inventory_find_object',['../inventory_8c.html#a206cbd4b392c6a6abbb7f8163f3ddef8',1,'inventory_find_object(Inventory *inventory, Id id):&#160;inventory.c'],['../inventory_8h.html#a206cbd4b392c6a6abbb7f8163f3ddef8',1,'inventory_find_object(Inventory *inventory, Id id):&#160;inventory.c']]],
+  ['inventory_5fget_5fmax_5fobj_12',['inventory_get_max_obj',['../inventory_8c.html#a585b37d5b1f38f4455ed0f33761510d4',1,'inventory_get_max_obj(Inventory *inventory):&#160;inventory.c'],['../inventory_8h.html#a585b37d5b1f38f4455ed0f33761510d4',1,'inventory_get_max_obj(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5fget_5fn_5fobjects_13',['inventory_get_n_objects',['../inventory_8c.html#aca9f94fcabdcdd7074bf4ad42d7270a5',1,'inventory_get_n_objects(Inventory *inventory):&#160;inventory.c'],['../inventory_8h.html#aca9f94fcabdcdd7074bf4ad42d7270a5',1,'inventory_get_n_objects(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5fget_5fobject_5fid_14',['inventory_get_object_id',['../inventory_8c.html#a6ed592ebd20f4b8451c9e5cb3216447a',1,'inventory_get_object_id(Inventory *inventory, int pos):&#160;inventory.c'],['../inventory_8h.html#a6ed592ebd20f4b8451c9e5cb3216447a',1,'inventory_get_object_id(Inventory *inventory, int pos):&#160;inventory.c']]],
+  ['inventory_5fis_5fempty_15',['inventory_is_empty',['../inventory_8c.html#ac27cfda179709aaa1de835ff8c991235',1,'inventory_is_empty(Inventory *inventory):&#160;inventory.c'],['../inventory_8h.html#ac27cfda179709aaa1de835ff8c991235',1,'inventory_is_empty(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5fis_5ffull_16',['inventory_is_full',['../inventory_8c.html#abfd950c2048c40d2cd566966a1b69bba',1,'inventory_is_full(Inventory *inventory):&#160;inventory.c'],['../inventory_8h.html#abfd950c2048c40d2cd566966a1b69bba',1,'inventory_is_full(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5fprint_17',['inventory_print',['../inventory_8h.html#a18eb07c76bbe3f6e6e1b69621b566bf7',1,'inventory_print(Inventory *inventory):&#160;inventory.c'],['../inventory_8c.html#a18eb07c76bbe3f6e6e1b69621b566bf7',1,'inventory_print(Inventory *inventory):&#160;inventory.c']]],
+  ['inventory_5fremove_5fobject_18',['inventory_remove_object',['../inventory_8c.html#af6c668a66290a85a5fdd29033545ae21',1,'inventory_remove_object(Inventory *inventory, Id id):&#160;inventory.c'],['../inventory_8h.html#af6c668a66290a85a5fdd29033545ae21',1,'inventory_remove_object(Inventory *inventory, Id id):&#160;inventory.c']]],
+  ['inventory_5fset_5fmax_5fobj_19',['inventory_set_max_obj',['../inventory_8h.html#af50e0e1e9e3bf8528575e65dfcafaed3',1,'inventory_set_max_obj(Inventory *inventory, int max):&#160;inventory.c'],['../inventory_8c.html#af50e0e1e9e3bf8528575e65dfcafaed3',1,'inventory_set_max_obj(Inventory *inventory, int max):&#160;inventory.c']]],
+  ['inventory_5ftest_2ec_20',['inventory_test.c',['../inventory__test_8c.html',1,'']]],
+  ['inventory_5ftest_2eh_21',['inventory_test.h',['../inventory__test_8h.html',1,'']]]
+];

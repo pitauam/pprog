@@ -1,0 +1,42 @@
+\doxysection{inventory.\+h}
+\hypertarget{inventory_8h_source}{}\label{inventory_8h_source}\index{include/inventory.h@{include/inventory.h}}
+\mbox{\hyperlink{inventory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INVENTORY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INVENTORY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8h}{types.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{set_8h}{set.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ MAX\_OBJ\ 2}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__Inventory}{\_Inventory}}\ \mbox{\hyperlink{struct__Inventory}{Inventory}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00018\ \mbox{\hyperlink{struct__Inventory}{Inventory}}*\ \mbox{\hyperlink{inventory_8h_a21084df415242116205e60d348c148fb}{inventory\_create}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00027\ \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}}\ \mbox{\hyperlink{inventory_8h_ae23961749b6ed45fd5fe1c18941fe586}{inventory\_destroy}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}\ *inventory);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00037\ \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}}\ \mbox{\hyperlink{inventory_8h_af50e0e1e9e3bf8528575e65dfcafaed3}{inventory\_set\_max\_obj}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory,\ \textcolor{keywordtype}{int}\ max);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{inventory_8h_a585b37d5b1f38f4455ed0f33761510d4}{inventory\_get\_max\_obj}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00056\ \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}}\ \mbox{\hyperlink{inventory_8h_acbe7dee8a75a2ab8a17ec446bf22b325}{inventory\_add\_object}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory,\ \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00066\ \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}}\ \mbox{\hyperlink{inventory_8h_af6c668a66290a85a5fdd29033545ae21}{inventory\_remove\_object}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory,\ \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00075\ \mbox{\hyperlink{types_8h_a39db6982619d623273fad8a383489309}{Bool}}\ \mbox{\hyperlink{inventory_8h_ac27cfda179709aaa1de835ff8c991235}{inventory\_is\_empty}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00084\ \mbox{\hyperlink{types_8h_a39db6982619d623273fad8a383489309}{Bool}}\ \mbox{\hyperlink{inventory_8h_abfd950c2048c40d2cd566966a1b69bba}{inventory\_is\_full}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00094\ \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}}\ \mbox{\hyperlink{inventory_8h_a6ed592ebd20f4b8451c9e5cb3216447a}{inventory\_get\_object\_id}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory,\ \textcolor{keywordtype}{int}\ pos);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00104\ \mbox{\hyperlink{types_8h_a39db6982619d623273fad8a383489309}{Bool}}\ \mbox{\hyperlink{inventory_8h_a206cbd4b392c6a6abbb7f8163f3ddef8}{inventory\_find\_object}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory,\ \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00113\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{inventory_8h_aca9f94fcabdcdd7074bf4ad42d7270a5}{inventory\_get\_n\_objects}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00122\ \mbox{\hyperlink{types_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status}}\ \mbox{\hyperlink{inventory_8h_a18eb07c76bbe3f6e6e1b69621b566bf7}{inventory\_print}}(\mbox{\hyperlink{struct__Inventory}{Inventory}}*\ inventory);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,208 @@
+\doxysection{src/inventory\+\_\+test.c File Reference}
+\hypertarget{inventory__test_8c}{}\label{inventory__test_8c}\index{src/inventory\_test.c@{src/inventory\_test.c}}
+
+
+It tests the inventory module.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}inventory.\+h"{}}\newline
+{\ttfamily \#include "{}inventory\+\_\+test.\+h"{}}\newline
+{\ttfamily \#include "{}test.\+h"{}}\newline
+Include dependency graph for inventory\+\_\+test.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{inventory__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709}{MAX\+\_\+\+TESTS}}~19
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{inventory__test_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a33638f1a88ae16ab8d6bee00145b82b8}{test1\+\_\+inventory\+\_\+create}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a73a6080c360a8870c4ffc734e989c8b3}{test2\+\_\+inventory\+\_\+create}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a248b148773d31c4e9ebd8b381104fd2d}{test1\+\_\+inventory\+\_\+set\+\_\+max\+\_\+obj}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a0bf0bbab0fe3a005c7b2a9302cc496db}{test2\+\_\+inventory\+\_\+set\+\_\+max\+\_\+obj}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a9271546f0289c333ce2b1de7aec8953e}{test1\+\_\+inventory\+\_\+get\+\_\+max\+\_\+obj}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_ab7e5678e1e23441596ca715a59c1ac38}{test2\+\_\+inventory\+\_\+get\+\_\+max\+\_\+obj}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_abddf20d7b11937754a88fb57c9d74292}{test1\+\_\+inventory\+\_\+add\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_aa71b62b43df77830d47caa4237ee76a2}{test2\+\_\+inventory\+\_\+add\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a77405dc2e23bc5e07f88194ade40a454}{test3\+\_\+inventory\+\_\+add\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a1f00275bfef281fd206f2a759c7ba6cc}{test4\+\_\+inventory\+\_\+add\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a2600ada0b5b2e5a34dfe6bc368f5e3be}{test1\+\_\+inventory\+\_\+remove\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a4ea1bbd9668f1049fb98590ffb0dd5db}{test2\+\_\+inventory\+\_\+remove\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_afe8c9730e30b58535afc0481970ab2b1}{test1\+\_\+inventory\+\_\+is\+\_\+empty}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a4d2a2a4d4ba59446d013debfe9bf05dc}{test2\+\_\+inventory\+\_\+is\+\_\+empty}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a7feab32c68817ece1716946f02738dc5}{test1\+\_\+inventory\+\_\+get\+\_\+object\+\_\+id}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_ae06d675912e7cd3a86516a908f5029d1}{test1\+\_\+inventory\+\_\+find\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_ad9bcddd93697f6e794166b65f7a901b3}{test2\+\_\+inventory\+\_\+find\+\_\+object}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a8f1cc7eac1d1d21709069e165971faa2}{test1\+\_\+inventory\+\_\+get\+\_\+n\+\_\+objects}} ()
+\item 
+void \mbox{\hyperlink{inventory__test_8c_a7039bfc0c3a9d938d4d48248ae03ca67}{test2\+\_\+inventory\+\_\+get\+\_\+n\+\_\+objects}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It tests the inventory module. 
+
+\begin{DoxyAuthor}{Author}
+Santiago Pita 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28-\/03-\/2026 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{inventory__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709}\label{inventory__test_8c_a2a77d2f2c5b698c69c19e1f8782bf709} 
+\index{inventory\_test.c@{inventory\_test.c}!MAX\_TESTS@{MAX\_TESTS}}
+\index{MAX\_TESTS@{MAX\_TESTS}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_TESTS}{MAX\_TESTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+TESTS~19}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{inventory__test_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{inventory__test_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{inventory\_test.c@{inventory\_test.c}!main@{main}}
+\index{main@{main}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_abddf20d7b11937754a88fb57c9d74292}\label{inventory__test_8c_abddf20d7b11937754a88fb57c9d74292} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_add\_object@{test1\_inventory\_add\_object}}
+\index{test1\_inventory\_add\_object@{test1\_inventory\_add\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_add\_object()}{test1\_inventory\_add\_object()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+add\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a33638f1a88ae16ab8d6bee00145b82b8}\label{inventory__test_8c_a33638f1a88ae16ab8d6bee00145b82b8} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_create@{test1\_inventory\_create}}
+\index{test1\_inventory\_create@{test1\_inventory\_create}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_create()}{test1\_inventory\_create()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_ae06d675912e7cd3a86516a908f5029d1}\label{inventory__test_8c_ae06d675912e7cd3a86516a908f5029d1} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_find\_object@{test1\_inventory\_find\_object}}
+\index{test1\_inventory\_find\_object@{test1\_inventory\_find\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_find\_object()}{test1\_inventory\_find\_object()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+find\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a9271546f0289c333ce2b1de7aec8953e}\label{inventory__test_8c_a9271546f0289c333ce2b1de7aec8953e} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_get\_max\_obj@{test1\_inventory\_get\_max\_obj}}
+\index{test1\_inventory\_get\_max\_obj@{test1\_inventory\_get\_max\_obj}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_get\_max\_obj()}{test1\_inventory\_get\_max\_obj()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+get\+\_\+max\+\_\+obj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a8f1cc7eac1d1d21709069e165971faa2}\label{inventory__test_8c_a8f1cc7eac1d1d21709069e165971faa2} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_get\_n\_objects@{test1\_inventory\_get\_n\_objects}}
+\index{test1\_inventory\_get\_n\_objects@{test1\_inventory\_get\_n\_objects}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_get\_n\_objects()}{test1\_inventory\_get\_n\_objects()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+get\+\_\+n\+\_\+objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a7feab32c68817ece1716946f02738dc5}\label{inventory__test_8c_a7feab32c68817ece1716946f02738dc5} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_get\_object\_id@{test1\_inventory\_get\_object\_id}}
+\index{test1\_inventory\_get\_object\_id@{test1\_inventory\_get\_object\_id}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_get\_object\_id()}{test1\_inventory\_get\_object\_id()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+get\+\_\+object\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_afe8c9730e30b58535afc0481970ab2b1}\label{inventory__test_8c_afe8c9730e30b58535afc0481970ab2b1} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_is\_empty@{test1\_inventory\_is\_empty}}
+\index{test1\_inventory\_is\_empty@{test1\_inventory\_is\_empty}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_is\_empty()}{test1\_inventory\_is\_empty()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+is\+\_\+empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a2600ada0b5b2e5a34dfe6bc368f5e3be}\label{inventory__test_8c_a2600ada0b5b2e5a34dfe6bc368f5e3be} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_remove\_object@{test1\_inventory\_remove\_object}}
+\index{test1\_inventory\_remove\_object@{test1\_inventory\_remove\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_remove\_object()}{test1\_inventory\_remove\_object()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+remove\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a248b148773d31c4e9ebd8b381104fd2d}\label{inventory__test_8c_a248b148773d31c4e9ebd8b381104fd2d} 
+\index{inventory\_test.c@{inventory\_test.c}!test1\_inventory\_set\_max\_obj@{test1\_inventory\_set\_max\_obj}}
+\index{test1\_inventory\_set\_max\_obj@{test1\_inventory\_set\_max\_obj}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test1\_inventory\_set\_max\_obj()}{test1\_inventory\_set\_max\_obj()}}
+{\footnotesize\ttfamily void test1\+\_\+inventory\+\_\+set\+\_\+max\+\_\+obj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_aa71b62b43df77830d47caa4237ee76a2}\label{inventory__test_8c_aa71b62b43df77830d47caa4237ee76a2} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_add\_object@{test2\_inventory\_add\_object}}
+\index{test2\_inventory\_add\_object@{test2\_inventory\_add\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_add\_object()}{test2\_inventory\_add\_object()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+add\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a73a6080c360a8870c4ffc734e989c8b3}\label{inventory__test_8c_a73a6080c360a8870c4ffc734e989c8b3} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_create@{test2\_inventory\_create}}
+\index{test2\_inventory\_create@{test2\_inventory\_create}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_create()}{test2\_inventory\_create()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_ad9bcddd93697f6e794166b65f7a901b3}\label{inventory__test_8c_ad9bcddd93697f6e794166b65f7a901b3} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_find\_object@{test2\_inventory\_find\_object}}
+\index{test2\_inventory\_find\_object@{test2\_inventory\_find\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_find\_object()}{test2\_inventory\_find\_object()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+find\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_ab7e5678e1e23441596ca715a59c1ac38}\label{inventory__test_8c_ab7e5678e1e23441596ca715a59c1ac38} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_get\_max\_obj@{test2\_inventory\_get\_max\_obj}}
+\index{test2\_inventory\_get\_max\_obj@{test2\_inventory\_get\_max\_obj}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_get\_max\_obj()}{test2\_inventory\_get\_max\_obj()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+get\+\_\+max\+\_\+obj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a7039bfc0c3a9d938d4d48248ae03ca67}\label{inventory__test_8c_a7039bfc0c3a9d938d4d48248ae03ca67} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_get\_n\_objects@{test2\_inventory\_get\_n\_objects}}
+\index{test2\_inventory\_get\_n\_objects@{test2\_inventory\_get\_n\_objects}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_get\_n\_objects()}{test2\_inventory\_get\_n\_objects()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+get\+\_\+n\+\_\+objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a4d2a2a4d4ba59446d013debfe9bf05dc}\label{inventory__test_8c_a4d2a2a4d4ba59446d013debfe9bf05dc} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_is\_empty@{test2\_inventory\_is\_empty}}
+\index{test2\_inventory\_is\_empty@{test2\_inventory\_is\_empty}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_is\_empty()}{test2\_inventory\_is\_empty()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+is\+\_\+empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a4ea1bbd9668f1049fb98590ffb0dd5db}\label{inventory__test_8c_a4ea1bbd9668f1049fb98590ffb0dd5db} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_remove\_object@{test2\_inventory\_remove\_object}}
+\index{test2\_inventory\_remove\_object@{test2\_inventory\_remove\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_remove\_object()}{test2\_inventory\_remove\_object()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+remove\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a0bf0bbab0fe3a005c7b2a9302cc496db}\label{inventory__test_8c_a0bf0bbab0fe3a005c7b2a9302cc496db} 
+\index{inventory\_test.c@{inventory\_test.c}!test2\_inventory\_set\_max\_obj@{test2\_inventory\_set\_max\_obj}}
+\index{test2\_inventory\_set\_max\_obj@{test2\_inventory\_set\_max\_obj}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test2\_inventory\_set\_max\_obj()}{test2\_inventory\_set\_max\_obj()}}
+{\footnotesize\ttfamily void test2\+\_\+inventory\+\_\+set\+\_\+max\+\_\+obj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a77405dc2e23bc5e07f88194ade40a454}\label{inventory__test_8c_a77405dc2e23bc5e07f88194ade40a454} 
+\index{inventory\_test.c@{inventory\_test.c}!test3\_inventory\_add\_object@{test3\_inventory\_add\_object}}
+\index{test3\_inventory\_add\_object@{test3\_inventory\_add\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test3\_inventory\_add\_object()}{test3\_inventory\_add\_object()}}
+{\footnotesize\ttfamily void test3\+\_\+inventory\+\_\+add\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{inventory__test_8c_a1f00275bfef281fd206f2a759c7ba6cc}\label{inventory__test_8c_a1f00275bfef281fd206f2a759c7ba6cc} 
+\index{inventory\_test.c@{inventory\_test.c}!test4\_inventory\_add\_object@{test4\_inventory\_add\_object}}
+\index{test4\_inventory\_add\_object@{test4\_inventory\_add\_object}!inventory\_test.c@{inventory\_test.c}}
+\doxysubsubsection{\texorpdfstring{test4\_inventory\_add\_object()}{test4\_inventory\_add\_object()}}
+{\footnotesize\ttfamily void test4\+\_\+inventory\+\_\+add\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
