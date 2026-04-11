@@ -71,7 +71,7 @@ void test2_character_set_name() {
 void test1_character_get_name() {
   Character *c = character_create(5);
   character_set_name(c, "Mario");
-  PRINT_TEST_RESULT(strcmp(character_get_name(c), "Juan") == 0);
+  PRINT_TEST_RESULT(strcmp(character_get_name(c), "Mario") == 0);
   character_destroy(c);
 }
 void test2_character_get_name() {

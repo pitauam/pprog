@@ -2,19 +2,19 @@
  #
  # @file Makefile
  # @author Santiago Pita and Mario Rodriguez
- # @version 5
- # @date 17-03-2025
+ # @version 6
+ # @date 11-04-2026
 
 #EXE is the name the .exe will have
 EXE = castle
 #OBJS references .o files
-OBJS = game.o space.o command.o game_loop.o game_reader.o graphic_engine.o object.o player.o game_actions.o set.o character.o inventory.o link.o
+OBJS = obj/game.o obj/space.o obj/command.o obj/game_loop.o obj/game_reader.o obj/graphic_engine.o obj/object.o obj/player.o obj/game_actions.o obj/set.o obj/character.o obj/inventory.o obj/link.o
 #CFLAGS flags used for warnings and style
-CFLAGS = -Wall -ansi -pedantic -g
+CFLAGS = -Wall -ansi -pedantic -g -I./include
 #CC stands for compilation command
 CC = gcc
 #CLIB are the libraries used when compiling
-CLIB = -lscreen -L.
+CLIB = -lscreen -L./lib
 #TESTS is used when cleaning
 TESTS = spacetest settest charactertest linktest inventorytest
 
@@ -23,7 +23,7 @@ all: $(EXE)
 
 #runs auxiliary map
 runaux:
-	./$(EXE) anthill.dat
+	./$(EXE) dat/anthill.dat
 
 #runs all tests
 runtests: 
@@ -38,89 +38,88 @@ $(EXE) : $(OBJS)
 	$(CC) -o $@ $^ $(CLIB)
 
 #makes all .o game files
-game.o: game.c game.h command.h types.h space.h set.h object.h player.h character.h link.h
-	$(CC) -c $(CFLAGS) game.c
+obj/game.o: src/game.c include/game.h include/command.h include/types.h include/space.h include/set.h include/object.h include/player.h include/character.h include/link.h
+	$(CC) -c $(CFLAGS) src/game.c -o $@
 
-command.o : command.c command.h types.h
-	$(CC) -c $(CFLAGS) $<
+obj/command.o : src/command.c include/command.h include/types.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-game_actions.o: game_actions.c game_actions.h command.h types.h game.h space.h object.h player.h set.h link.h
-	$(CC) -c $(CFLAGS) $<
+obj/game_actions.o: src/game_actions.c include/game_actions.h include/command.h include/types.h include/game.h include/space.h include/object.h include/player.h include/set.h include/link.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-game_loop.o: game_loop.c command.h game.h game_actions.h graphic_engine.h types.h space.h set.h
-	$(CC) -c $(CFLAGS) $<
+obj/game_loop.o: src/game_loop.c include/command.h include/game.h include/game_actions.h include/graphic_engine.h include/types.h include/space.h include/set.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-game_reader.o: game_reader.c game.h command.h types.h space.h set.h link.h
-	$(CC) -c $(CFLAGS) $<
+obj/game_reader.o: src/game_reader.c include/game.h include/command.h include/types.h include/space.h include/set.h include/link.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h set.h link.h
-	$(CC) -c $(CFLAGS) $<
+obj/graphic_engine.o: src/graphic_engine.c include/graphic_engine.h include/game.h include/command.h include/space.h include/types.h include/libscreen.h include/set.h include/link.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-object.o: object.c object.h types.h
-	$(CC) -c $(CFLAGS) $<
-	
-player.o: player.c player.h types.h link.h
-	$(CC) -c $(CFLAGS) $<
+obj/object.o: src/object.c include/object.h include/types.h
+	$(CC) -c $(CFLAGS) $< -o $@
+    
+obj/player.o: src/player.c include/player.h include/types.h include/link.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-space.o: space.c space.h types.h set.h
-	$(CC) -c $(CFLAGS) $<
+obj/space.o: src/space.c include/space.h include/types.h include/set.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-set.o: set.c set.h types.h
-	$(CC) -c $(CFLAGS) $<
+obj/set.o: src/set.c include/set.h include/types.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-character.o: character.c character.h types.h
-	$(CC) -c $(CFLAGS) $<
+obj/character.o: src/character.c include/character.h include/types.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-link.o: link.c link.h types.h
-	$(CC) -c $(CFLAGS) $<
+obj/link.o: src/link.c include/link.h include/types.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-inventory.o: inventory.c inventory.h types.h set.h
-	$(CC) -c $(CFLAGS) $<
-
-	
+obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
+	$(CC) -c $(CFLAGS) $< -o $@
+    
 #runs Iteration 3 map
 run:
-	./$(EXE) castle.dat
+	./$(EXE) dat/castle.dat
 
 #runs Iteration 3 map with valgrind
 runv:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) castle.dat
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat
 
 #runs anthill map with valgrind
 runvanthill:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) anthill.dat
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/anthill.dat
 
 #makes tests .exe
-spacetest: space_test.o space.o set.o
+spacetest: obj/space_test.o obj/space.o obj/set.o
 	$(CC) -o $@ $^
-	
-settest: set_test.o set.o
-	$(CC) -o $@ $^
-
-charactertest: character_test.o character.o
+    
+settest: obj/set_test.o obj/set.o
 	$(CC) -o $@ $^
 
-linktest: link_test.o link.o
+charactertest: obj/character_test.o obj/character.o
 	$(CC) -o $@ $^
 
-inventorytest: inventory_test.o inventory.o set.o
+linktest: obj/link_test.o obj/link.o
+	$(CC) -o $@ $^
+
+inventorytest: obj/inventory_test.o obj/inventory.o obj/set.o
 	$(CC) -o $@ $^
 
 #makes tests .o
-space_test.o: space_test.c space.h types.h set.h space_test.h test.h
-	$(CC) -c $<
-	
-set_test.o: set_test.c set.h types.h test.h
-	$(CC) -c $(CFLAGS) $<
+obj/space_test.o: src/space_test.c include/space.h include/types.h include/set.h include/space_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
+    
+obj/set_test.o: src/set_test.c include/set.h include/types.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-character_test.o: character_test.c character.h types.h test.h
-	$(CC) -c $(CFLAGS) $<
+obj/character_test.o: src/character_test.c include/character.h include/types.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-link_test.o: link_test.c link.h types.h link_test.h test.h
-	$(CC) -c $(CFLAGS) $<
+obj/link_test.o: src/link_test.c include/link.h include/types.h include/link_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-inventory_test.o: inventory_test.c inventory.h types.h set.h inventory_test.h test.h
-	$(CC) -c $(CFLAGS) $<
+obj/inventory_test.o: src/inventory_test.c include/inventory.h include/types.h include/set.h include/inventory_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
 #runs each test
 runspacetest: 
@@ -138,6 +137,10 @@ runlinktest: linktest
 runinventorytest: inventorytest
 	./inventorytest
 
+#documentation with Doxygen
+doc:
+	doxygen Doxyfile
+
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
-	rm -f *.o $(EXE) $(TESTS)
+	rm -f obj/*.o $(EXE) $(TESTS)
