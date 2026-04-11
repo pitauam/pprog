@@ -10,9 +10,7 @@
 #ifndef LINK_H
 #define LINK_H
 
-
 #include "types.h"
-
 
 typedef struct _Link Link;
 

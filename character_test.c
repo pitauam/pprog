@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
   if (all || test == 12) test2_character_get_id();
 
   PRINT_PASSED_PERCENTAGE;
-  return 0; /* ¡Devuelve 0 para evitar el Error 1 de Make! */
+  return 0;
 }
 
 void test1_character_create() {
@@ -60,18 +60,18 @@ void test2_character_create() {
 
 void test1_character_set_name() {
   Character *c = character_create(5);
-  PRINT_TEST_RESULT(character_set_name(c, "Mario") == OK);
+  PRINT_TEST_RESULT(character_set_name(c, "Alberto") == OK);
   character_destroy(c);
 }
 void test2_character_set_name() {
   Character *c = NULL;
-  PRINT_TEST_RESULT(character_set_name(c, "Mario") == ERROR);
+  PRINT_TEST_RESULT(character_set_name(c, "Pepe") == ERROR);
 }
 
 void test1_character_get_name() {
   Character *c = character_create(5);
   character_set_name(c, "Mario");
-  PRINT_TEST_RESULT(strcmp(character_get_name(c), "Mario") == 0);
+  PRINT_TEST_RESULT(strcmp(character_get_name(c), "Juan") == 0);
   character_destroy(c);
 }
 void test2_character_get_name() {
@@ -97,7 +97,6 @@ void test1_character_get_health() {
 }
 void test2_character_get_health() {
   Character *c = NULL;
-  /* Comprobamos si da 0 o error cuando pasamos NULL */
   PRINT_TEST_RESULT(character_get_health(c) <= 0); 
 }
 

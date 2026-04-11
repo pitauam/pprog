@@ -327,4 +327,3 @@ void test2_space_set_gdesc() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_gdesc(s, ":D:(>:(:o") == ERROR);
 }
-

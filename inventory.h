@@ -121,5 +121,4 @@ int inventory_get_n_objects(Inventory* inventory);
  */
 Status inventory_print(Inventory* inventory);
 
-
 #endif
