@@ -557,6 +557,7 @@ void game_actions_inspect(Game *game){
     {
       object = game_get_object(game, Id_object_player);
       game_set_message(game, object_get_desc(object));
+      game_set_name_message(game, object_get_name(object));
       command_set_return(game_get_last_command(game), OK);
       return;
     }
@@ -569,6 +570,7 @@ void game_actions_inspect(Game *game){
     {
       object = game_get_object(game, Id_object_player);
       game_set_message(game, object_get_desc(object));
+      game_set_name_message(game, object_get_name(object));
       command_set_return(game_get_last_command(game), OK);
       return;
     }

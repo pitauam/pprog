@@ -130,6 +130,7 @@ Status game_reader_load_objects(Game *game, char *filename){
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
+  char message[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, location = NO_ID;
   Object *object = NULL;
@@ -152,12 +153,15 @@ Status game_reader_load_objects(Game *game, char *filename){
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       location = atol(toks);
+      toks = strtok(NULL, "|");
+      strcpy(message, toks);
 #ifdef DEBUG
       printf("Leido: o:%ld|%s|%ld|%ld|%ld|%ld\n", id, name, location);
 #endif
       object = object_create(id);
       if (object != NULL) {
         object_set_name(object, name);
+        object_set_desc(object, message);
         game_set_object_location(game, location, id);
         game_add_object(game, object);
       }

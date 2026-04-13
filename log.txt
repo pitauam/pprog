@@ -1,0 +1,7 @@
+inspect Sword: OK
+unknown: ERROR
+take Sword: OK
+move n: OK
+inspect Sword: OK
+inspect Sword: ERROR
+exit: OK
