@@ -51,7 +51,7 @@ const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{player_8h_a7726d1629a2250
 int \mbox{\hyperlink{player_8h_a7b9278cc6659776cb91ac5fd6a4dc820}{player\+\_\+get\+\_\+n\+\_\+objects}} (\mbox{\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player}} \texorpdfstring{$\ast$}{*}player)
 \begin{DoxyCompactList}\small\item\em gets the number of objects in the backpack \end{DoxyCompactList}\item 
 \mbox{\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}} \mbox{\hyperlink{player_8h_a8c31ae938515be17db43e4a26b9ec39c}{player\+\_\+get\+\_\+object\+\_\+id}} (\mbox{\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player}} \texorpdfstring{$\ast$}{*}player, int pos)
-\begin{DoxyCompactList}\small\item\em Gets the player object. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Gets the player object id. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{types_8h_a39db6982619d623273fad8a383489309}{Bool}} \mbox{\hyperlink{player_8h_a3d67f649e219dd6f8c5185e9b0aa83f6}{player\+\_\+inventory\+\_\+empty}} (\mbox{\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player}} \texorpdfstring{$\ast$}{*}player)
 \begin{DoxyCompactList}\small\item\em Gets if the players inventory is empty. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{types_8h_a39db6982619d623273fad8a383489309}{Bool}} \mbox{\hyperlink{player_8h_ac4c1578810c3da58f778fca5dfe6d08f}{player\+\_\+inventory\+\_\+full}} (\mbox{\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player}} \texorpdfstring{$\ast$}{*}player)
@@ -319,7 +319,7 @@ a string with the player\textquotesingle{}s name
 
 
 
-Gets the player object. 
+Gets the player object id. 
 
 \begin{DoxyAuthor}{Author}
 Mario Rodriguez
@@ -327,6 +327,8 @@ Mario Rodriguez
 
 \begin{DoxyParams}{Parameters}
 {\em player} & pointer to the structure of the player \\
+\hline
+{\em pos} & position in the array \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -460,7 +462,7 @@ Mario Rodriguez
 \begin{DoxyParams}{Parameters}
 {\em player} & pointer to the structure of the player \\
 \hline
-{\em heatlh} & int with the hp of the player \\
+{\em health} & int with the hp of the player \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
