@@ -107,8 +107,10 @@ int main(int argc, char *argv[]) {
       return 1;
     }
   }
-  /*prints game data for debugging purposes*/
+  /*prints game data for debugging purposes
   game_print(game); 
+  */
+  
 
   last_cmd = game_get_last_command(game);
 

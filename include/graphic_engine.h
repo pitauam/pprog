@@ -28,7 +28,6 @@ Graphic_engine *graphic_engine_create();
  * @author Profesores PPROG
  *
  * @param ge pointer to the graphic engine
- * @return the graphic engine if every thing was correct or NULL if something was wrong
  */
 void graphic_engine_destroy(Graphic_engine *ge);
 

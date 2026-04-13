@@ -562,8 +562,6 @@ void graphic_engine_3place(Graphic_engine *ge,Game *game, Id id_left, Id id_act,
   player_gdesc = player_get_description(game_get_player(game));
   n_objects = game_get_number_of_objects(game);
 
-  sprintf(str, "  |%18d| | :D%15d| |%18d|", (int)id_left, (int)id_act, (int)id_right);
-
   sprintf(str, "+------------------+   +------------------+   +------------------+");
   screen_area_puts(ge->map, str);
   /*checks if the player is in this space*/

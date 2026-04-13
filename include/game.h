@@ -37,7 +37,6 @@ typedef struct _InterfaceData InterfaceData;
  * @brief creates the game, initializing all the variables
  * @author Profesores PPROG
  *
- * @param game pointer to game
  * @return OK, if everything goes well
  */
 Game* game_create();

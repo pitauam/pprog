@@ -116,7 +116,7 @@ void game_actions_inspect(Game *game);
  */
 void game_actions_move(Game *game);
 
-/**
+/*
    Game actions implementation
 */
 

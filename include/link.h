@@ -135,6 +135,6 @@ Bool link_get_open(Link* link);
  * @param link a pointer to the link
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status link_print(Link* space);
+Status link_print(Link* link);
 
 #endif

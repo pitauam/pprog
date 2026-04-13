@@ -1,0 +1,14 @@
+Para correr los tests de los diferentes modulos:
+
+make alltests
+make runtests
+
+Para correr el juego con valgrind:
+
+make
+make runv
+
+Para correr el juego con logs:
+
+make
+make run

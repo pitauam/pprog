@@ -48,7 +48,7 @@ struct _InterfaceData {
   char name_msg[WORD_SIZE];                   /*!< name of who is sending the message*/
 };
 
-/**
+/*
    Game interface implementation
 */
 

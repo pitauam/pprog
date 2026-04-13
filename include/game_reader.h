@@ -15,7 +15,6 @@
  * @brief reeds the file and creates the game based on the information
  * @author Profesores PPROG
  *
- * @param game pointer to game
  * @param filename pointer to a tring with the file name
  * @return OK, if everything goes well or ERROR if there was some mistake
  */

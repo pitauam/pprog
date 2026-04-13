@@ -95,7 +95,6 @@ const char* command_get_arg(Command* command);
  *
  * @param command a pointer to the command
  * @param s the return state
- * @return void
  */
 void command_set_return(Command *command, Status s);
 

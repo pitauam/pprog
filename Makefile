@@ -138,7 +138,6 @@ runinventorytest: inventorytest
 	./inventorytest
 
 #documentation with Doxygen
-
 #.phony is used to let makefile know the following instruction is a command
 .PHONY: doc
 doc:
