@@ -1,3 +1,12 @@
+/**
+ * @brief Implements format used in tests
+ *
+ * @file test.h
+ * @author Santiago Pita
+ * @version 1
+ * @date 13-04-2026
+ */
+
 #ifndef _TEST_H
 #define _TEST_H
 

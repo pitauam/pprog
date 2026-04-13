@@ -1,4 +1,13 @@
-#include <stdio.h>
+/**
+ * @brief Implements tests for the set module
+ *
+ * @file set_test.c
+ * @author Santiago Pita
+ * @version 1
+ * @date 13-04-2026
+ */
+
+ #include <stdio.h>
 #include <stdlib.h>
 #include "set.h"
 #include "test.h"

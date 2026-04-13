@@ -1,0 +1,10 @@
+<map id="include/space.h" name="include/space.h">
+<area shape="rect" id="Node000001" title="It defines the space module interface." alt="" coords="12,5,125,31"/>
+<area shape="rect" id="Node000002" href="$types_8h.html" title="It defines common types for the whole project." alt="" coords="5,152,71,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,32,46,139,41,138,64,31"/>
+<area shape="rect" id="Node000003" href="$set_8h.html" title="Set module." alt="" coords="75,79,126,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,30,92,65,88,67,72,32"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="92,106,59,143,55,140,88,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="95,152,157,177"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="107,103,120,138,115,140,102,105"/>
+</map>

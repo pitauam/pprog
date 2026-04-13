@@ -1,0 +1,9 @@
+<map id="include/inventory.h" name="include/inventory.h">
+<area shape="rect" id="Node000001" title="Implements the inventory module." alt="" coords="141,5,270,31"/>
+<area shape="rect" id="Node000002" href="$inventory_8c.html" title="Implements the inventory module." alt="" coords="5,79,112,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,39,84,81,82,76,169,34"/>
+<area shape="rect" id="Node000003" href="$inventory__test_8c.html" title="It tests the inventory module." alt="" coords="137,79,274,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,44,208,79,203,79,203,44"/>
+<area shape="rect" id="Node000004" href="$player_8c.html" title="Implements the player module." alt="" coords="298,79,387,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,34,321,76,319,81,238,39"/>
+</map>

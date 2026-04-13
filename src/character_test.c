@@ -1,3 +1,12 @@
+/**
+ * @brief Tests the character module
+ *
+ * @file character_test.c
+ * @author Santiago Pita
+ * @version 1
+ * @date 13-04-2026
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

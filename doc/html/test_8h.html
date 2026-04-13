@@ -78,10 +78,26 @@ $(function() {
   <div class="headertitle"><div class="title">test.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implements format used in tests.  
+<a href="#details">More...</a></p>
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="test_8h__dep__incl.png" border="0" usemap="#ainclude_2test_8hdep" alt=""/></div>
+<map name="ainclude_2test_8hdep" id="ainclude_2test_8hdep">
+<area shape="rect" title="Implements format used in tests." alt="" coords="333,5,433,31"/>
+<area shape="rect" href="character__test_8c.html" title="Tests the character module." alt="" coords="5,79,144,104"/>
+<area shape="poly" title=" " alt="" coords="320,36,125,81,124,76,319,31"/>
+<area shape="rect" href="inventory__test_8c.html" title="It tests the inventory module." alt="" coords="169,79,306,104"/>
+<area shape="poly" title=" " alt="" coords="348,39,262,81,260,76,346,34"/>
+<area shape="rect" href="link__test_8c.html" title="It tests the link module." alt="" coords="331,79,435,104"/>
+<area shape="poly" title=" " alt="" coords="385,44,385,79,380,79,380,44"/>
+<area shape="rect" href="set__test_8c.html" title="Implements tests for the set module." alt="" coords="459,79,562,104"/>
+<area shape="poly" title=" " alt="" coords="417,35,491,76,488,81,414,40"/>
+<area shape="rect" href="space__test_8c.html" title="It tests space module." alt="" coords="586,79,705,104"/>
+<area shape="poly" title=" " alt="" coords="439,32,603,76,602,81,437,37"/>
+</map>
 </div>
 </div>
 <p><a href="test_8h_source.html">Go to the source code of this file.</a></p>
@@ -103,7 +119,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a4a5b9a0026e80b1cfbfbbc3fa700ed31" id="r_a4a5b9a0026e80b1cfbfbbc3fa700ed31"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8h.html#a4a5b9a0026e80b1cfbfbbc3fa700ed31">PRINT_PASSED_PERCENTAGE</a>&#160;&#160;&#160;printf(&quot;Tests passed %d%%\n&quot;, ((__test_passed * 100) / __test_counter))</td></tr>
 <tr class="separator:a4a5b9a0026e80b1cfbfbbc3fa700ed31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements format used in tests. </p>
+<dl class="section author"><dt>Author</dt><dd>Santiago Pita </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>13-04-2026 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a32036c94dbb166a3f874b7efc169841f" name="a32036c94dbb166a3f874b7efc169841f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32036c94dbb166a3f874b7efc169841f">&#9670;&#160;</a></span>KCYN</h2>
 
@@ -197,11 +218,11 @@ Macros</h2></td></tr>
 <div class="line">       __FILE__, __LINE__ , __FUNCTION__,               \</div>
 <div class="line">       ((!__pass) ? <a class="code hl_define" href="test_8h.html#a66290957baed5df3930ada4cb8caccf1">KRED</a> <span class="stringliteral">&quot;NOT PASS&quot;</span> <a class="code hl_define" href="test_8h.html#ab702106cf3b3e96750b6845ded4e0299">RESET</a> : <a class="code hl_define" href="test_8h.html#ac081c83b067273757f7a2e54a5957d41">KGRN</a> <span class="stringliteral">&quot;PASS&quot;</span> <a class="code hl_define" href="test_8h.html#ab702106cf3b3e96750b6845ded4e0299">RESET</a>));    \</div>
 <div class="line">  } <span class="keywordflow">while</span> (0)</div>
-<div class="ttc" id="atest_8h_html_a32036c94dbb166a3f874b7efc169841f"><div class="ttname"><a href="test_8h.html#a32036c94dbb166a3f874b7efc169841f">KCYN</a></div><div class="ttdeci">#define KCYN</div><div class="ttdef"><b>Definition</b> test.h:10</div></div>
-<div class="ttc" id="atest_8h_html_a66290957baed5df3930ada4cb8caccf1"><div class="ttname"><a href="test_8h.html#a66290957baed5df3930ada4cb8caccf1">KRED</a></div><div class="ttdeci">#define KRED</div><div class="ttdef"><b>Definition</b> test.h:7</div></div>
-<div class="ttc" id="atest_8h_html_a897b10d246533c95ba86cb79f92e465a"><div class="ttname"><a href="test_8h.html#a897b10d246533c95ba86cb79f92e465a">KYEL</a></div><div class="ttdeci">#define KYEL</div><div class="ttdef"><b>Definition</b> test.h:9</div></div>
-<div class="ttc" id="atest_8h_html_ab702106cf3b3e96750b6845ded4e0299"><div class="ttname"><a href="test_8h.html#ab702106cf3b3e96750b6845ded4e0299">RESET</a></div><div class="ttdeci">#define RESET</div><div class="ttdef"><b>Definition</b> test.h:11</div></div>
-<div class="ttc" id="atest_8h_html_ac081c83b067273757f7a2e54a5957d41"><div class="ttname"><a href="test_8h.html#ac081c83b067273757f7a2e54a5957d41">KGRN</a></div><div class="ttdeci">#define KGRN</div><div class="ttdef"><b>Definition</b> test.h:8</div></div>
+<div class="ttc" id="atest_8h_html_a32036c94dbb166a3f874b7efc169841f"><div class="ttname"><a href="test_8h.html#a32036c94dbb166a3f874b7efc169841f">KCYN</a></div><div class="ttdeci">#define KCYN</div><div class="ttdef"><b>Definition</b> test.h:19</div></div>
+<div class="ttc" id="atest_8h_html_a66290957baed5df3930ada4cb8caccf1"><div class="ttname"><a href="test_8h.html#a66290957baed5df3930ada4cb8caccf1">KRED</a></div><div class="ttdeci">#define KRED</div><div class="ttdef"><b>Definition</b> test.h:16</div></div>
+<div class="ttc" id="atest_8h_html_a897b10d246533c95ba86cb79f92e465a"><div class="ttname"><a href="test_8h.html#a897b10d246533c95ba86cb79f92e465a">KYEL</a></div><div class="ttdeci">#define KYEL</div><div class="ttdef"><b>Definition</b> test.h:18</div></div>
+<div class="ttc" id="atest_8h_html_ab702106cf3b3e96750b6845ded4e0299"><div class="ttname"><a href="test_8h.html#ab702106cf3b3e96750b6845ded4e0299">RESET</a></div><div class="ttdeci">#define RESET</div><div class="ttdef"><b>Definition</b> test.h:20</div></div>
+<div class="ttc" id="atest_8h_html_ac081c83b067273757f7a2e54a5957d41"><div class="ttname"><a href="test_8h.html#ac081c83b067273757f7a2e54a5957d41">KGRN</a></div><div class="ttdeci">#define KGRN</div><div class="ttdef"><b>Definition</b> test.h:17</div></div>
 </div><!-- fragment -->
 </div>
 </div>

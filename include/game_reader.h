@@ -1,3 +1,11 @@
+/**
+ * @brief It reads the .dat file to create the game
+ *
+ * @file game_reader.h
+ * @author Santiago Pita
+ * @version 1
+ * @date 13-04-2026
+ */
 #ifndef GAME_READER_H
 #define GAME_READER_H
 

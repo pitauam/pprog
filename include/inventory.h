@@ -1,3 +1,11 @@
+/**
+ * @brief Implements the inventory module
+ *
+ * @file inventory.h
+ * @author Mario Rodriguez
+ * @version 1
+ * @date 13-04-2026
+ */
 #ifndef INVENTORY_H
 #define INVENTORY_H
 

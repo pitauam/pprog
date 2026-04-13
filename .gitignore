@@ -5,5 +5,4 @@ castle
 *.o
 
 .vscode/
-codex/
 .~lock.*#

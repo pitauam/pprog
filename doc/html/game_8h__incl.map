@@ -1,0 +1,28 @@
+<map id="include/game.h" name="include/game.h">
+<area shape="rect" id="Node000001" title="It defines the game interface." alt="" coords="217,5,327,31"/>
+<area shape="rect" id="Node000002" href="$command_8h.html" title="It defines the command interpreter interface." alt="" coords="472,152,563,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,18,367,24,410,34,452,51,488,77,500,90,508,106,517,137,512,139,503,108,495,93,485,81,449,56,408,39,366,29,327,24"/>
+<area shape="rect" id="Node000003" href="$types_8h.html" title="It defines common types for the whole project." alt="" coords="234,225,299,251"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="261,33,218,82,195,116,179,153,175,165,178,176,198,200,224,217,221,222,195,204,174,179,170,165,173,151,191,113,214,79,257,29"/>
+<area shape="rect" id="Node000004" href="$space_8h.html" title="It defines the space module interface." alt="" coords="43,79,111,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="242,33,123,76,121,71,240,28"/>
+<area shape="rect" id="Node000007" href="$object_8h.html" title="Defines the module &quot;object&quot;." alt="" coords="187,152,255,177"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="270,32,232,140,227,138,265,30"/>
+<area shape="rect" id="Node000008" href="$player_8h.html" title="Defines the module &quot;player&quot;." alt="" coords="280,152,347,177"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="278,30,309,138,304,139,273,32"/>
+<area shape="rect" id="Node000009" href="$character_8h.html" title="Defines the module &quot;character&quot;." alt="" coords="310,79,397,104"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="287,29,332,68,328,72,283,33"/>
+<area shape="rect" id="Node000010" href="$link_8h.html" title="Defines the link.h module." alt="" coords="421,79,475,104"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="301,28,409,72,407,76,299,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,180,314,226,312,221,476,175"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="84,103,102,138,116,158,132,175,176,203,222,222,220,227,174,208,129,179,112,161,98,141,79,105"/>
+<area shape="rect" id="Node000005" href="$set_8h.html" title="Set module." alt="" coords="11,152,61,177"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="73,106,52,141,47,139,68,103"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="62,171,221,220,220,225,61,176"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,225,67,251"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="39,178,39,212,33,212,33,178"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="231,176,254,212,250,215,227,179"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="308,179,284,215,280,212,303,176"/>
+<area shape="poly" id="edge14_Node000009_Node000003" title=" " alt="" coords="360,104,368,138,367,159,361,179,340,204,313,221,310,217,336,200,356,176,362,158,362,139,355,105"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="443,106,418,141,382,179,346,204,310,222,308,217,343,199,378,175,414,138,439,103"/>
+</map>
