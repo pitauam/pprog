@@ -79,8 +79,11 @@ obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set
     
 #runs Iteration 3 map and generates a log file
 run: $(EXE)
-	./$(EXE) dat/castle.dat -l log.txt
+	./$(EXE) dat/castle.dat
 
+#run
+runlog: $(EXE)
+	./$(EXE) dat/castle.dat -l log.txt
 #runs Iteration 3 map with valgrind and generates a log file
 runv: $(EXE)
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l log.txt
