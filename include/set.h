@@ -91,7 +91,8 @@ int set_get_n_ids(Set *set);
  * @author Mario Rodriguez
  *
  * @param set pointer to the set structure
- * @return number of ids in the set, or -1 if error
+ * @param pos position in the array
+ * @return gets the id of that pos
  */
 Id set_get_id(Set *set, int pos);
 

@@ -119,10 +119,11 @@ Status player_remove_object(Player* player, Id id);
 int player_get_n_objects(Player* player);
 
 /**
- * @brief Gets the player object
+ * @brief Gets the player object id
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
+ * @param pos position in the array
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Id player_get_object_id(Player* player, int pos);
@@ -179,7 +180,7 @@ const char *player_get_description(Player *player);
  * @author Mario Rodriguez
  *
  * @param player pointer to the structure of the player
- * @param heatlh int with the hp of the player
+ * @param health int with the hp of the player
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status player_set_health(Player *player, int health);

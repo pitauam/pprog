@@ -29,7 +29,7 @@ Inventory* inventory_create();
  * @brief It destroys a inventory, freeing the allocated memory
  * @author Mario Rodriguez
  *
- * @param iventory a pointer to the inventory that must be destroyed
+ * @param inventory a pointer to the inventory that must be destroyed
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status inventory_destroy(Inventory *inventory);
@@ -115,7 +115,7 @@ Bool inventory_find_object(Inventory* inventory, Id id);
  * @brief It gets the number of the objects of the inventory
  * @author Mario Rodriguez
  *
- * @param Inventory a pointer to the inventory
+ * @param inventory a pointer to the inventory
  * @return an int with the number of objects in the inventory
  */
 int inventory_get_n_objects(Inventory* inventory);

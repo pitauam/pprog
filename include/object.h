@@ -67,7 +67,7 @@ const char* object_get_name(Object* object);
  * @author Fernando Pina
  *
  * @param object pointer to the structure of the object
- * @param name pointer to the name of the object
+ * @param desc pointer to the name of the object
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_set_desc(Object* object, char* desc);
