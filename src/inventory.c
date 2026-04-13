@@ -12,6 +12,11 @@
 
 #include "inventory.h"
 
+/**
+ * @brief Inventory
+ *
+ * This struct stores all the information related to the inventory.
+ */
 struct _Inventory
 {
     Set *obj;

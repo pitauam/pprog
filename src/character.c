@@ -14,6 +14,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Character
+ *
+ * This struct stores all the information related to a character.
+ */
 struct _Character{
     Id id;                          /*!< Id number of the character, it must be unique */
     char name[WORD_SIZE +1 ];       /*!< Name of the character*/

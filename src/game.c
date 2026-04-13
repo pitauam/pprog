@@ -16,6 +16,11 @@
 
 
 /*Opaque Game struct*/
+/**
+ * @brief Game
+ *
+ * This struct stores all the information related to the game.
+ */
 struct _Game {
   Player *player[MAX_PLAYERS];                /*!< pointer to the player structure*/
   int n_players;                              /*!< number of players in the game*/
@@ -31,6 +36,11 @@ struct _Game {
   InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player*/
 };
 
+/**
+ * @brief Interface Data
+ *
+ * This struct stores all the information related to the interface data.
+ */
 struct _InterfaceData {
   Command *last_cmd;                          /*!< pointer to the last command executed*/
   Bool finished;                              /*!< whether the game has finished or not*/

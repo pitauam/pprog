@@ -13,6 +13,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Link
+ *
+ * This struct stores all the information related the links.
+ */
 struct _Link{
   Id id;                           /*!< Id number of the link, it must be unique */
   char name[WORD_SIZE + 1];        /*!< Name of the link */

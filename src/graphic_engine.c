@@ -29,9 +29,15 @@
 
 #define ROOM_HEIGHT 8 - 3
 
+/**
+ * @brief Graphic engine
+ *
+ * This struct stores all the information related to the graphic engine.
+ */
 struct _Graphic_engine {
   Area *map, *descript, *banner, *help, *feedback;
 };
+
 /*definition of private functions*/
 void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act);
 

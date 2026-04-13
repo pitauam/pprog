@@ -12,6 +12,11 @@
 
 #define SIZE 256 /*Max ids Ids */
 
+/**
+ * @brief Set
+ *
+ * This struct stores all the information related to the set.
+ */
 struct _Set
 {
     Id ids[SIZE];   /*Array of static Ids*/
