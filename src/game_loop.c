@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
     
     /*shows the player the result of their action*/
     graphic_engine_paint_game(gengine, game);
-    sleep(1);
+    sleep(2);
     /*advances the turn to the next player*/
     game_next_turn(game);
     last_cmd = game_get_last_command(game);
