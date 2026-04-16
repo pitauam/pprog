@@ -24,7 +24,7 @@ struct _Inventory
 };
 
 
-Inventory *inventory_create(void){
+Inventory *inventory_create(){
 
     Inventory *new_inventory = NULL;
 
@@ -88,7 +88,7 @@ Status inventory_add_object(Inventory* inventory, Id id){
 }
 
 Status inventory_remove_object(Inventory* inventory, Id id){
-    if(!inventory || !inventory->obj || id < 0 || id == NO_ID ){                                  /*falta compribar si esta vacio*/
+    if(!inventory || !inventory->obj || id < 0 || id == NO_ID ){
         return ERROR;
     }
 
@@ -158,7 +158,7 @@ int inventory_get_n_objects(Inventory* inventory){
 }
 
 Status inventory_print(Inventory* inventory){
-
+    
     if(!inventory || !inventory->obj){
         return ERROR;
     }

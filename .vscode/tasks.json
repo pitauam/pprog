@@ -1,31 +1,25 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "Compilar proyecto de C con tasks.json customizado",
-			"command": "/usr/bin/clang-17",
-			"args": [
-				"-fcolor-diagnostics",
-				"-Wall",
-				"-ansi",
-				"-pedantic",
-				"-g",
-				"-fansi-escape-codes",
-				"${workspaceFolder}/src/*.c",
-				"-I",
-				"${workspaceFolder}/include",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build",
-			"detail": "compiler: /usr/bin/clang-17"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar el juego (make all)",
+            "type": "shell",
+            "command": "make",
+            "args": ["all"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Ejecuta 'make all' usando tu Makefile"
+        },
+        {
+            "label": "Limpiar proyecto (make clean)",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "problemMatcher": [],
+            "detail": "Borra los .o y ejecutables viejos"
+        }
+    ]
 }
