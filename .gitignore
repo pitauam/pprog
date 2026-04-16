@@ -4,5 +4,4 @@ castle
 
 *.o
 
-.vscode/
 .~lock.*#

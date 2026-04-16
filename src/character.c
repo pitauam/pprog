@@ -131,7 +131,7 @@ Status character_set_friendly(Character *character, Bool friendly){
 
 Bool character_get_friendly(Character *character){
     if(character == NULL){
-        return ERROR;
+        return FALSE;
     }
 
     return character->friendly;

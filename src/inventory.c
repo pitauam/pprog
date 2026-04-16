@@ -24,7 +24,7 @@ struct _Inventory
 };
 
 
-Inventory *inventory_create(){
+Inventory *inventory_create(void){
 
     Inventory *new_inventory = NULL;
 
