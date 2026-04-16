@@ -3,5 +3,5 @@ castle
 *.out
 
 *.o
-./vscode
+vscode/
 .~lock.*#
