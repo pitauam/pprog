@@ -123,12 +123,12 @@ Id link_get_direction(Link* link){
   return link->direction;
 }
 
-Status link_set_open(Link* link, int bool){
+Status link_set_open(Link* link, int b){
   if (!link) {
     return ERROR;
   }
 
-  if (bool == 1)
+  if (b == 1)
   {
     link->open = TRUE;
   }

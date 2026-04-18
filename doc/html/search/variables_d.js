@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['result_0',['result',['../struct__Command.html#a561e0a587f742cef00493f2cefb86005',1,'_Command']]]
+  ['player_0',['player',['../struct__Game.html#a9317e55e7d847c5953c2ef7f53d8049b',1,'_Game']]]
 ];

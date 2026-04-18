@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['spaces_0',['spaces',['../struct__Game.html#ad5f218aa97ec196cf2c13d4832f6bc77',1,'_Game']]]
+  ['result_0',['result',['../struct__Command.html#a561e0a587f742cef00493f2cefb86005',1,'_Command']]],
+  ['rows_1',['ROWS',['../libscreen_8c.html#addaa6980ef43410a9e709757d93da1d7',1,'libscreen.c']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['map_0',['map',['../struct__Graphic__engine.html#a1ea06bb881d335da8c31d63b3e834bdb',1,'_Graphic_engine']]],
-  ['max_5fobj_1',['max_obj',['../struct__Inventory.html#a125272de261da5a37d2dbf47d82d81c4',1,'_Inventory']]],
-  ['message_2',['message',['../struct__Character.html#af8b64ab8be7f98639409859e1e80957b',1,'_Character']]],
-  ['msg_3',['msg',['../struct__InterfaceData.html#a0b8058ef97be34e8bf09a8d7c2d66faa',1,'_InterfaceData']]]
+  ['last_5fcmd_0',['last_cmd',['../struct__InterfaceData.html#a8267b5b09fd78bdd313dfbac3745ea21',1,'_InterfaceData']]],
+  ['link_1',['link',['../struct__Game.html#ac18efdbfea540d7c1eb504afabf5b315',1,'_Game']]],
+  ['location_2',['location',['../struct__Player.html#adbb6195d15b88f3f658e74274eff52d8',1,'_Player']]]
 ];

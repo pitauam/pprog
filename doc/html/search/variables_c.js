@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['player_0',['player',['../struct__Game.html#a9317e55e7d847c5953c2ef7f53d8049b',1,'_Game']]]
+  ['obj_0',['obj',['../struct__Inventory.html#a9700d6fa32d16310e33f76ef43fe7769',1,'_Inventory']]],
+  ['object_1',['object',['../struct__Game.html#a87273464426c9e20dea08574ed7f8ccc',1,'_Game']]],
+  ['objects_2',['objects',['../struct__Space.html#a661ed8b0fc8085b6db70188aa5085625',1,'_Space']]],
+  ['open_3',['open',['../struct__Link.html#ab5fcd7f279d39bfc67650459b3e47d79',1,'_Link']]],
+  ['origin_4',['origin',['../struct__Link.html#af039079d7500b5ab11ae21ef672cbf5f',1,'_Link']]]
 ];

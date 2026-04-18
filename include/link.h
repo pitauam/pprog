@@ -113,10 +113,10 @@ Id link_get_direction(Link* link);
  * @author Santiago Pita
  *
  * @param link a pointer to the link
- * @param bool whether the link is open (true) or closed (false)
+ * @param b whether the link is open (true) or closed (false)
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status link_set_open(Link* link, int bool);
+Status link_set_open(Link* link, int b);
 
 /**
  * @brief It gets the open parameter of the link

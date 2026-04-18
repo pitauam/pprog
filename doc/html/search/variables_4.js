@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['feedback_0',['feedback',['../struct__Graphic__engine.html#aaae226ce3b87e512ec196f792ed2f552',1,'_Graphic_engine']]],
-  ['finished_1',['finished',['../struct__InterfaceData.html#af9e8717a6460634a5df71f9f18cd0cd1',1,'_InterfaceData']]],
-  ['friendly_2',['friendly',['../struct__Character.html#a3cbca4d3292eb9713b0eb75609ab931c',1,'_Character']]]
+  ['descript_0',['descript',['../struct__Graphic__engine.html#a8a4927aedd398b43f86c871f197edf1d',1,'_Graphic_engine']]],
+  ['description_1',['description',['../struct__Object.html#add691deed525492ad692cc2f5bccfe90',1,'_Object']]],
+  ['destination_2',['destination',['../struct__Link.html#aae5a495d4f85697715abe75da7c59cd0',1,'_Link']]],
+  ['direction_3',['direction',['../struct__Link.html#a46b56d4039e8287a5564e5950d66ca74',1,'_Link']]]
 ];
