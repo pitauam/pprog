@@ -15,6 +15,8 @@
  */
 void test1_character_create();
 
+/*comentario de prueba*/
+
 /**
  * @test Test character creation
  * @pre Character ID is NO_ID
