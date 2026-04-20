@@ -24,6 +24,10 @@ struct _Object {
   Id id;                    /*!< Object's id, must be unique */
   char name[WORD_SIZE + 1];
   char description[WORD_SIZE + 1]; /*!< Object's description */
+  int health; /*!< Health of the object */
+  Bool movable; /*!< Movility of the object */
+  Id dependency; /*!< Dependency of the object */
+  Id open; /*!< Open or closed to get it */
 };
 
 /** object_create allocates memory and initializes all variables*/
@@ -105,6 +109,80 @@ const char* object_get_desc(Object* object)
   return object->description;
 }
 
+Status object_set_health(Object* object, int health) {
+  if (!object || !health)
+  {
+    return ERROR;
+  }
+  
+ object->health = health;
+  
+  return OK;
+}
+
+int object_get_health(Object* object) {
+  if (!object) {
+    return 1;
+  }
+
+  return object->health;
+}
+
+Status object_set_movable(Object* object, Bool movable){
+  if (!object)
+  {
+    return ERROR;
+  }
+  
+ object->movable = movable;
+  
+  return OK;
+}
+
+Bool object_get_movable(Object* object) {
+  if (!object) {
+    return FALSE;
+  }
+
+  return object->movable;
+}
+
+Status object_set_dependency(Object* object, Id dependency){
+  if(!object) {
+    return ERROR;
+  }
+  object->dependency = dependency;
+
+  return OK;
+}
+
+Id object_get_dependency(Object* object){
+  if(!object){
+    return NO_ID;
+  }
+
+  return object->dependency;
+}
+
+Status object_set_open(Object* object, Bool open){
+  if (!object)
+  {
+    return ERROR;
+  }
+  
+ object->open = open;
+  
+  return OK;
+}
+
+Bool object_get_open(Object* object) {
+  if (!object) {
+    return FALSE;
+  }
+
+  return object->open;
+}
+
 Status object_print(Object* object) {
   /*Id idaux = NO_ID;*/
 
@@ -114,7 +192,19 @@ Status object_print(Object* object) {
   }
 
   /* 1. Prints object's id and name */
-  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Description: %s)\n", object->id, object->name, object->description);
+  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Description: %s; Health: %d; Dependency: %ld)\n", object->id, object->name, object->description, object->health, object->dependency);
+
+  if (object_get_movable(object)) {
+    fprintf(stdout, "- Object is movable\n");
+  } else {
+    fprintf(stdout, "- Object cannot be moved\n");
+  }
+
+  if (object_get_open(object)) {
+    fprintf(stdout, "- Object can open other objects\n");
+  } else {
+    fprintf(stdout, "- Object cannot open other objects\n");
+  }
 
   return OK;
 }

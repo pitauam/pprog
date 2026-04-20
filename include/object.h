@@ -42,7 +42,6 @@ Status object_destroy(Object* object);
 Id object_get_id(Object* object);
 
 
-
 /**
  * @brief Sets the name of an object
  * @author Santiago Pita
@@ -80,6 +79,82 @@ Status object_set_desc(Object* object, char* desc);
  * @return a string with the name of an object
  */
 const char* object_get_desc(Object* object);
+
+/**
+ * @brief Sets the health of the object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @param health the amount it takes or gives
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status object_set_health(Object* object, int health);
+
+/**
+ * @brief Gives the health of an object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @return the health of an object
+ */
+int object_get_health(Object* object);
+
+/**
+ * @brief Sets if an object is movable or not
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @param movable true or false
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status object_set_movable(Object* object, Bool movable);
+
+/**
+ * @brief Gets if it's movable or not
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @return TRUE if movable and FALSE if not
+ */
+Bool object_get_movable(Object* object);
+
+/**
+ * @brief Sets the dependency of the object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @param id dependency
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status object_set_dependency(Object* object, Id dependency);
+
+/**
+ * @brief Gets the dependency of the object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @return Id of the dependency or NO_ID if error
+ */
+Id object_get_dependency(Object* object);
+
+/**
+ * @brief Sets if it's open to get it or closed
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @param open id to define it
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
+Status object_set_open(Object* object, Bool open);
+
+/**
+ * @brief Gets if it's open or not
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @return TRUE if open and FALSE if not
+ */
+Bool object_get_open(Object* object);
 
 /**
  * @brief Prints the information of an object (shows its Id)

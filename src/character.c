@@ -181,7 +181,7 @@ Status character_print(Character *character){
         return ERROR;
     }
     /* 1. Prints the character's id, name and health */
-    fprintf(stdout, "---> Character (Id: %ld; Name: %s; Health: %d)\n", character->id, character->name, character->health);
+    fprintf(stdout, "---> Character (Id: %ld; Name: %s; Health: %d; Following: %ld)\n", character->id, character->name, character->health, character->following);
 
     /* 3. Prints if the character has a description */
     if (character_get_description(character)) {
@@ -191,7 +191,7 @@ Status character_print(Character *character){
     if (character_get_message(character)) {
         fprintf(stdout, "- Message: %s\n", character->message);
     }
-   /* 3. Prints if the player has an object */
+   /* 3. Prints if the character is friendly */
   if (character_get_friendly(character)) {
     fprintf(stdout, "- Character is friendly\n");
   } else {
