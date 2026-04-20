@@ -93,42 +93,61 @@ char *command_get_arg(Command* command) {
   return command->arg;
 }
 
+
 Status command_get_user_input(Command* command) {
-  char input[CMD_LENGHT] = "", *token = NULL;
+  char input[CMD_LENGTH] = "", *token = NULL, *arg = NULL;
   int i = UNKNOWN - NO_CMD + 1;
   CommandCode cmd;
 
-  if (!command) {
+  if (!command)
+  {
     return ERROR;
   }
 
-
-  if (fgets(input, CMD_LENGHT, stdin)) {
-    token = strtok(input, " \n");
-    if (!token) {
+  if (fgets(input, CMD_LENGTH, stdin))
+  {
+    input[strcspn(input, "\n")] = '\0';
+    token = strtok(input, " ");
+    if (!token)
+    {
       return command_set_code(command, UNKNOWN);
     }
 
     cmd = UNKNOWN;
-    while (cmd == UNKNOWN && i < N_CMD) {
-      if (!strcasecmp(token, cmd_to_str[i][CMDS]) || !strcasecmp(token, cmd_to_str[i][CMDL])) {
+    while (cmd == UNKNOWN && i < N_CMD)
+    {
+      if (!strcasecmp(token, cmd_to_str[i][CMDS]) || !strcasecmp(token, cmd_to_str[i][CMDL]))
+      {
         cmd = i + NO_CMD;
       } else {
         i++;
       }
     }
-    token = strtok(NULL, " \n");
-    
-    if (token != NULL) {
-      command_set_arg(command, token);
-    } else {
-      command_set_arg(command, "");
+
+    if (command_set_code(command, cmd) == ERROR)
+    {
+      return ERROR;
     }
 
-    return command_set_code(command, cmd);
+    for (i = 0; i < MAX_CMD_ARG; i++)
+    {
+      arg = strtok(NULL, " ");
+      if (!arg)
+      {
+        arg = "";
+      }
+
+      if (command_set_arg(command, arg) == ERROR)
+      {
+        return ERROR;
+      }
+    }
+
+    return OK;
   }
-  else
+  else {
     return command_set_code(command, EXIT);
+  }
 }
 
 Status command_set_arg(Command* command, char* arg) {

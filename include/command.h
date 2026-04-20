@@ -14,6 +14,7 @@
 #include "types.h"
 
 #define CMD_LENGTH 30 /*!< Maximum lenght of a command input */
+#define MAX_CMD_ARG 3 /*!< Maximum arguments a command can have */
 #define N_CMDT 2
 #define N_CMD 11
 
