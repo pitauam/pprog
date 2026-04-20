@@ -1,17 +1,31 @@
-hola, esto son instrucciones para git:
+--------------------COMO JUGAR AL JUEGO:--------------------
+
+1) usar 'git clone https://github.com/pitauam/pprog.git' para descargarse el juego
+2) navegar a la carpeta 'pprog' en una terminal
+3) make
+4) make run
+5) moverse con 'move next' o 'm n', move right o 'm r'...
+6) take nombre_del_objeto (take Sword o drop Sword) (las mayusculas son importantes)
+
+nota: el juego funciona por turnos y por defecto hay 2 jugadores
+
+-------------INSTRUCCIONES PARA USAR GIT:-------------
 
 A) Acabo de llegar a clase (PC reseteado)
 El PC de clase no tiene nada. Tu misión es traer el código de la nube.
 
 Ir a donde quieras trabajar (ej. Escritorio): cd ~/Desktop
 
-Descargar tu proyecto de la nube: git clone https://github.com/pitauam/pprog.git
+Descargar tu proyecto de la nube: git clone https://github.com/pitauam/pprog
 
 Entrar en la carpeta que se acaba de crear: cd pprog
 
 Configurar quién eres (necesario cada vez que el PC se reinicie): git config user.name "el_tuyo" git config user.email "email@estudiante.uam.es"
 
 Abrir el código para empezar a trabajar: code .
+
+
+
 
 B) Ya estoy trabajando y quiero subir mis cambios
 Imagina que has modificado game.c y creado object.c. Quieres enviar tus "paquetes" a la cola.
@@ -36,7 +50,7 @@ COMANDOS:
 
 ---INICIO---
 
-git clone https://github.com/pitauam/pprog.git
+git clone https://github.com/pitauam/pprog
 
 cd pprog
 
@@ -58,3 +72,13 @@ git pull origin main
 
 git push origin main
 
+------------------------------MERGE CONFLICTS------------------------------
+si al subir codigo sale un error amarillo (merge conflict), hay que escribir:
+
+git config --global pull.rebase false
+
+git pull
+
+revisar los cambios que se han hecho (los archivos con la M grande) y quedarse con los cambios que quieres subir
+
+ctrl+x
