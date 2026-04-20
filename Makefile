@@ -149,4 +149,4 @@ doc:
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
-	rm -f obj/*.o $(EXE) $(TESTS) log.txt
+	rm -f obj/*.o rem -f *.o $(EXE) $(TESTS) log.txt
