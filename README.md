@@ -73,6 +73,7 @@ git pull origin main
 git push origin main
 
 ------------------------------MERGE CONFLICTS------------------------------
+
 si al subir codigo sale un error amarillo (merge conflict), hay que escribir:
 
 git config --global pull.rebase false
