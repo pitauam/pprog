@@ -1,0 +1,30 @@
+/**
+ * @brief It defines the game update interface
+ *
+ * @file game_actions.h
+ * @author Profesores PPROG
+ * @version 5
+ * @date 16-03-2026
+ * @copyright GNU Public License
+ */
+
+#ifndef GAME_ACTIONS_H
+#define GAME_ACTIONS_H
+
+#include "command.h"
+#include "game.h"
+#include "types.h"
+
+#define MAX_ARG 32 /*maximum number of characters for the argument*/
+
+/**
+ * @brief reads the command and finds what to do
+ * @author Profesores PPROG
+ *
+ * @param game pointer to game
+ * @param cmd pointer to the comand of the cmd
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_actions_update(Game *game, Command *cmd);
+
+#endif
