@@ -26,6 +26,7 @@ struct _Character{
     int health;                     /*!< Health of the character*/
     Bool friendly;                  /*!< TRUE if its firendly FALSE otherwise, hardcoded friendly*/
     char message[WORD_SIZE +1];     /*!< Message of the character*/
+    Id following;                   /*!<The id of the player that is following*/
 };
 
 Character *character_create(Id id){
@@ -43,6 +44,7 @@ Character *character_create(Id id){
     new_character->friendly = TRUE; 
     new_character->message[0] = '\0';
     new_character->message[0] = '\0';
+    newCharacter->following = NO_ID;
 
     return new_character;
 }
@@ -154,7 +156,25 @@ const char *character_get_message(Character *character){
 
     return character->message;
 }
+Id character_get_following(Character *character) {
+    if (!character)
+    {
+        return NO_ID;
+    }
 
+    return character->following;
+}
+
+Status character_set_following(Character *character, Id id) {
+    if (!character || id < 0)
+    {
+        return ERROR;
+    }
+
+    character->following = id;
+
+    return OK;
+}
 Status character_print(Character *character){
     /* Error Control */
     if (!character) {
