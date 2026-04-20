@@ -19,13 +19,13 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 90
-#define WIDTH_DES 37
-#define WIDTH_BAN 25
-#define HEIGHT_MAP 34
-#define HEIGHT_BAN 1
-#define HEIGHT_HLP 2
-#define HEIGHT_FDB 3
+#define WIDTH_MAP 90  /*!< Width of the map area */
+#define WIDTH_DES 37  /*!< Width of the description area */
+#define WIDTH_BAN 25  /*!< Width of the banner area */
+#define HEIGHT_MAP 34 /*!< Height of the map area */
+#define HEIGHT_BAN 1  /*!< Height of the banner area */
+#define HEIGHT_HLP 2  /*!< Height of the help area */
+#define HEIGHT_FDB 3  /*!< Height of the feedback area */
 
 #define ROOM_HEIGHT 8 - 3
 
@@ -35,7 +35,11 @@
  * This struct stores all the information related to the graphic engine.
  */
 struct _Graphic_engine {
-  Area *map, *descript, *banner, *help, *feedback;
+  Area *map;      /*!< Pointer to the map area */
+  Area *descript; /*!< Pointer to the description area */
+  Area *banner;   /*!< Pointer to the banner area */
+  Area *help;     /*!< Pointer to the help area */
+  Area *feedback; /*!< Pointer to the feedback area */
 };
 
 /*definition of private functions*/
@@ -119,14 +123,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     id_right = game_get_connection(game, id_act, 2);
     id_left = game_get_connection(game, id_act, 3);
 
-      /*imprime el anterior*/
+    /*Print previous*/
     if (id_back != NO_ID) {
       graphic_engine_space_place(ge, game, id_back);
       sprintf(str, "                                ^");
       screen_area_puts(ge->map, str);
     }
 
-      /*Imprime el actual*/
+    /*Print actual*/
     if (id_act != NO_ID) {
       
       if(id_left != NO_ID && id_right != NO_ID){
@@ -379,26 +383,18 @@ for (j = 0; j < 5; j++)
     screen_area_puts(ge->map, str);
   }    
 
-  strcpy(str, "                       |          ");
-
   len = 0;
-  /*prints first place objects*/
-  for(i=0; i < n_objects; i++){
-    if (game_get_object_location(game, game_get_object_id(game, i)) == id_act)
-    {
-      strcpy(obj, game_get_object_name(game, game_get_object(game, game_get_object_id(game, i))));
-      strcat(str, obj);
-      strcat(str, " "); 
-      len+= strlen(obj) + 1;
+
+  for(i=0; i<n_objects; i++){
+    if(game_get_object_location(game, game_get_object_id(game, i)) == id_act){
+      strcat(obj, object_get_name(game_get_object(game, game_get_object_id(game, i))));
+      strcat(obj, " ");
+      len += strlen(object_get_name(game_get_object(game, game_get_object_id(game, i))))+1;
     }
   }
-  
-  for (j = 0; j < 8 - len; j++) {
-    strcat(str, " ");
-  }
-  strcat(str, "|");
-
+  sprintf(str, "                       | %-16.16s|", obj);
   screen_area_puts(ge->map, str);
+
   sprintf(str, "                       +------------------+");
   screen_area_puts(ge->map, str);
 
