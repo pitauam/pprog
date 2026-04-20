@@ -14,6 +14,7 @@
 
 typedef struct _Link Link;
 
+
 /**
  * @brief It creates a new link, allocating memory and initializing its members
  * @author Santiago Pita
