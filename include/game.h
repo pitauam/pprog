@@ -397,5 +397,14 @@ int game_get_turn(Game *game);
  */
 Status game_next_turn(Game *game);
 
+/**
+ * @brief It gets the character id from a certain position in the array
+ * @author Samuel Manzorro
+ * 
+ * @param game a pointer to the game
+ * @param position the position in the array
+ * @return the character id from the wanted position
+ */
+Id game_get_character_id_at(Game *game, int position);
 
 #endif

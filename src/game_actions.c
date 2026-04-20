@@ -116,6 +116,22 @@ void game_actions_inspect(Game *game);
  */
 void game_actions_move(Game *game);
 
+/**
+ * @brief It lets the player to recruit characters
+ * @author Samuel Manzorro
+ * 
+ * @param game a pointer to the game
+ */
+void game_actions_recruit(Game *game);
+
+/**
+ * @brief It lets the player to abandon the recruited characters
+ * @author Samuel Manzorro
+ * 
+ * @param game a pointer to the game
+ */
+void game_actions_abandon(Game *game);
+
 /*
    Game actions implementation
 */
@@ -158,6 +174,14 @@ Status game_actions_update(Game *game, Command *command) {
     
     case INSPECT:
       game_actions_inspect(game);
+      break;
+    
+    case RECRUIT:
+      game_actions_recruit(game);
+      break;
+
+    case ABANDON:
+      game_actions_abandon(game);
       break;
 
     default:
@@ -579,4 +603,91 @@ void game_actions_inspect(Game *game){
   }
 
     return;
+}
+
+void game_actions_recruit(Game *game) {
+
+  int i;
+  Id player_location = NO_ID, character_location = NO_ID;
+  char *chr_name = NULL;
+  Character *chr = NULL;
+
+  if (!game)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+
+  player_location = game_get_player_location(game);
+  if (player_location == NO_ID)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  strcpy(chr_name, command_get_arg(game_get_last_command(game)));
+  if (chr_name == NULL)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
+
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    character_location = game_get_character_location(game, game_get_character_id_at(game, i));
+    chr = game_get_character(game, game_get_character_id_at(game, i));
+    if (character_location == player_location && chr && character_get_following(chr) == NO_ID && character_get_friendly(chr))
+    {
+      if (strcmp(chr_name, character_get_name(chr)) == 0)
+      {
+        character_set_following(chr, player_get_id(game_get_player(game)));
+        /* molaria poner un array de characters en player que le siguen */
+        command_set_return(game_get_last_command(game), ERROR);
+        return;
+      }
+    }
+  }
+
+  command_set_return(game_get_last_command(game), ERROR);
+  return;
+}
+
+void game_actions_abandon(Game *game) {
+
+  int i;
+  char *chr_name = NULL;
+  Character *chr = NULL;
+
+  if (!game)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  strcpy(chr_name, command_get_arg(game_get_last_command(game)));
+  if (chr_name == NULL)
+  {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+  
+
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    chr = game_get_character(game, game_get_character_id_at(game, i));
+    if (chr && character_get_following(chr) == player_get_id(game_get_player(game)))
+    {
+      if (strcmp(chr_name, character_get_name(chr)) == 0)
+      {
+        character_set_following(chr, NO_ID);
+        command_set_return(game_get_last_command(game), OK);
+        return;
+      }
+    }
+  }
+
+  command_set_return(game_get_last_command(game), ERROR);
+  return;
 }

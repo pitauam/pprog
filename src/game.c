@@ -563,3 +563,12 @@ Status game_next_turn(Game *game){
 
   return OK;
 }
+
+Id game_get_character_id_at(Game *game, int position) {
+  if (!game || position < 0)
+  {
+    return NO_ID;
+  }
+
+  return character_get_id(game->characters[position]);
+}
