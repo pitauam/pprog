@@ -1,0 +1,5 @@
+move s: unknown
+move s: unknown
+take Sword: exit
+chat Guardia: unknown
+exit: exit

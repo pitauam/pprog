@@ -19,10 +19,10 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 90  /*!< Width of the map area */
-#define WIDTH_DES 37  /*!< Width of the description area */
-#define WIDTH_BAN 25  /*!< Width of the banner area */
-#define HEIGHT_MAP 34 /*!< Height of the map area */
+#define WIDTH_MAP 50  /*!< Width of the map area */
+#define WIDTH_DES 30  /*!< Width of the description area */
+#define WIDTH_BAN 30  /*!< Width of the banner area */
+#define HEIGHT_MAP 30 /*!< Height of the map area */
 #define HEIGHT_BAN 1  /*!< Height of the banner area */
 #define HEIGHT_HLP 2  /*!< Height of the help area */
 #define HEIGHT_FDB 3  /*!< Height of the feedback area */
@@ -173,11 +173,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_clear(ge->descript);
   sprintf(str, " TURN: %i", game_get_turn(game)+1);
   screen_area_puts(ge->descript, str);
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
   sprintf(str, " Player name: %s (%s)",player_get_name(player), player_get_description(player));
   screen_area_puts(ge->descript, str);
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
 
-
-  sprintf(str, " Health : %dhp", player_get_health(player));
+  sprintf(str, " Health : %d", player_get_health(player));
   screen_area_puts(ge->descript, str);
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
@@ -294,7 +297,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Dump to the terminal */
   screen_paint((game_get_turn(game)+5)%MAX_PLAYERS);
-  printf("prompt:> ");
+  printf("prompt-> ");
   }
 }
 
@@ -343,6 +346,8 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   int len;
   char *gdesc;
   const char *player_gdesc;
+
+  obj[0] = '\0';
 
   if (ge == NULL) {return;}
   if (id_act == NO_ID){return;}

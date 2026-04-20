@@ -34,18 +34,18 @@ directions: NO_DIR,N,S,E,W
 #l:315|Inner countryard|15|16|1|1|
 #l:316|Garden|16|15|0|1|
 
-#c:41|kevin|O_o|11|5|1|Hola soy kevin. Necesito tu ayuda, mata a todos los enemigos por mi :)|
-#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ vuelve cuando seas mas fuerte plebeyo|
-#c:43|inmate|*_*|121|1|0|I've been stuck here for so long..|
+#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
+#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|
+#c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
 
-#p:100|juan|:D|11|5|3|
-#p:101|knight|^C>|12|5|3|
+#p:100|Juan|:D|11|5|3|
+#p:101|Knight|^C>|12|5|3|
 
-#ptest:102|knight2|^D>|13|3|1|
-#ptest:103|knight3|^X>|14|1|0|
-#ptest:104|knight3|^J>|14|1|0|
-#ptest:105|knight3|^Y>|14|1|0|
-#ptest:106|knight3|^Z>|14|1|0|
-#ptest:107|knight3|^Q>|14|1|0|
+#ptest:102|Knight2|^D>|13|3|1|
+#ptest:103|Knight3|^X>|14|1|0|
+#ptest:104|Knight3|^J>|14|1|0|
+#ptest:105|Knight3|^Y>|14|1|0|
+#ptest:106|Knight3|^Z>|14|1|0|
+#ptest:107|Knight3|^Q>|14|1|0|
