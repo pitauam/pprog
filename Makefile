@@ -147,9 +147,7 @@ doc:
 	doxygen Doxyfile
 	@echo "Doxygen documentation created. open the .html file in html/"
 
-#Para usar valgrind
-#valgrind: all
-#	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(EXE) castle.dat
+#see line 88 to run with valgrind
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
