@@ -1,3 +1,5 @@
+**[Haz clic aquí para ver la Documentación Completa del proyecto (Doxygen)](https://pitauam.github.io/pprog/)**
+
 --------------------COMO JUGAR AL JUEGO:--------------------
 
 1) usar 'git clone https://github.com/pitauam/pprog.git' para descargarse el juego
