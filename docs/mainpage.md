@@ -1,5 +1,3 @@
-**[Haz clic aquí para ver la Documentación Completa del proyecto (Doxygen)](https://pitauam.github.io/pprog/)**
-
 ----------------------------COMO JUGAR AL JUEGO:----------------------------
 
 1) usar 'git clone https://github.com/pitauam/pprog.git' para descargarse el juego
@@ -16,39 +14,6 @@
 
 nota: el juego funciona por turnos y por defecto hay 2 jugadores
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ----------------------------INSTRUCCIONES PARA USAR GIT:----------------------------
 
 A) Acabo de llegar a clase (PC reseteado)
@@ -63,6 +28,8 @@ Entrar en la carpeta que se acaba de crear: cd pprog
 Configurar quién eres (necesario cada vez que el PC se reinicie): git config user.name "el_tuyo" git config user.email "email@estudiante.uam.es"
 
 Abrir el código para empezar a trabajar: code .
+
+
 
 
 B) Ya estoy trabajando y quiero subir mis cambios
@@ -86,7 +53,7 @@ Nota: poner origin main es buena costumbre porque le dice a git donde enviarlo e
 
 COMANDOS:
 
-------------------------------INICIO------------------------------
+---INICIO---
 
 git clone https://github.com/pitauam/pprog
 
@@ -98,7 +65,7 @@ git config user.email "tu_email@estudiante.uam.es"
 
 code .
 
-------------------------------GUARDAR CAMBIOS------------------------------
+---GUARDAR CAMBIOS---
 
 git status
 
