@@ -135,6 +135,25 @@ Status character_set_message(Character *character, char *message);
 const char *character_get_message(Character *character);
 
 /**
+ * @brief It gets the following atribute of a character
+ * @author Mario Rodriguez
+ *
+ * @param character a pointer to the character
+ * @return the id of the player that is following or NO_ID if other wise
+ */
+Id character_get_following(Character *character);
+
+/**
+ * @brief It sets the following atribute of a character
+ * @author Mario Rodriguez
+ *
+ * @param character a pointer to the character
+ * @param id id of the player that is following
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status character_set_following(Character *character, Id id);
+
+/**
  * @brief Prints the information of the character
  * @author Mario Rodriguez
  *
