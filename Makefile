@@ -1,7 +1,7 @@
  # @brief Makefile for the Castle game
  #
  # @file Makefile
- # @author Santiago Pita and Mario Rodriguez
+ # @author Santiago Pita, Mario Rodriguez, Paula de la Fuente
  # @version 6
  # @date 11-04-2026
 
@@ -16,7 +16,7 @@ CC = gcc
 #CLIB are the libraries used when compiling
 CLIB = -lscreen -L./lib
 #TESTS is used when cleaning
-TESTS = spacetest settest charactertest linktest inventorytest
+TESTS = spacetest settest charactertest linktest inventorytest objecttest playertest
 
 #by default it makes the castle game executable
 all: $(EXE)
@@ -27,11 +27,11 @@ runaux:
 
 #runs all tests
 runtests: 
-	./spacetest && ./settest && ./charactertest && ./linktest && ./inventorytest
+	./spacetest && ./settest && ./charactertest && ./linktest && ./inventorytest && ./objecttest && ./playertest
 
 #makes all tests
 alltests:
-	make spacetest && make settest && make charactertest && make linktest && make inventorytest
+	make spacetest && make settest && make charactertest && make linktest && make inventorytest && make objecttest && make playertest
 
 #makes main game exe file
 $(EXE) : $(OBJS)
@@ -108,6 +108,13 @@ linktest: obj/link_test.o obj/link.o
 inventorytest: obj/inventory_test.o obj/inventory.o obj/set.o
 	$(CC) -o $@ $^
 
+objecttest: obj/object_test.o obj/object.o obj/set.o
+	$(CC) -o $@ $^
+
+playertest: obj/player_test.o obj/player.o obj/inventory.o obj/set.o
+	$(CC) -o $@ $^
+
+
 #makes tests .o
 obj/space_test.o: src/space_test.c include/space.h include/types.h include/set.h include/space_test.h include/test.h
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -122,6 +129,12 @@ obj/link_test.o: src/link_test.c include/link.h include/types.h include/link_tes
 	$(CC) -c $(CFLAGS) $< -o $@
 
 obj/inventory_test.o: src/inventory_test.c include/inventory.h include/types.h include/set.h include/inventory_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/object_test.o: src/object_test.c include/object.h include/types.h include/object_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/player_test.o: src/player_test.c include/player_test.h include/player.h include/inventory.h include/set.h include/test.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 #runs each test
@@ -139,6 +152,12 @@ runlinktest: linktest
 
 runinventorytest: inventorytest
 	./inventorytest
+
+runobjecttest: objecttest
+	./objecttest
+
+runplayertest: playertest
+	./playertest
 
 #documentation with Doxygen
 #.phony is used to let makefile know the following instruction is a command
