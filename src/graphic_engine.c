@@ -104,8 +104,8 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object_id = NO_ID;
-  Character *character;
-  Player *player;
+  Character *character = NULL;
+  Player *player = NULL;
   char str[255];
   CommandCode last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
@@ -167,8 +167,42 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     }
 
 
+  player = game_get_player(game);
+  
   /* Paint in the description area */
   screen_area_clear(ge->descript);
+  sprintf(str, " TURN: %i", game_get_turn(game)+1);
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " Player name: %s (%s)",player_get_name(player), player_get_description(player));
+  screen_area_puts(ge->descript, str);
+
+
+  sprintf(str, " Health : %dhp", player_get_health(player));
+  screen_area_puts(ge->descript, str);
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+
+  if(player_inventory_empty(player) == FALSE){
+  sprintf(str," Player carries: ");
+  screen_area_puts(ge->descript, str);
+    for(i=0; i < player_get_n_objects(player); i++){
+      player_object_id = player_get_object_id(player, i);
+      if (player_object_id != NO_ID) {
+        sprintf(str, " %12s (%ld)", object_get_name(game_get_object(game, player_object_id)), player_object_id);
+        screen_area_puts(ge->descript, str);
+      } 
+    }
+    
+  }
+  else 
+  {
+    sprintf(str, " Inventory is empty.");
+    screen_area_puts(ge->descript, str);
+  }
+
+  sprintf(str, " ");
+  screen_area_puts(ge->descript, str);
+
   sprintf(str, " Objects :");
   screen_area_puts(ge->descript, str);
   for(i=0; i < n_objects; i++){
@@ -205,30 +239,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
-  sprintf(str, " Player : %3d (%dhp)", (int)id_act, player_get_health(player));
 
-  screen_area_puts(ge->descript, str);
-  
-  if(player_inventory_empty(player) == FALSE){
-  sprintf(str," Player carries: ");
-  screen_area_puts(ge->descript, str);
-    for(i=0; i < player_get_n_objects(player); i++){
-      player_object_id = player_get_object_id(player, i);
-      if (player_object_id != NO_ID) {
-        sprintf(str, " %12s (%ld)", object_get_name(game_get_object(game, player_object_id)), player_object_id);
-        screen_area_puts(ge->descript, str);
-      } 
-    }
-    
-  }
-  else 
-  {
-    sprintf(str, " Inventory is empty.");
-    screen_area_puts(ge->descript, str);
-  }
-
-  sprintf(str, " ");
-  screen_area_puts(ge->descript, str);
   sprintf(str, " Links :");
   screen_area_puts(ge->descript, str);
   graphic_engine_print_link_info(ge, game, id_act, N, "North");

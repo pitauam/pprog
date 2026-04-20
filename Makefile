@@ -83,10 +83,10 @@ run: $(EXE)
 
 #run
 runlog: $(EXE)
-	./$(EXE) dat/castle.dat -l logFile
+	./$(EXE) dat/castle.dat -l log.txt
 #runs Iteration 3 map with valgrind and generates a log file
 runv: $(EXE)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l logFile
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l log.txt
 
 #runs anthill map with valgrind
 runvanthill:
@@ -146,6 +146,10 @@ runinventorytest: inventorytest
 doc:
 	doxygen Doxyfile
 	@echo "Doxygen documentation created. open the .html file in html/"
+
+#Para usar valgrind
+#valgrind: all
+#	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(EXE) castle.dat
 
  #cleans the .o and .exe files (used before uploading to git)
 clean: 
