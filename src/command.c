@@ -83,7 +83,7 @@ CommandCode command_get_code(Command* command) {
   return command->code;
 }
 
-const char *command_get_arg(Command* command) {
+char *command_get_arg(Command* command) {
   if (!command) {
     return NULL;
   }
@@ -141,13 +141,46 @@ void command_set_return(Command *command, Status s)
   command->result = s;
 }
 
-char* command_get_return(Command *command)
+Status command_get_return(Command *command)
 {
-  if (!command) {return NULL;}
+  if (!command) {return ERROR;}
 
   if (command->result == OK)
   {
-    return "OK";
+    return OK;
   }
-  return "ERROR";
+  return ERROR;
+}
+
+/* We use this function for the log to be able to print the command in a file. */
+char *command_to_string(CommandCode cmd){
+  switch (cmd)
+  {
+    case TAKE:
+      return "take";
+
+    case DROP:
+      return "drop";
+
+    case EXIT:
+      return "exit";
+
+    case UNKNOWN:
+      return "unknown";
+
+    case ATTACK:
+      return "attack";
+
+    case MOVE:
+      return "move";
+
+    case CHAT:
+      return "chat";
+
+    case INSPECT:
+      return "inspect";
+  
+    default:
+      return "unknown";
+  }
 }

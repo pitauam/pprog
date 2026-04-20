@@ -13,6 +13,7 @@
 
 #include "types.h"
 
+#define CMD_LENGTH 30 /*!< Maximum lenght of a command input */
 #define N_CMDT 2
 #define N_CMD 9
 
@@ -87,7 +88,7 @@ Status command_set_arg(Command* command, char* arg);
  * @param command a pointer to the command
  * @return the argument code
  */
-const char* command_get_arg(Command* command);
+char* command_get_arg(Command* command);
 
 /**
  * @brief It sets the return result of the command
@@ -105,7 +106,15 @@ void command_set_return(Command *command, Status s);
  * @param command a pointer to the command
  * @return the return state
  */
-char* command_get_return(Command *command);
+Status command_get_return(Command *command);
 
+/**
+ * @brief It changes the command to string, we use it in game_loop_log.
+ * @author Marta López
+ *
+ * @param code the new CommandCode to be set
+ * @return a string
+ */
+char *command_to_string(CommandCode cmd);
 
 #endif

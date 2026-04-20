@@ -24,6 +24,9 @@ int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name);
 
 void game_loop_cleanup(Game *game, Graphic_engine *gengine);
 
+/* Option of creating a file that saves all the commands used in that game. */
+void game_loop_log (Game *game, FILE *f);
+
 static const char *game_loop_command_to_str(CommandCode code) {
   switch (code) {
     case UNKNOWN:
@@ -60,9 +63,9 @@ static void game_loop_log_command(FILE *log_fp, Command *cmd) {
   arg = command_get_arg(cmd);
 
   if (arg && arg[0] != '\0') {
-    fprintf(log_fp, "%s %s: %s\n", cmd_str, arg, command_get_return(cmd));
+    fprintf(log_fp, "%s %s: %s\n", cmd_str, arg, command_to_string(command_get_return(cmd)));
   } else {
-    fprintf(log_fp, "%s: %s\n", cmd_str, command_get_return(cmd));
+    fprintf(log_fp, "%s: %s\n", cmd_str, command_to_string(command_get_return(cmd)));
   }
 }
 
@@ -164,4 +167,53 @@ int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name) {
 void game_loop_cleanup(Game* game, Graphic_engine *gengine) {
   graphic_engine_destroy(gengine);
   game_destroy(game);
+}
+
+void game_loop_log (Game *game, FILE *f) {
+  CommandCode last_cmd = UNKNOWN;
+  Status last_command_status = ERROR;
+  char line[WORD_SIZE];
+  char *str = NULL;
+  char last_cmd_arg[CMD_LENGTH];
+  char *arg = NULL;
+
+  if(!game || !f)
+  {
+    return;
+  }
+
+  last_cmd = command_get_code(game_get_last_command(game));
+  last_command_status = command_get_return(game_get_last_command(game));
+
+  last_cmd_arg[0] = '\0';
+  arg = command_get_arg(game_get_last_command(game));
+
+  if (arg != NULL && arg[0] != '\0')
+  {
+    strncpy(last_cmd_arg, arg, CMD_LENGTH-1); /* We need strncpy because we want to define the size. */
+    last_cmd_arg[CMD_LENGTH-1] = '\0';
+  }
+
+  str = command_to_string(last_cmd); /* We need this new function because we need to change the command to string. */
+  
+  if (last_cmd_arg[0] == '\0')
+  {
+    if (last_command_status == OK)
+    {
+      sprintf(line, "%s: OK\n", str);
+    } else {
+      sprintf(line, "%s: ERROR\n", str);
+    }
+  } else
+  {
+    if (last_command_status == OK)
+    {
+      sprintf(line, "%s %s: OK\n", str, last_cmd_arg);
+    } else {
+      sprintf(line, "%s %s: ERROR\n", str, last_cmd_arg);
+    }
+  }
+
+  fprintf(f, "Player %d's turn:\n", game_get_turn(game)+1);
+  fprintf(f, "%s\n", line);
 }

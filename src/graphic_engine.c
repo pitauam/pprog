@@ -274,7 +274,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the feedback area */
   last_cmd = command_get_code(game_get_last_command(game));
-  sprintf(str, " %s (%s): %s", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS], command_get_return(game_get_last_command(game)));
+  sprintf(str, " %s (%s): %s", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS], command_to_string(command_get_return(game_get_last_command(game))));
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
