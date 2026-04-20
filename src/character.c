@@ -44,7 +44,7 @@ Character *character_create(Id id){
     new_character->friendly = TRUE; 
     new_character->message[0] = '\0';
     new_character->message[0] = '\0';
-    newCharacter->following = NO_ID;
+    new_character->following = NO_ID;
 
     return new_character;
 }
