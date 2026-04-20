@@ -94,4 +94,39 @@ void test1_character_get_id();
  */
 void test2_character_get_id();
 
+/**
+ * @test Test setting character following ID
+ * @pre Pointer to character is not NULL
+ * @post Output == NO_ID
+ */
+void test1_character_set_following();
+
+/**
+ * @test Test setting character following ID
+ * @pre Pointer to character is NULL
+ * @post Output == NO_ID
+ */
+void test2_character_set_following();
+
+/**
+ * @test Test setting character following ID
+ * @pre Pointer to character is not NULL
+ * @post Output == NO_ID
+ */
+void test3_character_set_following();
+
+/**
+ * @test Test setting character following ID
+ * @pre Pointer to character is not NULL
+ * @post Output == NO_ID
+ */
+void test1_character_get_following();
+
+/**
+ * @test Test setting character following ID
+ * @pre Pointer to character is NULL
+ * @post Output == NO_ID
+ */
+void test2_character_get_following();
+
 #endif
