@@ -460,7 +460,6 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
     strcat(str, "   ");
   }
   
-
   strcat(str, "     |   |          ");
   if (game_get_character_id(game, id_act) != NO_ID)
   {
