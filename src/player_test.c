@@ -87,23 +87,27 @@
 
 
 void test1_player_set_location() {
-    Player* p = player_create(5);
-    PRINT_TEST_RESULT(player_set_location(p, 2)==OK);
-    player_destroy(p);
-  }
+  Player* p = player_create(5);
+  PRINT_TEST_RESULT(player_set_location(p, 2)==OK);
+  player_destroy(p);
+}
 
 void test2_player_set_location() {
-    Player* p = player_create(5);
-    PRINT_TEST_RESULT(player_set_location(p, NO_ID)==ERROR);
-    player_destroy(p);
-  }
+  Player* p = player_create(5);
+  PRINT_TEST_RESULT(player_set_location(p, NO_ID)==ERROR);
+  player_destroy(p);
+}
 
 void test1_player_get_location() {
     Player* p = player_create(5);
     player_set_location(p,2);
     PRINT_TEST_RESULT(player_get_location(p)==2);
     player_destroy(p);
-  }
+}
+
+void test2_player_get_location(){
+  PRINT_TEST_RESULT(player_get_location(NULL)==NO_ID);
+}
 
 void test1_player_add_object(){
   Player *p = player_create(5);
@@ -141,7 +145,10 @@ void test2_player_find_object(){
 
 void test1_player_inventory_full(){
   Player *p = player_create(2);
-  player_add_object(p, 5);
+  int i;
+  for(i=0; i<MAX_OBJ; i++){
+    player_add_object(p, i);
+  }
   PRINT_TEST_RESULT(player_inventory_full(p)==TRUE);
   player_destroy(p);
 }

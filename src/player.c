@@ -12,7 +12,6 @@
 #include <string.h>
 
 #include "player.h"
-#include "inventory.h"
 
 /**
  * @brief Player
