@@ -8,7 +8,7 @@
 #EXE is the name the .exe will have
 EXE = castle
 #OBJS references .o files
-OBJS = obj/game.o obj/space.o obj/command.o obj/game_loop.o obj/game_reader.o obj/graphic_engine.o obj/object.o obj/player.o obj/game_actions.o obj/set.o obj/character.o obj/inventory.o obj/link.o
+OBJS = obj/game.o obj/space.o obj/command.o obj/game_loop.o obj/game_reader.o obj/graphic_engine.o obj/object.o obj/player.o obj/game_actions.o obj/set.o obj/character.o obj/inventory.o obj/link.o obj/interface_data.o
 #CFLAGS flags used for warnings and style
 CFLAGS = -Wall -ansi -pedantic -g -I./include
 #CC stands for compilation command
@@ -16,7 +16,7 @@ CC = gcc
 #CLIB are the libraries used when compiling
 CLIB = -lscreen -L./lib
 #TESTS is used when cleaning
-TESTS = spacetest settest charactertest linktest inventorytest
+TESTS = spacetest settest charactertest linktest inventorytest objecttest playertest
 
 #by default it makes the castle game executable
 all: $(EXE)
@@ -27,11 +27,11 @@ runaux:
 
 #runs all tests
 runtests: 
-	./spacetest && ./settest && ./charactertest && ./linktest && ./inventorytest
+	./spacetest && ./settest && ./charactertest && ./linktest && ./inventorytest && ./objecttest && ./playertest
 
 #makes all tests
 alltests:
-	make spacetest && make settest && make charactertest && make linktest && make inventorytest
+	make spacetest && make settest && make charactertest && make linktest && make inventorytest && make objecttest && make playertest
 
 #makes main game exe file
 $(EXE) : $(OBJS)
@@ -59,7 +59,7 @@ obj/graphic_engine.o: src/graphic_engine.c include/graphic_engine.h include/game
 obj/object.o: src/object.c include/object.h include/types.h
 	$(CC) -c $(CFLAGS) $< -o $@
     
-obj/player.o: src/player.c include/player.h include/types.h include/link.h
+obj/player.o: src/player.c include/player.h include/types.h include/link.h include/inventory.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 obj/space.o: src/space.c include/space.h include/types.h include/set.h
@@ -75,6 +75,9 @@ obj/link.o: src/link.c include/link.h include/types.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/interface_data.o: include/interface_data.c include/interface_data.h include/command.h include/types.h include/player.h include/inventory.h include/set.h
 	$(CC) -c $(CFLAGS) $< -o $@
     
 #runs Iteration 3 map and generates a log file
@@ -108,6 +111,12 @@ linktest: obj/link_test.o obj/link.o
 inventorytest: obj/inventory_test.o obj/inventory.o obj/set.o
 	$(CC) -o $@ $^
 
+objecttest: obj/object_test.o obj/object.o obj/set.o
+	$(CC) -o $@ $^
+
+playertest: obj/player_test.o obj/player.o obj/inventory.o obj/set.o
+	$(CC) -o $@ $^
+
 #makes tests .o
 obj/space_test.o: src/space_test.c include/space.h include/types.h include/set.h include/space_test.h include/test.h
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -122,6 +131,12 @@ obj/link_test.o: src/link_test.c include/link.h include/types.h include/link_tes
 	$(CC) -c $(CFLAGS) $< -o $@
 
 obj/inventory_test.o: src/inventory_test.c include/inventory.h include/types.h include/set.h include/inventory_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/object_test.o: src/object_test.c include/object.h include/types.h include/object_test.h include/test.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/player_test.o: src/player_test.c include/player_test.h include/player.h include/inventory.h include/set.h include/test.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 #runs each test
@@ -139,6 +154,12 @@ runlinktest: linktest
 
 runinventorytest: inventorytest
 	./inventorytest
+
+runobjecttest: objecttest
+	./objecttest
+
+runplayertest: playertest
+	./playertest
 
 #documentation with Doxygen
 #.phony is used to let makefile know the following instruction is a command

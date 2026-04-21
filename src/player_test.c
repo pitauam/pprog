@@ -2,9 +2,9 @@
  * @brief It tests player module
  * 
  * @file player_test.c
- * @author Paula de la Fuente
+ * @author Paula de la Fuente and Marta López
  * @version 0.0 
- * @date 24-03-2025
+ * @date 21/04/2026
  * @copyright GNU Public License
  */
 
@@ -16,7 +16,7 @@
 #include "player_test.h"
 #include "test.h"
 
-#define MAX_TESTS 45
+#define MAX_TESTS 30
 
 
 /** 
@@ -54,10 +54,10 @@
   if (all || test == 4) test2_player_set_name();
   if (all || test == 5) test1_player_get_name();
   if (all || test == 6) test2_player_get_name();
-  if (all || test == 7) test1_player_set_gdesc();
-  if (all || test == 8) test2_player_set_gdesc();
-  if (all || test == 9) test1_player_get_gdesc();
-  if (all || test == 10) test2_player_get_gdesc();
+  if (all || test == 7) test1_player_set_description();
+  if (all || test == 8) test2_player_set_description();
+  if (all || test == 9) test1_player_get_description();
+  if (all || test == 10) test2_player_get_description();
   if (all || test == 11) test1_player_set_health();
   if (all || test == 12) test2_player_set_health();
   if (all || test == 13) test1_player_get_health();
@@ -66,33 +66,18 @@
   if (all || test == 16) test2_player_get_id();
   if (all || test == 17) test1_player_set_location();
   if (all || test == 18) test2_player_set_location();
-  if (all || test == 19) test3_player_set_location();
-  if (all || test == 20) test1_player_get_location();
-  if (all || test == 21) test2_player_get_location();
-  if (all || test == 22) test1_player_add_object_to_backpack();
-  if (all || test == 23) test2_player_add_object_to_backpack();
-  if (all || test == 24) test3_player_add_object_to_backpack();
-  if (all || test == 25) test4_player_add_object_to_backpack();
-  if (all || test == 26) test5_player_add_object_to_backpack();
-  if (all || test == 27) test1_player_remove_object_of_backpack();
-  if (all || test == 28) test2_player_remove_object_of_backpack();
-  if (all || test == 29) test3_player_remove_object_of_backpack();
-  if (all || test == 30) test4_player_remove_object_of_backpack();
-  if (all || test == 31) test1_player_has_object();
-  if (all || test == 32) test2_player_has_object();
-  if (all || test == 33) test3_player_has_object();
-  if (all || test == 34) test4_player_has_object();
-  if (all || test == 35) test1_player_get_backpack();
-  if (all || test == 36) test2_player_get_backpack();
-  if (all || test == 37) test1_player_set_backpack();
-  if (all || test == 38) test2_player_set_backpack();
-  if (all || test == 39) test3_player_set_backpack();
-  if (all || test == 40) test1_player_backpack_is_full();
-  if (all || test == 41) test2_player_backpack_is_full();
-  if (all || test == 42) test3_player_backpack_is_full();
-  if (all || test == 43) test1_player_get_object_from_backpack();
-  if (all || test == 44) test2_player_get_object_from_backpack();
-  if (all || test == 45) test3_player_get_object_from_backpack();
+  if (all || test == 19) test1_player_get_location();
+  if (all || test == 20) test2_player_get_location();
+  if (all || test == 21) test1_player_add_object();
+  if (all || test == 22) test2_player_add_object();
+  if (all || test == 23) test1_player_remove_object();
+  if (all || test == 24) test2_player_remove_object();
+  if (all || test == 25) test1_player_find_object();
+  if (all || test == 26) test2_player_find_object();
+  if (all || test == 27) test1_player_inventory_full();
+  if (all || test == 28) test2_player_inventory_full();
+  if (all || test == 29) test1_player_get_object_id();
+  if (all || test == 30) test2_player_get_object_id();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -113,292 +98,155 @@ void test2_player_set_location() {
     player_destroy(p);
   }
 
-void test3_player_set_location() {
-    Player* p = NULL;
-    PRINT_TEST_RESULT(player_set_location(p, 2)==ERROR);
-  }
-
-
 void test1_player_get_location() {
-  Player* p = player_create(5);
-  player_set_location(p, 2);
-  PRINT_TEST_RESULT(player_get_location(p)==2);
-  player_destroy(p);  
-}
-
-void test2_player_get_location() {
-  Player* p = NULL;
-  PRINT_TEST_RESULT(player_get_location(p)==NO_ID);
-}
-
-void test1_player_add_object_to_backpack() {
-  Player* p = player_create(5);
-  PRINT_TEST_RESULT(player_add_object_to_backpack(p, 2)==OK);
-  player_destroy(p);
-}
-
-void test2_player_add_object_to_backpack() {
-  Player* p = NULL;
-  PRINT_TEST_RESULT(player_add_object_to_backpack(p, 2)==ERROR);
-}
-
-void test3_player_add_object_to_backpack() {
-  Player* p = player_create(5);
-  PRINT_TEST_RESULT(player_add_object_to_backpack(p, NO_ID)==ERROR);
-  player_destroy(p);
-}
-
-void test4_player_add_object_to_backpack() { /* Object repetition. */
-  Player* p = player_create(5);
-  player_add_object_to_backpack(p, 2);
-  PRINT_TEST_RESULT(player_add_object_to_backpack(p, 2)==ERROR);
-  player_destroy(p);
-}
-
-void test5_player_add_object_to_backpack() { /*Without space. */
-  Player* p = player_create(5);
-  int i;
-  for(i=0 ; i<MAX_OBJS ; i++){
-    player_add_object_to_backpack(p, i);
+    Player* p = player_create(5);
+    player_set_location(p,2);
+    PRINT_TEST_RESULT(player_get_location(p)==2);
+    player_destroy(p);
   }
-  PRINT_TEST_RESULT(player_add_object_to_backpack(p, MAX_OBJS)==ERROR);
+
+void test1_player_add_object(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_add_object(p, 2)==OK);
   player_destroy(p);
 }
 
-void test1_player_remove_object_of_backpack() {
-  Player* p = player_create(5);
-  player_add_object_to_backpack(p, 2);
-  PRINT_TEST_RESULT(player_remove_object_from_backpack(p, 2)==OK);
+void test2_player_add_object(){
+  PRINT_TEST_RESULT(player_add_object(NULL, 2)==ERROR);
+}
+
+void test1_player_remove_object(){
+  Player *p = player_create(5);
+  player_add_object(p, 2);
+  PRINT_TEST_RESULT(player_remove_object(p, 2)==OK);
   player_destroy(p);
 }
 
-void test2_player_remove_object_of_backpack() {
-  Player* p = NULL;
-  PRINT_TEST_RESULT(player_remove_object_from_backpack(p, 2)==ERROR);
+void test2_player_remove_object(){
+  PRINT_TEST_RESULT(player_remove_object(NULL, 2)==ERROR);
 }
 
-void test3_player_remove_object_of_backpack() {
-  Player* p = player_create(5);
-  PRINT_TEST_RESULT(player_remove_object_from_backpack(p, NO_ID)==ERROR);
-  player_destroy(p);
-}
-
-void test4_player_remove_object_of_backpack() { /*no that obj*/
-  Player* p = player_create(5);
-  player_add_object_to_backpack(p, 2);
-  PRINT_TEST_RESULT(player_remove_object_from_backpack(p, 1)==ERROR);
-  player_destroy(p);
-}
-
-
-
-void test1_player_has_object() {
+void test1_player_find_object(){
   Player *p = player_create(2);
-  player_add_object_to_backpack(p, 5);
-  PRINT_TEST_RESULT(player_has_object(p, 5) == TRUE);
+  player_add_object(p, 5);
+  PRINT_TEST_RESULT(player_find_object(p, 5)==OK);
   player_destroy(p);
 }
 
-void test2_player_has_object() {
+void test2_player_find_object(){
   Player *p = player_create(2);
-  PRINT_TEST_RESULT(player_has_object(p, 5) == FALSE);
+  PRINT_TEST_RESULT(player_find_object(p, 5)==ERROR);
   player_destroy(p);
 }
 
-void test3_player_has_object() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_has_object(p, 5) == FALSE);
-}
-
-void test4_player_has_object() {
+void test1_player_inventory_full(){
   Player *p = player_create(2);
-  PRINT_TEST_RESULT(player_has_object(p, NO_ID) == FALSE);
-  player_destroy(p);
-}
-
-void test1_player_get_backpack() {
-  Player *p = player_create(2);
-  PRINT_TEST_RESULT(player_get_backpack(p)!=NULL);
-  player_destroy(p);
-}
-
-
-void test2_player_get_backpack() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_backpack(p)==NULL);
-}
-
-
-void test1_player_set_backpack() {
-  Inventory* inv=NULL;
-  Player *p = player_create(2);
-  inv = inventory_create();
-  PRINT_TEST_RESULT(player_set_backpack(p, inv)==OK);
-}
-
-void test2_player_set_backpack() {
-  Inventory* inv=NULL;
-  Player *p = NULL;
-  inv = inventory_create();
-  PRINT_TEST_RESULT(player_set_backpack(p, inv)==ERROR);
-}
-
-void test3_player_set_backpack() {
-  Inventory* inv=NULL;
-  Player *p = player_create(2);
-  PRINT_TEST_RESULT(player_set_backpack(p, inv)==ERROR);
-}
-
-
-void test1_player_backpack_is_full() {
   int i;
-  Player *p = player_create(2);
-  for(i=0; i<MAX_OBJS ; i++){
-    player_add_object_to_backpack(p, i);
+  for(i=0; i<max_objects; i++){
+    player_add_object(p, i);
   }
-  PRINT_TEST_RESULT(player_backpack_is_full(p)==TRUE);
+  PRINT_TEST_RESULT(player_inventory_full(p)==TRUE);
   player_destroy(p);
-
 }
 
-void test2_player_backpack_is_full() {
+void test2_player_inventory_full(){
+  PRINT_TEST_RESULT(player_inventory_full(NULL)==FALSE);
+}
+
+void test1_player_get_object_id(){
   Player *p = player_create(2);
-  player_add_object_to_backpack(p, 5);
-  PRINT_TEST_RESULT(player_backpack_is_full(p)==FALSE);
-  player_destroy(p);
-
-}
-
-void test3_player_backpack_is_full() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_backpack_is_full(p)==TRUE);
-  player_destroy(p);
-
-}
-
-
-
-
-void test1_player_get_object_from_backpack() {
-  Player *p = player_create(2);
-  player_add_object_to_backpack(p, 5);  
-  PRINT_TEST_RESULT(player_get_object_from_backpack(p, 0)==5);
+  player_add_object(p, 5);
+  PRINT_TEST_RESULT(player_get_object_id(p, 0)==5);
   player_destroy(p);
 }
 
-void test2_player_get_object_from_backpack() {
-  Player *p = player_create(2);
-  player_add_object_to_backpack(p, 5);  
-  PRINT_TEST_RESULT(player_get_object_from_backpack(p, -1)==NO_ID);
+void test2_player_get_object_id(){
+  PRINT_TEST_RESULT(player_get_object_id(NULL, 1)==NO_ID);
+}
+
+void test1_player_set_description(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_description(p, "^P*")==OK);
   player_destroy(p);
 }
 
+void test2_player_set_description(){
+  PRINT_TEST_RESULT(player_set_description(NULL, "^M*")==ERROR);
+}
 
-void test3_player_get_object_from_backpack() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_object_from_backpack(p, 1)==NO_ID);
+void test1_player_get_description(){
+  Player *p = player_create(5);
+  player_set_description(p, "^M*");
+  PRINT_TEST_RESULT(strcmp(player_get_description(p), "^M*") == 0);
   player_destroy(p);
 }
 
+void test2_player_get_description(){
+  PRINT_TEST_RESULT(player_get_description(NULL)==NULL);
+}
 
-
-
-void test1_player_create() {
-  Player* p = player_create(5);
-  PRINT_TEST_RESULT(p != NULL);
+void test1_player_set_health(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_health(p, 10)==OK);
   player_destroy(p);
 }
 
-void test2_player_create() {
-  Player* p = player_create(NO_ID);
-  PRINT_TEST_RESULT(p == NULL);
+void test2_player_player_set_health(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_health(NULL, -5)==ERROR);
+  player_destroy(p);
 }
 
+void test1_player_get_health(){
+  Player *p = player_create(5);
+  player_player_set_health(p, 10);
+  PRINT_TEST_RESULT(player_get_health(p) == 10);
+  player_destroy(p);
+}
 
-void test1_player_set_name() {
+void test2_player_get_health(){
+  PRINT_TEST_RESULT(player_get_health(NULL)==-1);
+}
+
+test1_player_create(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(p!=NULL);
+  player_destroy(p);
+}
+
+test2_player_create(){
+  PRINT_TEST_RESULT(player_create(NO_ID)==NULL);
+}
+
+test1_player_set_name(){
   Player *p = player_create(5);
   PRINT_TEST_RESULT(player_set_name(p, "Player") == OK);
   player_destroy(p);
 }
 
-void test2_player_set_name() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_set_name(p, "Player") == ERROR);
+test2_player_set_name(){
+  PRINT_TEST_RESULT(player_set_name(NULL, "Player")==ERROR);
 }
 
-
-void test1_player_get_name() {
+test1_player_get_name(){
   Player *p = player_create(5);
   player_set_name(p, "Player");
-  PRINT_TEST_RESULT(strcmp(player_get_name(p), "Player") == 0);
+  PRINT_TEST_RESULT(strcmp(player_get_name(p), "Player")==0);
   player_destroy(p);
 }
 
-void test2_player_get_name() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_name(p) == NULL);
+test2_player_get_name(){
+  PRINT_TEST_RESULT(player_get_name(NULL)==NULL);
 }
-
-
-void test1_player_set_gdesc() {
-  Player *p = player_create(5);
-  PRINT_TEST_RESULT(player_set_gdesc(p, "^P*") == OK);
-  player_destroy(p);
-}
-
-void test2_player_set_gdesc() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_set_gdesc(p, "^M*") == ERROR);
-}
-
-
-void test1_player_get_gdesc() {
-  Player *p = player_create(5);
-  player_set_gdesc(p, "^M*");
-  PRINT_TEST_RESULT(strcmp(player_get_gdesc(p), "^M*") == 0);
-  player_destroy(p);
-}
-
-void test2_player_get_gdesc() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_gdesc(p) == NULL);
-}
-
-
-void test1_player_set_health() {
-  Player *p = player_create(5);
-  PRINT_TEST_RESULT(player_set_health(p, 10) == OK);
-  player_destroy(p);
-}
-
-void test2_player_set_health() {
-  Player *p = player_create(5);
-  PRINT_TEST_RESULT(player_set_health(p, -5) == ERROR); /* Negative life */
-  player_destroy(p);
-}
-
-
-void test1_player_get_health() {
-  Player *p = player_create(5);
-  player_set_health(p, 10);
-  PRINT_TEST_RESULT(player_get_health(p) == 10);
-  player_destroy(p);
-}
-
-void test2_player_get_health() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_health(p) == -1);
-}
-
 
 void test1_player_get_id() {
-  Player *p;
-  p = player_create(25);
+  Player *p = player_create(25);
   PRINT_TEST_RESULT(player_get_id(p) == 25);
   player_destroy(p);
+
 }
 
 void test2_player_get_id() {
-  Player *p = NULL;
-  PRINT_TEST_RESULT(player_get_id(p) == NO_ID);
+  
+  PRINT_TEST_RESULT(player_get_id(NULL) == NO_ID);
 }
