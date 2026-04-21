@@ -157,3 +157,9 @@ git push origin main
 
 Desde main, elimina la rama local:
 git branch -d ej1
+
+------------------------------ERRORES------------------------------
+
+"error: failed to push some refs"
+Tu rama no tiene upstream:
+git push --set-upstream origin nombre_rama
