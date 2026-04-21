@@ -23,7 +23,7 @@ all: $(EXE)
 
 #runs auxiliary map
 runaux:
-	./$(EXE) dat/anthill.dat
+	./$(EXE) dat/singleplayer.dat
 
 #runs all tests
 runtests: 
@@ -89,8 +89,8 @@ runv: $(EXE)
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l log.txt
 
 #runs anthill map with valgrind
-runvanthill:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/anthill.dat
+runvaux:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/singleplayer.dat
 
 #makes tests .exe
 spacetest: obj/space_test.o obj/space.o obj/set.o
