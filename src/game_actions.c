@@ -636,7 +636,7 @@ void game_actions_recruit(Game *game) {
     character_location = game_get_character_location(game, current_char_id);
     chr = game_get_character(game, current_char_id);
 
-    if (character_location == player_location && character_get_friendly(chr) == TRUE && chr != NULL) {
+    if (character_location == player_location && character_get_friendly(chr) == TRUE && chr != NULL && character_get_following(chr) == NO_ID) {
       if (strcmp(chr_name, character_get_name(chr)) == 0) {
         
         character_set_following(chr, player_get_id(game_get_player(game)));
