@@ -2,7 +2,7 @@
  * @brief Tests the character module
  *
  * @file character_test.c
- * @author Santiago Pita
+ * @author Santiago Pita and Marta López
  * @version 1
  * @date 13-04-2026
  */
@@ -15,20 +15,7 @@
 
 #include "character_test.h"
 
-#define MAX_TESTS 12
-
-void test1_character_create();
-void test2_character_create();
-void test1_character_set_name();
-void test2_character_set_name();
-void test1_character_get_name();
-void test2_character_get_name();
-void test1_character_set_health();
-void test2_character_set_health();
-void test1_character_get_health();
-void test2_character_get_health();
-void test1_character_get_id();
-void test2_character_get_id();
+#define MAX_TESTS 29
 
 int main(int argc, char** argv) {
   int test = 0, all = 1;
@@ -57,6 +44,19 @@ int main(int argc, char** argv) {
   if (all || test == 15) test3_character_set_following();
   if (all || test == 16) test1_character_get_following();
   if (all || test == 17) test2_character_get_following();
+  if (all || test == 18) test1_character_set_friendly();
+  if (all || test == 19) test2_character_set_friendly();
+  if (all || test == 20) test1_character_get_friendly();
+  if (all || test == 21) test2_character_get_friendly();
+  if (all || test == 22) test1_character_set_message();
+  if (all || test == 23) test2_character_set_message();
+  if (all || test == 24) test1_character_get_message();
+  if (all || test == 25) test2_character_get_message();
+  if (all || test == 26) test1_character_set_description();
+  if (all || test == 27) test2_character_set_description();
+  if (all || test == 28) test1_character_get_description();
+  if (all || test == 29) test2_character_get_description();
+
 
   PRINT_PASSED_PERCENTAGE;
   return 0;
@@ -151,4 +151,67 @@ void test1_character_get_following() {
 void test2_character_get_following() {
     Character *c = NULL;
     PRINT_TEST_RESULT(character_get_following(c) == NO_ID);
+}
+
+void test1_character_set_friendly() {
+  Character *c = character_create(5);
+  PRINT_TEST_RESULT(character_set_friendly(c, TRUE) == OK);
+  character_destroy(c);
+}
+void test2_character_set_friendly() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_set_friendly(c, TRUE) == ERROR);
+}
+
+void test1_character_get_friendly() {
+  Character *c = character_create(5);
+  character_set_friendly(c, TRUE);
+  PRINT_TEST_RESULT(character_get_friendly(c) == TRUE);
+  character_destroy(c);
+}
+void test2_character_get_friendly() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_get_friendly(c) == FALSE);
+}
+
+void test1_character_set_message() {
+  Character *c = character_create(5);
+  PRINT_TEST_RESULT(character_set_message(c, "Hola") == OK);
+  character_destroy(c);
+}
+void test2_character_set_message() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_set_message(c, "Hola") == ERROR);
+}
+
+void test1_character_get_message() {
+  Character *c = character_create(5);
+  character_set_message(c, "Hola");
+  PRINT_TEST_RESULT(strcmp(character_get_message(c), "Hola") == 0);
+  character_destroy(c);
+}
+void test2_character_get_message() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_get_message(c) == NULL);
+}
+
+void test1_character_set_description() {
+  Character *c = character_create(5);
+  PRINT_TEST_RESULT(character_set_description(c, "^M*") == OK);
+  character_destroy(c);
+}
+void test2_character_set_description() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_set_description(c, "^M*") == ERROR);
+}
+
+void test1_character_get_description() {
+  Character *c = character_create(5);
+  character_set_description(c, "^M*");
+  PRINT_TEST_RESULT(strcmp(character_get_description(c), "^M*") == 0);
+  character_destroy(c);
+}
+void test2_character_get_description() {
+  Character *c = NULL;
+  PRINT_TEST_RESULT(character_get_description(c) == NULL);
 }
