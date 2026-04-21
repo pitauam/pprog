@@ -442,7 +442,7 @@ void game_actions_attack(Game *game){
   n_followers = game_actions_get_n_followers(game, player);
   if (n_followers == -1)
   {
-
+    command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
