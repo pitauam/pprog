@@ -141,10 +141,7 @@ void test2_player_find_object(){
 
 void test1_player_inventory_full(){
   Player *p = player_create(2);
-  int i;
-  for(i=0; i<max_objects; i++){
-    player_add_object(p, i);
-  }
+  player_add_object(p, 5);
   PRINT_TEST_RESULT(player_inventory_full(p)==TRUE);
   player_destroy(p);
 }
@@ -199,7 +196,7 @@ void test2_player_player_set_health(){
 
 void test1_player_get_health(){
   Player *p = player_create(5);
-  player_player_set_health(p, 10);
+  player_set_health(p, 10);
   PRINT_TEST_RESULT(player_get_health(p) == 10);
   player_destroy(p);
 }
@@ -208,34 +205,34 @@ void test2_player_get_health(){
   PRINT_TEST_RESULT(player_get_health(NULL)==-1);
 }
 
-test1_player_create(){
+void test1_player_create(){
   Player *p = player_create(5);
   PRINT_TEST_RESULT(p!=NULL);
   player_destroy(p);
 }
 
-test2_player_create(){
+void test2_player_create(){
   PRINT_TEST_RESULT(player_create(NO_ID)==NULL);
 }
 
-test1_player_set_name(){
+void test1_player_set_name(){
   Player *p = player_create(5);
   PRINT_TEST_RESULT(player_set_name(p, "Player") == OK);
   player_destroy(p);
 }
 
-test2_player_set_name(){
+void test2_player_set_name(){
   PRINT_TEST_RESULT(player_set_name(NULL, "Player")==ERROR);
 }
 
-test1_player_get_name(){
+void test1_player_get_name(){
   Player *p = player_create(5);
   player_set_name(p, "Player");
   PRINT_TEST_RESULT(strcmp(player_get_name(p), "Player")==0);
   player_destroy(p);
 }
 
-test2_player_get_name(){
+void test2_player_get_name(){
   PRINT_TEST_RESULT(player_get_name(NULL)==NULL);
 }
 
