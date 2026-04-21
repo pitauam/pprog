@@ -244,16 +244,6 @@ Id game_get_object_id(Game *game, int pos);
 const char* game_get_object_name(Game *game, Object *object);
 
 /**
- * @brief returns the id of a character in the given space
- * @author Santiago Pita
- *
- * @param game pointer to game
- * @param id id of the space where the character is
- * @return the id of the character in said space or NO_ID if there is no character
- */
-Id game_get_character_id(Game *game, Id id);
-
-/**
  * @brief Gets the id of the space where the character is located
  * @author Mario Rodriguez
  *
@@ -262,6 +252,26 @@ Id game_get_character_id(Game *game, Id id);
  * @return the id of the space where the character is located
 */
 Id game_get_character_location(Game *game, Id id);
+
+/**
+ * @brief Gets the id of one character located at a given space
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param space_id id of the space
+ * @return the id of a character in that space or NO_ID if there is none
+ */
+Id game_get_character_id(Game *game, Id space_id);
+
+/**
+ * @brief Gets the id of one character located at a given position in the array
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @param position id of the space
+ * @return the id of a character in that space or NO_ID if there is none
+ */
+Id game_get_character_id_at(Game *game, int position);
 
 /**
  * @brief Gets the pointer to a character
@@ -398,16 +408,6 @@ int game_get_turn(Game *game);
 Status game_next_turn(Game *game);
 
 /**
- * @brief It gets the character id from a certain position in the array
- * @author Samuel Manzorro
- * 
- * @param game a pointer to the game
- * @param position the position in the array
- * @return the character id from the wanted position
- */
-Id game_get_character_id_at(Game *game, int position);
-
-/**
  * @brief gets the number of followers a player has
  * @author Santiago Pita
  * 
@@ -417,4 +417,16 @@ Id game_get_character_id_at(Game *game, int position);
  * @return returns number of followers
  */
 int game_get_n_followers(Game *game, Player *player);
+
+/**
+ * @brief gets the name of a given character
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * @param chr a pointer to the character
+ * 
+ * @return the name of a given character
+ */
+const char *game_get_character_name(Game *game, Character *chr); 
+
 #endif

@@ -132,6 +132,16 @@ void game_actions_recruit(Game *game);
  */
 void game_actions_abandon(Game *game);
 
+/**
+ * @brief Gets the id of the first enemy character at a given space
+ * @author Santiago Pita
+ *
+ * @param game a pointer to the game
+ * @param space_id id of the space to inspect
+ * @return enemy character id, or NO_ID if there is none
+ */
+Id game_actions_get_enemy_character_at(Game *game, Id space_id);
+
 /*
    Game actions implementation
 */
@@ -374,7 +384,7 @@ void game_actions_drop(Game *game){
 
 void game_actions_attack(Game *game){
   Id player_location; 
-  Id character_at_player_location;
+  Id enemy_character_at_player_location;
   Character *enemy = NULL; 
   Character *char_aux = NULL;
   Player *player = NULL;
@@ -382,41 +392,41 @@ void game_actions_attack(Game *game){
   int enemy_health;
   int player_health;
   int random_number;
-
+  
   int random_character; /*chooses a number betwen -1 and n_following_characters to decide who gets the damage*/
   int n_followers;
 
-  if (!game) {{
+  if (!game) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
-  if (player_location == NO_ID) {{
+  if (player_location == NO_ID) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
-  /*gets the id of the character located at the same space as the player*/
-  character_at_player_location = game_get_character_id(game, player_location);
-  if (character_at_player_location == NO_ID) {{
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
-  }}
+  }
 
-  enemy = game_get_character(game, character_at_player_location);
-  if (enemy == NULL) {{
+  /*gets the id of the enemy character located at the same space as the player*/
+  enemy_character_at_player_location = game_actions_get_enemy_character_at(game, player_location);
+  if (enemy_character_at_player_location == NO_ID) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
+
+  enemy = game_get_character(game, enemy_character_at_player_location);
+  if (enemy == NULL) {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   /*if character is friendly, return*/
-  if (character_get_friendly(enemy) == TRUE) {{
+  if (character_get_friendly(enemy) == TRUE) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
-  character_print(enemy);
   player = game_get_player(game);
 
   enemy_health = character_get_health(enemy);
@@ -438,32 +448,51 @@ void game_actions_attack(Game *game){
   /*generates a random number between 0 and 9*/
   random_number = (rand() % 10);
 
-  /*random number between and n_followers-1*/
+  /*random number between -1 and n_followers-1*/
   random_character = ((rand() % (n_followers+1)) - 1);
 
-  /*if the player loses*/
-  if (random_number < 5)
-  {
-    if (random_character == -1)
-    {
-      player_set_health(player, (player_health -1));
-    }
-    else
-    {
-      char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
-      character_set_health(char_aux, (character_get_health(char_aux) - 1));
-    }  
-  }
+  
   /*if the player wins*/
-  else 
+  if (random_number >= 5)
   {
     character_set_health(enemy, (enemy_health - (1 + n_followers)));
   } 
+  /*if the player looses*/
+  else
+  {
+    /*if player has no followers*/
+    if (n_followers == 0)
+    {
+      /*player gets hit*/
+      player_set_health(player, (player_health -1));
+    }
+    /*if it's the players turn to get hit*/
+    else if (random_character == -1)
+    {
+      /*player gets hit*/
+      player_set_health(player, (player_health -1));
+    }
+    /*characters following the player get hit, depending if they are followers or not*/
+    else
+    {
+      char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
+      /*while the character is not following the player the die keeps rolling*/
+      while (character_get_following(char_aux) != player_get_id(player))
+      {
+        /*new random number until a character that follows the player is found*/
+        random_character = ((rand() % (n_followers+1)) - 1);
+        char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
+      }
+      /*if the while loop ended its because a character who follows the player was found*/
+      character_set_health(char_aux, (character_get_health(char_aux) - 1));
+    }  
+  }
 
+  /*checks if character is dead or player is dead (this should be move to another place, not inside game_actions)*/
   if (character_get_health(enemy) <= 0)
   {
     /*enemy character dies*/
-    space_set_character(game_get_space(game, player_location), NO_ID);  
+    space_remove_character(game_get_space(game, player_location), enemy_character_at_player_location);
   }
 
   if (player_get_health(game_get_player(game)) <= 0)
@@ -472,7 +501,7 @@ void game_actions_attack(Game *game){
     game_set_finished(game, TRUE); /*if player dies, game ends*/
   }
 
-  if (character_get_health(char_aux) <= 0)
+  if (char_aux != NULL && character_get_health(char_aux) <= 0)
   {
     /*follower character dies*/
     /*
@@ -480,6 +509,7 @@ void game_actions_attack(Game *game){
     space_set_character(game_get_space(game, player_location), NO_ID);  
     */
   }
+  /*all above must be moved*/
 
   command_set_return(game_get_last_command(game), OK);
   return;
@@ -711,4 +741,28 @@ void game_actions_abandon(Game *game) {
 
   command_set_return(game_get_last_command(game), ERROR);
   return;
+}
+
+Id game_actions_get_enemy_character_at(Game *game, Id space_id){
+  int i;
+  Character *chr = NULL;
+  Id current_char_id = NO_ID;
+
+  if (!game || space_id == NO_ID){
+    return NO_ID;
+  }
+
+  /* searches the character list and returns the first enemy foundin that space. */
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    current_char_id = game_get_character_id_at(game, i);
+    chr = game_get_character(game, current_char_id);
+
+    if (chr != NULL && game_get_character_location(game, current_char_id) == space_id && character_get_friendly(chr) == FALSE)
+    {
+      return current_char_id;
+    }
+  }
+
+  return NO_ID;
 }

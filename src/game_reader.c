@@ -354,7 +354,7 @@ Status game_reader_load_characters(Game *game, char *filename){
       if (character != NULL) {
         character_set_name(character, name);
         character_set_description(character, gdesc_str);
-        space_set_character(game_get_space(game, space_id), id);
+        space_add_character(game_get_space(game, space_id), id);
         character_set_health(character, health_points);
         if (friendly == 1)
         {

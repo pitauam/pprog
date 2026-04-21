@@ -389,18 +389,11 @@ Id game_get_object_id(Game *game, int pos)
   return object_get_id(game->object[pos]);
 }
 
-const char * game_get_object_name(Game *game, Object *object) 
+const char *game_get_object_name(Game *game, Object *object) 
 {
   if (!game || !object) {return NULL;}
 
   return object_get_name(object);
-}
-
-Id game_get_character_id(Game *game, Id id)
-{
-  if (!game || id == NO_ID) {return NO_ID;}
- 
-  return space_get_character(game_get_space(game, id)); 
 }
 
 Character *game_get_character(Game *game, Id id)
@@ -421,6 +414,13 @@ Character *game_get_character(Game *game, Id id)
   return NULL;
 }
 
+const char *game_get_character_name(Game *game, Character *chr) 
+{
+  if (!game || !chr) {return NULL;}
+
+  return character_get_name(chr);
+}
+
 int game_get_number_of_characters(Game *game)
 {
   if (!game) {return -1;}
@@ -434,29 +434,43 @@ int game_get_number_of_spaces(Game *game){
   return game->n_spaces;
 }
 
-/*FALTA COMENTAR vvv */
-
 int game_get_number_of_links(Game *game){
   if (!game) {return -1;}
 
   return game->n_links;
 }
 
-
 Id game_get_character_location(Game *game, Id id){
   int i;
-
   if (!game || id == NO_ID) {return NO_ID;}
   
   for (i = 0; i < game->n_spaces; i++)
   {
-    if (space_get_character(game->spaces[i]) == id)
+    if (space_find_character(game->spaces[i], id) == TRUE)
     {
       return game_get_space_id_at(game, i);
     }
   }
-  
+
   return NO_ID; 
+}
+
+Id game_get_character_id(Game *game, Id space_id) {
+  int i;
+  Id current_char_id = NO_ID;
+
+  if (!game || space_id == NO_ID) {
+    return NO_ID;
+  }
+
+  for (i = 0; i < game->n_characters; i++) {
+    current_char_id = character_get_id(game->characters[i]);
+    if (game_get_character_location(game, current_char_id) == space_id) {
+      return current_char_id;
+    }
+  }
+
+  return NO_ID;
 }
 
 Status game_set_message(Game *game, const char* message){
