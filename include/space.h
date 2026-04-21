@@ -63,83 +63,6 @@ Status space_set_name(Space* space, char* name);
 const char* space_get_name(Space* space);
 
 /**
- * @brief It sets the id of the space located at the north
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @param id the id number of the space located at the north
- * @return OK, if everything goes well or ERROR if there was some mistake
- */
-
-Status space_set_north(Space* space, Id id);
-
-/**
- * @brief It gets the id of the space located at the north
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @return the id number of the space located at the north
- */
-Id space_get_north(Space* space);
-
-/**
- * @brief It sets the id of the space located at the south
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @param id the id number of the space located at the south
- * @return OK, if everything goes well or ERROR if there was some mistake
- */
-Status space_set_south(Space* space, Id id);
-
-/**
- * @brief It gets the id of the space located at the south
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @return the id number of the space located at the south
- */
-Id space_get_south(Space* space);
-
-/**
- * @brief It sets the id of the space located at the east
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @param id the id number of the space located at the east
- * @return OK, if everything goes well or ERROR if there was some mistake
- */
-Status space_set_east(Space* space, Id id);
-
-/**
- * @brief It gets the id of the space located at the east
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @return the id number of the space located at the east
- */
-Id space_get_east(Space* space);
-
-/**
- * @brief It sets the id of the space located at the west
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @param id the id number of the space located at the west
- * @return OK, if everything goes well or ERROR if there was some mistake
- */
-Status space_set_west(Space* space, Id id);
-
-/**
- * @brief It gets the id of the space located at the west
- * @author Profesores PPROG
- *
- * @param space a pointer to the space
- * @return the id number of the space located at the west
- */
-Id space_get_west(Space* space);
-
-/**
  * @brief It adds a object to the space
  * @author Mario Rodriguez
  *
@@ -148,6 +71,17 @@ Id space_get_west(Space* space);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_add_object(Space* space, Id id);
+
+/**
+ * @brief It adds a character to the space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param id an Id, specifying if in the space there is a character (Id) or not (NO_ID)
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_add_character(Space* space, Id id);
+
 /**
  * @brief It removes an object from the space
  * @author Mario Rodriguez
@@ -157,15 +91,16 @@ Status space_add_object(Space* space, Id id);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_remove_object(Space* space, Id id);
-/*
- * @brief It gets whether the space has an object or not
- * @author Profesores PPROG
+
+/**
+ * @brief It removes a character from the space
+ * @author Santiago Pita
  *
  * @param space a pointer to the space
- * @return True if there is an object, False if there is no object
- 
-Bool space_get_object(Space* space);
-*/
+ * @param id Id of the character that will be deleted
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_remove_character(Space* space, Id id);
 
 /**
  * @brief It finds the id of an object in a space
@@ -178,23 +113,14 @@ Bool space_get_object(Space* space);
 Bool space_find_object(Space* space, Id id);
 
 /**
- * @brief It gets the id of the character in the given space
+ * @brief It finds the id of a character in a space
  * @author Santiago Pita
  *
  * @param space a pointer to the space
- * @return the id number of the character in the given space
+ * @param id id of the character to find
+ * @return True if it finds the character, otherwise False
  */
-Id space_get_character(Space* space);
-
-/**
- * @brief It sets the id of the character in the given space
- * @author Santiago Pita
- *
- * @param space a pointer to the space
- * @param id the id number of the character in said space
- * @return OK, if everything goes well or ERROR if there was some mistake
- */
-Status space_set_character(Space* space, Id id);
+Bool space_find_character(Space* space, Id id);
 
 /**
  * @brief It gets the number of the objects of the space
@@ -204,6 +130,15 @@ Status space_set_character(Space* space, Id id);
  * @return an int with the number of objects in the space
  */
 int space_get_n_objects(Space* space);
+
+/**
+ * @brief It gets the number of the characters of the space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @return an int with the number of characters in the space
+ */
+int space_get_n_characters(Space* space);
 
 /**
  * @brief It prints the space information
