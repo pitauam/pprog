@@ -192,11 +192,17 @@ Status character_print(Character *character){
         fprintf(stdout, "- Message: %s\n", character->message);
     }
    /* 3. Prints if the character is friendly */
-  if (character_get_friendly(character)) {
-    fprintf(stdout, "- Character is friendly\n");
-  } else {
-    fprintf(stdout, "- Character is not friendly\n");
-  }
+    if (character_get_friendly(character)) {
+        fprintf(stdout, "- Character is friendly\n");
+    } else {
+        fprintf(stdout, "- Character is not friendly\n");
+    }
+
+    if (character_get_following(character)) {
+        fprintf(stdout, "- Character is following %ld\n", character->following);
+    } else {
+        fprintf(stdout, "- Character is not following anyone\n");
+    }
 
   return OK;
 }
