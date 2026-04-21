@@ -132,17 +132,6 @@ void game_actions_recruit(Game *game);
  */
 void game_actions_abandon(Game *game);
 
-/**
- * @brief gets the number of followers a player has
- * @author Santiago Pita
- * 
- * @param game a pointer to the game
- * @param player a pointer to the player
- * 
- * @return returns number of followers
- */
-int game_actions_get_n_followers(Game *game, Player *player);
-
 /*
    Game actions implementation
 */
@@ -439,7 +428,7 @@ void game_actions_attack(Game *game){
     return;
   }
 
-  n_followers = game_actions_get_n_followers(game, player);
+  n_followers = game_get_n_followers(game, player);
   if (n_followers == -1)
   {
     command_set_return(game_get_last_command(game), ERROR);
@@ -722,27 +711,4 @@ void game_actions_abandon(Game *game) {
 
   command_set_return(game_get_last_command(game), ERROR);
   return;
-}
-
-int game_actions_get_n_followers(Game *game, Player *player){
-  int n_followers;
-  Character *char_aux = NULL;
-  int i;
-
-  if (!game || !player){
-    return -1;
-  }
-
-  n_followers = 0;
-  for (i = 0; i < game_get_number_of_characters(game); i++)
-  {
-    char_aux = game_get_character(game, game_get_character_id_at(game, i));
-    /*if the character is following the current player*/
-    if (character_get_following(char_aux) == player_get_id(player))
-    {
-      n_followers++;
-    }
-  }
-
-  return n_followers;
 }

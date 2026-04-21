@@ -572,3 +572,26 @@ Id game_get_character_id_at(Game *game, int position) {
 
   return character_get_id(game->characters[position]);
 }
+
+int game_get_n_followers(Game *game, Player *player){
+  int n_followers;
+  Character *char_aux = NULL;
+  int i;
+
+  if (!game || !player){
+    return -1;
+  }
+
+  n_followers = 0;
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    char_aux = game_get_character(game, game_get_character_id_at(game, i));
+    /*if the character is following the current player*/
+    if (character_get_following(char_aux) == player_get_id(player))
+    {
+      n_followers++;
+    }
+  }
+
+  return n_followers;
+}

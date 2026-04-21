@@ -407,4 +407,14 @@ Status game_next_turn(Game *game);
  */
 Id game_get_character_id_at(Game *game, int position);
 
+/**
+ * @brief gets the number of followers a player has
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * @param player a pointer to the player
+ * 
+ * @return returns number of followers
+ */
+int game_get_n_followers(Game *game, Player *player);
 #endif
