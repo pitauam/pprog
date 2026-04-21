@@ -132,6 +132,17 @@ void game_actions_recruit(Game *game);
  */
 void game_actions_abandon(Game *game);
 
+/**
+ * @brief gets the number of followers a player has
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * @param player a pointer to the player
+ * 
+ * @return returns number of followers
+ */
+int game_actions_get_n_followers(Game *game, Player *player);
+
 /*
    Game actions implementation
 */
@@ -375,12 +386,16 @@ void game_actions_drop(Game *game){
 void game_actions_attack(Game *game){
   Id player_location; 
   Id character_at_player_location;
-  Character *character = NULL; 
+  Character *enemy = NULL; 
+  Character *char_aux = NULL;
   Player *player = NULL;
 
-  int character_health;
+  int enemy_health;
   int player_health;
   int random_number;
+
+  int random_character; /*chooses a number betwen -1 and n_following_characters to decide who gets the damage*/
+  int n_followers;
 
   if (!game) {{
     command_set_return(game_get_last_command(game), ERROR);
@@ -400,57 +415,81 @@ void game_actions_attack(Game *game){
     return;
   }}
 
-  character = game_get_character(game, character_at_player_location);
-  if (character == NULL) {{
+  enemy = game_get_character(game, character_at_player_location);
+  if (enemy == NULL) {{
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }}
 
   /*if character is friendly, return*/
-  if (character_get_friendly(character) == TRUE) {{
+  if (character_get_friendly(enemy) == TRUE) {{
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }}
 
-  character_print(character);
+  character_print(enemy);
   player = game_get_player(game);
 
-  character_health = character_get_health(character);
+  enemy_health = character_get_health(enemy);
   player_health = player_get_health(player);
   
   /*if character or player is dead, return*/
-  if (character_health <= 0 || player_health <= 0) {{
+  if (enemy_health <= 0 || player_health <= 0) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
+
+  n_followers = game_actions_get_n_followers(game, player);
+  if (n_followers == -1)
+  {
+
+    return;
+  }
 
   /*generates a random number between 0 and 9*/
   random_number = (rand() % 10);
-  printf("%d", random_number);
+
+  /*random number between and n_followers-1*/
+  random_character = ((rand() % (n_followers+1)) - 1);
 
   /*if the player loses*/
   if (random_number < 5)
   {
-    player_set_health(player, player_health -1);
+    if (random_character == -1)
+    {
+      player_set_health(player, (player_health -1));
+    }
+    else
+    {
+      char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
+      character_set_health(char_aux, (character_get_health(char_aux) - 1));
+    }  
   }
+  /*if the player wins*/
   else 
   {
-    character_set_health(character, character_health - 1);
+    character_set_health(enemy, (enemy_health - (1 + n_followers)));
+  } 
+
+  if (character_get_health(enemy) <= 0)
+  {
+    /*enemy character dies*/
+    space_set_character(game_get_space(game, player_location), NO_ID);  
   }
 
-  if (character_get_health(character) <= 0)
-  {
-    /*character dies*/
-    space_set_character(game_get_space(game, player_location), NO_ID);  
-    command_set_return(game_get_last_command(game), OK);
-    return;
-  }
   if (player_get_health(game_get_player(game)) <= 0)
   {
     /*player dies*/
     game_set_finished(game, TRUE); /*if player dies, game ends*/
-    command_set_return(game_get_last_command(game), OK);
-    return;
+  }
+
+  if (character_get_health(char_aux) <= 0)
+  {
+    /*follower character dies*/
+    /*
+    NOTE: this must be added when spaces can have more than one character
+    space_set_character(game_get_space(game, player_location), NO_ID);  
+    */
   }
 
   command_set_return(game_get_last_command(game), OK);
@@ -683,4 +722,27 @@ void game_actions_abandon(Game *game) {
 
   command_set_return(game_get_last_command(game), ERROR);
   return;
+}
+
+int game_actions_get_n_followers(Game *game, Player *player){
+  int n_followers;
+  Character *char_aux = NULL;
+  int i;
+
+  if (!game || !player){
+    return -1;
+  }
+
+  n_followers = 0;
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    char_aux = game_get_character(game, game_get_character_id_at(game, i));
+    /*if the character is following the current player*/
+    if (character_get_following(char_aux) == player_get_id(player))
+    {
+      n_followers++;
+    }
+  }
+
+  return n_followers;
 }
