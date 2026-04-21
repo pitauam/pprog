@@ -1,7 +1,7 @@
  # @brief Makefile for the Castle game
  #
  # @file Makefile
- # @author Santiago Pita and Mario Rodriguez
+ # @author Santiago Pita, Mario Rodriguez, Paula de la Fuente
  # @version 6
  # @date 11-04-2026
 
