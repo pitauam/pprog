@@ -385,13 +385,17 @@ void game_actions_drop(Game *game){
 void game_actions_attack(Game *game){
   Id player_location; 
   Id enemy_character_at_player_location;
+  Id follower_ids[MAX_CHARACTERS];
+  Id current_char_id;
   Character *enemy = NULL; 
   Character *char_aux = NULL;
+  Character *current_char = NULL;
   Player *player = NULL;
 
   int enemy_health;
   int player_health;
   int random_number;
+  int i;
   
   int random_character; /*chooses a number betwen -1 and n_following_characters to decide who gets the damage*/
   int n_followers;
@@ -432,17 +436,23 @@ void game_actions_attack(Game *game){
   enemy_health = character_get_health(enemy);
   player_health = player_get_health(player);
   
-  /*if character or player is dead, return*/
+  /*if character is dead or player is dead, return*/
   if (enemy_health <= 0 || player_health <= 0) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
-  n_followers = game_get_n_followers(game, player);
-  if (n_followers == -1)
+  n_followers = 0;
+  for (i = 0; i < game_get_number_of_characters(game); i++)
   {
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
+    current_char_id = game_get_character_id_at(game, i);
+    current_char = game_get_character(game, current_char_id);
+
+    if (current_char != NULL && character_get_following(current_char) == player_get_id(player) && character_get_health(current_char) > 0 && game_get_character_location(game, current_char_id) == player_location)
+    {
+      follower_ids[n_followers] = current_char_id;
+      n_followers++;
+    }
   }
 
   /*generates a random number between 0 and 9*/
@@ -475,15 +485,7 @@ void game_actions_attack(Game *game){
     /*characters following the player get hit, depending if they are followers or not*/
     else
     {
-      char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
-      /*while the character is not following the player the die keeps rolling*/
-      while (character_get_following(char_aux) != player_get_id(player))
-      {
-        /*new random number until a character that follows the player is found*/
-        random_character = ((rand() % (n_followers+1)) - 1);
-        char_aux = game_get_character(game, game_get_character_id_at(game, random_character));
-      }
-      /*if the while loop ended its because a character who follows the player was found*/
+      char_aux = game_get_character(game, follower_ids[random_character]);
       character_set_health(char_aux, (character_get_health(char_aux) - 1));
     }  
   }
@@ -508,6 +510,7 @@ void game_actions_attack(Game *game){
     NOTE: this must be added when spaces can have more than one character
     space_set_character(game_get_space(game, player_location), NO_ID);  
     */
+    space_remove_character(game_get_space(game, player_location), character_get_id(char_aux));
   }
   /*all above must be moved*/
 
