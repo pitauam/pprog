@@ -49,7 +49,7 @@ nota: el juego funciona por turnos y por defecto hay 2 jugadores
 
 
 
-----------------------------INSTRUCCIONES PARA USAR GIT:----------------------------
+----------------------------INSTRUCCIONES PARA DESCARGAR EL REPOSITORIO:----------------------------
 
 A) Acabo de llegar a clase (PC reseteado)
 El PC de clase no tiene nada. Tu misión es traer el código de la nube.
@@ -88,12 +88,10 @@ COMANDOS:
 
 ------------------------------INICIO------------------------------
 
-git clone https://github.com/pitauam/pprog
-
+git clone https://github.com/pitauam/pprog  
 cd pprog
 
 git config user.name "tu_nombre_de_github"
-
 git config user.email "tu_email@estudiante.uam.es"
 
 code .
@@ -101,23 +99,61 @@ code .
 ------------------------------GUARDAR CAMBIOS------------------------------
 
 git status
-
-git add (. si quieres subir todo o archivo.c si quieres subir solo alguno)
-
-git commit -m "escribe los cambios que has hecho aqui"
-
+git add .   (o archivo.c si quieres subir solo uno)
+git commit -m "describe tus cambios"
 git pull origin main
-
 git push origin main
 
 ------------------------------MERGE CONFLICTS------------------------------
 
-si al subir codigo sale un error amarillo (merge conflict), hay que escribir:
+Si aparece un error amarillo (merge conflict):
 
 git config --global pull.rebase false
-
 git pull
 
-revisar los cambios que se han hecho (los archivos con la M grande) y quedarse con los cambios que quieres subir
+Revisa los archivos marcados con M, elige qué cambios conservar y guarda.
+(ctrl+x para salir del editor si aparece)
 
-ctrl+x
+------------------------------RAMAS------------------------------
+
+Ver ramas:
+git branch -a
+
+Cambiar de rama:
+git switch nombre_rama
+
+Crear rama nueva:
+git switch -c nombre_rama
+
+Subir rama nueva:
+git push --set-upstream origin nombre_rama
+
+Traer cambios de main a tu rama (sin fusionar):  
+git fetch origin
+git rebase origin/main
+
+(Si hay conflictos, arréglalos y continúa con: git rebase --continue)
+
+------------------------------JUNTAR RAMA SECUNDARIA CON MAIN------------------------------
+
+---Paso 1: Guarda tus cambios en tu rama
+git add game.c game_actions.c
+git commit -m "Fix: errores corregidos e integración It3"
+
+---Paso 2: Cambia a main
+git switch main
+
+---Paso 3: Actualiza main
+git pull origin main
+
+---Paso 4: Fusiona
+git merge ej1
+(Si aparece un editor, ctrl+x y Enter)
+
+---Paso 5: Sube la fusión
+git push origin main
+
+------------------------------DESTRUIR RAMA------------------------------
+
+Desde main, elimina la rama local:
+git branch -d ej1
