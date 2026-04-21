@@ -1,6 +1,6 @@
 /** @brief It declares the tests for the character module
  * @file character_test.h
- * @author Santiago Pita
+ * @author Santiago Pita and Marta López
  * @version 1
  * @date 2026
  */
@@ -128,5 +128,89 @@ void test1_character_get_following();
  * @post Output == NO_ID
  */
 void test2_character_get_following();
+
+/**
+ * @test Test function for character_friendly setting
+ * @pre Valid pointer to character
+ * @post Output == OK
+ */
+void test1_character_set_friendly();
+
+/**
+ * @test Test function for character_friendly setting
+ * @pre Pointer to character = NULL
+ * @post Output == ERROR
+ */
+void test2_character_set_friendly();
+
+/**
+ * @test Test function for checking if character is friendly
+ * @pre Valid pointer to character set as friendly
+ * @post Output == TRUE
+ */
+void test1_character_get_friendly();
+
+/**
+ * @test Test function for checking if character is friendly
+ * @pre Pointer to character = NULL
+ * @post Output == FALSE
+ */
+void test2_character_get_friendly();
+
+/**
+ * @test Test function for character_message setting
+ * @pre Valid pointer to character and valid string
+ * @post Output == OK
+ */
+void test1_character_set_message();
+
+/**
+ * @test Test function for character_message setting
+ * @pre Pointer to character = NULL
+ * @post Output == ERROR
+ */
+void test2_character_set_message();
+
+/**
+ * @test Test function for character_message getting
+ * @pre Valid pointer to character with a message set
+ * @post Output == 0 (strcmp matches the string)
+ */
+void test1_character_get_message();
+
+/**
+ * @test Test function for character_message getting
+ * @pre Pointer to character = NULL
+ * @post Output == NULL
+ */
+void test2_character_get_message();
+
+/**
+ * @test Test function for character_description setting
+ * @pre Valid pointer to character and valid string
+ * @post Output == OK
+ */
+void test1_character_set_description();
+
+/**
+ * @test Test function for character_description setting
+ * @pre Pointer to character = NULL
+ * @post Output == ERROR
+ */
+void test2_character_set_description();
+
+/**
+ * @test Test function for character_description getting
+ * @pre Valid pointer to character with a description set
+ * @post Output == 0 (strcmp matches the string)
+ */
+void test1_character_get_description();
+
+/**
+ * @test Test function for character_description getting
+ * @pre Pointer to character = NULL
+ * @post Output == NULL
+ */
+void test2_character_get_description();
 
 #endif

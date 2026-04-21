@@ -1,7 +1,7 @@
 /**
  * @brief It declares the tests for the space module
  * @file player_test.h
- * @author Paula de la Fuente
+ * @author Paula de la Fuente and Marta López
  * @version 0.0 
  * @date 11-04-2026
  * @copyright GNU Public License

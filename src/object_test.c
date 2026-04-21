@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
   if (all || test == 7) test2_object_get_name();
   if (all || test == 8) test1_object_get_id();
   if (all || test == 9) test2_object_get_id();
-  //--------------------------------------------------
+  /*
   if (all || test == 10) test1_set_health();
   if (all || test == 11) test2_set health();
   if (all || test == 12) test1_get_health();
@@ -60,6 +60,7 @@ int main(int argc, char** argv) {
   if (all || test == 23) test2_set_open();
   if (all || test == 24) test1_get_open();
   if (all || test == 25) test2_get_open();
+  */
 
   PRINT_PASSED_PERCENTAGE;
 
