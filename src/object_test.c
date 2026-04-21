@@ -56,11 +56,12 @@ int main(int argc, char** argv) {
   if (all || test == 19) test2_set_dependency();
   if (all || test == 20) test1_get_dependency();
   if (all || test == 21) test2_get_dependency();
-  if (all || test == 22) test1_set_open();
-  if (all || test == 23) test2_set_open();
-  if (all || test == 24) test1_get_open();
-  if (all || test == 25) test2_get_open();
   */
+  if (all || test == 22) test1_object_set_open();
+  if (all || test == 23) test2_object_set_open();
+  if (all || test == 24) test1_object_get_open();
+  if (all || test == 25) test2_object_get_open();
+  if (all || test == 26) test2_object_get_open();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -116,4 +117,35 @@ void test1_object_get_id() {
 void test2_object_get_id() {
   Object *o = NULL;
   PRINT_TEST_RESULT(object_get_id(o) == NO_ID);
+}
+
+void test1_object_set_open() {
+  Object *object;
+  object = object_create(1);
+  PRINT_TEST_RESULT(object_set_open(object, TRUE) == OK);
+  object_destroy(object);
+}
+
+void test2_object_set_open() {
+  PRINT_TEST_RESULT(object_set_open(NULL, TRUE) == ERROR);
+}
+
+void test1_object_get_open() {
+  Object *o;
+  o = object_create(1);
+  object_set_open(o, TRUE);
+  PRINT_TEST_RESULT(object_get_open(o) == TRUE);
+  object_destroy(o);
+}
+
+void test2_object_get_open() {
+  Object *o;
+  o = object_create(1);
+  object_set_open(o, FALSE);
+  PRINT_TEST_RESULT(object_get_open(o) == FALSE);
+  object_destroy(o);
+}
+
+void test3_object_get_open() {
+  PRINT_TEST_RESULT(object_get_open(NULL) == FALSE);
 }

@@ -292,8 +292,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the feedback area */
   last_cmd = command_get_code(game_get_last_command(game));
-  sprintf(str, " %s (%s): %s", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS], command_to_string(command_get_return(game_get_last_command(game))));
-  screen_area_puts(ge->feedback, str);
+  if(command_get_return(game_get_last_command(game))){
+    sprintf(str, " %s (%s): OK", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
+    screen_area_puts(ge->feedback, str);
+  }else {
+    sprintf(str, " %s (%s): ERROR", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
+    screen_area_puts(ge->feedback, str);
+  }
+  
 
   /* Dump to the terminal */
   screen_paint((game_get_turn(game)+5)%MAX_PLAYERS);

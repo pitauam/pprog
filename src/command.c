@@ -28,7 +28,7 @@ char *cmd_to_str[N_CMD][N_CMDT] = {
   {"c", "Chat"},
   {"i", "Inspect"},
   {"r", "Recruit"},
-  {"a", "Abandon"}
+  {"x", "Abandon"}
 };
 
 /**
@@ -129,18 +129,11 @@ Status command_get_user_input(Command* command) {
       return ERROR;
     }
 
-    for (i = 0; i < MAX_CMD_ARG; i++)
-    {
-      arg = strtok(NULL, " ");
-      if (!arg)
-      {
-        arg = "";
-      }
-
-      if (command_set_arg(command, arg) == ERROR)
-      {
-        return ERROR;
-      }
+    arg = strtok(NULL, " "); 
+    if (arg != NULL) {
+      command_set_arg(command, arg);
+    } else {
+      command_set_arg(command, "");
     }
 
     return OK;
