@@ -11,6 +11,7 @@
 #define PLAYER_H
 
 #include "types.h"
+#include "inventory.h"
 
 typedef struct _Player Player;
 

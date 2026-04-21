@@ -43,6 +43,23 @@ int main(int argc, char** argv) {
   if (all || test == 7) test2_object_get_name();
   if (all || test == 8) test1_object_get_id();
   if (all || test == 9) test2_object_get_id();
+  //--------------------------------------------------
+  if (all || test == 10) test1_set_health();
+  if (all || test == 11) test2_set health();
+  if (all || test == 12) test1_get_health();
+  if (all || test == 13) test2_get_health();
+  if (all || test == 14) test1_set_movable();
+  if (all || test == 15) test2_set_movable();
+  if (all || test == 16) test1_get_movable();
+  if (all || test == 17) test2_get_movable();
+  if (all || test == 18) test1_set_dependency();
+  if (all || test == 19) test2_set_dependency();
+  if (all || test == 20) test1_get_dependency();
+  if (all || test == 21) test2_get_dependency();
+  if (all || test == 22) test1_set_open();
+  if (all || test == 23) test2_set_open();
+  if (all || test == 24) test1_get_open();
+  if (all || test == 25) test2_get_open();
 
   PRINT_PASSED_PERCENTAGE;
 
