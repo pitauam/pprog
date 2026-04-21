@@ -76,10 +76,7 @@ obj/link.o: src/link.c include/link.h include/types.h
 
 obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
 	$(CC) -c $(CFLAGS) $< -o $@
-
-obj/interface_data.o: include/interface_data.c include/interface_data.h include/command.h include/types.h include/player.h include/inventory.h include/set.h
-	$(CC) -c $(CFLAGS) $< -o $@
-    
+   
 #runs Iteration 3 map and generates a log file
 run: $(EXE)
 	./$(EXE) dat/castle.dat
