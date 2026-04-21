@@ -188,7 +188,7 @@ void test1_player_set_health(){
   player_destroy(p);
 }
 
-void test2_player_player_set_health(){
+void test2_player_set_health(){
   Player *p = player_create(5);
   PRINT_TEST_RESULT(player_set_health(NULL, -5)==ERROR);
   player_destroy(p);
