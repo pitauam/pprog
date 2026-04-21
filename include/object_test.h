@@ -74,4 +74,39 @@ void test1_object_get_id();
  */
 void test2_object_get_id();
 
+/**
+ * @test Test object set open
+ * @pre object open
+ * @post Output == open
+ */
+void test1_object_set_open();
+
+/**
+ * @test Test object set open
+ * @pre object open
+ * @post Output == ERROR
+ */
+void test2_object_set_open();
+
+/**
+ * @test Test object get open
+ * @pre object open
+ * @post Output == open
+ */
+void test1_object_get_open();
+
+/**
+ * @test Test object get open
+ * @pre object closed
+ * @post Output == closed
+ */
+void test2_object_get_open();
+
+/**
+ * @test Test object get open
+ * @pre object NULL
+ * @post Output == closed
+ */
+void test3_object_get_open();
+
 #endif
