@@ -2,9 +2,8 @@
  * @brief It defines the command interpreter interface
  *
  * @file command.h
- * @author Profesores PPROG
  * @version 0
- * @date 27-01-2025
+ * @date 22-02-2026
  * @copyright GNU Public License
  */
 
@@ -16,11 +15,11 @@
 #define CMD_LENGTH 30 /*!< Maximum lenght of a command input */
 #define MAX_CMD_ARG 3 /*!< Maximum arguments a command can have */
 #define N_CMDT 2
-#define N_CMD 11
+#define N_CMD 12
 
 typedef enum { CMDS, CMDL } CommandType;
 
-typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON } CommandCode;
+typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON, USE } CommandCode;
 
 typedef struct _Command Command;
 

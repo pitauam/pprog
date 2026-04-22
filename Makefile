@@ -137,7 +137,7 @@ obj/player_test.o: src/player_test.c include/player_test.h include/player.h incl
 	$(CC) -c $(CFLAGS) $< -o $@
 
 #runs each test
-runspacetest: 
+runspacetest: spacetest
 	./spacetest
 
 runsettest: settest

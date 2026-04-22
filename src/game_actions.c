@@ -2,7 +2,6 @@
  * @brief It implements the game update through user actions
  *
  * @file game_actions.c
- * @author Profesores PPROG
  * @version 5
  * @date 16-03-2026
  * @copyright GNU Public License
@@ -133,6 +132,14 @@ void game_actions_recruit(Game *game);
 void game_actions_abandon(Game *game);
 
 /**
+ * @brief It lets the player use the object for something
+ * @author Marta López
+ * 
+ * @param game a pointer to the game
+ */
+void game_actions_use(Game *game);
+
+/**
  * @brief Gets the id of the first enemy character at a given space
  * @author Santiago Pita
  *
@@ -192,6 +199,10 @@ Status game_actions_update(Game *game, Command *command) {
 
     case ABANDON:
       game_actions_abandon(game);
+      break;
+
+    case USE:
+      game_actions_use(game);
       break;
 
     default:
@@ -745,6 +756,26 @@ void game_actions_abandon(Game *game) {
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
+/*
+void game_actions_use(Game *game){
+  int i=0;
+  Player *player = NULL;
+  Object *obj = NULL;
+
+  Id object_id = NO_ID;
+  char *obj_name = NULL;
+
+  if(game == NULL) return;
+
+  player = game_get_player(game);
+  if(player == NULL){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  
+}
+*/
 
 Id game_actions_get_enemy_character_at(Game *game, Id space_id){
   int i;

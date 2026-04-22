@@ -2,9 +2,8 @@
  * @brief It implements the command interpreter
  *
  * @file command.c
- * @author Profesores PPROG
  * @version 1
- * @date 24-01-2026
+ * @date 22-04-2026
  * @copyright GNU Public License
  */
 
@@ -28,7 +27,8 @@ char *cmd_to_str[N_CMD][N_CMDT] = {
   {"c", "Chat"},
   {"i", "Inspect"},
   {"r", "Recruit"},
-  {"x", "Abandon"}
+  {"x", "Abandon"},
+  {"u", "Use"}
 };
 
 /**
@@ -194,6 +194,15 @@ char *command_to_string(CommandCode cmd){
 
     case INSPECT:
       return "inspect";
+
+    case RECRUIT:
+      return "recruit";
+
+    case ABANDON:
+      return "abandon";
+
+    case USE:
+      return "use";
   
     default:
       return "unknown";

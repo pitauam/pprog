@@ -68,7 +68,7 @@ void test2_player_set_description();
 
 /**
  * @test Test function for player description getting
- * @pre Valid pointer to player with a gdesc set
+ * @pre Valid pointer to player with description set
  * @post Output == 0 (strcmp matches the string)
  */
 void test1_player_get_description();
@@ -89,7 +89,7 @@ void test1_player_set_health();
 
 /**
  * @test Test function for player_health setting
- * @pre Valid pointer to player and negative health value
+ * @pre Valid pointer to player = NULL
  * @post Output == ERROR
  */
 void test2_player_set_health();
@@ -109,7 +109,7 @@ void test1_player_get_health();
 void test2_player_get_health();
 
 /**
- * @test Test function for plaeyr_id getting
+ * @test Test function for player_id getting
  * @pre Valid pointer to player
  * @post Output == Supplied Player Id
  */
@@ -209,8 +209,8 @@ void test2_player_inventory_full();
 
 /**
  * @test Test getting the object id from the player's object at a specific position
- * @pre Player= NULL and valid index
- * @post Output == NO_ID
+ * @pre valid pointer to player and valid index
+ * @post Output == id
  */
 void test1_player_get_object_id();
 
