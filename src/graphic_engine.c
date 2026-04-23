@@ -19,15 +19,14 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 50  /*!< Width of the map area */
-#define WIDTH_DES 30  /*!< Width of the description area */
-#define WIDTH_BAN 30  /*!< Width of the banner area */
-#define HEIGHT_MAP 30 /*!< Height of the map area */
+#define WIDTH_MAP 90  /*!< Width of the map area */
+#define WIDTH_DES 37  /*!< Width of the description area */
+#define WIDTH_BAN 25  /*!< Width of the banner area */
+#define HEIGHT_MAP 32 /*!< Height of the map area */
 #define HEIGHT_BAN 1  /*!< Height of the banner area */
 #define HEIGHT_HLP 2  /*!< Height of the help area */
 #define HEIGHT_FDB 3  /*!< Height of the feedback area */
-
-#define ROOM_HEIGHT 8 - 3
+#define ROOM_HEIGHT (8 - 3)
 
 /**
  * @brief Graphic engine
@@ -294,11 +293,10 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   last_cmd = command_get_code(game_get_last_command(game));
   if(command_get_return(game_get_last_command(game))){
     sprintf(str, " %s (%s): OK", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
-    screen_area_puts(ge->feedback, str);
   }else {
     sprintf(str, " %s (%s): ERROR", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
-    screen_area_puts(ge->feedback, str);
   }
+  screen_area_puts(ge->feedback, str);
   
 
   /* Dump to the terminal */
@@ -414,7 +412,7 @@ for (j = 0; j < 5; j++)
       len += strlen(object_get_name(game_get_object(game, game_get_object_id(game, i))))+1;
     }
   }
-  sprintf(str, "                       | %-16.16s|", obj);
+  sprintf(str, "                       |%-18.18s|", obj);
   screen_area_puts(ge->map, str);
 
   sprintf(str, "                       +------------------+");
@@ -537,21 +535,15 @@ void graphic_engine_2place(Graphic_engine *ge,Game *game, Id id_left, Id id_act)
   
   if (len1 <= 0)
   {
-    strcat(str, "     |"); 
-    screen_area_puts(ge->map, str);
+    strcat(str, "     |");
   }
   else
   {
-    for (j = 0; j < 8 - len2; j++)
-    { 
-      strcat(str, " ");
-    }
-
-  strcat(str, "|"); 
-
-  screen_area_puts(ge->map, str);
+    strcat(str, "|");
+    strcat(str, obj);
+    strcat(str, "|");
   }
-
+  screen_area_puts(ge->map, str);
   sprintf(str, "+------------------+   +------------------+");
   screen_area_puts(ge->map, str);
   
