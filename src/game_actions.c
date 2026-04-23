@@ -761,7 +761,8 @@ void game_actions_abandon(Game *game) {
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
-/*
+
+/**
 void game_actions_use(Game *game){
   int i=0;
   Player *player = NULL;
@@ -772,14 +773,34 @@ void game_actions_use(Game *game){
 
   if(game == NULL) return;
 
+  // Get the player
   player = game_get_player(game);
   if(player == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
-Nota: descomentar cuando esté hecha la funcion
+
+  // Get object name
+  obj_name = command_get_arg(game_get_last_command(game));
+  if(obj_name == NULL){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  for(i=0; i<game_get_number_of_objects(game); i++){
+    Id actual = game_get_object_id(game, i);
+    Object *current_object = game_get_object(game, actual);
+
+    if (current_object != NULL &&
+        strcmp(object_get_name(current_object), obj_name) == 0) {
+
+      object_id = actual;
+      break;
+    }
+  }
 }
 */
+
 
 Id game_actions_get_enemy_character_at(Game *game, Id space_id){
   int i;
