@@ -136,8 +136,10 @@ void game_actions_abandon(Game *game);
  * @author Marta López
  * 
  * @param game a pointer to the game
- */
+ 
 void game_actions_use(Game *game);
+Nota: descomentar cuando esté hecha la funcion
+*/
 
 /**
  * @brief Gets the id of the first enemy character at a given space
@@ -201,9 +203,12 @@ Status game_actions_update(Game *game, Command *command) {
       game_actions_abandon(game);
       break;
 
+      /*
     case USE:
       game_actions_use(game);
       break;
+      Nota: descomentar cuando esté hecha la funcion
+*/
 
     default:
       break;
@@ -772,8 +777,7 @@ void game_actions_use(Game *game){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
-
-  
+Nota: descomentar cuando esté hecha la funcion
 }
 */
 

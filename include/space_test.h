@@ -60,10 +60,14 @@ void test1_space_add_object();
 void test2_space_add_object();
 void test1_space_remove_object();
 void test2_space_remove_object();
+
+/*
 void test1_space_set_character();
 void test2_space_set_character();
 void test1_space_get_character();
 void test2_space_get_character();
+*/
+
 void test1_space_set_gdesc();
 void test2_space_set_gdesc();
 

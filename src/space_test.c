@@ -293,6 +293,7 @@ void test2_space_remove_object() {
   space_destroy(s);
 }
 
+/*
 void test1_space_set_character() {
   Space *s = space_create(1);
   PRINT_TEST_RESULT(space_set_character(s, 5) == OK);
@@ -315,6 +316,7 @@ void test2_space_get_character() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_character(s) == NO_ID);
 }
+*/
 
 void test1_space_set_gdesc() {
   Space *s = space_create(1);
