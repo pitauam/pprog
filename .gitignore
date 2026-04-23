@@ -1,4 +1,12 @@
 castle
+charactertest
+inventorytest
+linktest
+objecttest
+playertest
+settest
+spacetest
+
 *.exe
 *.out
 
