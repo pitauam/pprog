@@ -762,7 +762,7 @@ void game_actions_abandon(Game *game) {
   return;
 }
 
-/**
+
 void game_actions_use(Game *game){
   int i=0;
   Player *player = NULL;
@@ -773,20 +773,21 @@ void game_actions_use(Game *game){
 
   if(game == NULL) return;
 
-  // Get the player
+  /* Get the player */
   player = game_get_player(game);
   if(player == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
-  // Get object name
+  /* Get object name (use "something") */
   obj_name = command_get_arg(game_get_last_command(game));
   if(obj_name == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
+  /* Search for object */
   for(i=0; i<game_get_number_of_objects(game); i++){
     Id actual = game_get_object_id(game, i);
     Object *current_object = game_get_object(game, actual);
@@ -798,8 +799,38 @@ void game_actions_use(Game *game){
       break;
     }
   }
+
+  if(object_id == NO_ID){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  if(player_find_object(player, object_id) == ERROR){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  /* Get the object */
+  obj = game_get_object(game, object_id);
+
+  if(obj == NULL){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  if(object_get_health(obj) == 0){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
+  player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+
+  /* Remove from inventary */
+  player_remove_object(player, object_id);
+
+  command_set_return(game_get_last_command(game), OK);
 }
-*/
+
 
 
 Id game_actions_get_enemy_character_at(Game *game, Id space_id){
