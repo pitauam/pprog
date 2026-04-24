@@ -2,9 +2,9 @@
  * @brief It tests space module
  * 
  * @file space_test.c
- * @author Profesores Pprog
+ * @author Profesores Pprog, Paula de la Fuente, Santiago Pita
  * @version 0.0 
- * @date 23-4-2026
+ * @date 24-4-2026
  * @copyright GNU Public License
  */
 
@@ -13,9 +13,10 @@
 #include <string.h> 
 #include "space.h"
 #include "space_test.h"
+#include "set.h"
 #include "test.h"
 
-#define MAX_TESTS 30
+#define MAX_TESTS 37
 
 /** 
  * @brief Main function for SPACE unit tests. 
@@ -43,32 +44,47 @@ int main(int argc, char** argv) {
     }
   }
 
+
+
   if (all || test == 1) test1_space_create();
   if (all || test == 2) test2_space_create();
   if (all || test == 3) test1_space_set_name();
   if (all || test == 4) test2_space_set_name();
   if (all || test == 5) test3_space_set_name();
-  if (all || test == 6) test1_space_add_object();
-  if (all || test == 7) test2_space_add_object();
-  if (all || test == 8) test1_space_get_id();
-  if (all || test == 9) test2_space_get_id();
-  if (all || test == 10) test1_space_get_name();
-  if (all || test == 11) test2_space_get_name();
-  if (all || test == 12) test1_space_add_character();
-  if (all || test == 13) test2_space_add_character();
-  if (all || test == 14) test3_space_add_character();
-  if (all || test == 15) test1_space_remove_character();
-  if (all || test == 16) test2_space_remove_character();
-  if (all || test == 17) test3_space_remove_character();
-  if (all || test == 18) test1_space_find_character();
-  if (all || test == 19) test2_space_find_character();
-  if (all || test == 20) test3_space_find_character();
-  if (all || test == 21) test1_space_get_n_characters();
-  if (all || test == 22) test2_space_get_n_characters();
-  if (all || test == 23) test1_space_find_object();
-  if (all || test == 24) test2_space_find_object();
-  if (all || test == 25) test1_space_get_n_objects();
-  if (all || test == 26) test2_space_get_n_objects();
+  if (all || test == 6) test1_space_get_id();
+  if (all || test == 7) test2_space_get_id();
+  if (all || test == 8) test1_space_get_name();
+  if (all || test == 9) test2_space_get_name();
+  if (all || test == 10) test1_space_add_object();
+  if (all || test == 11) test2_space_add_object();
+  if (all || test == 12) test1_space_remove_object();
+  if (all || test == 13) test2_space_remove_object();
+  if (all || test == 14) test1_space_find_object();
+  if (all || test == 15) test2_space_find_object();
+  if (all || test == 16) test1_space_set_gdesc();
+  if (all || test == 17) test2_space_set_gdesc();
+  if (all || test == 18) test1_space_set_discovered();
+  if (all || test == 19) test2_space_set_discovered();
+  if (all || test == 20) test1_space_is_discovered();
+  if (all || test == 21) test2_space_is_discovered();
+  if (all || test == 22) test3_space_set_gdesc();
+  if (all || test == 23) test1_space_get_gdesc_line();
+  if (all || test == 24) test2_space_get_gdesc_line();
+  if (all || test == 25) test3_space_get_gdesc_line();
+  if (all || test == 26) test4_space_get_gdesc_line();
+  if (all || test == 27) test1_space_add_character();
+  if (all || test == 28) test2_space_add_character();
+  if (all || test == 29) test3_space_add_character();
+  if (all || test == 30) test1_space_remove_character();
+  if (all || test == 31) test2_space_remove_character();
+  if (all || test == 32) test3_space_remove_character();
+  if (all || test == 33) test1_space_find_character();
+  if (all || test == 34) test2_space_find_character();
+  if (all || test == 35) test3_space_find_character();
+  if (all || test == 36) test1_space_get_n_characters();
+  if (all || test == 37) test2_space_get_n_characters();
+
+
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -94,13 +110,13 @@ void test2_space_create() {
 void test1_space_set_name() {
   Space *s;
   s = space_create(5);
-  PRINT_TEST_RESULT(space_set_name(s, "nameforspace") == OK);
+  PRINT_TEST_RESULT(space_set_name(s, "espacio") == OK);
   space_destroy(s);
 }
 
 void test2_space_set_name() {
   Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_name(s, "nameforspace") == ERROR);
+  PRINT_TEST_RESULT(space_set_name(s, "espacio") == ERROR);
 }
 
 void test3_space_set_name() {
@@ -109,73 +125,64 @@ void test3_space_set_name() {
   PRINT_TEST_RESULT(space_set_name(s, NULL) == ERROR);
   space_destroy(s);
 }
-/*
-void test1_space_set_north() {
-  Space *s;
-  s = space_create(5);
-  PRINT_TEST_RESULT(space_set_north(s, 4) == OK);
-  space_destroy(s);
-}
-
-void test2_space_set_north() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_north(s, 4) == ERROR);
-}
-
-void test1_space_set_south() {
-  Space *s;
-  s = space_create(5);
-  PRINT_TEST_RESULT(space_set_south(s, 4) == OK);
-  space_destroy(s);
-}
-
-void test2_space_set_south() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_south(s, 4) == ERROR);
-}
-
-void test1_space_set_east() {
-  Space *s;
-  s = space_create(5);
-  PRINT_TEST_RESULT(space_set_east(s, 4) == OK);
-  space_destroy(s);
-}
-
-void test2_space_set_east() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_east(s, 4) == ERROR);
-}
-
-void test1_space_set_west() {
-  Space *s;
-  s = space_create(5);
-  PRINT_TEST_RESULT(space_set_west(s, 4) == OK);
-  space_destroy(s);
-}
-
-void test2_space_set_west() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_west(s, 4) == ERROR);
-}
-*/
 
 void test1_space_add_object() {
-  Space *s;
-  s = space_create(1);
+  Space *s = space_create(1);
   PRINT_TEST_RESULT(space_add_object(s, 10) == OK);
   space_destroy(s);
 }
-
 void test2_space_add_object() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_add_object(s, 10) == ERROR);
 }
+void test1_space_remove_object() {
+  Space *s = space_create(1);
+  space_add_object(s, 10);
+  PRINT_TEST_RESULT(space_remove_object(s, 10) == OK);
+  space_destroy(s);
+}
+void test2_space_remove_object() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_remove_object(s, 10) == ERROR); /* Delete what doesn't exist. */
+  space_destroy(s);
+}
+void test1_space_find_object() {
+  Space *s = space_create(1);
+  space_add_object(s, 10);
+  PRINT_TEST_RESULT(space_find_object(s, 10) == TRUE);
+  space_destroy(s);
+}
+void test2_space_find_object() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_find_object(s, 10) == FALSE);
+  space_destroy(s);
+}
+
+
+void test1_space_set_gdesc() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_set_gdesc(s, "TestDesc") == OK);
+  space_destroy(s);
+}
+void test2_space_set_gdesc() {
+  Space *s = NULL;
+  PRINT_TEST_RESULT(space_set_gdesc(s, "TestDesc") == ERROR); /* Error because of line out of range. */
+  space_destroy(s);
+}
+
+/*new test3*/
+void test3_space_set_gdesc() {
+  Space *s = space_create(1);
+  PRINT_TEST_RESULT(space_set_gdesc(s, NULL) == ERROR); /* Error because of line out of range. */
+  space_destroy(s);
+}
+
 
 void test1_space_get_name() {
   Space *s;
   s = space_create(1);
-  space_set_name(s, "name");
-  PRINT_TEST_RESULT(strcmp(space_get_name(s), "name") == 0);
+  space_set_name(s, "espacio");
+  PRINT_TEST_RESULT(strcmp(space_get_name(s), "espacio") == 0);
   space_destroy(s);
 }
 
@@ -183,82 +190,8 @@ void test2_space_get_name() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_name(s) == NULL);
 }
-/*
-void test1_space_get_object() {
-  Space *s;
-  s = space_create(1);
-  PRINT_TEST_RESULT(space_get_object(s) == FALSE);
-  space_destroy(s);
-}
-  
 
-void test2_space_get_object() {
-  Space *s;
-  s = space_create(1);
-  space_add_object(s,TRUE);
-  PRINT_TEST_RESULT(space_get_object(s) == TRUE);
-  space_destroy(s);  
-}
 
-void test3_space_get_object() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_object(s) == FALSE);
-}
-*/
-
-/*
-void test1_space_get_north() {
-  Space *s;
-  s = space_create(5);
-  space_set_north(s, 4);
-  PRINT_TEST_RESULT(space_get_north(s) == 4);
-  space_destroy(s);
-}
-
-void test2_space_get_north() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_north(s) == NO_ID);
-}
-
-void test1_space_get_south() {
-  Space *s;
-  s = space_create(5);
-  space_set_south(s, 2);
-  PRINT_TEST_RESULT(space_get_south(s) == 2);
-  space_destroy(s);
-}
-
-void test2_space_get_south() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_south(s) == NO_ID);
-}
-
-void test1_space_get_east() {
-  Space *s;
-  s = space_create(5);
-  space_set_east(s, 1);
-  PRINT_TEST_RESULT(space_get_east(s) == 1);
-  space_destroy(s);
-}
-
-void test2_space_get_east() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_east(s) == NO_ID);
-}
-
-void test1_space_get_west() {
-  Space *s;
-  s = space_create(5);
-  space_set_west(s, 6);
-  PRINT_TEST_RESULT(space_get_west(s) == 6);
-  space_destroy(s);
-}
-
-void test2_space_get_west() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_west(s) == NO_ID);
-}
-*/
 
 void test1_space_get_id() {
   Space *s;
@@ -272,54 +205,60 @@ void test2_space_get_id() {
   PRINT_TEST_RESULT(space_get_id(s) == NO_ID);
 }
 
-void test1_space_remove_object() {
-  Space *s = space_create(1);
-  space_add_object(s, 10);
-  PRINT_TEST_RESULT(space_remove_object(s, 10) == OK);
-  space_destroy(s);
-}
-void test2_space_remove_object() {
-  Space *s = space_create(1);
-  PRINT_TEST_RESULT(space_remove_object(s, 10) == ERROR);
-  space_destroy(s);
+void test1_space_set_discovered() {
+    Space *s = space_create(5);
+    PRINT_TEST_RESULT(space_set_discovered(s, TRUE) == OK);
+    space_destroy(s);
 }
 
-/*
-void test1_space_set_character() {
-  Space *s = space_create(1);
-  PRINT_TEST_RESULT(space_set_character(s, 5) == OK);
-  space_destroy(s);
-}
-
-void test2_space_set_character() {
+void test2_space_set_discovered() {
   Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_character(s, 5) == ERROR);
+  PRINT_TEST_RESULT(space_set_discovered(s, TRUE) == ERROR);
 }
 
-void test1_space_get_character() {
-  Space *s = space_create(1);
-  space_set_character(s, 5);
-  PRINT_TEST_RESULT(space_get_character(s) == 5);
+void test1_space_is_discovered() {
+  Space *s = space_create(5);
+  space_set_discovered(s, TRUE);
+  PRINT_TEST_RESULT(space_is_discovered(s) == TRUE);
   space_destroy(s);
 }
 
-void test2_space_get_character() {
+void test2_space_is_discovered() {
   Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_character(s) == NO_ID);
+  PRINT_TEST_RESULT(space_is_discovered(s) == FALSE);
 }
-*/
 
-void test1_space_set_gdesc() {
-  Space *s = space_create(1);
-  char drawing[46] = "5234623464222537524321342542356354675463756474";
-  PRINT_TEST_RESULT(space_set_gdesc(s, drawing) == OK);
+
+void test1_space_get_gdesc_line() {
+  Space* s = space_create(5);
+  space_set_gdesc(s, "***");
+  PRINT_TEST_RESULT(strcmp (space_get_gdesc_line(s, 0), "***")==0);
   space_destroy(s);
 }
 
-void test2_space_set_gdesc() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_set_gdesc(s, ":D:(>:(:o") == ERROR);
+
+void test2_space_get_gdesc_line() {
+  Space* s = space_create(5);
+  space_set_gdesc(s, "***");
+  PRINT_TEST_RESULT(space_get_gdesc_line(s, -1)==NULL);
+  space_destroy(s);
 }
+
+
+void test3_space_get_gdesc_line() {
+  Space* s = NULL;
+  PRINT_TEST_RESULT(space_get_gdesc_line(s, 1)==NULL);
+  space_destroy(s);
+}
+
+
+void test4_space_get_gdesc_line() {
+  Space* s = space_create(5);
+  space_set_gdesc(s, "***");
+  PRINT_TEST_RESULT(space_get_gdesc_line(s, GDESC_HEIGHT )==NULL);
+  space_destroy(s);
+}
+
 
 void test1_space_add_character() {
   Space *s = space_create(1);
@@ -387,28 +326,4 @@ void test2_space_get_n_characters() {
   PRINT_TEST_RESULT(space_get_n_characters(s) == -1);
 }
 
-void test1_space_find_object() {
-  Space *s = space_create(1);
-  space_add_object(s, 10);
-  PRINT_TEST_RESULT(space_find_object(s, 10) == TRUE);
-  space_destroy(s);
-}
 
-void test2_space_find_object() {
-  Space *s = space_create(1);
-  PRINT_TEST_RESULT(space_find_object(s, 10) == FALSE);
-  space_destroy(s);
-}
-
-void test1_space_get_n_objects() {
-  Space *s = space_create(1);
-  space_add_object(s, 10);
-  space_add_object(s, 11);
-  PRINT_TEST_RESULT(space_get_n_objects(s) == 2);
-  space_destroy(s);
-}
-
-void test2_space_get_n_objects() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_n_objects(s) == -1);
-}
