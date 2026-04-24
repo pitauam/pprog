@@ -1,10 +1,11 @@
-/** 
+/**
  * @brief It declares the tests for the space module
- * 
  * @file space_test.h
  * @author Santiago Pita
- * @version 3
- * @date 23-04-2026
+ * @author Samuel Manzorro
+ * @author Paula de la Fuente
+ * @version 0.0 
+ * @date 17-02-2025
  * @copyright GNU Public License
  */
 
@@ -28,7 +29,7 @@ void test2_space_create();
 /**
  * @test Test function for space_name setting
  * @pre String with space name
- * @post Ouput == OK 
+ * @post Output == OK 
  */
 void test1_space_set_name();
 
@@ -41,80 +42,190 @@ void test2_space_set_name();
 
 /**
  * @test Test function for space_name setting
- * @pre pointer to space_name = NULL (point to space = NON NULL) 
+ * @pre pointer to space_name = NULL (pointer to space = NON NULL) 
  * @post Output == ERROR
  */
 void test3_space_set_name();
 
 /**
- * @test Test space id getter
- * @pre Space created with valid ID
- * @post Output == ID of the space
+ * @test Test function for space_id getting
+ * @pre Valid pointer to space
+ * @post Output == Supplied Space Id
  */
 void test1_space_get_id();
 
 /**
- * @test Test space id getter
+ * @test Test function for space_id getting
  * @pre Pointer to space = NULL
  * @post Output == NO_ID
  */
 void test2_space_get_id();
 
 /**
- * @test Test space name getter
- * @pre Space created and name set
- * @post Output == 0 (string comparison matches)
+ * @test Test function for space_name getting
+ * @pre Valid pointer to space
+ * @post Output == String with space name
  */
 void test1_space_get_name();
 
 /**
- * @test Test space name getter
+ * @test Test function for space_name getting
  * @pre Pointer to space = NULL
  * @post Output == NULL
  */
 void test2_space_get_name();
 
 /**
- * @test Test function to add an object to space
- * @pre Space created, valid object ID
+ * @test Test function for object adding
+ * @pre Valid pointer to space and valid object id
  * @post Output == OK
  */
 void test1_space_add_object();
 
 /**
- * @test Test function to add an object to space
+ * @test Test function for object adding
  * @pre Pointer to space = NULL
  * @post Output == ERROR
  */
 void test2_space_add_object();
 
 /**
- * @test Test function to remove an object from space
- * @pre Space created and object previously added
+ * @test Test function for object deleting
+ * @pre Valid pointer to space and existing object id
  * @post Output == OK
  */
 void test1_space_remove_object();
 
 /**
- * @test Test function to remove an object from space
- * @pre Space created, but object not in space
+ * @test Test function for object deleting
+ * @pre Valid pointer to space and non-existing object id
  * @post Output == ERROR
  */
 void test2_space_remove_object();
 
 /**
- * @test Test setting the graphic description of space
- * @pre Space created, valid gdesc string
+ * @test Test function for checking object presence
+ * @pre Valid pointer to space and existing object id
+ * @post Output == TRUE
+ */
+void test1_space_find_object();
+
+/**
+ * @test Test function for checking object presence
+ * @pre Valid pointer to space and non-existing object id
+ * @post Output == FALSE
+ */
+void test2_space_find_object();
+
+/**
+ * @test Test function for character setting
+ * @pre Valid pointer to space
+ * @post Output == OK
+ */
+void test1_space_set_character();
+
+/**
+ * @test Test function for character setting
+ * @pre Pointer to space = NULL
+ * @post Output == ERROR
+ */
+void test2_space_set_character();
+
+/**
+ * @test Test function for character getting
+ * @pre Valid pointer to space with a character
+ * @post Output == Supplied Character Id
+ */
+void test1_space_get_character();
+
+/**
+ * @test Test function for character getting
+ * @pre Pointer to space = NULL
+ * @post Output == NO_ID
+ */
+void test2_space_get_character();
+
+/**
+ * @test Test function for gdesc setting
+ * @pre Valid pointer to space and valid char
  * @post Output == OK
  */
 void test1_space_set_gdesc();
 
 /**
- * @test Test setting the graphic description of space
- * @pre Pointer to space = NULL
+ * @test Test function for gdesc setting
+ * @pre Space=NULL and valid char
  * @post Output == ERROR
  */
 void test2_space_set_gdesc();
+
+/*new test3*/
+/**
+ * @test Test function for gdesc setting
+ * @pre Valid pointer to space and char =NULL
+ * @post Output == ERROR
+ */
+void test3_space_set_gdesc();
+
+/**
+ * @test Test function for graphic description getting
+ * @pre Valid pointer to space
+ * @post Output == "***" the gdesc of the space in line 0
+ */
+void test1_space_get_gdesc_line();
+
+/**
+ * @test Test function for graphic description getting
+ * @pre Valid pointer to space
+ * @pre Invalid line<0
+ * @post Output == NULL
+ */
+void test2_space_get_gdesc_line();
+
+/**
+ * @test Test function for graphic description getting
+ * @pre Space = NULL and valid line
+ * @post Output == NULL
+ */
+void test3_space_get_gdesc_line();
+
+/**
+ * @test Test function for graphic description getting
+ * @pre Valid pointer to space
+ * @pre Invalid line > GDESC_HEIGHT
+ * @post Output == NULL
+ */
+void test4_space_get_gdesc_line();
+
+
+/**
+ * @test Test function for space_discovered setting
+ * @pre Valid pointer to space
+ * @post Output == OK
+ */
+void test1_space_set_discovered();
+
+/**
+ * @test Test function for space_discovered setting
+ * @pre Pointer to space = NULL
+ * @post Output == ERROR
+ */
+void test2_space_set_discovered();
+
+/**
+ * @test Test function for checking if space is discovered
+ * @pre Valid pointer to space set as discovered
+ * @post Output == TRUE
+ */
+void test1_space_is_discovered();
+
+/**
+ * @test Test function for checking if space is discovered
+ * @pre Pointer to space = NULL
+ * @post Output == FALSE
+ */
+void test2_space_is_discovered();
+
 
 /**
  * @test Test function to add a character to space
@@ -192,33 +303,5 @@ void test1_space_get_n_characters();
  * @post Output == -1
  */
 void test2_space_get_n_characters();
-
-/**
- * @test Test function to find an object in space
- * @pre Space created and object previously added
- * @post Output == TRUE
- */
-void test1_space_find_object();
-
-/**
- * @test Test function to find an object in space
- * @pre Space created, but object not in space
- * @post Output == FALSE
- */
-void test2_space_find_object();
-
-/**
- * @test Test getting the number of objects in a space
- * @pre Space created with 2 objects added
- * @post Output == 2
- */
-void test1_space_get_n_objects();
-
-/**
- * @test Test getting the number of objects in a space
- * @pre Pointer to space = NULL
- * @post Output == -1
- */
-void test2_space_get_n_objects();
 
 #endif
