@@ -226,12 +226,16 @@ void game_actions_unknown(Game *game) {}
 void game_actions_exit(Game *game) {}
 
 void game_actions_move(Game *game){
-  Id future_id = NO_ID;
-  Id space_id = NO_ID;
+  Id future_id = NO_ID; /*Where I go*/
+  Id space_id = NO_ID;  /*Where i am*/
   Bool open = FALSE;
   Direction dir = NO_DIR;
-
   char direction[MAX_ARG];
+
+  Character* chr=NULL;
+  Id current_char_id = NO_ID, current_char_location = NO_ID, current_char_following = NO_ID;
+  int i;
+  Space* actual_space = NULL, *future_space = NULL;
 
   strcpy(direction, command_get_arg(game_get_last_command(game)));
 
@@ -257,18 +261,55 @@ void game_actions_move(Game *game){
   }
 
   space_id = game_get_player_location(game);
-  if (NO_ID == space_id) {
+  actual_space = game_get_space(game, space_id);
+  if (NO_ID == space_id || !actual_space) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   future_id = game_get_connection(game, space_id, dir);
+  future_space = game_get_space(game, future_id);
+  if (NO_ID == space_id || !future_space) {
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
   open = game_connection_is_open(game, space_id, dir);
 
   if (future_id != NO_ID && open == TRUE) {
+
     game_set_player_location(game, future_id);
+
+    
+    /*The reclutas will go with this player to the future_id space -> condiciones: MISMO ESPACIO, AMIGO, QUE ME SIGA (id de recluta == id jugador) y que esté VIVO*/
+
+    /*1. Find the character to move*/
+    for (i=0 ; i<game_get_number_of_characters(game) ; i++) { /*Passes through all the characters of the game*/
+      current_char_id = game_get_character_id_at(game, i);
+      chr = game_get_character(game, current_char_id);
+      current_char_location = game_get_character_location(game, current_char_id);
+      current_char_following = character_get_following(chr);
+
+      if(current_char_id == NO_ID || !chr || current_char_location == NO_ID){
+        command_set_return(game_get_last_command(game), ERROR);
+        return;
+      }
+
+      if (current_char_location == space_id && character_get_friendly(chr)==TRUE && current_char_following == player_get_id(game_get_player(game)) && character_get_health(chr)<0) { /*CUMPLE CONDICIONES*/
+        /*2. Remove character from the space_id   and   3. Add character to the future_id*/
+        /*if (space_remove_character(actual_space, current_char_id)==ERROR || space_add_character(future_space, current_char_id)==ERROR){
+          command_set_return(game_get_last_command(game), ERROR);
+          return;
+        }*/
+        space_remove_character(actual_space, current_char_id);
+        space_add_character(future_space, current_char_id);
+        command_set_return(game_get_last_command(game), OK);
+      }
+      
+    }
+
+
   }
-  
   else
   {
     command_set_return(game_get_last_command(game), ERROR);
@@ -718,7 +759,7 @@ void game_actions_recruit(Game *game) {
         
         character_set_following(chr, player_get_id(game_get_player(game)));
         
-        command_set_return(game_get_last_command(game), OK);
+        command_set_return(game_get_last_command(game), OK);  /*Done successfully*/
         return;
       }
     }
