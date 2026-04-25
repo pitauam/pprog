@@ -578,9 +578,12 @@ void game_actions_attack(Game *game){
 
 void game_actions_chat(Game *game){
 
-  Id player_location; 
-  Id character_at_player_location;
-  Character *character = NULL; 
+  Id player_location = NO_ID; 
+  Id character_id = NO_ID;
+  Character *character = NULL;
+  int i;
+  char character_name[MAX_ARG];
+
 
   if (!game) {{
     command_set_return(game_get_last_command(game), ERROR);
@@ -593,30 +596,33 @@ void game_actions_chat(Game *game){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }}
-  /*gets the id of the character located at the same space as the player*/
-  character_at_player_location = game_get_character_id(game, player_location);
-  if (character_at_player_location == NO_ID) {{
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
-  }}
 
-  character = game_get_character(game, character_at_player_location);
-  if (character == NULL) {{
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
-  }}
+  /*Get the character wanted*/
+  strcpy(character_name, command_get_arg(game_get_last_command(game))); /*name got it*/
 
-  /*if character is not friendly, return*/
-  if (character_get_friendly(character) == FALSE) {{
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
-  }}
+  for (i=0 ; i < game_get_number_of_characters(game) ; i++) { /*Go through all the characters of the game comparing the name with the name of the character wanted*/
+    character_id = game_get_character_id_at(game, i);
+    character = game_get_character(game, character_id);
+    if (strcmp(game_get_character_name(game, character), character_name) == 0) { 
+      /*We found the character wanted*/
 
-  if(game_set_message(game, character_get_message(character)) == OK){
-    game_set_name_message(game, character_get_name(character));
-    command_set_return(game_get_last_command(game), OK);
-    return;
+      /*if character is not friendly, return*/
+      if (character_get_friendly(character) == FALSE) {{
+        command_set_return(game_get_last_command(game), ERROR);
+        return;
+      }}
+
+      if(game_set_message(game, character_get_message(character)) == OK){
+        game_set_name_message(game, character_get_name(character));
+        command_set_return(game_get_last_command(game), OK);
+        return;
+      }
+
+
+    }
   }
+
+  
 
   command_set_return(game_get_last_command(game), ERROR);
   return;
