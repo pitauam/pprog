@@ -255,7 +255,14 @@ void game_actions_move(Game *game){
   {
     dir = 3;
   }
-  else {
+  else if (strcmp(direction, "u") == 0 || strcmp(direction, "up") == 0)
+  {
+    dir = 4;
+  }
+  else if (strcmp(direction, "d") == 0 || strcmp(direction, "down") == 0)
+  {
+    dir = 5;
+  } else {
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
