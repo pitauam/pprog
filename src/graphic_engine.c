@@ -248,6 +248,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   graphic_engine_print_link_info(ge, game, id_act, S, "South");
   graphic_engine_print_link_info(ge, game, id_act, E, "East");
   graphic_engine_print_link_info(ge, game, id_act, W, "West");
+  graphic_engine_print_link_info(ge, game, id_act, U, "Up");
+  graphic_engine_print_link_info(ge, game, id_act, D, "Down");
   
 /*funcion original*/
 /*
@@ -286,7 +288,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_clear(ge->help);
   sprintf(str, " The commands you can use are:");
   screen_area_puts(ge->help, str);
-  sprintf(str, "     move or m (right,left,back,next), attack or a, chat or c, take or t, drop or d, inspect or i, use or u, recruit or r, exit or e");
+  sprintf(str, "     move or m (right,left,back,next,up,down), attack or a, chat or c, take or t, drop or d, inspect or i, use or u, recruit or r, exit or e");
   screen_area_puts(ge->help, str);
 
   /* Paint in the feedback area */
