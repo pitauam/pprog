@@ -16,10 +16,12 @@
 
 typedef long Id;
 
-typedef enum { FALSE, TRUE } Bool;          /*!< whether it is true or false, used when returning booleans in a function*/
+typedef enum { FALSE, TRUE } Bool;          /*!< Whether it is true or false, used when returning booleans in a function*/
 
-typedef enum { ERROR, OK } Status;          /*!< whether a function goes well or has an error*/
+typedef enum { ERROR, OK } Status;          /*!< Whether a function goes well or has an error*/
 
-typedef enum { NO_DIR = -1, N, S, E, W } Direction;      /*!< whether a space is connected north, south, east or west or here is no connection*/
+typedef enum { NO_DIR = -1, N, S, E, W } Direction;      /*!< Whether a space is connected north, south, east or west or here is no connection*/
+
+typedef enum {NO_CAT = -1, Venom, Elixir, Strenght, Cursed} Category; /*!< Category of the objects when you use them */
 
 #endif

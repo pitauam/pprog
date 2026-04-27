@@ -2,9 +2,9 @@
  * @brief Defines the module "object"
  *
  * @file object.h
- * @author Santiago Pita
+ * @author Santiago Pita and Marta López
  * @version 0
- * @date 03-01-2026
+ * @date 27-04-2026
  * @copyright GNU Public License
  */
 #ifndef OBJECT_H
@@ -154,7 +154,25 @@ Status object_set_open(Object* object, Bool open);
  * @param object pointer to the structure of the object
  * @return TRUE if open and FALSE if not
  */
-Bool object_get_open(Object* object);
+Id object_get_open(Object* object);
+
+/**
+ * @brief Sets the category of the object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object and category of the object
+ * @return TRUE if open and FALSE if not
+ */
+Status object_set_category(Object* object, Category category);
+
+/**
+ * @brief Gets the category of the object
+ * @author Marta López
+ *
+ * @param object pointer to the structure of the object
+ * @return NO_CAT if error and Venom, Elixir, Strenght or Cursed depending on the object
+ */
+Category object_get_category(Object* object);
 
 /**
  * @brief Prints the information of an object (shows its Id)
