@@ -133,12 +133,13 @@ int main(int argc, char *argv[]) {
       break;
     }
     
-    /*shows the player the result of their action*/
-    graphic_engine_paint_game(gengine, game);
-    sleep(1);
-    /*advances the turn to the next player*/
-    game_next_turn(game);
-    last_cmd = game_get_last_command(game);
+    if (command_get_return(last_cmd) == OK)
+    {
+      graphic_engine_paint_game(gengine, game);
+      sleep(5);
+      game_next_turn(game);
+      last_cmd = game_get_last_command(game);
+    }
   }
 
   if (log_fp) {
