@@ -112,7 +112,7 @@ Status command_get_return(Command *command);
  * @brief It changes the command to string, we use it in game_loop_log.
  * @author Marta López
  *
- * @param code the new CommandCode to be set
+ * @param cmd the command that will be changed into a string
  * @return a string
  */
 char *command_to_string(CommandCode cmd);

@@ -131,7 +131,7 @@ void game_actions_recruit(Game *game);
  */
 void game_actions_abandon(Game *game);
 
-/**
+/*
  * @brief It lets the player use the object for something
  * @author Marta López
  * 
@@ -222,7 +222,7 @@ void game_actions_exit(Game *game) {}
 
 void game_actions_move(Game *game){
   Id future_id = NO_ID; /*Where I go*/
-  Id space_id = NO_ID;  /*Where i am*/
+  Id space_id = NO_ID;  /*Where I am*/
   Bool open = FALSE;
   Direction dir = NO_DIR;
   char direction[MAX_ARG];
@@ -281,36 +281,40 @@ void game_actions_move(Game *game){
   if (future_id != NO_ID && open == TRUE) {
 
     game_set_player_location(game, future_id);
-
     
     /*The reclutas will go with this player to the future_id space -> condiciones: MISMO ESPACIO, AMIGO, QUE ME SIGA (id de recluta == id jugador) y que esté VIVO*/
 
-    /*1. Find the character to move*/
-    for (i=0 ; i<game_get_number_of_characters(game) ; i++) { /*Passes through all the characters of the game*/
+    /*Finds the character to move*/
+    for (i = 0 ; i < game_get_number_of_characters(game); i++)
+    {
+      /*Passes through all the characters of the game*/
       current_char_id = game_get_character_id_at(game, i);
       chr = game_get_character(game, current_char_id);
       current_char_location = game_get_character_location(game, current_char_id);
       current_char_following = character_get_following(chr);
 
-      if(current_char_id == NO_ID || !chr || current_char_location == NO_ID){
+      if (current_char_id == NO_ID || !chr){
         command_set_return(game_get_last_command(game), ERROR);
         return;
       }
 
-      if (current_char_location == space_id && character_get_friendly(chr)==TRUE && current_char_following == player_get_id(game_get_player(game)) && character_get_health(chr)<0) { /*CUMPLE CONDICIONES*/
+      if (current_char_location == space_id && character_get_friendly(chr)==TRUE && current_char_following == player_get_id(game_get_player(game)) && character_get_health(chr) > 0 && current_char_location != NO_ID) { /*CUMPLE CONDICIONES*/
         /*2. Remove character from the space_id   and   3. Add character to the future_id*/
-        /*if (space_remove_character(actual_space, current_char_id)==ERROR || space_add_character(future_space, current_char_id)==ERROR){
+        
+        if (space_remove_character(actual_space, current_char_id) == ERROR)
+        {
           command_set_return(game_get_last_command(game), ERROR);
           return;
-        }*/
-        space_remove_character(actual_space, current_char_id);
-        space_add_character(future_space, current_char_id);
+        }
+
+        if (space_add_character(future_space, current_char_id) == ERROR)
+        {
+          command_set_return(game_get_last_command(game), ERROR);
+          return;
+        }
         command_set_return(game_get_last_command(game), OK);
       }
-      
     }
-
-
   }
   else
   {

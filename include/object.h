@@ -123,7 +123,7 @@ Bool object_get_movable(Object* object);
  * @author Marta López
  *
  * @param object pointer to the structure of the object
- * @param id dependency
+ * @param dependency id of the object that the object depends on
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_set_dependency(Object* object, Id dependency);
