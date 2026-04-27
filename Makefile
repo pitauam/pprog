@@ -77,11 +77,11 @@ obj/link.o: src/link.c include/link.h include/types.h
 obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
 	$(CC) -c $(CFLAGS) $< -o $@
    
-#runs Iteration 3 map and generates a log file
+#run
 run: $(EXE)
 	./$(EXE) dat/castle.dat
 
-#run
+#run Iteration 3 map and generates a log file
 runlog: $(EXE)
 	./$(EXE) dat/castle.dat -l log.txt
 #runs Iteration 3 map with valgrind and generates a log file
