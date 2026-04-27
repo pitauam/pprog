@@ -1,0 +1,19 @@
+<map id="src/inventory_test.c" name="src/inventory_test.c">
+<area shape="rect" id="Node000001" title="It tests the inventory module." alt="" coords="111,5,249,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,225,67,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,33,72,51,54,64,40,80,26,112,22,148,25,183,31,212,26,213,20,183,17,148,21,111,35,77,50,60,69,46,111,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="49,79,113,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,33,110,73,107,68,163,29"/>
+<area shape="rect" id="Node000004" href="$inventory_8h.html" title="Implements the inventory module." alt="" coords="138,79,222,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="183,31,183,65,177,65,177,31"/>
+<area shape="rect" id="Node000007" href="$inventory__test_8h.html" title="It declares the tests for the inventory module." alt="" coords="247,79,361,104"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="201,28,273,69,271,74,199,33"/>
+<area shape="rect" id="Node000008" href="$test_8h.html" title="Implements format used in tests." alt="" coords="386,79,441,104"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="218,28,373,75,372,80,217,33"/>
+<area shape="rect" id="Node000005" href="$types_8h.html" title="It defines common types for the whole project." alt="" coords="115,225,181,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="180,105,156,213,151,211,175,104"/>
+<area shape="rect" id="Node000006" href="$set_8h.html" title="Set module." alt="" coords="92,152,143,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="172,106,139,143,135,140,168,103"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="106,179,61,218,58,214,103,175"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="125,177,140,212,135,214,120,179"/>
+</map>

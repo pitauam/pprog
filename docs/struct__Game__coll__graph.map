@@ -1,0 +1,22 @@
+<map id="_Game" name="_Game">
+<area shape="rect" id="Node000001" title="Game." alt="" coords="257,295,321,320"/>
+<area shape="rect" id="Node000002" href="$struct__Player.html" title="Player." alt="" coords="16,207,83,232"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,244,68,257,79,268,111,281,159,291,258,301,257,307,158,296,109,286,76,273,64,261,55,246"/>
+<area shape="rect" id="Node000003" href="$struct__Inventory.html" title="Inventory." alt="" coords="5,108,88,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="40,147,37,158,37,182,46,206,41,207,32,183,32,157,35,146"/>
+<area shape="rect" id="Node000004" href="$struct__Set.html" title="Set." alt="" coords="71,5,121,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,44,55,109,50,107,82,42"/>
+<area shape="rect" id="Node000007" href="$struct__Space.html" title=" " alt="" coords="108,157,175,183"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="106,43,140,156,135,158,101,45"/>
+<area shape="rect" id="Node000005" href="$struct__Object.html" title="Object." alt="" coords="207,207,273,232"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="256,243,285,293,280,295,251,245"/>
+<area shape="rect" id="Node000006" href="$struct__Character.html" title="Character." alt="" coords="298,207,385,232"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="329,245,299,296,294,293,325,243"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="142,196,143,214,150,231,173,255,201,273,258,296,256,301,198,278,169,259,146,233,138,215,136,196"/>
+<area shape="rect" id="Node000008" href="$struct__Link.html" title="Link." alt="" coords="409,207,463,232"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="421,245,391,273,357,290,323,301,321,296,354,285,388,268,418,241"/>
+<area shape="rect" id="Node000009" href="$struct__InterfaceData.html" title="Interface Data." alt="" coords="487,207,595,232"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="510,241,440,273,377,291,322,303,321,298,376,286,438,268,508,236"/>
+<area shape="rect" id="Node000010" href="$struct__Command.html" title="Command." alt="" coords="497,108,586,133"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="544,147,544,207,539,207,539,147"/>
+</map>

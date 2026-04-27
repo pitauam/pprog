@@ -1,0 +1,34 @@
+<map id="include/inventory.h" name="include/inventory.h">
+<area shape="rect" id="Node000001" title="Implements the inventory module." alt="" coords="599,5,728,31"/>
+<area shape="rect" id="Node000002" href="$player_8h.html" title="Defines the module &quot;player&quot;." alt="" coords="474,79,586,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="631,39,553,81,551,76,629,35"/>
+<area shape="rect" id="Node000014" href="$inventory_8c.html" title="Implements the inventory module." alt="" coords="610,79,717,104"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="666,44,666,79,661,79,661,44"/>
+<area shape="rect" id="Node000015" href="$inventory__test_8c.html" title="It tests the inventory module." alt="" coords="741,79,879,104"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="700,34,787,76,785,81,698,39"/>
+<area shape="rect" id="Node000003" href="$game_8h.html" title="It defines the game interface." alt="" coords="351,152,461,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="500,113,428,154,425,149,497,108"/>
+<area shape="rect" id="Node000012" href="$player_8c.html" title="Implements the player module." alt="" coords="485,152,575,177"/>
+<area shape="poly" id="edge14_Node000002_Node000012" title=" " alt="" coords="533,118,533,152,527,152,527,118"/>
+<area shape="rect" id="Node000013" href="$player__test_8c.html" title="It tests player module." alt="" coords="599,152,717,177"/>
+<area shape="poly" id="edge15_Node000002_Node000013" title=" " alt="" coords="564,108,638,149,636,154,561,113"/>
+<area shape="rect" id="Node000004" href="$game__actions_8h.html" title="It defines the game update interface." alt="" coords="5,225,164,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="342,183,137,228,136,223,341,178"/>
+<area shape="rect" id="Node000006" href="$game__loop_8c.html" title="It defines the game loop." alt="" coords="217,299,336,324"/>
+<area shape="poly" id="edge12_Node000003_Node000006" title=" " alt="" coords="338,173,308,179,278,189,251,205,230,227,225,236,225,244,232,264,247,282,263,297,260,301,243,285,228,266,220,245,220,234,225,224,248,201,276,185,306,174,336,167"/>
+<area shape="rect" id="Node000007" href="$game__reader_8h.html" title="It reads the .dat file to create the game." alt="" coords="239,225,391,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="382,188,332,227,329,223,379,184"/>
+<area shape="rect" id="Node000008" href="$graphic__engine_8h.html" title="It defines the textual graphic engine interface." alt="" coords="415,225,581,251"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="433,183,485,223,481,227,430,188"/>
+<area shape="rect" id="Node000010" href="$game_8c.html" title="It implements the game structure." alt="" coords="605,225,692,251"/>
+<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="459,179,610,223,609,228,457,184"/>
+<area shape="rect" id="Node000011" href="$game__reader_8c.html" title="Reads the information of the .dat." alt="" coords="716,225,845,251"/>
+<area shape="poly" id="edge13_Node000003_Node000011" title=" " alt="" coords="475,176,721,223,720,228,474,182"/>
+<area shape="rect" id="Node000005" href="$game__actions_8c.html" title="It implements the game update through user actions." alt="" coords="17,299,153,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="87,264,87,299,82,299,82,264"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="129,253,246,296,244,301,128,258"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="305,264,285,300,281,297,300,262"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="450,257,313,301,312,296,449,252"/>
+<area shape="rect" id="Node000009" href="$graphic__engine_8c.html" title="It implements a textual graphic engine." alt="" coords="427,299,569,324"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="501,264,501,299,495,299,495,264"/>
+</map>

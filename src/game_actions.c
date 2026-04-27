@@ -131,7 +131,7 @@ void game_actions_recruit(Game *game);
  */
 void game_actions_abandon(Game *game);
 
-/**
+/*
  * @brief It lets the player use the object for something
  * @author Marta López
  * 
