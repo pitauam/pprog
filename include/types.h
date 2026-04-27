@@ -20,7 +20,7 @@ typedef enum { FALSE, TRUE } Bool;          /*!< Whether it is true or false, us
 
 typedef enum { ERROR, OK } Status;          /*!< Whether a function goes well or has an error*/
 
-typedef enum { NO_DIR = -1, N, S, E, W } Direction;      /*!< Whether a space is connected north, south, east or west or here is no connection*/
+typedef enum { NO_CAT = -1, Venom, Elixir, Strenght, Cursed} Category;      /*!< Category of the object you are gonna use */
 
 typedef enum { NO_DIR = -1, N, S, E, W, U, D} Direction;      /*!< whether a space is connected north, south, east or west, up or down, or here is no connection*/
 
