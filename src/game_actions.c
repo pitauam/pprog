@@ -281,6 +281,7 @@ void game_actions_move(Game *game){
   if (future_id != NO_ID && open == TRUE) {
 
     game_set_player_location(game, future_id);
+    space_set_discovered(game_get_space(game, future_id), TRUE);
     
     /*The reclutas will go with this player to the future_id space -> condiciones: MISMO ESPACIO, AMIGO, QUE ME SIGA (id de recluta == id jugador) y que esté VIVO*/
 
@@ -356,7 +357,7 @@ void game_actions_take(Game *game){
   for (i = 0; i < game_get_number_of_objects(game) ; i++)
   {
     /*gets the object id*/
-    object_id = game_get_object_id(game, i);
+    object_id = game_get_object_id_at(game, i);
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
 
@@ -407,7 +408,7 @@ void game_actions_drop(Game *game){
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
     /*gets the object id*/
-    buffer = game_get_object_id(game, i);
+    buffer = game_get_object_id_at(game, i);
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
 
@@ -685,7 +686,7 @@ void game_actions_inspect(Game *game){
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
     /*gets the object id*/
-    buffer = game_get_object_id(game, i);
+    buffer = game_get_object_id_at(game, i);
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
 
@@ -844,7 +845,7 @@ void game_actions_use(Game *game){
 
   /* Search for object */
   for(i=0; i<game_get_number_of_objects(game); i++){
-    Id actual = game_get_object_id(game, i);
+    Id actual = game_get_object_id_at(game, i);
     Object *current_object = game_get_object(game, actual);
 
     if (current_object != NULL &&

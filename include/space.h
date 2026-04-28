@@ -19,7 +19,8 @@
 
 #define GDESC_WIDTH (9+1) /*+1 to store the '\0' character*/
 #define GDESC_HEIGHT 5
-
+#define GDESC_SIZE1 5
+#define GDESC_SIZE2 10
 
 
 typedef struct _Space Space;

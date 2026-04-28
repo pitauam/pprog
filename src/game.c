@@ -382,7 +382,7 @@ int game_get_number_of_objects(Game *game)
   return game->n_objects;
 }
 
-Id game_get_object_id(Game *game, int pos)
+Id game_get_object_id_at(Game *game, int pos)
 {
   if (!game || pos < 0) {return NO_ID;}
 
