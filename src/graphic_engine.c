@@ -200,7 +200,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   CommandCode last_cmd = UNKNOWN;
   /*Status last_command_status = OK;*/
   extern char *cmd_to_str[N_CMD][N_CMDT];
-  int i, k;
+  int i, j, k;
   Object *obj = NULL;
   Character *chr = NULL;
   Player *player = NULL;
@@ -415,21 +415,31 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_puts(ge->descript, str);
   sprintf(str, " Characters :");
   screen_area_puts(ge->descript, str);
+  
   for(i=0; i < game_get_number_of_spaces(game); i++){
     /*char_id = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
 
-    character_id = game_get_character_id(game, game_get_space_id_at(game, i));
-    
-    if (character_id != NO_ID) 
+
+    char_loc = game_get_space_id_at(game, i);
+
+    /*for every character in the space*/
+    for (j = 0; j < space_get_n_characters(game_get_space(game, char_loc)); j++)
     {
-      char_loc = game_get_space_id_at(game,i);
-
-      chr = game_get_character(game, character_id);
-
-      sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+      character_id = space_get_character_id_at(game_get_space(game, char_loc), j);
     
-      screen_area_puts(ge->descript, str);
+      if (character_id != NO_ID) 
+      {
+        char_loc = game_get_space_id_at(game,i);
+
+        chr = game_get_character(game, character_id);
+
+        sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+    
+        screen_area_puts(ge->descript, str);
+      }
+
     }
+    
   }
 
   player = game_get_player(game);

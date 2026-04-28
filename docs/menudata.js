@@ -93,6 +93,7 @@ var menudata={children:[
 {text:"s",url:"globals_s.html#index_s"},
 {text:"t",url:"globals_t.html#index_t"},
 {text:"u",url:"globals_u.html#index_u"},
+{text:"v",url:"globals_v.html#index_v"},
 {text:"w",url:"globals_w.html#index_w"},
 {text:"y",url:"globals_y.html#index_y"}]},
 {text:"Functions",url:"globals_func.html",children:[
@@ -126,6 +127,7 @@ var menudata={children:[
 {text:"s",url:"globals_eval.html#index_s"},
 {text:"t",url:"globals_eval.html#index_t"},
 {text:"u",url:"globals_eval.html#index_u"},
+{text:"v",url:"globals_eval.html#index_v"},
 {text:"w",url:"globals_eval.html#index_w"},
 {text:"y",url:"globals_eval.html#index_y"}]},
 {text:"Macros",url:"globals_defs.html",children:[

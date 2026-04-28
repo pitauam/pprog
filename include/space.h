@@ -208,4 +208,25 @@ int space_get_n_characters(Space* space);
  */
 Status space_print(Space* space);
 
+/**
+ * @brief returns the set of characters in a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @return set of characters
+ */
+Set *space_get_characters(Space *space);
+
+/**
+ * @brief returns the character in the i position inside a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param i index of the position
+ * @return id of the character in that position
+ */
+
+Id space_get_character_id_at(Space *space, int i);
+
+
 #endif
