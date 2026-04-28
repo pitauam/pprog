@@ -11,7 +11,8 @@ var searchData=
   ['n_5fspaces_8',['n_spaces',['../struct__Game.html#af091df2bb12ae5c6ec3f63bfc8d7877d',1,'_Game']]],
   ['name_9',['name',['../struct__Player.html#ac89715f913cc607b75eb7236765c41f5',1,'_Player::name'],['../struct__Space.html#aa1c9c994c2d16ecf3ef46138685fdfdc',1,'_Space::name'],['../struct__Object.html#a03fb9b8d91f071e8e30d669be79cc040',1,'_Object::name'],['../struct__Link.html#a020ee863120055b29609157b9de3c84d',1,'_Link::name'],['../struct__Character.html#a809c1f8d0e467133b7fc33f4b7c54968',1,'_Character::name']]],
   ['name_5fmsg_10',['name_msg',['../struct__InterfaceData.html#a5829607d9f8acae5155133ab00614b3a',1,'_InterfaceData']]],
-  ['no_5fcmd_11',['NO_CMD',['../command_8h.html#a805cf38fd2b6d5604bf1f1036b80fde2a785693a1d550a18688638e9124af41d0',1,'command.h']]],
-  ['no_5fdir_12',['NO_DIR',['../types_8h.html#a224b9163917ac32fc95a60d8c1eec3aaa3d847d0cdb11753a868963e7014f1fdb',1,'types.h']]],
-  ['no_5fid_13',['NO_ID',['../types_8h.html#a642e16f35aa1e585c25e405ede76e115',1,'types.h']]]
+  ['no_5fcat_11',['NO_CAT',['../types_8h.html#a9ca8f05608edcbf85ab6c2c85a439ccba1efb43101a50e1500c2f2e10b046e455',1,'types.h']]],
+  ['no_5fcmd_12',['NO_CMD',['../command_8h.html#a805cf38fd2b6d5604bf1f1036b80fde2a785693a1d550a18688638e9124af41d0',1,'command.h']]],
+  ['no_5fdir_13',['NO_DIR',['../types_8h.html#a224b9163917ac32fc95a60d8c1eec3aaa3d847d0cdb11753a868963e7014f1fdb',1,'types.h']]],
+  ['no_5fid_14',['NO_ID',['../types_8h.html#a642e16f35aa1e585c25e405ede76e115',1,'types.h']]]
 ];

@@ -396,13 +396,31 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   else {
     strcat(str, "   ");
   }
+   /*
+
+  strcpy(str, "                       |          ");
+
+for very character inside the space
+  for(i=0; i<space_get_n_characters(game_get_space(game, space_id)); i++)
+  {
+    if(game_get_character_location(game, game_get_character_id_at(game, i)) == id_act && game_get_character_id_at(game, i) != NO_ID){
+      strcat(chr, character_get_name(game_get_character(game, game_get_character_id_at(game, i))));
+      strcat(chr, " ");
+      len += strlen(character_get_name(game_get_character(game, game_get_character_id_at(game, i))))+1;
+    }
+  }
+
+  sprintf(str, "                       |%-18.18s|", chr);
+    
+
+  */
   
 
   strcat(str, "     |");
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |");
 
-for (j = 0; j < 5; j++) 
+  for (j = 0; j < 5; j++) 
   {
     gdesc = space_get_gdesc_line(game_get_space(game, id_act), j);
 
@@ -741,6 +759,7 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
     sprintf(str, "                     |%15d|   |%18d|", (int)id_act, (int)id_right);
   }
   screen_area_puts(ge->map, str);
+
   /*prints the characters*/
   sprintf(str, "                       |             ");
   if (game_get_character_id(game, id_act) != NO_ID)
