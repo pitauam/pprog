@@ -41,7 +41,7 @@ directions: NO_DIR,N,S,E,W,U,D
 #l:317|Basement|17|11|4|1|
 
 #c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
-#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|
+#c:42|Guardia|>:O|12|5|1|JASJAJSJAJSJAJ return when you are stronger peasant|
 #c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|

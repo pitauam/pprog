@@ -102,7 +102,7 @@ void graphic_engine_destroy(Graphic_engine *ge) {
 }
 
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object_id = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_right = NO_ID, id_left = NO_ID, obj_loc = NO_ID, char_id = NO_ID, char_loc = NO_ID, player_object_id = NO_ID, space_id = NO_ID;
   Character *character = NULL;
   Player *player = NULL;
   char str[255];
@@ -110,6 +110,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   extern char *cmd_to_str[N_CMD][N_CMDT];
   int n_objects;
   int i = 0;
+  int j = 0;
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);
@@ -220,21 +221,30 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_puts(ge->descript, str);
   sprintf(str, " Characters :");
   screen_area_puts(ge->descript, str);
+  
   for(i=0; i < game_get_number_of_spaces(game); i++){
     /*char_id = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
 
-    char_id = game_get_character_id(game, game_get_space_id_at(game, i));
-    
-    if (char_id != NO_ID) 
+    space_id = game_get_space_id_at(game, i);
+
+    /*for every character in the space*/
+    for (j = 0; j < space_get_n_characters(game_get_space(game, space_id)); j++)
     {
-      char_loc = game_get_space_id_at(game,i);
-
-      character = game_get_character(game, char_id);
-
-      sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(character)),character_get_description(character), (int)char_loc, character_get_health(character));
+      char_id = space_get_character_id_at(game_get_space(game, space_id), j);
     
-      screen_area_puts(ge->descript, str);
+      if (char_id != NO_ID) 
+      {
+        char_loc = game_get_space_id_at(game,i);
+
+        character = game_get_character(game, char_id);
+
+        sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(character)),character_get_description(character), (int)char_loc, character_get_health(character));
+    
+        screen_area_puts(ge->descript, str);
+      }
+
     }
+    
   }
 
   player = game_get_player(game);
@@ -386,13 +396,31 @@ void graphic_engine_space_place(Graphic_engine *ge,Game *game, Id id_act){
   else {
     strcat(str, "   ");
   }
+   /*
+
+  strcpy(str, "                       |          ");
+
+for very character inside the space
+  for(i=0; i<space_get_n_characters(game_get_space(game, space_id)); i++)
+  {
+    if(game_get_character_location(game, game_get_character_id_at(game, i)) == id_act && game_get_character_id_at(game, i) != NO_ID){
+      strcat(chr, character_get_name(game_get_character(game, game_get_character_id_at(game, i))));
+      strcat(chr, " ");
+      len += strlen(character_get_name(game_get_character(game, game_get_character_id_at(game, i))))+1;
+    }
+  }
+
+  sprintf(str, "                       |%-18.18s|", chr);
+    
+
+  */
   
 
   strcat(str, "     |");
   screen_area_puts(ge->map, str);
   sprintf(str, "                       |                  |");
 
-for (j = 0; j < 5; j++) 
+  for (j = 0; j < 5; j++) 
   {
     gdesc = space_get_gdesc_line(game_get_space(game, id_act), j);
 
@@ -731,6 +759,7 @@ void graphic_engine_space_2place(Graphic_engine *ge,Game *game, Id id_act, Id id
     sprintf(str, "                     |%15d|   |%18d|", (int)id_act, (int)id_right);
   }
   screen_area_puts(ge->map, str);
+
   /*prints the characters*/
   sprintf(str, "                       |             ");
   if (game_get_character_id(game, id_act) != NO_ID)

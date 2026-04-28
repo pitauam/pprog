@@ -217,8 +217,6 @@ int space_get_n_objects(Space* space){
 }
 
 
-
-
 Status space_add_character(Space* space, Id id) {
   if (space == NULL || id == NO_ID || space->characters == NULL) {
     return ERROR;
@@ -265,13 +263,6 @@ int space_get_n_characters(Space* space){
 }
 
 
-
-
-
-
-
-
-
 Status space_print(Space* space) {
   Id idaux = NO_ID;
   int i = 0;
@@ -301,4 +292,22 @@ Status space_print(Space* space) {
   }
 
   return OK;
+}
+
+
+Set *space_get_characters(Space *space) {
+  if (!space)
+  {
+    return NULL;
+  }
+  
+  return space->characters;
+}
+
+Id space_get_character_id_at(Space *space, int i) {
+  if (!space || i < 0){
+    return NO_ID;
+  }
+
+  return set_get_id(space->characters, i);
 }

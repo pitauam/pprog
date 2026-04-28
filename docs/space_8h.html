@@ -218,6 +218,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a013d3166ac751f717612c5b0d6510c2c" id="r_a013d3166ac751f717612c5b0d6510c2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a013d3166ac751f717612c5b0d6510c2c">space_print</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
 <tr class="memdesc:a013d3166ac751f717612c5b0d6510c2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">It prints the space information.  <br /></td></tr>
 <tr class="separator:a013d3166ac751f717612c5b0d6510c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab0447b96784652e10639effbf37b28b" id="r_aab0447b96784652e10639effbf37b28b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#aab0447b96784652e10639effbf37b28b">space_get_characters</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:aab0447b96784652e10639effbf37b28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the set of characters in a space  <br /></td></tr>
+<tr class="separator:aab0447b96784652e10639effbf37b28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a08547a3ed9e35b581fd6d17fdff19d" id="r_a4a08547a3ed9e35b581fd6d17fdff19d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a845e604fb28f7e3d97549da3448149d3">Id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a4a08547a3ed9e35b581fd6d17fdff19d">space_get_character_id_at</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, int i)</td></tr>
+<tr class="memdesc:a4a08547a3ed9e35b581fd6d17fdff19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the character in the i position inside a space  <br /></td></tr>
+<tr class="separator:a4a08547a3ed9e35b581fd6d17fdff19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the space module interface. </p>
@@ -479,6 +485,73 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TRUE, if the object is in the space, FALSE in other cases </dd></dl>
+
+</div>
+</div>
+<a id="a4a08547a3ed9e35b581fd6d17fdff19d" name="a4a08547a3ed9e35b581fd6d17fdff19d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a08547a3ed9e35b581fd6d17fdff19d">&#9670;&#160;</a></span>space_get_character_id_at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a845e604fb28f7e3d97549da3448149d3">Id</a> space_get_character_id_at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>returns the character in the i position inside a space </p>
+<dl class="section author"><dt>Author</dt><dd>Santiago Pita</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">space</td><td>a pointer to the space </td></tr>
+    <tr><td class="paramname">i</td><td>index of the position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>id of the character in that position </dd></dl>
+
+</div>
+</div>
+<a id="aab0447b96784652e10639effbf37b28b" name="aab0447b96784652e10639effbf37b28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab0447b96784652e10639effbf37b28b">&#9670;&#160;</a></span>space_get_characters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> * space_get_characters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>returns the set of characters in a space </p>
+<dl class="section author"><dt>Author</dt><dd>Santiago Pita</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">space</td><td>a pointer to the space </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>set of characters </dd></dl>
 
 </div>
 </div>
