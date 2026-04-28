@@ -619,7 +619,7 @@ int game_get_object_position(Game *game, Id object_id){
   }
 
   for(i = 0; i < game->n_objects; i++){
-    if(game_get_object_id(game, i) == object_id){
+    if(game_get_object_id_at(game, i) == object_id){
       return i;
     }
   }

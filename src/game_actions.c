@@ -359,7 +359,7 @@ void game_actions_take(Game *game){
   for (i = 0; i < game_get_number_of_objects(game) ; i++)
   {
     /*gets the object id*/
-    object_id = game_get_object_id(game, i);
+    object_id = game_get_object_id_at(game, i);
     object = game_get_object(game, object_id);
     dependency = object_get_dependency(object);
 
