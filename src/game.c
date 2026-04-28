@@ -609,3 +609,36 @@ int game_get_n_followers(Game *game, Player *player){
 
   return n_followers;
 }
+
+int game_get_object_position(Game *game, Id object_id){
+
+  int i = 0;
+
+  if(!game){
+    return ERROR;
+  }
+
+  for(i = 0; i < game->n_objects; i++){
+    if(game_get_object_id_at(game, i) == object_id){
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+Status game_remove_object(Game *game, Object *object){
+
+  Id obj_id = object_get_id(object);
+  int index;
+
+  if(!game || !object){
+    return ERROR;
+  }
+
+  index = game_get_object_position(game, obj_id);
+
+  object_destroy(game->object[index]);
+  
+  return OK;
+}

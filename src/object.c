@@ -226,15 +226,15 @@ Status object_print(Object* object) {
   }
 
   if (object_get_category(object) == Venom) {
-    fprintf(stdout, "- Object category is Venomus\n");
+    fprintf(stdout, "- Object category is venomus\n");
   } else if (object_get_category(object) == Elixir) {
-    fprintf(stdout, "- Object category is Elexir\n");
+    fprintf(stdout, "- Object category is an elexir\n");
   } else if (object_get_category(object) == Strenght) {
-    fprintf(stdout, "- Object category is Power\n");
+    fprintf(stdout, "- Object category is empowering\n");
   } else if (object_get_category(object) == Cursed) {
-    fprintf(stdout, "- Object category is Cursed\n");
+    fprintf(stdout, "- Object category is a curse\n");
   } else{
-    fprintf(stdout, "- Object cannot be moved\n");
+    fprintf(stdout, "- Object with no category\n");
   }
 
   return OK;

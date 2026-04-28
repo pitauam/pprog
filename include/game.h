@@ -429,4 +429,26 @@ int game_get_n_followers(Game *game, Player *player);
  */
 const char *game_get_character_name(Game *game, Character *chr); 
 
+/**
+ * @brief gets the position of the object
+ * @author Marta López
+ * 
+ * @param game a pointer to the game
+ * @param object_id the id of the object
+ * 
+ * @return position of the object in the game->object array
+ */
+int game_get_object_position(Game *game, Id object_id);
+
+/**
+ * @brief removes the object from the game
+ * @author Marta López
+ * 
+ * @param game a pointer to the game
+ * @param object a pointer to object
+ * 
+ * @return OK if removed, ERROR otherwise
+ */
+Status game_remove_object(Game *game, Object *object);
+
 #endif
