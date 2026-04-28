@@ -616,6 +616,7 @@ void game_actions_attack(Game *game){
     NOTE: this must be added when spaces can have more than one character
     space_set_character(game_get_space(game, player_location), NO_ID);  
     */
+    character_set_following(char_aux, NO_ID);
     space_remove_character(game_get_space(game, player_location), character_get_id(char_aux));
   }
   /*all above must be moved*/

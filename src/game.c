@@ -638,7 +638,8 @@ Status game_remove_object(Game *game, Object *object){
 
   index = game_get_object_position(game, obj_id);
 
-  object_destroy(game->object[index]);
+  /*comprobar que esto esté bien vvv*/
+  game->object[index] = NULL;
   
   return OK;
 }
