@@ -19,7 +19,8 @@
 
 #define GDESC_WIDTH (9+1) /*+1 to store the '\0' character*/
 #define GDESC_HEIGHT 5
-
+#define GDESC_SIZE1 5
+#define GDESC_SIZE2 10
 
 
 typedef struct _Space Space;
@@ -206,5 +207,26 @@ int space_get_n_characters(Space* space);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_print(Space* space);
+
+/**
+ * @brief returns the set of characters in a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @return set of characters
+ */
+Set *space_get_characters(Space *space);
+
+/**
+ * @brief returns the character in the i position inside a space
+ * @author Santiago Pita
+ *
+ * @param space a pointer to the space
+ * @param i index of the position
+ * @return id of the character in that position
+ */
+
+Id space_get_character_id_at(Space *space, int i);
+
 
 #endif

@@ -231,7 +231,7 @@ int game_get_number_of_objects(Game *game);
  * @param pos position of the object
  * @return the id of the object in said position
  */
-Id game_get_object_id(Game *game, int pos);
+Id game_get_object_id_at(Game *game, int pos);
 
 /**
  * @brief returns the name of an object
