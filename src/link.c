@@ -28,6 +28,9 @@ struct _Link{
   Bool open;                       /*!< Whether the connection between origin and destination spaces is open or not*/
 };
 
+
+
+
 Link* link_create(Id id){
   Link* new_link = NULL;
 
@@ -147,6 +150,13 @@ Bool link_get_open(Link* link){
     return FALSE;
   }
   return link->open;
+}
+
+Id link_get_id(Link* link){
+  if (!link) {
+    return NO_ID;
+  }
+  return link->id;
 }
 
 Status link_print(Link* link){
