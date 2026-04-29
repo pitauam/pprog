@@ -145,7 +145,7 @@ void game_actions_use(Game *game);
  * 
  * @param game a pointer to the game
  */
-/*void game_actions_open(Game *game);               DESCOMENTAAAAAAAAARRRRRRRRRRRR!!!!!!!!!!!!!!!!!!!!!!!*/
+void game_actions_open(Game *game);  
 
 
 /**
@@ -952,10 +952,43 @@ void game_actions_use(Game *game){
   command_set_return(game_get_last_command(game), OK);
 }
 
-void game_actions_open(Game *game);
 void game_actions_open(Game *game){
-  /*Que el link este cerrado, que el objecto tenga en open el id del link, que ese link esté en el espacio del jugador*/
+  Id obj_id = NO_ID, link_id = NO_ID;
+  char* link_name =  NULL, *object_name = NULL;
+  Link* link =  NULL;
+  Object* obj = NULL;
 
+  if(!game) {return;}
+
+  /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
+  strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
+  if (!link_name) return;
+
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 2));
+  if (!object_name) return;
+
+  /*Get all we need*/
+  link = game_get_link_by_name(game, link_name);
+  if(!link) return;
+  link_id = link_get_id(link);
+  if(link_id == NO_ID) return;
+
+  obj = game_get_object_by_name(game, object_name);
+  if(!obj) return;
+  obj_id = object_get_id(obj);
+
+
+  /*This command only has sense if the link is actually closed*/
+  if(link_get_open(link)==TRUE) {
+    return;
+  }
+
+  /*Check that the object can open this link*/
+  if(link_id == object_get_open(obj)) {
+    /*Uses this object to open the link*/
+    player_remove_object(game_get_player(game), obj_id);
+    link_set_open(link, TRUE);
+  }
 
   return;
 }
