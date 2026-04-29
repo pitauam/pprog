@@ -13,13 +13,13 @@
 #include "types.h"
 
 #define CMD_LENGTH 30 /*!< Maximum lenght of a command input */
-#define MAX_CMD_ARG 3 /*!< Maximum arguments a command can have */
-#define N_CMDT 2
-#define N_CMD 12
+#define MAX_CMD_ARGS 3 /*!< Maximum arguments a command can have */
+#define N_CMDT 2    /*!< Number of command Types*/
+#define N_CMD 13      /*!< Number of commands*/
 
 typedef enum { CMDS, CMDL } CommandType;
 
-typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON, USE } CommandCode;
+typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON, USE, OPEN } CommandCode;
 
 typedef struct _Command Command;
 
@@ -72,23 +72,25 @@ Status command_get_user_input(Command* command);
 
 /**
  * @brief It sets the argument of the command
- * @author Santiago Pita
+ * @author Paula de la Fuente
  *
  * @param command a pointer to the command
  * @param arg a string with the argument to set
+ * @param index the index that the argument wanted occupies on the array
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status command_set_arg(Command* command, char* arg);
+Status command_set_arg(Command* command, char* arg, int index);
 
 
 /**
  * @brief It gets the argument of the command
- * @author Santiago Pita
+ * @author Paula de la Fuente
  *
  * @param command a pointer to the command
+ * @param index index of that the argument wanted ocuppies in the array
  * @return the argument code
  */
-char* command_get_arg(Command* command);
+char *command_get_arg(Command* command, int index);
 
 /**
  * @brief It sets the return result of the command

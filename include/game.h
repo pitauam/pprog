@@ -110,6 +110,17 @@ Id game_get_object_location(Game *game, Id object_id);
 Status game_set_object_location(Game *game, Id new_space_id, Id object_id);
 
 /**
+ * @brief Sets the location of a character
+ * @author Paula de la Fuente
+ *
+ * @param game pointer to game
+ * @param new_space_id id of the space where the character will be added
+ * @param chr_id id of the chracter to add
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_set_character_location(Game *game, Id new_space_id, Id chr_id);
+
+/**
  * @brief Gets the last command
  * @author Profesores PPROG
  *

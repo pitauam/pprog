@@ -60,7 +60,7 @@ static void game_loop_log_command(FILE *log_fp, Command *cmd) {
   }
 
   cmd_str = game_loop_command_to_str(command_get_code(cmd));
-  arg = command_get_arg(cmd);
+  arg = command_get_arg(cmd, 0);
 
   if (arg && arg[0] != '\0') {
     fprintf(log_fp, "%s %s: %s\n", cmd_str, arg, command_to_string(command_get_return(cmd)));
@@ -187,7 +187,7 @@ void game_loop_log (Game *game, FILE *f) {
   last_command_status = command_get_return(game_get_last_command(game));
 
   last_cmd_arg[0] = '\0';
-  arg = command_get_arg(game_get_last_command(game));
+  arg = command_get_arg(game_get_last_command(game), 0);
 
   if (arg != NULL && arg[0] != '\0')
   {

@@ -142,6 +142,15 @@ Nota: descomentar cuando esté hecha la funcion
 */
 
 /**
+ * @brief It lets the player to open a link with some object
+ * @author Paula de la Fuente
+ * 
+ * @param game a pointer to the game
+ */
+/*void game_actions_open(Game *game);               DESCOMENTAAAAAAAAARRRRRRRRRRRR!!!!!!!!!!!!!!!!!!!!!!!*/
+
+
+/**
  * @brief Gets the id of the first enemy character at a given space
  * @author Santiago Pita
  *
@@ -210,6 +219,13 @@ Status game_actions_update(Game *game, Command *command) {
       Nota: descomentar cuando esté hecha la funcion
 */
 
+    /*case OPEN:
+      game_actions_open(game);
+      break;
+
+      NOTA:             DESCOMENTAR CUANDO ESTÉ TERMINADOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!
+      */
+
     default:
       break;
   }
@@ -237,7 +253,7 @@ void game_actions_move(Game *game){
   int i;
   Space* actual_space = NULL, *future_space = NULL;
 
-  strcpy(direction, command_get_arg(game_get_last_command(game)));
+  strcpy(direction, command_get_arg(game_get_last_command(game), 0));
 
   if (strcmp(direction, "b") == 0 || strcmp(direction, "back") == 0)
   {
@@ -340,7 +356,7 @@ void game_actions_take(Game *game){
 
 
   /*saves the last command argument*/
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   if (player_inventory_full(player) == TRUE) {
     command_set_return(game_get_last_command(game), ERROR);
@@ -396,7 +412,7 @@ void game_actions_drop(Game *game){
   /*checks if the player has an object*/
   player = game_get_player(game);
 
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
@@ -598,7 +614,7 @@ void game_actions_chat(Game *game){
   }}
 
   /*Get the character wanted*/
-  strcpy(character_name, command_get_arg(game_get_last_command(game))); /*name got it*/
+  strcpy(character_name, command_get_arg(game_get_last_command(game), 0)); /*name got it*/
 
   for (i=0 ; i < game_get_number_of_characters(game) ; i++) { /*Go through all the characters of the game comparing the name with the name of the character wanted*/
     character_id = game_get_character_id_at(game, i);
@@ -672,7 +688,7 @@ void game_actions_inspect(Game *game){
   
 
   /*saves the last command argument*/
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
@@ -748,7 +764,7 @@ void game_actions_recruit(Game *game) {
     return;
   }
 
-  chr_name = command_get_arg(game_get_last_command(game));
+  chr_name = command_get_arg(game_get_last_command(game), 0);
   if (chr_name == NULL || chr_name[0] == '\0') {
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -785,7 +801,7 @@ void game_actions_abandon(Game *game) {
     return;
   }
 
-  chr_name = command_get_arg(game_get_last_command(game));
+  chr_name = command_get_arg(game_get_last_command(game), 0);
 
   if (chr_name == NULL) {
     command_set_return(game_get_last_command(game), ERROR);
@@ -828,7 +844,7 @@ void game_actions_use(Game *game){
   }
 
   /* Get object name (use "something") */
-  obj_name = command_get_arg(game_get_last_command(game));
+  obj_name = command_get_arg(game_get_last_command(game), 0);
   if(obj_name == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -876,6 +892,14 @@ void game_actions_use(Game *game){
   player_remove_object(player, object_id);
 
   command_set_return(game_get_last_command(game), OK);
+}
+
+void game_actions_open(Game *game);
+void game_actions_open(Game *game){
+  /*Que el link este cerrado, que el objecto tenga en open el id del link, que ese link esté en el espacio del jugador*/
+
+
+  return;
 }
 
 

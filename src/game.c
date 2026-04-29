@@ -207,6 +207,10 @@ Id game_get_object_location(Game *game, Id object_id)
   return NO_ID; 
 }
 
+
+/*--------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------*/
+/*CREO QUE ESTAS DOS FUNCIONES NO SIRVEN PARA NADA*/
 Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
   Space *space;
 
@@ -221,6 +225,24 @@ Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
 
   return OK;
 }
+
+Status game_set_character_location(Game *game, Id new_space_id, Id chr_id) {
+  Space *space;
+  if (!game || new_space_id == NO_ID || chr_id == NO_ID ) return ERROR;
+
+  /* Places the character in the space */
+  space = game_get_space(game, new_space_id);
+  if (!space) return ERROR;
+
+  
+  if (space_add_character(space, chr_id) == ERROR) {return ERROR;}
+
+  return OK;
+
+}
+/*--------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------*/
+
 
 Command* game_get_last_command(Game *game) {
   if (!game || game->turn < 0 || game->turn >= game->n_players) {
@@ -440,6 +462,10 @@ int game_get_number_of_links(Game *game){
   return game->n_links;
 }
 
+
+
+
+
 Id game_get_character_location(Game *game, Id id){
   int i;
   if (!game || id == NO_ID) {return NO_ID;}
@@ -455,6 +481,8 @@ Id game_get_character_location(Game *game, Id id){
   return NO_ID; 
 }
 
+/*-----------------------------------------------*/
+/*novale -> ahora en un espacio hay mas de un character            BORRAR??????????????????????*/
 Id game_get_character_id(Game *game, Id space_id) {
   int i;
   Id current_char_id = NO_ID;
@@ -472,6 +500,12 @@ Id game_get_character_id(Game *game, Id space_id) {
 
   return NO_ID;
 }
+/*-----------------------------------------------*/
+
+
+
+
+
 
 Status game_set_message(Game *game, const char* message){
 
