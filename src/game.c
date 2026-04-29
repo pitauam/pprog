@@ -36,6 +36,8 @@ struct _Game {
   InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player*/
 };
 
+
+
 /**
  * @brief Interface Data
  *
@@ -280,6 +282,8 @@ Status game_set_finished(Game *game, Bool finished) {
   return OK;
 }
 
+
+
 void game_print(Game *game) {
   int i = 0;
 
@@ -406,6 +410,19 @@ Link *game_get_link(Game *game, Id id) {
 
   for (i = 0; i < game->n_links; i++) {
     if (id == link_get_id(game->link[i])) {
+      return game->link[i];
+    }
+  }
+
+  return NULL;
+}
+
+Link* game_get_link_by_name(Game* game, char* name){
+  int i;
+  if(!game) return NULL;
+
+  for (i = 0; i < game->n_links; i++) {
+    if (strcmp(name, link_get_name(game->link[i])) == 0) {
       return game->link[i];
     }
   }

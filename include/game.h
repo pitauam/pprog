@@ -235,6 +235,17 @@ Object *game_get_object(Game *game, Id id);
  */
 Link *game_get_link(Game *game, Id id);
 
+/**
+ * @brief Gets the pointer of the link from its name
+ * @author Paula de la Fuente
+ *
+ * @param game pointer to game
+ * @param name name of the linik
+ * @return pointer to the link or NULL if something went wrong
+ */
+Link* game_get_link_by_name(Game* game, char* name);
+
+
 
 
 /**
