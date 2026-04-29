@@ -2,9 +2,9 @@
  * @brief Implements the object module
  *
  * @file object.c
- * @author Santiago Pita
+ * @author Marta López y Santiago Pita
  * @version 0
- * @date 03-02-2026
+ * @date 27-04-2026
  * @copyright GNU Public License
  */
 
@@ -27,7 +27,8 @@ struct _Object {
   int health; /*!< Health of the object */
   Bool movable; /*!< Movility of the object */
   Id dependency; /*!< Dependency of the object */
-  Id open; /*!< Open or closed to get it */
+  Id open; /*!< Id of a link, Open or closed to get it */
+  Category category;
 };
 
 /** object_create allocates memory and initializes all variables*/
@@ -47,6 +48,11 @@ Object* object_create(Id id) {
   new_object->id = id;
   new_object->name[0] = '\0';
   new_object->description[0] = '\0';
+  new_object->health = '0';
+  new_object->movable = FALSE;
+  new_object->dependency = NO_ID;
+  new_object->open = NO_ID;
+  new_object->category = NO_CAT;
 
   return new_object;
 }
@@ -115,7 +121,7 @@ Status object_set_health(Object* object, int health) {
     return ERROR;
   }
   
- object->health = health;
+  object->health = health;
   
   return OK;
 }
@@ -134,7 +140,7 @@ Status object_set_movable(Object* object, Bool movable){
     return ERROR;
   }
   
- object->movable = movable;
+  object->movable = movable;
   
   return OK;
 }
@@ -175,12 +181,31 @@ Status object_set_open(Object* object, Bool open){
   return OK;
 }
 
-Bool object_get_open(Object* object) {
+Id object_get_open(Object* object) {
   if (!object) {
-    return FALSE;
+    return NO_ID;
   }
 
   return object->open;
+}
+
+Status object_set_category(Object* object, Category category){
+  if (!object)
+  {
+    return ERROR;
+  }
+  
+  object->category = category;
+  
+  return OK;
+}
+
+Category object_get_category(Object* object) {
+  if (!object) {
+    return NO_CAT;
+  }
+
+  return object->category;
 }
 
 Status object_print(Object* object) {
@@ -192,18 +217,24 @@ Status object_print(Object* object) {
   }
 
   /* 1. Prints object's id and name */
-  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Description: %s; Health: %d; Dependency: %ld)\n", object->id, object->name, object->description, object->health, object->dependency);
+  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Description: %s; Health: %d; Dependency: %ld; Open: %ld)\n", object->id, object->name, object->description, object->health, object->dependency, object->open);
 
-  if (object_get_movable(object)) {
+  if (object_get_movable(object) == TRUE) {
     fprintf(stdout, "- Object is movable\n");
   } else {
     fprintf(stdout, "- Object cannot be moved\n");
   }
 
-  if (object_get_open(object)) {
-    fprintf(stdout, "- Object can open other objects\n");
-  } else {
-    fprintf(stdout, "- Object cannot open other objects\n");
+  if (object_get_category(object) == Venom) {
+    fprintf(stdout, "- Object category is venomus\n");
+  } else if (object_get_category(object) == Elixir) {
+    fprintf(stdout, "- Object category is an elexir\n");
+  } else if (object_get_category(object) == Strenght) {
+    fprintf(stdout, "- Object category is empowering\n");
+  } else if (object_get_category(object) == Cursed) {
+    fprintf(stdout, "- Object category is a curse\n");
+  } else{
+    fprintf(stdout, "- Object with no category\n");
   }
 
   return OK;
