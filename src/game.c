@@ -430,6 +430,20 @@ Link* game_get_link_by_name(Game* game, char* name){
   return NULL;
 }
 
+
+Object* game_get_object_by_name(Game* game, char* name){
+  int i;
+  if(!game) return NULL;
+
+  for (i = 0; i < game->n_objects; i++) {
+    if (strcmp(name, object_get_name(game->object[i])) == 0) {
+      return game->object[i];
+    }
+  }
+
+  return NULL;
+}
+
 int game_get_number_of_objects(Game *game)
 {
   if (!game) {return -1;}
