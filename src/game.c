@@ -397,6 +397,22 @@ Object *game_get_object(Game *game, Id id) {
   return NULL;
 }
 
+Link *game_get_link(Game *game, Id id) {
+  int i = 0;
+
+  if (id == NO_ID) {
+    return NULL;
+  }
+
+  for (i = 0; i < game->n_links; i++) {
+    if (id == link_get_id(game->link[i])) {
+      return game->link[i];
+    }
+  }
+
+  return NULL;
+}
+
 int game_get_number_of_objects(Game *game)
 {
   if (!game) {return -1;}

@@ -226,6 +226,18 @@ Status game_add_character(Game *game, Character *character);
 Object *game_get_object(Game *game, Id id);
 
 /**
+ * @brief Gets the pointer of the link from its id
+ * @author Paula de la Fuente
+ *
+ * @param game pointer to game
+ * @param id id of the link
+ * @return pointer to the link or NULL if something went wrong
+ */
+Link *game_get_link(Game *game, Id id);
+
+
+
+/**
  * @brief gets the total number of objects
  * @author Santiago Pita
  *
