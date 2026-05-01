@@ -877,12 +877,14 @@ void game_actions_abandon(Game *game) {
 
 
 void game_actions_use(Game *game){
-  int i=0;
+  int i=0, j=0;
   Player *player = NULL;
   Object *obj = NULL;
+  Character *character = NULL;
 
   Id object_id = NO_ID;
   char *obj_name = NULL;
+  char *character_name = NULL;
 
   if(game == NULL) return;
 
@@ -891,6 +893,32 @@ void game_actions_use(Game *game){
   if(player == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
+
+  /* If the command has more than one arg, means that you use it on a character who's following the player */
+  if((character_name = command_get_arg(game_get_last_command(game), 2)) != NULL){
+
+    /* Buscar quién te sigue para aumentar su vida */
+    for(j = 0; j < game_get_number_of_characters(game); j++){
+      
+      /* Get the actual character */
+      character = game_get_character(game, game_get_character_id_at(game, j));
+
+      if(character == NULL){
+         continue;
+      }
+
+      if(character_get_following(character) == player_get_id(player) && strcmp(character_name, character_get_name(character)) == 0){
+        break;
+      }
+      /* Si no coincide sigo buscando */
+    }
+
+    /* Si no funciona */
+    if(character == NULL || character_get_following(character) != player_get_id(player) || strcmp(character_name, character_get_name(character)) != 0){
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
+    }
   }
 
   /* Get object name (use "something") */
@@ -935,14 +963,24 @@ void game_actions_use(Game *game){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
-  /* Each category of the object adds or removes health to the character */
 
-  if(object_get_category(obj) == Venom){
-    player_set_health(player, (player_get_health(player)-object_get_health(obj)));
-  } else if (object_get_category(obj) == Elixir){
-    player_set_health(player, (player_get_health(player)+object_get_health(obj)));
-  } else if (object_get_category(obj) == NO_CAT){
-    player_set_health(player, (player_get_health(player)+0));
+  /* Each category of the object adds or removes health to the character or player */
+  if((character_name = command_get_arg(game_get_last_command(game), 2)) != NULL){  
+    if(object_get_category(obj) == Venom){
+      character_set_health(character, (character_get_health(character)-object_get_health(obj)));
+    } else if (object_get_category(obj) == Elixir){
+      character_set_health(character, (character_get_health(character)+object_get_health(obj)));
+    } else if (object_get_category(obj) == NO_CAT){
+      character_set_health(character, (character_get_health(character)+0));
+    }
+  } else {
+    if(object_get_category(obj) == Venom){
+      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
+    } else if (object_get_category(obj) == Elixir){
+      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+    } else if (object_get_category(obj) == NO_CAT){
+      player_set_health(player, (player_get_health(player)+0));
+    }
   }
 
   /* Remove from inventary */
@@ -950,6 +988,7 @@ void game_actions_use(Game *game){
   game_remove_object(game, obj);
 
   command_set_return(game_get_last_command(game), OK);
+  
 }
 
 void game_actions_open(Game *game){
