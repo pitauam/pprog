@@ -965,21 +965,31 @@ void game_actions_use(Game *game){
   }
 
   /* Each category of the object adds or removes health to the character or player */
-  if((character_name = command_get_arg(game_get_last_command(game), 2)) != NULL){  
-    if(object_get_category(obj) == Venom){
-      character_set_health(character, (character_get_health(character)-object_get_health(obj)));
-    } else if (object_get_category(obj) == Elixir){
-      character_set_health(character, (character_get_health(character)+object_get_health(obj)));
-    } else if (object_get_category(obj) == NO_CAT){
-      character_set_health(character, (character_get_health(character)+0));
-    }
-  } else {
+  if((character_name = command_get_arg(game_get_last_command(game), 2)) == NULL){
     if(object_get_category(obj) == Venom){
       player_set_health(player, (player_get_health(player)-object_get_health(obj)));
     } else if (object_get_category(obj) == Elixir){
       player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Strength){
+      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Cursed){
+      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
     } else if (object_get_category(obj) == NO_CAT){
       player_set_health(player, (player_get_health(player)+0));
+    }
+  } else {
+    if(object_get_category(obj) == Venom){
+      character_set_health(character, (character_get_health(character)-object_get_health(obj)));
+    } else if (object_get_category(obj) == Elixir){
+      character_set_health(character, (character_get_health(character)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Strength){
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
+    } else if (object_get_category(obj) == Cursed){
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
+    } else if (object_get_category(obj) == NO_CAT){
+      character_set_health(character, (character_get_health(character)+0));
     }
   }
 

@@ -48,7 +48,7 @@ Object* object_create(Id id) {
   new_object->id = id;
   new_object->name[0] = '\0';
   new_object->description[0] = '\0';
-  new_object->health = '0';
+  new_object->health = 0;
   new_object->movable = FALSE;
   new_object->dependency = NO_ID;
   new_object->open = NO_ID;
@@ -116,7 +116,7 @@ const char* object_get_desc(Object* object)
 }
 
 Status object_set_health(Object* object, int health) {
-  if (!object || !health)
+  if (!object)
   {
     return ERROR;
   }
@@ -229,7 +229,7 @@ Status object_print(Object* object) {
     fprintf(stdout, "- Object category is venomus\n");
   } else if (object_get_category(object) == Elixir) {
     fprintf(stdout, "- Object category is an elexir\n");
-  } else if (object_get_category(object) == Strenght) {
+  } else if (object_get_category(object) == Strength) {
     fprintf(stdout, "- Object category is empowering\n");
   } else if (object_get_category(object) == Cursed) {
     fprintf(stdout, "- Object category is a curse\n");
