@@ -499,9 +499,4 @@ Status game_next_turn(Game *game);
  */
 void game_print(Game *game);
 
-
-
-
-
-
 #endif

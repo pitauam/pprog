@@ -3,206 +3,168 @@
  *
  * @file game_rules.c
  * @version 0
- * @date 28-04-2026
+ * @date 04-05-2026
  */
 
- #include "game_rules.h"
+#include "game_rules.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <time.h>
+
+#define N_CMDS 2      /*!< Number of commands*/
+
+
+/**
+   Private functions
+*/
+
+/**
+ * @brief the command teleports the player and its followers to a random space
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ */
+void game_rules_teleport(Game *game);
+
+/**
+ * @brief the command deals 1 damage to the player
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ */
+
+void game_rules_random_damage(Game* game);
+
 /*
-#define CMD_LENGHT 30
+   Game actions implementation
+*/
 
-char *cmd_to_str[N_CMD][N_CMDT] = {
-  {"", "No command"},
-  {"", "Unknown"},
-  {"e", "Exit"},
-  {"m", "Move"},
-  {"t", "Take"},
-  {"d", "Drop"},
-  {"a", "Attack"},
-  {"c", "Chat"},
-  {"i", "Inspect"},
-  {"r", "Recruit"},
-  {"x", "Abandon"},
-  {"u", "Use"}
-};*/
+Status game_rules_update(Game *game) {
+  CommandRules random_command; /*chooses a command to execute*/
+  int random_number; /*this number decides whether a command is executed or not*/
 
-/*
- * @brief Command
- *
- * This struct stores all the information related to a command.
- *
-struct _Command {
-  CommandCode code;            /*!< Name of the command *
-  char arg[CMD_LENGHT];        /*!<Argument introduced with the command
-  Status result;               /*!<result of the command (error or ok)*
-};
-
-/** space_create allocates memory for a new space
- *  and initializes its members
- *
-Command* command_create() {
-  Command* newCommand = NULL;
-
-  newCommand = (Command*)calloc(1,sizeof(Command));
-  if (newCommand == NULL) {
-    return NULL;
+  random_number = rand() % 3;
+  if (random_number != 0){
+    /*1 out of 10 chance the command will execute*/
+    return OK;
   }
 
-  /* Initialization of an empty command*
-  newCommand->code = NO_CMD;
-  newCommand->arg[0] = '\0';
-  return newCommand;
-}
+  /*random number between -1 and N_CMD-1
+  random_number =  ((rand() % (N_CMD+1)) - 1);
+  */
 
-Status command_destroy(Command* command) {
-  if (!command) {
-    return ERROR;
+  /*random number between 0 and N_CMD to decide the command that will be executed*/
+  random_command  = rand() % N_CMDS;
+  
+  switch (random_command) {
+    /*no command. -1
+    case UNKNOWN_CMD:
+      game_rules_unknown_cmd(game);
+      break;
+    */
+
+    case TELEPORT:
+      game_rules_teleport(game);
+      break;
+
+    case RANDOM_DAMAGE:
+      game_rules_random_damage(game);
+      break;
+
+    default:
+      break;
   }
 
-  free(command);
-  command = NULL;
   return OK;
 }
 
-Status command_set_code(Command* command, CommandCode code) {
-  if (!command) {
-    return ERROR;
+/**
+   Calls implementation for each action
+*/
+
+void game_rules_unknown_cmd(Game *game) {}
+
+void game_rules_teleport(Game *game){
+  Id future_id = NO_ID; /*Where I go*/
+  Id space_id = NO_ID;  /*Where I am*/
+  Bool open = FALSE;    
+  Direction dir = NO_DIR;
+
+  Character* chr=NULL;
+  Id current_char_id = NO_ID, current_char_location = NO_ID, current_char_following = NO_ID;
+  int i;
+  Space* actual_space = NULL, *future_space = NULL;
+  int random_number = 5;
+
+  dir = random_number;
+
+  space_id = game_get_player_location(game);
+  actual_space = game_get_space(game, space_id);
+  if (NO_ID == space_id || !actual_space) {
+    return;
   }
 
-  command->code=code;
-
-  return OK;
-}
-
-CommandCode command_get_code(Command* command) {
-  if (!command) {
-    return NO_CMD;
-  }
-  return command->code;
-}
-
-char *command_get_arg(Command* command) {
-  if (!command) {
-    return NULL;
-  }
-  return command->arg;
-}
-
-
-Status command_get_user_input(Command* command) {
-  char input[CMD_LENGTH] = "", *token = NULL, *arg = NULL;
-  int i = UNKNOWN - NO_CMD + 1;
-  CommandCode cmd;
-
-  if (!command)
-  {
-    return ERROR;
+  future_id = game_get_connection(game, space_id, dir);
+  future_space = game_get_space(game, future_id);
+  if (NO_ID == space_id || !future_space) {
+    return;
   }
 
-  if (fgets(input, CMD_LENGTH, stdin))
-  {
-    input[strcspn(input, "\n")] = '\0';
-    token = strtok(input, " ");
-    if (!token)
+  open = game_connection_is_open(game, space_id, dir);
+
+  if (future_id != NO_ID && open == TRUE) {
+
+    game_set_player_location(game, future_id);
+    space_set_discovered(game_get_space(game, future_id), TRUE);
+    
+    /*The reclutas will go with this player to the future_id space -> condiciones: MISMO ESPACIO, AMIGO, QUE ME SIGA (id de recluta == id jugador) y que esté VIVO*/
+
+    /*Finds the character to move*/
+    for (i = 0 ; i < game_get_number_of_characters(game); i++)
     {
-      return command_set_code(command, UNKNOWN);
-    }
+      /*Passes through all the characters of the game*/
+      current_char_id = game_get_character_id_at(game, i);
+      chr = game_get_character(game, current_char_id);
+      current_char_location = game_get_character_location(game, current_char_id);
+      current_char_following = character_get_following(chr);
 
-    cmd = UNKNOWN;
-    while (cmd == UNKNOWN && i < N_CMD)
-    {
-      if (!strcasecmp(token, cmd_to_str[i][CMDS]) || !strcasecmp(token, cmd_to_str[i][CMDL]))
-      {
-        cmd = i + NO_CMD;
-      } else {
-        i++;
+      if (current_char_id == NO_ID || !chr){
+        return;
+      }
+
+      if (current_char_location == space_id && character_get_friendly(chr)==TRUE && current_char_following == player_get_id(game_get_player(game)) && character_get_health(chr) > 0 && current_char_location != NO_ID) { /*CUMPLE CONDICIONES*/
+        /*2. Remove character from the space_id   and   3. Add character to the future_id*/
+        
+        if (space_remove_character(actual_space, current_char_id) == ERROR)
+        {
+          return;
+        }
+
+        if (space_add_character(future_space, current_char_id) == ERROR)
+        {
+          return;
+        }
       }
     }
-
-    if (command_set_code(command, cmd) == ERROR)
-    {
-      return ERROR;
-    }
-
-    arg = strtok(NULL, " "); 
-    if (arg != NULL) {
-      command_set_arg(command, arg);
-    } else {
-      command_set_arg(command, "");
-    }
-
-    return OK;
   }
-  else {
-    return command_set_code(command, EXIT);
+  return;
+}
+
+void game_rules_random_damage(Game *game){
+  Player *player;
+  if (!game){
+    return;
   }
-}
 
-Status command_set_arg(Command* command, char* arg) {
-  if (!command || !arg) {return ERROR;}
-  strcpy(command->arg, arg);
-  return OK;
-}
-
-void command_set_return(Command *command, Status s)
-{
-  if (!command) {return;}
-
-  command->result = s;
-}
-
-Status command_get_return(Command *command)
-{
-  if (!command) {return ERROR;}
-
-  if (command->result == OK)
+  /*if the player moved in the last turn*/
+  if (command_get_code(game_get_last_command(game)) == 2)
   {
-    return OK;
+    game_set_message(game, "You fell and sprained your ankle while moving! You lost 1 health point");
+    player = game_get_player(game);
+    player_set_health(player, (player_get_health(player)-1));
   }
-  return ERROR;
-}
 
-/* We use this function for the log to be able to print the command in a file. *
-char *command_to_string(CommandCode cmd){
-  switch (cmd)
-  {
-    case TAKE:
-      return "take";
-
-    case DROP:
-      return "drop";
-
-    case EXIT:
-      return "exit";
-
-    case UNKNOWN:
-      return "unknown";
-
-    case ATTACK:
-      return "attack";
-
-    case MOVE:
-      return "move";
-
-    case CHAT:
-      return "chat";
-
-    case INSPECT:
-      return "inspect";
-
-    case RECRUIT:
-      return "recruit";
-
-    case ABANDON:
-      return "abandon";
-
-    case USE:
-      return "use";
-  
-    default:
-      return "unknown";
-  }
+  return;
 }
