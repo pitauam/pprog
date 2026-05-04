@@ -384,6 +384,7 @@ void game_actions_take(Game *game){
 
     
     if(object_get_movable(game_get_object(game, object_id)) == TRUE){
+      printf("%s", game_get_object_name(game, game_get_object(game, object_id)));
       if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0 && dependency != NO_ID)
       {
         /* Get the object and checks dependency */
@@ -407,9 +408,9 @@ void game_actions_take(Game *game){
             }
           }
         }
-      } 
-      else if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
-      {
+      
+    else if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
+      { 
         object_location = game_get_object_location(game, object_id);
         /*if the object is in the same place as the player, then it can take it*/
         if (object_location != NO_ID && object_location == player_location)
@@ -424,7 +425,7 @@ void game_actions_take(Game *game){
         }
       }
     }
-
+  }
 
   command_set_return(game_get_last_command(game), ERROR);
   return;

@@ -6,24 +6,23 @@
  * @date 28-04-2026
  */
 
- #ifndef GAME_RULES_H
- #define GAME_RULES_H
+#ifndef GAME_RULES_H
+#define GAME_RULES_H
 
- #include "types.h"
- /*
-#define CMD_LENGTH 30 /*!< Maximum lenght of a command input 
-#define MAX_CMD_ARG 3 /*!< Maximum arguments a command can have 
-#define N_CMDT 2
-#define N_CMD 12
+#include "game.h"
+#include "types.h"
 
-typedef enum { CMDS, CMDL } CommandType;
+#define MAX_ARG 32 /*maximum number of characters for the argument*/
 
-typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON, USE } CommandCode;
+typedef enum {UNKNOWN_CMD = -1, TELEPORT, RANDOM_DAMAGE} CommandRules; /*different commands available*/
 
-typedef struct _Command Command;
-
-
-Command* command_create();
-*/
+/**
+ * @brief reads the command and finds what to do in order to update the game
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status game_rules_update(Game *game);
 
 #endif
