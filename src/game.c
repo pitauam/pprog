@@ -22,18 +22,18 @@
  * This struct stores all the information related to the game.
  */
 struct _Game {
-  Player *player[MAX_PLAYERS];                /*!< pointer to the player structure*/
-  int n_players;                              /*!< number of players in the game*/
-  Object *object[MAX_OBJECTS];                /*!< pointer to the array of objects*/
-  int n_objects;                              /*!< number of objects*/
-  Character *characters[MAX_CHARACTERS];      /*!< pointer to the array of characters*/
-  int n_characters;                           /*!< number of characters*/
-  Space *spaces[MAX_SPACES];                  /*!< pointer to the spaces structure*/
-  int n_spaces;                               /*!< number of spaces in castle*/ 
-  Link *link[MAX_LINKS];                      /*!< links between spaces*/
-  int n_links;                                /*!< number of links*/
-  int turn;                                   /*!< indicates the index of the player that has a turn*/
-  InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player*/
+  Player *player[MAX_PLAYERS];                /*!< Pointer to the array of players */
+  int n_players;                              /*!< Number of players in the game */
+  Object *object[MAX_OBJECTS];                /*!< Pointer to the array of objects */
+  int n_objects;                              /*!< Number of objects */
+  Character *characters[MAX_CHARACTERS];      /*!< Pointer to the array of characters */
+  int n_characters;                           /*!< Number of characters */
+  Space *spaces[MAX_SPACES];                  /*!< Pointer to the spaces structure */
+  int n_spaces;                               /*!< Number of spaces in castle */ 
+  Link *link[MAX_LINKS];                      /*!< Pointer to he array of links between spaces */
+  int n_links;                                /*!< Number of links */
+  int turn;                                   /*!< Indicates the index of the player that has a turn */
+  InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player */
 };
 
 /**
@@ -144,22 +144,6 @@ Status game_destroy(Game *game) {
   return OK;
 }
 
-Space *game_get_space(Game *game, Id id) {
-  int i = 0;
-
-  if (id == NO_ID) {
-    return NULL;
-  }
-
-  for (i = 0; i < game->n_spaces; i++) {
-    if (id == space_get_id(game->spaces[i])) {
-      return game->spaces[i];
-    }
-  }
-
-  return NULL;
-}
-
 Id game_get_player_location(Game *game) { 
   if(game == NULL || game->player[game->turn] == NULL){
     return NO_ID;
@@ -176,7 +160,7 @@ Status game_set_player_location(Game *game, Id id) {
   return player_set_location(game->player[game->turn], id);
 }
 
-Status game_set_player(Game *game, Player *player) {
+Status game_add_player(Game *game, Player *player) {
   if (!game || !player || game->n_players >= MAX_PLAYERS) {
     return ERROR;
   }
@@ -190,6 +174,16 @@ Status game_set_player(Game *game, Player *player) {
 
   return OK;
 }
+
+Player* game_get_player(Game *game)
+{
+  if (!game || game->player[game->turn] == NULL) {return NULL;}
+
+  return game->player[game->turn];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+
 
 Id game_get_object_location(Game *game, Id object_id) 
 {
@@ -221,6 +215,175 @@ Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
 
   return OK;
 }
+
+Status game_add_object(Game *game, Object *object) {
+  if ((!game) || (!object) || (game->n_objects >= MAX_OBJECTS)) {
+    return ERROR;
+  }
+
+  game->object[game->n_objects] = object;
+  game->n_objects++;
+
+  return OK;
+}
+
+Object *game_get_object(Game *game, Id id) {
+  int i = 0;
+
+  if (id == NO_ID) {
+    return NULL;
+  }
+
+  for (i = 0; i < game->n_objects; i++) {
+    if (id == object_get_id(game->object[i])) {
+      return game->object[i];
+    }
+  }
+
+  return NULL;
+}
+
+int game_get_number_of_objects(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_objects;
+}
+
+Id game_get_object_id_at(Game *game, int pos)
+{
+  if (!game || pos < 0) {return NO_ID;}
+
+  return object_get_id(game->object[pos]);
+}
+
+const char *game_get_object_name(Game *game, Object *object) 
+{
+  if (!game || !object) {return NULL;}
+
+  return object_get_name(object);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Status game_add_character(Game *game, Character *character) {
+  if ((!game) || (!character) || (game->n_characters >= MAX_CHARACTERS)) {
+    return ERROR;
+  }
+
+  game->characters[game->n_characters] = character;
+  game->n_characters++;
+
+  return OK;
+}
+
+
+Character *game_get_character(Game *game, Id id)
+{
+  int i;
+  if (!game || id == NO_ID) {return NULL;}
+
+  for (i = 0; i < game->n_characters;i++)
+  {
+    /*if the id given as an argument is found inside a space*/
+    if ((character_get_id(game->characters[i]) == id))
+    {
+      /*returns the character at the place i in the array, which must have id i*/
+      return game->characters[i];
+    }
+  }
+  /*if the character isn't found*/
+  return NULL;
+}
+
+const char *game_get_character_name(Game *game, Character *chr) 
+{
+  if (!game || !chr) {return NULL;}
+
+  return character_get_name(chr);
+}
+
+int game_get_number_of_characters(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_characters;
+}
+
+Id game_get_character_id_at(Game *game, int position) {
+  if (!game || position < 0)
+  {
+    return NO_ID;
+  }
+
+  return character_get_id(game->characters[position]);
+}
+
+int game_get_n_followers(Game *game, Player *player){
+  int n_followers;
+  Character *char_aux = NULL;
+  int i;
+
+  if (!game || !player){
+    return -1;
+  }
+
+  n_followers = 0;
+  for (i = 0; i < game_get_number_of_characters(game); i++)
+  {
+    char_aux = game_get_character(game, game_get_character_id_at(game, i));
+    /*if the character is following the current player*/
+    if (character_get_following(char_aux) == player_get_id(player))
+    {
+      n_followers++;
+    }
+  }
+
+  return n_followers;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Status game_add_space(Game *game, Space *space) {
+  if ((!game) || (!space) || (game->n_spaces >= MAX_SPACES)) {
+    return ERROR;
+  }
+
+  game->spaces[game->n_spaces] = space;
+  game->n_spaces++;
+
+  return OK;
+}
+
+Space *game_get_space(Game *game, Id id) {
+  int i = 0;
+
+  if (id == NO_ID) {
+    return NULL;
+  }
+
+  for (i = 0; i < game->n_spaces; i++) {
+    if (id == space_get_id(game->spaces[i])) {
+      return game->spaces[i];
+    }
+  }
+
+  return NULL;
+}
+
+Id game_get_space_id_at(Game *game, int position) {
+  if (!game || position < 0 || position >= game->n_spaces) {
+    return NO_ID;
+  }
+
+  return space_get_id(game->spaces[position]);
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Command* game_get_last_command(Game *game) {
   if (!game || game->turn < 0 || game->turn >= game->n_players) {
@@ -298,17 +461,6 @@ void game_print(Game *game) {
   printf("\n");
 
 }
-
-Status game_add_space(Game *game, Space *space) {
-  if ((!game) || (!space) || (game->n_spaces >= MAX_SPACES)) {
-    return ERROR;
-  }
-
-  game->spaces[game->n_spaces] = space;
-  game->n_spaces++;
-
-  return OK;
-}
 /*FALTA DOCUMENTAR vvv */
 
 Status game_add_link(Game *game, Link *link) {
@@ -320,112 +472,6 @@ Status game_add_link(Game *game, Link *link) {
   game->n_links++;
 
   return OK;
-}
-
-Id game_get_space_id_at(Game *game, int position) {
-  if (!game || position < 0 || position >= game->n_spaces) {
-    return NO_ID;
-  }
-
-  return space_get_id(game->spaces[position]);
-}
-
-Player* game_get_player(Game *game)
-{
-  if (!game || game->player[game->turn] == NULL) {return NULL;}
-
-  return game->player[game->turn];
-}
-
-Status game_add_object(Game *game, Object *object) {
-  if ((!game) || (!object) || (game->n_objects >= MAX_OBJECTS)) {
-    return ERROR;
-  }
-
-  game->object[game->n_objects] = object;
-  game->n_objects++;
-
-  return OK;
-}
-
-Status game_add_character(Game *game, Character *character) {
-  if ((!game) || (!character) || (game->n_characters >= MAX_CHARACTERS)) {
-    return ERROR;
-  }
-
-  game->characters[game->n_characters] = character;
-  game->n_characters++;
-
-  return OK;
-}
-
-Object *game_get_object(Game *game, Id id) {
-  int i = 0;
-
-  if (id == NO_ID) {
-    return NULL;
-  }
-
-  for (i = 0; i < game->n_objects; i++) {
-    if (id == object_get_id(game->object[i])) {
-      return game->object[i];
-    }
-  }
-
-  return NULL;
-}
-
-int game_get_number_of_objects(Game *game)
-{
-  if (!game) {return -1;}
-
-  return game->n_objects;
-}
-
-Id game_get_object_id_at(Game *game, int pos)
-{
-  if (!game || pos < 0) {return NO_ID;}
-
-  return object_get_id(game->object[pos]);
-}
-
-const char *game_get_object_name(Game *game, Object *object) 
-{
-  if (!game || !object) {return NULL;}
-
-  return object_get_name(object);
-}
-
-Character *game_get_character(Game *game, Id id)
-{
-  int i;
-  if (!game || id == NO_ID) {return NULL;}
-
-  for (i = 0; i < game->n_characters;i++)
-  {
-    /*if the id given as an argument is found inside a space*/
-    if ((character_get_id(game->characters[i]) == id))
-    {
-      /*returns the character at the place i in the array, which must have id i*/
-      return game->characters[i];
-    }
-  }
-  /*if the character isn't found*/
-  return NULL;
-}
-
-const char *game_get_character_name(Game *game, Character *chr) 
-{
-  if (!game || !chr) {return NULL;}
-
-  return character_get_name(chr);
-}
-
-int game_get_number_of_characters(Game *game)
-{
-  if (!game) {return -1;}
-
-  return game->n_characters;
 }
 
 int game_get_number_of_spaces(Game *game){
@@ -576,36 +622,4 @@ Status game_next_turn(Game *game){
   }
 
   return OK;
-}
-
-Id game_get_character_id_at(Game *game, int position) {
-  if (!game || position < 0)
-  {
-    return NO_ID;
-  }
-
-  return character_get_id(game->characters[position]);
-}
-
-int game_get_n_followers(Game *game, Player *player){
-  int n_followers;
-  Character *char_aux = NULL;
-  int i;
-
-  if (!game || !player){
-    return -1;
-  }
-
-  n_followers = 0;
-  for (i = 0; i < game_get_number_of_characters(game); i++)
-  {
-    char_aux = game_get_character(game, game_get_character_id_at(game, i));
-    /*if the character is following the current player*/
-    if (character_get_following(char_aux) == player_get_id(player))
-    {
-      n_followers++;
-    }
-  }
-
-  return n_followers;
 }
