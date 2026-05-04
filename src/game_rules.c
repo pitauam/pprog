@@ -57,7 +57,9 @@ Status game_rules_update(Game *game) {
 
   /*random number between 0 and N_CMD to decide the command that will be executed*/
   random_command  = rand() % N_CMDS;
-  
+  /*
+  random_command = 0;
+  */
   switch (random_command) {
     /*no command. -1
     case UNKNOWN_CMD:
@@ -89,16 +91,12 @@ void game_rules_unknown_cmd(Game *game) {}
 void game_rules_teleport(Game *game){
   Id future_id = NO_ID; /*Where I go*/
   Id space_id = NO_ID;  /*Where I am*/
-  Bool open = FALSE;    
-  Direction dir = NO_DIR;
 
   Character* chr=NULL;
   Id current_char_id = NO_ID, current_char_location = NO_ID, current_char_following = NO_ID;
   int i;
   Space* actual_space = NULL, *future_space = NULL;
-  int random_number = 5;
 
-  dir = random_number;
 
   space_id = game_get_player_location(game);
   actual_space = game_get_space(game, space_id);
@@ -106,15 +104,16 @@ void game_rules_teleport(Game *game){
     return;
   }
 
-  future_id = game_get_connection(game, space_id, dir);
+  /*fix this function*/
+  future_id = game_get_random_space(game);
   future_space = game_get_space(game, future_id);
   if (NO_ID == space_id || !future_space) {
     return;
   }
-
+/*
   open = game_connection_is_open(game, space_id, dir);
-
-  if (future_id != NO_ID && open == TRUE) {
+*/
+  if (future_id != NO_ID) {
 
     game_set_player_location(game, future_id);
     space_set_discovered(game_get_space(game, future_id), TRUE);

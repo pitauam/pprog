@@ -328,6 +328,15 @@ Id game_get_space_id_at(Game *game, int position);
 int game_get_number_of_spaces(Game *game);
 
 /**
+ * @brief It teleports the player to a random space.
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * @return the id of the space the player has teleported to
+ */
+Id game_get_random_space(Game *game);
+
+/**
  * @brief It adds a link to the array of links
  * @author Santiago Pita
  *
@@ -498,5 +507,16 @@ Status game_next_turn(Game *game);
  * @param game pointer to game
  */
 void game_print(Game *game);
+
+/**
+ * @brief returns a random space id that is open
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * 
+ * @return ID of a random space in game
+ */
+
+Id game_get_random_space(Game *game);
 
 #endif
