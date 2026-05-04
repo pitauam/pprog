@@ -455,7 +455,7 @@ Status game_reader_load_players(Game *game, char *filename) {
 
         game_command_create(game);
 
-        game_set_player(game, player);
+        game_add_player(game, player);
     
       }
     }

@@ -138,8 +138,14 @@ void graphic_engine_paint_box(Game *game, char box[10][WORD_SIZE * 3], char *cha
       }
     }
 
-    sprintf(str, "|%-15.15s   |", objects);
-    strcat(box[8], str);
+    if (space_is_discovered(space))
+    {
+      sprintf(str, "|%-15.15s   |", objects);
+      strcat(box[8], str);
+    } else {
+      sprintf(str, "|                  |");
+      strcat(box[8], str);
+    }
 
     sprintf(str, "+------------------+");
     strcat(box[9], str);
@@ -152,7 +158,7 @@ void graphic_engine_paint_box(Game *game, char box[10][WORD_SIZE * 3], char *cha
   }
 }
 
-void graphic_engine_paint_box_space_vertical(Game *game, char box[10][WORD_SIZE * 3], Id space_id, Direction direction) {
+void graphic_engine_paint_box_space_vertical(Game *game, char box[10][WORD_SIZE * 3], Direction direction) {
 
   int j;
 
@@ -160,7 +166,7 @@ void graphic_engine_paint_box_space_vertical(Game *game, char box[10][WORD_SIZE 
 
   for (j = 0; j < GDESC_SIZE2; j++)
   {
-    if (j == 7 && space_id != NO_ID)
+    if (j == 7)
     {
       if (direction == W)
       {
@@ -169,6 +175,9 @@ void graphic_engine_paint_box_space_vertical(Game *game, char box[10][WORD_SIZE 
       } else if (direction == E) {
         sprintf(str, "> ");
         strcat(box[j], str);
+      } else if (direction == NO_DIR) {
+      sprintf(str, "  ");
+      strcat(box[j], str);
       }
     } else {
       sprintf(str, "  ");
@@ -294,13 +303,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     graphic_engine_paint_box(game, box_up, NULL, NULL, "", NULL, NO_ID);
     if (id_back != NO_ID)
     {
-      graphic_engine_paint_box_space_vertical(game, box_up, id_left, W);
+      graphic_engine_paint_box_space_vertical(game, box_up, NO_DIR);
       graphic_engine_paint_box(game, box_up, chr_back, game_get_space(game, id_back), obj_back, NULL, id_back);
-      graphic_engine_paint_box_space_vertical(game, box_up, id_right, E);
+      graphic_engine_paint_box_space_vertical(game, box_up, NO_DIR);
     } else {
-      graphic_engine_paint_box_space_vertical(game, box_up, NO_ID, W);
+      graphic_engine_paint_box_space_vertical(game, box_up, NO_DIR);
       graphic_engine_paint_box(game, box_up, chr_back, game_get_space(game, id_back), obj_back, NULL, NO_ID);
-      graphic_engine_paint_box_space_vertical(game, box_up, NO_ID, E);
+      graphic_engine_paint_box_space_vertical(game, box_up, NO_DIR);
     }
 
     graphic_engine_paint_box(game, box_up, NULL, NULL, "", NULL, NO_ID);
@@ -320,10 +329,20 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     }
     
 
-    graphic_engine_paint_box(game, box_act, chr_left, game_get_space(game, id_left), obj_left, NULL, id_left);    
-    graphic_engine_paint_box_space_vertical(game, box_act, id_left, W);
+    graphic_engine_paint_box(game, box_act, chr_left, game_get_space(game, id_left), obj_left, NULL, id_left);
+    if (id_left != NO_ID)
+    {
+      graphic_engine_paint_box_space_vertical(game, box_act, W);
+    } else {
+      graphic_engine_paint_box_space_vertical(game, box_act, NO_DIR);
+    }
     graphic_engine_paint_box(game, box_act, chr_act, game_get_space(game, id_act), obj_act, player_act, id_act);
-    graphic_engine_paint_box_space_vertical(game, box_act, id_right, E);
+    if (id_right != NO_ID)
+    {
+      graphic_engine_paint_box_space_vertical(game, box_act, E);
+    } else {
+      graphic_engine_paint_box_space_vertical(game, box_act, NO_DIR);
+    }
     graphic_engine_paint_box(game, box_act, chr_right, game_get_space(game, id_right), obj_right, NULL, id_right);
 
     for (i = 0; i < 10; i++)
@@ -344,13 +363,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     graphic_engine_paint_box(game, box_down, NULL, NULL, "", NULL, NO_ID);
     if (id_next != NO_ID)
     {
-      graphic_engine_paint_box_space_vertical(game, box_down, id_left, W);
+      graphic_engine_paint_box_space_vertical(game, box_down, NO_DIR);
       graphic_engine_paint_box(game, box_down, chr_next, game_get_space(game, id_next), obj_next, NULL, id_next);
-      graphic_engine_paint_box_space_vertical(game, box_down, id_right, E);
+      graphic_engine_paint_box_space_vertical(game, box_down, NO_DIR);
     } else {
-      graphic_engine_paint_box_space_vertical(game, box_down, NO_ID, W);
+      graphic_engine_paint_box_space_vertical(game, box_down, NO_DIR);
       graphic_engine_paint_box(game, box_down, chr_next, game_get_space(game, id_next), obj_next, NULL, NO_ID);
-      graphic_engine_paint_box_space_vertical(game, box_down, NO_ID, E);
+      graphic_engine_paint_box_space_vertical(game, box_down, NO_DIR);
     }
     graphic_engine_paint_box(game, box_down, NULL, NULL, "", NULL, NO_ID);
 
