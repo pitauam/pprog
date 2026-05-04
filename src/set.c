@@ -53,30 +53,23 @@ Status set_destroy(Set* set)
 
 Status set_add_value(Set* set, Id value)
 {
-    int i;
     if (!set){return ERROR;}
 
-    for (i = 0; i < SIZE; i++)
-    {
-        if (set->ids[i] == NO_ID)
-        {
-            set->ids[i] = value;
-            set->n_ids++;
-            return OK;
-        }
-    }
-    return ERROR;
+    set->ids[set->n_ids] = value;
+    set->n_ids++;
+    return OK;
 }
 
 
 Status set_del_value(Set* set, Id value) {
     int i;
     if (!set || value == NO_ID) return ERROR;
-
+    
     for (i = 0; i < SIZE; i++) {
         if (set->ids[i] == value) {
-            set->ids[i] = NO_ID;
             set->n_ids--;
+            set->ids[i] = set->ids[set->n_ids];
+            set->ids[set->n_ids] = NO_ID;
             return OK;
         }
     }

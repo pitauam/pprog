@@ -131,8 +131,11 @@ Status game_reader_load_objects(Game *game, char *filename){
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char message[WORD_SIZE] = "";
+  int category = 0;
   char *toks = NULL;
-  Id id = NO_ID, location = NO_ID;
+  int health = 0;
+  Id id = NO_ID, location = NO_ID, dependency = NO_ID, open = NO_ID;
+  Bool movable;
   Object *object = NULL;
   Status status = OK;
 
@@ -148,13 +151,25 @@ Status game_reader_load_objects(Game *game, char *filename){
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#o:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
-      id = atol(toks);
+      id = atol(toks); /*atol -> string to a long*/
       toks = strtok(NULL, "|");
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       location = atol(toks);
       toks = strtok(NULL, "|");
       strcpy(message, toks);
+      toks = strtok(NULL, "|");
+      health = atoi(toks); /*atoi -> string to an int*/
+      toks = strtok(NULL, "|");
+      category = atoi(toks);
+      toks = strtok(NULL, "|");
+      movable = atoi(toks);
+      toks = strtok(NULL, "|");
+      dependency = atol(toks);
+      toks = strtok(NULL, "|");
+      open = atol(toks);
+
+
 #ifdef DEBUG
       printf("Leido: o:%ld|%s|%ld|%ld|%ld|%ld\n", id, name, location);
 #endif
@@ -163,6 +178,12 @@ Status game_reader_load_objects(Game *game, char *filename){
         object_set_name(object, name);
         object_set_desc(object, message);
         game_set_object_location(game, location, id);
+        object_set_health(object, health);
+        object_set_category(object, category);
+        object_set_movable(object, movable);
+        object_set_dependency(object, dependency);
+        object_set_open(object, open);
+
         game_add_object(game, object);
       }
     }

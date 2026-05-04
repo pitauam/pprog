@@ -132,12 +132,21 @@ void game_actions_recruit(Game *game);
 void game_actions_abandon(Game *game);
 
 /*
- * @brief It lets the player use the object for something
+ * @brief It allows the player use the object for something
  * @author Marta López
  * 
  * @param game a pointer to the game
  */
 void game_actions_use(Game *game);
+
+/**
+ * @brief It lets the player to open a link with some object
+ * @author Paula de la Fuente
+ * 
+ * @param game a pointer to the game
+ */
+void game_actions_open(Game *game);  
+
 
 /**
  * @brief Gets the id of the first enemy character at a given space
@@ -205,6 +214,13 @@ Status game_actions_update(Game *game, Command *command) {
       game_actions_use(game);
       break;
 
+    /*case OPEN:
+      game_actions_open(game);
+      break;
+
+      NOTA:             DESCOMENTAR CUANDO ESTÉ TERMINADOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!
+      */
+
     default:
       break;
   }
@@ -232,7 +248,7 @@ void game_actions_move(Game *game){
   int i;
   Space* actual_space = NULL, *future_space = NULL;
 
-  strcpy(direction, command_get_arg(game_get_last_command(game)));
+  strcpy(direction, command_get_arg(game_get_last_command(game), 0));
 
   if (strcmp(direction, "b") == 0 || strcmp(direction, "back") == 0)
   {
@@ -332,9 +348,11 @@ void game_actions_take(Game *game){
   Id player_location = NO_ID;
   Id object_location = NO_ID;
   Id object_id = NO_ID;
-  int i;
+  int i, j;
   char object_name[MAX_ARG];
   Player *player;
+  Object *object;
+  Id dependency = NO_ID;
 
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
@@ -347,7 +365,7 @@ void game_actions_take(Game *game){
 
 
   /*saves the last command argument*/
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   if (player_inventory_full(player) == TRUE) {
     command_set_return(game_get_last_command(game), ERROR);
@@ -358,25 +376,54 @@ void game_actions_take(Game *game){
   {
     /*gets the object id*/
     object_id = game_get_object_id_at(game, i);
+    object = game_get_object(game, object_id);
+    dependency = object_get_dependency(object);
+
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
 
-    if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
-    {
-      object_location = game_get_object_location(game, object_id);
-      /*if the object is in the same place as the player, then it can take it*/
-      if (object_location != NO_ID && object_location == player_location)
+    
+    if(object_get_movable(game_get_object(game, object_id)) == TRUE){
+      if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0 && dependency != NO_ID)
       {
-        /*sets the object to the player*/
-        player_add_object(player, object_id);
+        /* Get the object and checks dependency */
+        for(j = 0; j < player_get_n_objects(player); j++){
+          if(player_get_object_id(player, j) == dependency){
+              if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
+              {
+                object_location = game_get_object_location(game, object_id);
+                /*if the object is in the same place as the player, then it can take it*/
+                if (object_location != NO_ID && object_location == player_location)
+                {
+                  /*sets the object to the player*/
+                  player_add_object(player, object_id);
 
-        /*deletes the object from the space*/
-        space_remove_object(game_get_space(game, player_location), object_id);
-        command_set_return(game_get_last_command(game), OK);
-        return;
+                  /*deletes the object from the space*/
+                  space_remove_object(game_get_space(game, player_location), object_id);
+                  command_set_return(game_get_last_command(game), OK);
+                  return;
+                }
+              }
+            }
+          }
+        }
+      } 
+      else if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
+      {
+        object_location = game_get_object_location(game, object_id);
+        /*if the object is in the same place as the player, then it can take it*/
+        if (object_location != NO_ID && object_location == player_location)
+        {
+          /*sets the object to the player*/
+          player_add_object(player, object_id);
+
+          /*deletes the object from the space*/
+          space_remove_object(game_get_space(game, player_location), object_id);
+          command_set_return(game_get_last_command(game), OK);
+          return;
+        }
       }
     }
-  }
 
 
   command_set_return(game_get_last_command(game), ERROR);
@@ -391,6 +438,7 @@ void game_actions_drop(Game *game){
   Id buffer = NO_ID;
   int i;
   Bool object_exists = FALSE;
+  Id dependency = NO_ID;
 
   /*gets the id of the space where the player is*/
   space_id = game_get_player_location(game);
@@ -403,7 +451,7 @@ void game_actions_drop(Game *game){
   /*checks if the player has an object*/
   player = game_get_player(game);
 
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
@@ -427,21 +475,29 @@ void game_actions_drop(Game *game){
     return;
   }
 
+  dependency = object_get_dependency(game_get_object(game, object_id));
+
   if (player_find_object(player, object_id) == ERROR)
   {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }else
+  } else if (dependency != NO_ID && player_find_object(player, dependency) == OK)
   {
-      /*removes the object from the player*/
+    /* Removes both objects because one depends on the other */
+    player_remove_object(player, dependency);
+    space_add_object(game_get_space(game, space_id), dependency);
+
+    /*removes the object from the player*/
+    player_remove_object(player, object_id);
+    /*adds the object to the space*/
+    space_add_object(game_get_space(game, space_id), object_id);
+  } else {
+    /*removes the object from the player*/
     player_remove_object(player, object_id);
     /*adds the object to the space*/
     space_add_object(game_get_space(game, space_id), object_id);
   }
   
-  
-  
-
   command_set_return(game_get_last_command(game), OK);
   return;
 }
@@ -576,6 +632,7 @@ void game_actions_attack(Game *game){
     NOTE: this must be added when spaces can have more than one character
     space_set_character(game_get_space(game, player_location), NO_ID);  
     */
+    character_set_following(char_aux, NO_ID);
     space_remove_character(game_get_space(game, player_location), character_get_id(char_aux));
   }
   /*all above must be moved*/
@@ -607,7 +664,7 @@ void game_actions_chat(Game *game){
   }}
 
   /*Get the character wanted*/
-  strcpy(character_name, command_get_arg(game_get_last_command(game))); /*name got it*/
+  strcpy(character_name, command_get_arg(game_get_last_command(game), 0)); /*name got it*/
 
   for (i=0 ; i < game_get_number_of_characters(game) ; i++) { /*Go through all the characters of the game comparing the name with the name of the character wanted*/
     character_id = game_get_character_id_at(game, i);
@@ -681,7 +738,7 @@ void game_actions_inspect(Game *game){
   
 
   /*saves the last command argument*/
-  strcpy(object_name, command_get_arg(game_get_last_command(game)));
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   for (i = 0; i < game_get_number_of_objects(game); i++)
   {
@@ -757,7 +814,7 @@ void game_actions_recruit(Game *game) {
     return;
   }
 
-  chr_name = command_get_arg(game_get_last_command(game));
+  chr_name = command_get_arg(game_get_last_command(game), 0);
   if (chr_name == NULL || chr_name[0] == '\0') {
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -794,7 +851,7 @@ void game_actions_abandon(Game *game) {
     return;
   }
 
-  chr_name = command_get_arg(game_get_last_command(game));
+  chr_name = command_get_arg(game_get_last_command(game), 0);
 
   if (chr_name == NULL) {
     command_set_return(game_get_last_command(game), ERROR);
@@ -820,12 +877,14 @@ void game_actions_abandon(Game *game) {
 
 
 void game_actions_use(Game *game){
-  int i=0;
+  int i=0, j=0;
   Player *player = NULL;
   Object *obj = NULL;
+  Character *character = NULL;
 
   Id object_id = NO_ID;
   char *obj_name = NULL;
+  char *character_name = NULL;
 
   if(game == NULL) return;
 
@@ -836,8 +895,34 @@ void game_actions_use(Game *game){
     return;
   }
 
+  /* If the command has more than one arg, means that you use it on a character who's following the player */
+  if((character_name = command_get_arg(game_get_last_command(game), 1)) != NULL){
+
+    /* Buscar quién te sigue para aumentar su vida */
+    for(j = 0; j < game_get_number_of_characters(game); j++){
+      
+      /* Get the actual character */
+      character = game_get_character(game, game_get_character_id_at(game, j));
+
+      if(character == NULL){
+         continue;
+      }
+
+      if(character_get_following(character) == player_get_id(player) && strcmp(character_name, character_get_name(character)) == 0){
+        break;
+      }
+      /* Si no coincide sigo buscando */
+    }
+
+    /* Si no funciona */
+    if(character == NULL || character_get_following(character) != player_get_id(player) || strcmp(character_name, character_get_name(character)) != 0){
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
+    }
+  }
+
   /* Get object name (use "something") */
-  obj_name = command_get_arg(game_get_last_command(game));
+  obj_name = command_get_arg(game_get_last_command(game), 0);
   if(obj_name == NULL){
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -878,13 +963,81 @@ void game_actions_use(Game *game){
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
-  /* Añadir categoria*/
-  player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+
+  /* Each category of the object adds or removes health to the character or player */
+  if((character_name = command_get_arg(game_get_last_command(game), 1)) == NULL){
+    if(object_get_category(obj) == Venom){
+      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
+    } else if (object_get_category(obj) == Elixir){
+      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Strength){
+      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Cursed){
+      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
+    } else if (object_get_category(obj) == NO_CAT){
+      player_set_health(player, (player_get_health(player)+0));
+    }
+  } else {
+    if(object_get_category(obj) == Venom){
+      character_set_health(character, (character_get_health(character)-object_get_health(obj)));
+    } else if (object_get_category(obj) == Elixir){
+      character_set_health(character, (character_get_health(character)+object_get_health(obj)));
+    } else if (object_get_category(obj) == Strength){
+      command_set_return(game_get_last_command(game), ERROR);
+    } else if (object_get_category(obj) == Cursed){
+      command_set_return(game_get_last_command(game), ERROR);
+    } else if (object_get_category(obj) == NO_CAT){
+      character_set_health(character, (character_get_health(character)+0));
+    }
+  }
 
   /* Remove from inventary */
   player_remove_object(player, object_id);
+  game_remove_object(game, obj);
 
   command_set_return(game_get_last_command(game), OK);
+  
+}
+
+void game_actions_open(Game *game){
+  Id obj_id = NO_ID, link_id = NO_ID;
+  char* link_name =  NULL, *object_name = NULL;
+  Link* link =  NULL;
+  Object* obj = NULL;
+
+  if(!game) {return;}
+
+  /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
+  strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
+  if (!link_name) return;
+
+  strcpy(object_name, command_get_arg(game_get_last_command(game), 2));
+  if (!object_name) return;
+
+  /*Get all we need*/
+  link = game_get_link_by_name(game, link_name);
+  if(!link) return;
+  link_id = link_get_id(link);
+  if(link_id == NO_ID) return;
+
+  obj = game_get_object_by_name(game, object_name);
+  if(!obj) return;
+  obj_id = object_get_id(obj);
+
+
+  /*This command only has sense if the link is actually closed*/
+  if(link_get_open(link)==TRUE) {
+    return;
+  }
+
+  /*Check that the object can open this link*/
+  if(link_id == object_get_open(obj)) {
+    /*Uses this object to open the link*/
+    player_remove_object(game_get_player(game), obj_id);
+    link_set_open(link, TRUE);
+  }
+
+  return;
 }
 
 

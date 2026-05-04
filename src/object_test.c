@@ -15,7 +15,7 @@
 #include "object_test.h"
 #include "test.h"
 
-#define MAX_TESTS 26
+#define MAX_TESTS 30
 
 int main(int argc, char** argv) {
 
@@ -60,6 +60,10 @@ int main(int argc, char** argv) {
   if (all || test == 24) test1_object_get_open();
   if (all || test == 25) test2_object_get_open();
   if (all || test == 26) test2_object_get_open();
+  if (all || test == 27) test1_set_category();
+  if (all || test == 28) test2_set_category();
+  if (all || test == 29) test1_get_category();
+  if (all || test == 30) test2_get_category();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -215,4 +219,27 @@ void test2_object_get_open() {
 
 void test3_object_get_open() {
   PRINT_TEST_RESULT(object_get_open(NULL) == FALSE);
+}
+
+void test1_set_category(){
+  Object *o = object_create(1);
+  PRINT_TEST_RESULT(object_set_category(o, Venom) == OK);
+  object_destroy(o);
+}
+
+void test2_set_category() {
+  Object *o = NULL;
+  PRINT_TEST_RESULT(object_set_category(o, Venom) == ERROR);
+}
+
+void test1_get_category(){
+  Object *o = object_create(1);
+  object_set_category(o, Elixir);
+  PRINT_TEST_RESULT(object_get_category(o) == Elixir);
+  object_destroy(o);
+}
+
+void test2_get_category() {
+  Object *o = NULL;
+  PRINT_TEST_RESULT(object_get_category(o) == NO_CAT);
 }

@@ -14,7 +14,7 @@
 #include <string.h>
 #include <strings.h>
 
-#define CMD_LENGHT 30
+
 
 char *cmd_to_str[N_CMD][N_CMDT] = {
   {"", "No command"},
@@ -28,7 +28,9 @@ char *cmd_to_str[N_CMD][N_CMDT] = {
   {"i", "Inspect"},
   {"r", "Recruit"},
   {"x", "Abandon"},
-  {"u", "Use"}
+  {"u", "Use"},
+  {"o", "Open"}
+
 };
 
 /**
@@ -38,7 +40,7 @@ char *cmd_to_str[N_CMD][N_CMDT] = {
  */
 struct _Command {
   CommandCode code;            /*!< Name of the command */
-  char arg[CMD_LENGHT];        /*!<Argument introduced with the command*/
+  char args[MAX_CMD_ARGS][CMD_LENGTH];        /*!<Arguments introduced with the command*/
   Status result;               /*!<result of the command (error or ok)*/
 };
 
@@ -55,7 +57,7 @@ Command* command_create() {
 
   /* Initialization of an empty command*/
   newCommand->code = NO_CMD;
-  newCommand->arg[0] = '\0';
+  newCommand->args[0][0] = '\0';
   return newCommand;
 }
 
@@ -86,17 +88,18 @@ CommandCode command_get_code(Command* command) {
   return command->code;
 }
 
-char *command_get_arg(Command* command) {
-  if (!command) {
+char *command_get_arg(Command* command, int index) {  /*Now, here we need a specific index to return a concrete arg*/
+  if (!command || index < 0 || index >= MAX_CMD_ARGS) {
     return NULL;
   }
-  return command->arg;
+  return command->args[index];
 }
 
 
 Status command_get_user_input(Command* command) {
   char input[CMD_LENGTH] = "", *token = NULL, *arg = NULL;
   int i = UNKNOWN - NO_CMD + 1;
+  int j;
   CommandCode cmd;
 
   if (!command)
@@ -128,14 +131,14 @@ Status command_get_user_input(Command* command) {
     {
       return ERROR;
     }
-
+  for(j=0 ; j<MAX_CMD_ARGS ; j++){        /*With more than one argument, we need to store all of them*/
     arg = strtok(NULL, " "); 
     if (arg != NULL) {
-      command_set_arg(command, arg);
+      command_set_arg(command, arg, j);
     } else {
-      command_set_arg(command, "");
+      command_set_arg(command, "", j);
     }
-
+  }
     return OK;
   }
   else {
@@ -143,9 +146,11 @@ Status command_get_user_input(Command* command) {
   }
 }
 
-Status command_set_arg(Command* command, char* arg) {
-  if (!command || !arg) {return ERROR;}
-  strcpy(command->arg, arg);
+Status command_set_arg(Command* command, char* arg, int index) {  /*Now, here we need a specific index to set the arg in a concrete position*/
+  if (!command || !arg || index < 0 || index >= MAX_CMD_ARGS) {return ERROR;}
+
+  strcpy(command->args[index], arg);
+
   return OK;
 }
 
@@ -158,13 +163,12 @@ void command_set_return(Command *command, Status s)
 
 Status command_get_return(Command *command)
 {
-  if (!command) {return ERROR;}
-
-  if (command->result == OK)
+  if (!command)
   {
-    return OK;
+    return ERROR;
   }
-  return ERROR;
+
+  return command->result;
 }
 
 /* We use this function for the log to be able to print the command in a file. */
@@ -203,6 +207,9 @@ char *command_to_string(CommandCode cmd){
 
     case USE:
       return "use";
+
+    case OPEN:
+      return "open";
   
     default:
       return "unknown";

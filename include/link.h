@@ -53,6 +53,15 @@ Status link_set_name(Link* link, char* name);
 const char* link_get_name(Link* link);
 
 /**
+ * @brief It gets the id of a link
+ * @author Paula de la FUente
+ *
+ * @param link a pointer to the link
+ * @return  the ID of the link
+ */
+Id link_get_id(Link* link);
+
+/**
  * @brief It sets the id of the space of origin
  * @author Santiago Pita
  *

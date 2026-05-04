@@ -385,7 +385,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     for(i=0; i < player_get_n_objects(player); i++){
       player_obj_id = player_get_object_id(player, i);
       if (player_obj_id != NO_ID) {
-        sprintf(str, " %12s (%ld)", object_get_name(game_get_object(game, player_obj_id)), player_obj_id);
+        sprintf(str, " %12s (%ld) (%d)", object_get_name(game_get_object(game, player_obj_id)), player_obj_id, object_get_health(game_get_object(game, game_get_object_id_at(game, i))));
         screen_area_puts(ge->descript, str);
       } 
     }
@@ -405,7 +405,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   for(i = 0; i < game_get_number_of_objects(game); i++){
     if ((obj_loc = game_get_object_location(game, game_get_object_id_at(game, i) )) != NO_ID) {
     
-    sprintf(str, "    %5s:% 3d", (game_get_object_name(game, game_get_object(game, game_get_object_id_at(game, i)))), (int)obj_loc);
+    sprintf(str, "    %5s:% 3d (%d)", (game_get_object_name(game, game_get_object(game, game_get_object_id_at(game, i)))), (int)obj_loc, object_get_health(game_get_object(game, game_get_object_id_at(game, i))));
     
     screen_area_puts(ge->descript, str);
     }
@@ -493,7 +493,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
   screen_area_clear(ge->help);
   sprintf(str, " The commands you can use are:");
   screen_area_puts(ge->help, str);
-  sprintf(str, "     move or m (right,left,back,next,up,down), attack or a, chat or c, take or t, drop or d, inspect or i, use or u, recruit or r, exit or e");
+  sprintf(str, "     move or m (right,left,back,next,up,down), attack or a, chat or c, take or t, drop or d, inspect or i, use or u, recruit or r, open or o, x or abandon, u 'obj' 'character' (use over), exit or e");
   screen_area_puts(ge->help, str);
 
   /* Paint in the feedback area */

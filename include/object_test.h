@@ -194,4 +194,32 @@ void test2_object_get_open();
  */
 void test3_object_get_open();
 
+/**
+ * @test Test function for object category setting
+ * @pre Valid pointer to object and category value
+ * @post Output == OK
+ */
+void test1_set_category();
+
+/**
+ * @test Test function for object category setting
+ * @pre NULL object pointer
+ * @post Output == ERROR
+ */
+void test2_set_category();
+
+/**
+ * @test Test function for getting object category
+ * @pre Object with initialized movable
+ * @post Output == set category value
+ */
+void test1_get_category();
+
+/**
+ * @test Test function for getting object category
+ * @pre NULL object pointer
+ * @post Output == NO_CAT
+ */
+void test2_get_category();
+
 #endif
