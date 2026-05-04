@@ -18,6 +18,7 @@
 #include "game_actions.h"
 #include "graphic_engine.h"
 #include "game_reader.h"
+#include "game_rules.h"
 #include <time.h>
 
 int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name);
@@ -124,6 +125,8 @@ int main(int argc, char *argv[]) {
     graphic_engine_paint_game(gengine, game);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
+    game_rules_update(game);
+    
     if (log_fp) {
       game_loop_log_command(log_fp, last_cmd);
     }

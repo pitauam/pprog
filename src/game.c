@@ -212,7 +212,7 @@ Id game_get_object_location(Game *game, Id object_id)
 
 /*--------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------*/
-/*CREO QUE ESTAS DOS FUNCIONES NO SIRVEN PARA NADA*/
+
 Status game_set_object_location(Game *game, Id new_space_id, Id object_id) {
   Space *space;
 

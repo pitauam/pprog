@@ -8,7 +8,7 @@
 #EXE is the name the .exe will have
 EXE = castle
 #OBJS references .o files
-OBJS = obj/game.o obj/space.o obj/command.o obj/game_loop.o obj/game_reader.o obj/graphic_engine.o obj/object.o obj/player.o obj/game_actions.o obj/set.o obj/character.o obj/inventory.o obj/link.o
+OBJS = obj/game.o obj/space.o obj/command.o obj/game_loop.o obj/game_reader.o obj/graphic_engine.o obj/object.o obj/player.o obj/game_actions.o obj/set.o obj/character.o obj/inventory.o obj/link.o obj/game_rules.o
 #CFLAGS flags used for warnings and style
 CFLAGS = -Wall -ansi -pedantic -g -I./include
 #CC stands for compilation command
@@ -47,7 +47,7 @@ obj/command.o : src/command.c include/command.h include/types.h
 obj/game_actions.o: src/game_actions.c include/game_actions.h include/command.h include/types.h include/game.h include/space.h include/object.h include/player.h include/set.h include/link.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-obj/game_loop.o: src/game_loop.c include/command.h include/game.h include/game_actions.h include/graphic_engine.h include/types.h include/space.h include/set.h include/game_reader.h
+obj/game_loop.o: src/game_loop.c include/command.h include/game.h include/game_actions.h include/graphic_engine.h include/types.h include/space.h include/set.h include/game_reader.h include/game_rules.h
 	$(CC) -c $(CFLAGS) $< -o $@
 	
 obj/game_reader.o: src/game_reader.c include/game.h include/command.h include/types.h include/space.h include/set.h include/link.h
@@ -75,6 +75,9 @@ obj/link.o: src/link.c include/link.h include/types.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+obj/game_rules.o: src/game_rules.c include/game.h include/types.h
 	$(CC) -c $(CFLAGS) $< -o $@
    
 #run

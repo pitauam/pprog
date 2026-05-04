@@ -1,3 +1,0 @@
-take Sword: unknown
-take Sword: unknown
-exit: unknown

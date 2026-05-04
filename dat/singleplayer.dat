@@ -7,19 +7,21 @@
 #s:14|Kitchen|         |         |         |         |         |
 #s:15|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|
 #s:16|Garden|         |         |         |         |         |
-#s:17|Basement|         |         |         |         |         |
 
 
-#object:id|name|spawn_id|description|category(future implementation)|
+#object:id|name|spawn_id|description|health|category(future implementation)|movable|dependency|open
 
-#o:21|Sword|11|It deals damage!|
-#o:22|Steak|14|Tasty steak..|
-#o:23|Rose|16|Looks spiky|
-#o:24|Stew|132|Smells.. weird|
+#o:21|Sword|11|It deals damage!|10|2|1|-1|-1
+#o:22|Steak|14|Tasty steak..|5|1|1|-1|-1
+#o:23|Rose|16|Looks spiky|4|3|1|25|-1|-1
+#o:24|Stew|132|Smells.. weird|2|1|1|-1|-1
+#o:25|depRose|16|Looks spiky|4|3|1|-1|-1
+#o:26|Key|11|....|10|2|1|-1|12
+
 
 #links:id|name|origin_id|destination_id|north,south..|open|
-directions: NO_DIR,N,S,E,W,U,D
-              -1,  0,1,2,3,4,5
+directions: NO_DIR,N,S,E,W
+              -1,  0,1,2,3
 
 #l:31|Entry|11|12|1|1|
 #l:32|Corridor|12|11|0|1|
@@ -37,11 +39,9 @@ directions: NO_DIR,N,S,E,W,U,D
 #l:314|Inner countryard|15|14|0|1|
 #l:315|Inner countryard|15|16|1|1|
 #l:316|Garden|16|15|0|1|
-#l:317|Basement|11|17|5|1|
-#l:317|Basement|17|11|4|1|
 
 #c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
-#c:42|Guardia|>:O|12|5|1|JASJAJSJAJSJAJ return when you are stronger peasant|
+#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|
 #c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
