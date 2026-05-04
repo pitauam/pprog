@@ -434,6 +434,10 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
         chr = game_get_character(game, character_id);
 
         sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+
+        if(character_get_following(chr) != NO_ID){
+          sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+        }
     
         screen_area_puts(ge->descript, str);
       }
