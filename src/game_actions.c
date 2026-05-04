@@ -889,6 +889,8 @@ void game_actions_use(Game *game){
 
   if(game == NULL) return;
 
+  character_name = command_get_arg(game_get_last_command(game), 1);
+
   /* Get the player */
   player = game_get_player(game);
   if(player == NULL){
@@ -897,7 +899,7 @@ void game_actions_use(Game *game){
   }
 
   /* If the command has more than one arg, means that you use it on a character who's following the player */
-  if((character_name = command_get_arg(game_get_last_command(game), 1)) != NULL){
+  if(character_name != NULL){
 
     /* Buscar quién te sigue para aumentar su vida */
     for(j = 0; j < game_get_number_of_characters(game); j++){
@@ -934,8 +936,7 @@ void game_actions_use(Game *game){
     Id actual = game_get_object_id_at(game, i);
     Object *current_object = game_get_object(game, actual);
 
-    if (current_object != NULL &&
-        strcmp(object_get_name(current_object), obj_name) == 0) {
+    if (current_object != NULL && strcmp(object_get_name(current_object), obj_name) == 0) {
 
       object_id = actual;
       break;
@@ -966,15 +967,17 @@ void game_actions_use(Game *game){
   }
 
   /* Each category of the object adds or removes health to the character or player */
-  if((character_name = command_get_arg(game_get_last_command(game), 1)) == NULL){
+  if(character_name == NULL){
     if(object_get_category(obj) == Venom){
       player_set_health(player, (player_get_health(player)-object_get_health(obj)));
     } else if (object_get_category(obj) == Elixir){
       player_set_health(player, (player_get_health(player)+object_get_health(obj)));
     } else if (object_get_category(obj) == Strength){
-      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
     } else if (object_get_category(obj) == Cursed){
-      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
+      command_set_return(game_get_last_command(game), ERROR);
+      return;
     } else if (object_get_category(obj) == NO_CAT){
       player_set_health(player, (player_get_health(player)+0));
     }
@@ -985,8 +988,10 @@ void game_actions_use(Game *game){
       character_set_health(character, (character_get_health(character)+object_get_health(obj)));
     } else if (object_get_category(obj) == Strength){
       command_set_return(game_get_last_command(game), ERROR);
+      return;
     } else if (object_get_category(obj) == Cursed){
       command_set_return(game_get_last_command(game), ERROR);
+      return;
     } else if (object_get_category(obj) == NO_CAT){
       character_set_health(character, (character_get_health(character)+0));
     }

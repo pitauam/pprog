@@ -1,0 +1,9 @@
+take Sword: exit
+move n: exit
+ Kevin: exit
+move n: exit
+ Sword: unknown
+ Sword: unknown
+move n: unknown
+chat Inmate: unknown
+exit: unknown

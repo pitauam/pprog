@@ -237,15 +237,13 @@ Status game_add_object(Game *game, Object *object) {
 Status game_remove_object(Game *game, Object *object){
 
   Id obj_id = object_get_id(object);
-  int index;
+  int index = game_get_object_position(game, obj_id);
 
-  if(!game || !object){
+  if(!game || !object || index == -1){
     return ERROR;
   }
 
-  index = game_get_object_position(game, obj_id);
-
-  /*comprobar que esto esté bien vvv*/
+  object_destroy(game->object[index]);
   game->object[index] = NULL;
   
   return OK;
