@@ -497,4 +497,15 @@ int game_get_object_position(Game *game, Id object_id);
  */
 Status game_remove_object(Game *game, Object *object);
 
+/**
+ * @brief returns a random space id that is open
+ * @author Santiago Pita
+ * 
+ * @param game a pointer to the game
+ * 
+ * @return ID of a random space in game
+ */
+
+Id game_get_random_space(Game *game);
+
 #endif

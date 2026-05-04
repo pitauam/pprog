@@ -724,3 +724,20 @@ Status game_remove_object(Game *game, Object *object){
   
   return OK;
 }
+
+Id game_get_random_space(Game *game){
+  int random_number;
+  Id space_id = NO_ID;
+
+  if (!game){
+    return NO_ID;
+  }
+
+  while (space_id == NO_ID)
+  {
+    random_number = rand() % game_get_number_of_spaces(game);
+    space_id = game_get_space_id_at(game, random_number);
+  }
+  
+  return space_id;
+}
