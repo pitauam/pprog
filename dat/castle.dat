@@ -11,7 +11,7 @@
 
 #object:id|name|spawn_id|description|category(future implementation)|
 
-#o:21|Sword|11|It deals damage!|10|2|
+#o:21|Sword|11|It deals damage!|10|1|
 #o:22|Steak|14|Tasty steak..|5|1|
 #o:23|Rose|16|Looks spiky|4|3|
 #o:24|Stew|132|Smells.. weird|2|1|

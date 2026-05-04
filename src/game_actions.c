@@ -896,7 +896,7 @@ void game_actions_use(Game *game){
   }
 
   /* If the command has more than one arg, means that you use it on a character who's following the player */
-  if((character_name = command_get_arg(game_get_last_command(game), 2)) != NULL){
+  if((character_name = command_get_arg(game_get_last_command(game), 1)) != NULL){
 
     /* Buscar quién te sigue para aumentar su vida */
     for(j = 0; j < game_get_number_of_characters(game); j++){
@@ -965,7 +965,7 @@ void game_actions_use(Game *game){
   }
 
   /* Each category of the object adds or removes health to the character or player */
-  if((character_name = command_get_arg(game_get_last_command(game), 2)) == NULL){
+  if((character_name = command_get_arg(game_get_last_command(game), 1)) == NULL){
     if(object_get_category(obj) == Venom){
       player_set_health(player, (player_get_health(player)-object_get_health(obj)));
     } else if (object_get_category(obj) == Elixir){
@@ -984,10 +984,8 @@ void game_actions_use(Game *game){
       character_set_health(character, (character_get_health(character)+object_get_health(obj)));
     } else if (object_get_category(obj) == Strength){
       command_set_return(game_get_last_command(game), ERROR);
-      return;
     } else if (object_get_category(obj) == Cursed){
       command_set_return(game_get_last_command(game), ERROR);
-      return;
     } else if (object_get_category(obj) == NO_CAT){
       character_set_health(character, (character_get_health(character)+0));
     }
