@@ -14,7 +14,7 @@
 
 #define MAX_ARG 32 /*maximum number of characters for the argument*/
 
-typedef enum {UNKNOWN_CMD = -1, TELEPORT, RANDOM_DAMAGE} CommandRules; /*different commands available*/
+typedef enum {UNKNOWN_CMD = -1, TELEPORT, RANDOM_DAMAGE, RANDOM_DROP} CommandRules; /*different commands available*/
 
 /**
  * @brief reads the command and finds what to do in order to update the game

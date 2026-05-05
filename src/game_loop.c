@@ -65,18 +65,12 @@ int main(int argc, char *argv[]) {
 
   if (result == 1) {
     fprintf(stderr, "Error while initializing game.\n");
-    if (log_fp != NULL)
-    {
-      fclose(log_fp);
-    }
+    fclose(log_fp);
     game_destroy(game);
     return 1;
   } else if (result == 2){
     fprintf(stderr, "Error while initializing graphic engine.\n");
-    if (log_fp != NULL)
-    {
-      fclose(log_fp);
-    }
+    fclose(log_fp);
     return 1;
   }
 
@@ -94,7 +88,6 @@ int main(int argc, char *argv[]) {
     graphic_engine_paint_game(gengine, game, FALSE);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
-    game_rules_update(game);
     
     if (log_fp) {
       game_loop_log(game, log_fp);
@@ -109,6 +102,8 @@ int main(int argc, char *argv[]) {
     {
       /*shows the player the result of their action*/
       graphic_engine_paint_game(gengine, game, TRUE);
+      /*updates the game rules*/
+      game_rules_update(game);
       /*time given to see the result of the player's actions*/
       sleep(1);
       /*advances the turn to the next player*/
@@ -117,11 +112,9 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if (log_fp == NULL) {
-    fclose(log_fp);
-  }
+  fclose(log_fp);
+  
   game_loop_cleanup(game, gengine);
-
   return 0;
 }
 
