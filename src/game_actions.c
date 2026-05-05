@@ -881,13 +881,22 @@ void game_actions_use(Game *game){
   int i=0, j=0;
   Player *player = NULL;
   Object *obj = NULL;
-  Character *character = NULL;
+  Character *character = NULL, *found_character = NULL;
 
   Id object_id = NO_ID;
   char *obj_name = NULL;
   char *character_name = NULL;
 
   if(game == NULL) return;
+
+  /* Get object name (use "something") */
+  obj_name = command_get_arg(game_get_last_command(game), 0);
+  character_name = command_get_arg(game_get_last_command(game), 1);
+
+  if(obj_name == NULL){
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   /* Get the player */
   player = game_get_player(game);
@@ -897,9 +906,9 @@ void game_actions_use(Game *game){
   }
 
   /* If the command has more than one arg, means that you use it on a character who's following the player */
-  if((character_name = command_get_arg(game_get_last_command(game), 1)) != NULL){
+  if(character_name != NULL && character_name[0] != '\0'){
 
-    /* Buscar quién te sigue para aumentar su vida */
+    /* Search for who is following you */
     for(j = 0; j < game_get_number_of_characters(game); j++){
       
       /* Get the actual character */
@@ -910,23 +919,19 @@ void game_actions_use(Game *game){
       }
 
       if(character_get_following(character) == player_get_id(player) && strcmp(character_name, character_get_name(character)) == 0){
+        found_character = character;
         break;
       }
-      /* Si no coincide sigo buscando */
+      /* Keep searching */
     }
 
-    /* Si no funciona */
-    if(character == NULL || character_get_following(character) != player_get_id(player) || strcmp(character_name, character_get_name(character)) != 0){
+    /* If it doesn't work */
+    if(found_character == NULL){
       command_set_return(game_get_last_command(game), ERROR);
       return;
     }
-  }
 
-  /* Get object name (use "something") */
-  obj_name = command_get_arg(game_get_last_command(game), 0);
-  if(obj_name == NULL){
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
+    character = found_character;
   }
 
   /* Search for object */
@@ -934,8 +939,7 @@ void game_actions_use(Game *game){
     Id actual = game_get_object_id_at(game, i);
     Object *current_object = game_get_object(game, actual);
 
-    if (current_object != NULL &&
-        strcmp(object_get_name(current_object), obj_name) == 0) {
+    if (current_object != NULL && strcmp(object_get_name(current_object), obj_name) == 0) {
 
       object_id = actual;
       break;
@@ -966,30 +970,20 @@ void game_actions_use(Game *game){
   }
 
   /* Each category of the object adds or removes health to the character or player */
-  if((character_name = command_get_arg(game_get_last_command(game), 1)) == NULL){
-    if(object_get_category(obj) == Venom){
-      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
-    } else if (object_get_category(obj) == Elixir){
-      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
-    } else if (object_get_category(obj) == Strength){
-      player_set_health(player, (player_get_health(player)+object_get_health(obj)));
-    } else if (object_get_category(obj) == Cursed){
-      player_set_health(player, (player_get_health(player)-object_get_health(obj)));
-    } else if (object_get_category(obj) == NO_CAT){
-      player_set_health(player, (player_get_health(player)+0));
-    }
+  if(character_name == NULL || character_name[0] == '\0'){
+
+    player_set_health(player,
+      player_get_health(player) + object_get_health(obj));
+
   } else {
-    if(object_get_category(obj) == Venom){
-      character_set_health(character, (character_get_health(character)-object_get_health(obj)));
-    } else if (object_get_category(obj) == Elixir){
-      character_set_health(character, (character_get_health(character)+object_get_health(obj)));
-    } else if (object_get_category(obj) == Strength){
+
+    if(character == NULL){
       command_set_return(game_get_last_command(game), ERROR);
-    } else if (object_get_category(obj) == Cursed){
-      command_set_return(game_get_last_command(game), ERROR);
-    } else if (object_get_category(obj) == NO_CAT){
-      character_set_health(character, (character_get_health(character)+0));
+      return;
     }
+
+    character_set_health(character,
+      character_get_health(character) + object_get_health(obj));
   }
 
   /* Remove from inventary */
@@ -999,6 +993,7 @@ void game_actions_use(Game *game){
   command_set_return(game_get_last_command(game), OK);
   
 }
+
 
 void game_actions_open(Game *game){
   Id obj_id = NO_ID, link_id = NO_ID;
