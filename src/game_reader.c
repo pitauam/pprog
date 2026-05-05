@@ -450,6 +450,7 @@ Status game_reader_load_players(Game *game, char *filename) {
         player_set_name(player, name);
         player_set_description(player, gdesc_str);
         player_set_location(player, space_id);
+        space_set_discovered(game_get_space(game, space_id), TRUE);
         player_set_health(player, health_points);
         player_set_max_objects(player, max_objects);
 

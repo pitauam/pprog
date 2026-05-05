@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
   srand(time(NULL));
 
   while ((command_get_code(last_cmd) != EXIT) && (game_get_finished(game) == FALSE)) {
-    graphic_engine_paint_game(gengine, game);
+    graphic_engine_paint_game(gengine, game, FALSE);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
     game_rules_update(game);
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
     if (command_get_return(last_cmd) == OK)
     {
       /*shows the player the result of their action*/
-      graphic_engine_paint_game(gengine, game);
+      graphic_engine_paint_game(gengine, game, TRUE);
       /*time given to see the result of the player's actions*/
       sleep(1);
       /*advances the turn to the next player*/
