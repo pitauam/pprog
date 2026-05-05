@@ -363,6 +363,13 @@ int game_get_number_of_characters(Game *game)
   return game->n_characters;
 }
 
+int game_get_number_of_players(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_players;
+}
+
 Id game_get_character_id_at(Game *game, int position) {
   if (!game || position < 0)
   {

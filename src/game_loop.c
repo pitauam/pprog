@@ -31,11 +31,12 @@ void game_loop_log (Game *game, FILE *f);
 int main(int argc, char *argv[]) {
   Game *game = NULL;
   Graphic_engine *gengine;
-  int result;
+  int result, a=0;
   Command *last_cmd = NULL;
   FILE *log_fp = NULL;
   const char *data_file = NULL;
   const char *log_file = NULL;
+  char name[WORD_SIZE];
 
   if (argc != 2 && argc != 4) {
     fprintf(stderr, "Use: %s <game_data_file> [-l <log_file>]\n", argv[0]);
@@ -52,6 +53,17 @@ int main(int argc, char *argv[]) {
   }
   
   result = game_loop_init(&game, &gengine, (char *)data_file);
+
+  for(a =0; a < game_get_number_of_players(game); a++){
+    printf("Name of player %d (NO spaces): ", a+1);
+    while(scanf("%s", name) != 1){
+      printf("\nERROR, name not valid.");
+      printf("Name of player %d (NO spaces): ", a+1);
+    }
+
+    player_set_name(game_get_player(game), name);
+    game_next_turn(game);
+  }
 
    if (log_file != NULL) {
     log_fp = fopen(log_file, "w");
@@ -117,7 +129,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if (log_fp == NULL) {
+  if (log_fp != NULL) {
     fclose(log_fp);
   }
   game_loop_cleanup(game, gengine);

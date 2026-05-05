@@ -404,7 +404,6 @@ Status game_reader_load_characters(Game *game, char *filename){
 Status game_reader_load_players(Game *game, char *filename) {
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
-  char name[WORD_SIZE] = "";
   char gdesc_str[10] = "";
   char *toks = NULL;
   
@@ -430,9 +429,6 @@ Status game_reader_load_players(Game *game, char *filename) {
       /*id of the player*/
       id = atol(toks);
       toks = strtok(NULL, "|");
-      /*name of the player*/
-      strcpy(name, toks);
-      toks = strtok(NULL, "|");
       /*graphic description of the player*/
       strcpy(gdesc_str, toks);
       toks = strtok(NULL, "|");
@@ -447,7 +443,6 @@ Status game_reader_load_players(Game *game, char *filename) {
 
       player = player_create(id);
       if (player != NULL) {
-        player_set_name(player, name);
         player_set_description(player, gdesc_str);
         player_set_location(player, space_id);
         player_set_health(player, health_points);
