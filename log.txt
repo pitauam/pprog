@@ -1,0 +1,20 @@
+ Kevin: exit
+attack Guardia: exit
+move n: unknown
+take Key: exit
+take Sword: exit
+ Kevin: exit
+move n: unknown
+drop Sword: exit
+move l: exit
+take Sword: exit
+move n: exit
+drop Sword: exit
+ Kevin: exit
+take Sword: exit
+unknown Kevin: exit
+move b: exit
+move n: exit
+take Steak: exit
+ Kevin: exit
+exit: exit

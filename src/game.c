@@ -372,6 +372,21 @@ Id game_get_character_id_at(Game *game, int position) {
   return character_get_id(game->characters[position]);
 }
 
+Character* game_get_character_by_name(Game* game, char* name){
+  int i;
+  if(!game) return NULL;
+
+  for (i = 0; i < game->n_characters; i++) {
+    if (strcmp(name, character_get_name(game->characters[i])) == 0) {
+      return game->characters[i];
+    }
+  }
+
+  return NULL;
+  
+
+}
+
 int game_get_n_followers(Game *game, Player *player){
   int n_followers;
   Character *char_aux = NULL;
@@ -543,6 +558,8 @@ Link* game_get_link_by_name(Game* game, char* name){
 
   return NULL;
 }
+
+
 
 int game_get_number_of_links(Game *game){
   if (!game) {return -1;}

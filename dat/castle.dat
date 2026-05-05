@@ -23,10 +23,10 @@
 directions: NO_DIR,N,S,E,W
               -1,  0,1,2,3
 
-#l:31|Entry|11|12|1|1|
+#l:31|Entry|11|12|1|0|
 #l:32|Corridor|12|11|0|1|
 #l:33|Corridor|12|13|1|1|
-#l:34|Corridor|12|121|3|0|
+#l:34|Corridor|12|121|3|1|
 #l:35|Dungeon|121|16|-1|1|
 #l:36|Dining room|13|12|0|1|
 #l:37|Dining room|13|131|2|1|

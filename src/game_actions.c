@@ -846,6 +846,7 @@ void game_actions_abandon(Game *game) {
   int i;
   char *chr_name = NULL;
   Character *chr = NULL;
+  Id chr_following = NO_ID;
 
   if (!game) {
     command_set_return(game_get_last_command(game), ERROR);
@@ -858,8 +859,20 @@ void game_actions_abandon(Game *game) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
+
+  chr = game_get_character_by_name(game, chr_name);
+  if(!chr) return;
+
+  chr_following = character_get_following(chr);
+  if(chr_following == NO_ID) return ;
+
+  if (chr_following == player_get_id(game_get_player(game))) {
+    character_set_following(chr, NO_ID);
+    command_set_return(game_get_last_command(game), OK);
+    return;
+  }
   
-  for (i = 0; i < game_get_number_of_characters(game); i++) {
+  /*for (i = 0; i < game_get_number_of_characters(game); i++) {
     chr = game_get_character(game, game_get_character_id_at(game, i));
     
     if (chr != NULL && character_get_following(chr) == player_get_id(game_get_player(game))) {
@@ -870,7 +883,7 @@ void game_actions_abandon(Game *game) {
         return;
       }
     }
-  }
+  }*/
 
   command_set_return(game_get_last_command(game), ERROR);
   return;

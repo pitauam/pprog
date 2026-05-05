@@ -182,6 +182,18 @@ Object* game_get_object_by_name(Game* game, char* name);
 
 
 /**
+ * @brief Gets the pointer of the character from its name
+ * @author Paula de la Fuente
+ *
+ * @param game pointer to game
+ * @param name name of the character
+ * @return pointer to the character or NULL if something went wrong
+ */
+Character* game_get_character_by_name(Game* game, char* name);
+
+
+
+/**
  * @brief gets the position of the object
  * @author Marta López
  * 
