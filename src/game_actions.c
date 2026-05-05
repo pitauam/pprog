@@ -243,7 +243,7 @@ void game_actions_move(Game *game){
   Direction dir = NO_DIR;
   char direction[MAX_ARG];
 
-  Character* chr=NULL;
+  Character* chr = NULL;
   Id current_char_id = NO_ID, current_char_location = NO_ID, current_char_following = NO_ID;
   int i;
   Space* actual_space = NULL, *future_space = NULL;
