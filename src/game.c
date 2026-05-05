@@ -491,7 +491,7 @@ Id game_get_random_space(Game *game){
     return NO_ID;
   }
 
-  while (space_id == NO_ID)
+  while (space_id == NO_ID || space_is_discovered(game_get_space(game, space_id)) == FALSE)
   {
     random_number = rand() % game_get_number_of_spaces(game);
     space_id = game_get_space_id_at(game, random_number);

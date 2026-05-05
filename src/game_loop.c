@@ -125,7 +125,6 @@ int main(int argc, char *argv[]) {
     graphic_engine_paint_game(gengine, game);
     command_get_user_input(last_cmd);
     game_actions_update(game, last_cmd);
-    game_rules_update(game);
     
     if (log_fp) {
       game_loop_log_command(log_fp, last_cmd);
@@ -140,6 +139,8 @@ int main(int argc, char *argv[]) {
     {
       /*shows the player the result of their action*/
       graphic_engine_paint_game(gengine, game);
+      /*updates the game rules*/
+      game_rules_update(game);
       /*time given to see the result of the player's actions*/
       sleep(1);
       /*advances the turn to the next player*/
