@@ -68,6 +68,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char *toks = NULL;
+  int floor = 0;
   Id id = NO_ID;
   Space *space = NULL;
   Status status = OK;
@@ -101,6 +102,13 @@ Status game_reader_load_spaces(Game *game, char *filename) {
         }
       }
 
+      toks = strtok(NULL, "|");
+      if (toks != NULL) {
+        floor = atoi(toks);
+      } else {
+        floor = 0;
+      }
+
 #ifdef DEBUG
       printf("Leido: s:%ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
 #endif
@@ -110,6 +118,7 @@ Status game_reader_load_spaces(Game *game, char *filename) {
           space_set_gdesc(space, gdesc_str);
         }
         space_set_name(space, name);
+        space_set_floor(space, floor);
         game_add_space(game, space);
 
       }

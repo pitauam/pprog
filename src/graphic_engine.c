@@ -207,6 +207,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   char box_up[10][WORD_SIZE * 3] = {{'\0'}};
   char box_act[10][WORD_SIZE * 3] = {{'\0'}};
   char box_down[10][WORD_SIZE * 3] = {{'\0'}};
+  int current_floor = 1;
   /*char msg[WORD_SIZE] = {'\0'};
   char chr_msg[WORD_SIZE] = {'\0'};*/
 
@@ -223,11 +224,28 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   screen_area_clear(ge->map);
   if ((id_act = game_get_player_location(game)) != NO_ID)
   {
+    current_floor = space_get_floor(game_get_space(game, id_act));
+
     id_back = game_get_connection(game, id_act, N);
     id_next = game_get_connection(game, id_act, S);
     id_left = game_get_connection(game, id_act, W);
     id_right = game_get_connection(game, id_act, E);
 
+    if (id_back != NO_ID && space_get_floor(game_get_space(game, id_back)) != current_floor) {
+      id_back = NO_ID;
+    }
+
+    if (id_next != NO_ID && space_get_floor(game_get_space(game, id_next)) != current_floor) {
+      id_next = NO_ID;
+    }
+
+    if (id_left != NO_ID && space_get_floor(game_get_space(game, id_left)) != current_floor) {
+      id_left = NO_ID;
+    }
+
+    if (id_right != NO_ID && space_get_floor(game_get_space(game, id_right)) != current_floor) {
+      id_right = NO_ID;
+    }
     for (i=0; i < game_get_number_of_objects(game); i++)
     {
       obj_id = game_get_object_id_at(game, i);

@@ -21,6 +21,7 @@
 #define GDESC_HEIGHT 5
 #define GDESC_SIZE1 5
 #define GDESC_SIZE2 10
+#define MAX_FLOORS 3
 
 
 typedef struct _Space Space;
@@ -227,6 +228,10 @@ Set *space_get_characters(Space *space);
  */
 
 Id space_get_character_id_at(Space *space, int i);
+
+Status space_set_floor(Space *space, int floor);
+
+int space_get_floor(Space *space);
 
 
 #endif

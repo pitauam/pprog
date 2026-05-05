@@ -23,7 +23,7 @@ all: $(EXE)
 
 #runs auxiliary map
 runaux:
-	./$(EXE) dat/singleplayer.dat
+	./$(EXE) dat/new_castle.dat
 
 #runs all tests
 runtests: 
@@ -82,7 +82,7 @@ obj/game_rules.o: src/game_rules.c include/game.h include/types.h
 
 #run
 run: $(EXE)
-	./$(EXE) dat/castle.dat
+	./$(EXE) dat/new_castle.dat
 
 #run Iteration 3 map and generates a log file
 runlog: $(EXE)

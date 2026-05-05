@@ -22,6 +22,7 @@ struct _Space {
   Set *objects;             /*!< Set of objects in the space */
   Set *characters;           /*Stores the ID of the character(s) in the space, or NO_ID if there is no character */
   Bool discovered;          /*!< Whether the space is discovered or not */
+  int floor;                 /*!< The floor where the space is*/
 };
 
 
@@ -63,6 +64,7 @@ Space* space_create(Id id) {
   }
 
   newSpace->discovered = FALSE;
+  newSpace->floor = 0;
 
   return newSpace;
 }
@@ -310,4 +312,23 @@ Id space_get_character_id_at(Space *space, int i) {
   }
 
   return set_get_id(space->characters, i);
+
+}
+
+Status space_set_floor(Space *space, int floor){
+  if (!space || floor > MAX_FLOORS || floor < 0){
+      return ERROR;
+    }
+
+    space->floor = floor;
+
+    return OK;
+}
+
+int space_get_floor(Space *space){
+  if (!space){
+      return -1;
+    }
+
+    return space->floor;
 }
