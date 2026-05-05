@@ -79,7 +79,7 @@ obj/inventory.o: src/inventory.c include/inventory.h include/types.h include/set
 
 obj/game_rules.o: src/game_rules.c include/game.h include/types.h
 	$(CC) -c $(CFLAGS) $< -o $@
-   
+
 #run
 run: $(EXE)
 	./$(EXE) dat/castle.dat

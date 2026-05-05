@@ -118,10 +118,15 @@ void graphic_engine_paint_box(Game *game, char box[10][WORD_SIZE * 3], char *cha
       sprintf(str, "|            %3d   |", (int)space_id);
       strcat(box[1], str);
     }
-
-    sprintf(str, "|    %-8.8s      |", characters);
-    strcat(box[2], str);
-
+    if (space_is_discovered(space))
+    {
+      sprintf(str, "|    %-8.8s      |", characters);
+      strcat(box[2], str);
+    } else {
+      sprintf(str, "|                  |");
+      strcat(box[2], str);
+    }
+  
     for (n = 0; n < GDESC_SIZE1; n++)
     {
       if (space_get_gdesc_line(space, n) != NULL)
@@ -186,7 +191,7 @@ void graphic_engine_paint_box_space_vertical(Game *game, char box[10][WORD_SIZE 
   }
 }
 
-void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
+void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_left = NO_ID, id_right = NO_ID, obj_loc = NO_ID, obj_id = NO_ID, character_id = NO_ID, player_obj_id = NO_ID, char_loc = NO_ID;
   char obj_act[WORD_SIZE] = {'\0'};
   char obj_back[WORD_SIZE] = {'\0'};
@@ -521,12 +526,15 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the feedback area */
   last_cmd = command_get_code(game_get_last_command(game));
-  if(command_get_return(game_get_last_command(game))){
-    sprintf(str, " %s (%s): OK", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
-  }else {
-    sprintf(str, " %s (%s): ERROR", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
+  if (!repeat)
+  {
+    if(command_get_return(game_get_last_command(game))){
+      sprintf(str, " %s (%s): OK", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
+    }else {
+      sprintf(str, " %s (%s): ERROR", cmd_to_str[last_cmd - NO_CMD][CMDL],cmd_to_str[last_cmd - NO_CMD][CMDS]);
+    }
+    screen_area_puts(ge->feedback, str);
   }
-  screen_area_puts(ge->feedback, str);
   
 
   /* Dump to the terminal */

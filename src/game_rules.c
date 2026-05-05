@@ -13,7 +13,7 @@
 #include <strings.h>
 #include <time.h>
 
-#define N_CMDS 2      /*!< Number of commands*/
+#define N_CMDS 3      /*!< Number of commands*/
 
 
 /**
@@ -34,8 +34,24 @@ void game_rules_teleport(Game *game);
  *
  * @param game pointer to game
  */
-
 void game_rules_random_damage(Game* game);
+
+/**
+ * @brief the command drops one random item from the player's inventory
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ */
+void game_rules_random_drop(Game* game);
+
+/**
+ * @brief the command updates links after killing an enemy (it can open or close them)
+ * @author Santiago Pita
+ *
+ * @param game pointer to game
+ */
+void game_rules_update_links(Game *game);
+
 
 /*
    Game actions implementation
@@ -45,34 +61,31 @@ Status game_rules_update(Game *game) {
   CommandRules random_command; /*chooses a command to execute*/
   int random_number; /*this number decides whether a command is executed or not*/
 
-  random_number = rand() % 3;
-  if (random_number != 0){
-    /*1 out of 10 chance the command will execute*/
-    return OK;
-  }
-
-  /*random number between -1 and N_CMD-1
-  random_number =  ((rand() % (N_CMD+1)) - 1);
-  */
+  game_rules_update_links(game);
 
   /*random number between 0 and N_CMD to decide the command that will be executed*/
+
+  random_number = rand() % 6;
+  if (random_number != 0){
+    /*1 out of 3 chance the command will execute*/
+    return OK;
+  }
   random_command  = rand() % N_CMDS;
+  
   /*
-  random_command = 0;
+  random_command = 2;
   */
   switch (random_command) {
-    /*no command. -1
-    case UNKNOWN_CMD:
-      game_rules_unknown_cmd(game);
-      break;
-    */
-
     case TELEPORT:
       game_rules_teleport(game);
       break;
 
     case RANDOM_DAMAGE:
       game_rules_random_damage(game);
+      break;
+
+    case RANDOM_DROP:
+      game_rules_random_drop(game);
       break;
 
     default:
@@ -86,7 +99,6 @@ Status game_rules_update(Game *game) {
    Calls implementation for each action
 */
 
-void game_rules_unknown_cmd(Game *game) {}
 
 void game_rules_teleport(Game *game){
   Id future_id = NO_ID; /*Where I go*/
@@ -104,18 +116,16 @@ void game_rules_teleport(Game *game){
     return;
   }
 
-  /*fix this function*/
   future_id = game_get_random_space(game);
   future_space = game_get_space(game, future_id);
   if (NO_ID == space_id || !future_space) {
     return;
   }
-/*
-  open = game_connection_is_open(game, space_id, dir);
-*/
+
   if (future_id != NO_ID) {
 
     game_set_player_location(game, future_id);
+    game_set_message(game, "You were teleported to a random space!");
     space_set_discovered(game_get_space(game, future_id), TRUE);
     
     /*The reclutas will go with this player to the future_id space -> condiciones: MISMO ESPACIO, AMIGO, QUE ME SIGA (id de recluta == id jugador) y que esté VIVO*/
@@ -152,7 +162,7 @@ void game_rules_teleport(Game *game){
 }
 
 void game_rules_random_damage(Game *game){
-  Player *player;
+  Player *player = NULL;
   if (!game){
     return;
   }
@@ -160,10 +170,55 @@ void game_rules_random_damage(Game *game){
   /*if the player moved in the last turn*/
   if (command_get_code(game_get_last_command(game)) == 2)
   {
-    game_set_message(game, "You fell and sprained your ankle while moving! You lost 1 health point");
     player = game_get_player(game);
     player_set_health(player, (player_get_health(player)-1));
+    game_set_message(game, "You fell and sprained your ankle while moving! You lost 1 health point");
   }
 
   return;
+}
+
+void game_rules_random_drop(Game *game){
+  Player *player = NULL;
+  Id object_id = NO_ID;
+  Id space_id = NO_ID;
+  char message[256];
+
+  player = game_get_player(game);
+
+  /*if the player has 1 or less objects or if the last turn the player used a command that wasnt move*/
+  if (!game || player_get_n_objects(player) <= 1 || command_get_code(game_get_last_command(game)) != 2){
+    return;
+  }
+
+  object_id = player_get_object_id(player, 1);
+  
+  /*gets the id of the space where the player is*/
+  space_id = game_get_player_location(game);
+  if(space_id == NO_ID){
+    return;
+  }
+  
+  /*removes the object from the player*/
+  player_remove_object(player, object_id);
+  /*adds the object to the space*/
+  space_add_object(game_get_space(game, space_id), object_id);
+  
+  strcpy(message, "You dropped your ");
+  strcat(message, object_get_name(game_get_object(game, object_id)));
+
+  game_set_message(game, message);
+
+  return;
+}
+
+void game_rules_update_links(Game *game){
+
+  if (!game){
+    return;
+  }
+
+
+
+
 }

@@ -363,6 +363,13 @@ int game_get_number_of_characters(Game *game)
   return game->n_characters;
 }
 
+int game_get_number_of_players(Game *game)
+{
+  if (!game) {return -1;}
+
+  return game->n_players;
+}
+
 Id game_get_character_id_at(Game *game, int position) {
   if (!game || position < 0)
   {
@@ -506,7 +513,7 @@ Id game_get_random_space(Game *game){
     return NO_ID;
   }
 
-  while (space_id == NO_ID)
+  while (space_id == NO_ID || space_is_discovered(game_get_space(game, space_id)) == FALSE)
   {
     random_number = rand() % game_get_number_of_spaces(game);
     space_id = game_get_space_id_at(game, random_number);

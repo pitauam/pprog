@@ -1,61 +1,88 @@
-#s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|
-#s:12|Corridor|-------'-|l[o] [o]l|l   $   l|l  -$-  l|---------
-#s:13|Dungeon|---------|l l l l l|l l l l l|l l l l l|---------|
-#s:14|Dining room| .-===-. | ! . . ! | ! .'. ! |()_____()|II_____II|
-#s:15|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|
-#s:16|Bathroom|         |         |         |         |         |
-#s:17|Kitchen|         |         |         |         |         |
-#s:18|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|
-#s:19|Garden|         |         |         |         |         |
+#s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|1|
+#s:12|Corridor|-------'-|l[o] [o]l|l   $   l|l  -$-  l|---------|1|
+#s:13|Dungeon|---------|l l l l l|l l l l l|l l l l l|---------|1|
+#s:14|Dining room| .-===-. | ! . . ! | ! .'. ! |()_____()|II_____II|1|
+#s:15|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|1|
+#s:16|Bathroom|         |         |         |         |         |1|
+#s:17|Kitchen|         |         |         |         |         |1|
+#s:18|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|1|
+#s:19|Garden|         |         |         |         |         |1|
+#s:111|Dungeon stairs|         |         |         |         |         |0|
+#s:112|Dungeon corridor|         |         |         |         |         |0|
+#s:113|Dungeon cells|         |         |         |         |         |0|
+#s:114|Guard post|         |         |         |         |         |0|
+#s:115|Armory|         |         |         |         |         |0|
+#s:116|atic stairs|         |         |         |         |         |2|
+#s:117|atic corridor|         |         |         |         |         |2|
+#s:118|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
+#s:119|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
+#s:121|atic corridor|         |         |         |         |         |2|
+#s:122|atic corridor|         |         |         |         |         |2|
+#s:123|Throne door|         |         |         |         |         |2|
+#s:123|Throne room|         |         |         |         |         |2|
+
+
+
+
+
 
 #faltan los espacios nuevos
 
-#object:id|name|spawn_id|description|category(future implementation)|
+#object:id|name|spawn_id|description|health|category|movable|dependency|open
 
-#o:21|Sword|11|It deals damage!|
-#o:22|Steak|17|Tasty steak..|
-#o:23|Rose|19|Looks spiky|
-#o:24|Stew|16|Smells.. weird|
-#o:25|Potion| | |
-#o:26|Wand| | |
-#o:27|Shovel| | |
-#o:28|Coin| | |
-#o:29|Armor| | |
-#o:211|Larntern| | |
-#o:212|Torch| | |
-#o:213|Key| | |
-#o:214|Chimney| | |
-#o:215|Box| | |
-#o:216|Sword+| | |
-#o:217|Bow+| | |
-#o:218|Armor+| | |
-#o:219|Repair kit| | |
-#o:221|Bendages| | |
+
+#o:21|Sword|11|It gives you a damage boost|2|2|1|-1|-1|
+#o:22|Steak|14|Tasty steak..|5|1|1|-1|-1|
+#o:23|Rose|16|Looks spiky|4|3|1|25|-1|-1|
+#o:24|Stew|132|Smells.. weird|2|1|1|-1|-1|
+#o:25|depRose|16|Looks spiky|4|3|1|-1|-1|
+#o:26|Dungeon Key|11|It could open a door|1|2|1|-1|12|
+#o:27|Potion| |A healing potion|10|1|1|-1|-1|
+#o:28|Wand| |It looks like a stick|2|2|1|-1|-1|
+#o:29|Shovel| |Maybe you could dig somewhere|2|6|1|-1|-1|
+#o:211|Coin| |Maybe you can give this to someone|1|4|1|-1|-1|
+#o:212|Armor| |Use it to protect you from damage|2|5|1|-1|-1|
+#o:213|Torch| |You could use it to light something on fire|1|6|1|-1|-1|
+#o:214|Atic Key| |It could open a door|1|6|1|-1|-1|
+#o:215|Chimney| |It can be lighted up|1|-1|-1|-1|-1|
+#o:216|Box| |Its can be broken with something|1|-1|-1|-1|-1|
+#o:217|Sword+| |It gives you a damage boost|4|2|1|1|-1|-1|
+#o:218|Armor+| |Use it to protect you from damage|4|5|1|-1|-1|
+#o:219|Repair kit| |Repairs your armor|2|4|1|-1|-1|
+#o:221|Bendages| |Heals you a bit|2|1|1|-1|-1|
 
 
 #he puesto esto para ir poniendo un poco como seria 
 
 
-#links:id|name|origin_id|destination_id|north,south..|open|
+#links:id|name|origin_id|destination_id|north,south..|open|floor|
 directions: NO_DIR,N,S,E,W
               -1,  0,1,2,3
 
-#l:31|Entry|11|12|1|1|
-#l:32|Corridor|12|11|0|1|
-#l:33|Corridor|12|14|1|1|
-#l:34|Corridor|12|13|3|0|
-#l:35|Dungeon|13|19|-1|1|
-#l:36|Dining room|14|12|0|1|
-#l:37|Dining room|14|15|2|1|
-#l:38|Dining room|14|17|1|1|
-#l:39|Bedroom|15|14|3|1|
-#l:310|Bedroom|15|16|2|1|
-#l:311|Bathroom|16|15|3|1|
-#l:312|Kitchen|17|14|0|1|
-#l:313|Kitchen|17|18|1|1|
-#l:314|Inner countryard|18|17|0|1|
-#l:315|Inner countryard|18|19|1|1|
-#l:316|Garden|19|18|0|1|
+#l:31|Entry|11|12|1|1|1|
+#l:32|Corridor|12|11|0|1|1|
+#l:33|Corridor|12|14|1|1|1|
+#l:34|Corridor|12|13|3|0|1|
+#l:35|Dungeon|13|19|-1|1|1|
+#l:36|Dungeon|13|111|5|1|0|
+#l:37|Dining room|14|12|0|1|1|
+#l:38|Dining room|14|15|2|1|1|
+#l:39|Dining room|14|17|1|1|1|
+#l:310|Bedroom|15|14|3|1|1|
+#l:311|Bedroom|15|16|2|1|1|
+#l:312|Bathroom|16|15|3|1|1|
+#l:312|Kitchen|17|14|0|1|1|
+#l:314|Kitchen|17|18|1|1|1|
+#l:315|Inner countryard|18|17|0|1|1|
+#l:316|Inner countryard|18|19|1|1|1|
+#l:317|Garden|19|18|0|1|1|
+#l:318|Dungeon stairs|111|13|4|1|1|
+#l:319|Dungeon stairs|111|112|1|1|0|
+#l:320|Dungeon corridor|112|111|0|1|0|
+#l:321|Dungeon corridor|112|113|2|1|0|
+#l:322|Dungeon corridor|112|111|0|1|0|
+
+
 
 #c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
 #c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|

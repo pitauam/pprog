@@ -245,6 +245,15 @@ const char *game_get_character_name(Game *game, Character *chr);
  */
 int game_get_number_of_characters(Game *game);
 
+/**
+ * @brief gets the number of players
+ * @author Marta López
+ * 
+ * @param game a pointer to the game
+ * 
+ * @return returns number of players or -1 if something went wrong
+ */
+int game_get_number_of_players(Game *game);
 
 /**
  * @brief Gets the id of one character located at a given position in the array

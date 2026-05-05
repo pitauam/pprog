@@ -38,7 +38,8 @@ void graphic_engine_destroy(Graphic_engine *ge);
  *
  * @param ge pointer to the graphic engine
  * @param game pointer to the game
+ * @param repeat 
  */
-void graphic_engine_paint_game(Graphic_engine *ge, Game *game);
+void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat);
 
 #endif

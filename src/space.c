@@ -20,8 +20,8 @@ struct _Space {
   char name[WORD_SIZE + 1]; /*!< Name of the space */
   char gdesc[GDESC_HEIGHT][GDESC_WIDTH]; /*!< Description of the space */
   Set *objects;             /*!< Set of objects in the space */
-  Set *characters;           /*Stores the ID of the character(s) in the space, or NO_ID if there is no character*/
-  Bool discovered;          /*!< Whether the space is discovered or not*/
+  Set *characters;           /*Stores the ID of the character(s) in the space, or NO_ID if there is no character */
+  Bool discovered;          /*!< Whether the space is discovered or not */
 };
 
 
