@@ -12,6 +12,8 @@
 #s:113|Dungeon cells|         |         |         |         |         |0|
 #s:114|Guard post|         |         |         |         |         |0|
 #s:115|Armory|         |         |         |         |         |0|
+#s:124|Cell|         |         |         |         |         |0|
+#s:125|Cell|         |         |         |         |         |0|
 #s:116|atic stairs|         |         |         |         |         |2|
 #s:117|atic corridor|         |         |         |         |         |2|
 #s:118|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
@@ -19,7 +21,7 @@
 #s:121|atic corridor|         |         |         |         |         |2|
 #s:122|atic corridor|         |         |         |         |         |2|
 #s:123|Throne door|         |         |         |         |         |2|
-#s:123|Throne room|         |         |         |         |         |2|
+#s:124|Throne room|         |         |         |         |         |2|
 
 
 
@@ -56,8 +58,8 @@
 
 
 #links:id|name|origin_id|destination_id|north,south..|open|floor|
-directions: NO_DIR,N,S,E,W
-              -1,  0,1,2,3
+directions: NO_DIR,N,S,E,W U D
+              -1,  0,1,2,3 4 5
 
 #l:31|Entry|11|12|1|1|1|
 #l:32|Corridor|12|11|0|1|1|
@@ -80,7 +82,15 @@ directions: NO_DIR,N,S,E,W
 #l:319|Dungeon stairs|111|112|1|1|0|
 #l:320|Dungeon corridor|112|111|0|1|0|
 #l:321|Dungeon corridor|112|113|2|1|0|
-#l:322|Dungeon corridor|112|111|0|1|0|
+#l:322|Dungeon corridor|112|114|3|1|0|
+#l:323|Guard post|114|113|2|1|0|
+#l:324|Guard post|114|115|3|0|0|
+#l:325|Armory|115|114|2|1|0|
+#l:326|Dungeon cells|113|112|3|1|0|
+#l:327|Dungeon cells|113|124|2|0|0|
+#l:328|Dungeon cells|113|125|1|0|0|
+#l:329|Cell|124|113|3|1|0|
+#l:330|Cell|125|113|0|1|0|
 
 
 
