@@ -65,18 +65,12 @@ int main(int argc, char *argv[]) {
 
   if (result == 1) {
     fprintf(stderr, "Error while initializing game.\n");
-    if (log_fp != NULL)
-    {
-      fclose(log_fp);
-    }
+    fclose(log_fp);
     game_destroy(game);
     return 1;
   } else if (result == 2){
     fprintf(stderr, "Error while initializing graphic engine.\n");
-    if (log_fp != NULL)
-    {
-      fclose(log_fp);
-    }
+    fclose(log_fp);
     return 1;
   }
 
@@ -118,11 +112,9 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if (log_fp == NULL) {
-    fclose(log_fp);
-  }
+  fclose(log_fp);
+  
   game_loop_cleanup(game, gengine);
-
   return 0;
 }
 
