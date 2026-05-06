@@ -153,6 +153,14 @@ Id character_get_following(Character *character);
  */
 Status character_set_following(Character *character, Id id);
 
+Status character_set_strength(Character *character, int strength);
+
+int character_get_strength(Character *character);
+
+Status character_set_armor(Character *character, int armor);
+
+int character_get_armor(Character *character);
+
 /**
  * @brief Prints the information of the character
  * @author Mario Rodriguez

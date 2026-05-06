@@ -25,6 +25,8 @@ struct _Player {
     int health; /*!< Health of the player */
     char gdesc[7]; /*!< Gives a graphic description */
     Inventory *backpack; /*!< Inventory of the player */
+    int strength; /*!< Atack of the player */
+    int armor; /*!< Armor of the player */
 };
 
 /** player_create allocates memory and initializes all variables*/
@@ -46,6 +48,8 @@ Player* player_create(Id id) {
   new_player->location = NO_ID;
   new_player->backpack = inventory_create();
   new_player->health = 5;
+  new_player->strength = 1;
+  new_player->armor = 0;
   new_player->gdesc[0] = '\0';
 
   return new_player;
@@ -240,6 +244,45 @@ const char *player_get_description(Player *player){
     }
 
     return player->gdesc;
+}
+
+
+Status player_set_strength(Player *player, int strength){
+    if(player == NULL || strength < 0){
+        return ERROR;
+    }
+
+    player->strength = strength;
+
+    return OK;
+}
+
+int player_get_strength(Player *player){
+    if(player == NULL){
+        return -1;
+    }
+
+    return player->strength;
+}
+
+
+
+Status player_set_armor(Player *player, int armor){
+    if(player == NULL || armor < 0){
+        return ERROR;
+    }
+
+    player->armor = armor;
+
+    return OK;
+}
+
+int player_get_armor(Player *player){
+    if(player == NULL){
+        return -1;
+    }
+
+    return player->armor;
 }
 /**player_print prints the information of the player*/
   Status player_print(Player* player) {

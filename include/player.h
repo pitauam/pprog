@@ -195,6 +195,15 @@ Status player_set_health(Player *player, int health);
  */
 int player_get_health(Player *player);
 
+Status player_set_strength(Player *player, int strength);
+
+int player_get_strength(Player *player);
+
+Status player_set_armor(Player *player, int armor);
+
+int player_get_armor(Player *player);
+
+
 /**
  * @brief Prints information about the player
  * @author Mario Rodriguez

@@ -63,11 +63,12 @@ directions: NO_DIR,N,S,E,W U D
 
 #l:31|Entry|11|12|1|1|
 #l:32|Corridor|12|11|0|1|
-#l:33|Corridor|12|14|1|1|
+#l:33|Corridor|12|14|1|0|
 #l:34|Corridor|12|13|3|0|
 #l:35|Dungeon|13|19|-1|1|
 #l:36|Dungeon|13|111|5|1|
-#l:37|Dining room|14|12|0|1|
+#l:345|Dungeon|13|12|2|1|
+#l:37|Dining room|14|12|0|0|
 #l:38|Dining room|14|15|2|1|
 #l:39|Dining room|14|17|1|1|
 #l:310|Bedroom|15|14|3|1|
@@ -83,7 +84,7 @@ directions: NO_DIR,N,S,E,W U D
 #l:320|Dungeon corridor|112|111|0|1|
 #l:321|Dungeon corridor|112|113|2|1|
 #l:322|Dungeon corridor|112|114|3|1|
-#l:323|Guard post|114|113|2|1|
+#l:323|Guard post|114|112|2|1|
 #l:324|Guard post|114|115|3|0|
 #l:325|Armory|115|114|2|1|
 #l:326|Dungeon cells|113|112|3|1|
@@ -107,17 +108,21 @@ directions: NO_DIR,N,S,E,W U D
 #l:344|Throne room|127|123|3|0|
 
 
+#_character:characterid|knigth|gdesc^C>|spawn11|hp5|friendly|message|strength|armor|
+
+#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|1|1|
+#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|1|0|
+#c:43|Inmate|*_*|124|1|0|I've been stuck here for so long..|1|0|
+#c:44|Bit|-_-|19|5|0||1|0|
+#c:45|Byte|<o_->|19|7|0||2|1|
+#c:46|Mega|>0_0<|19|10|0||2|2|
 
 
-#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
-#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|
-#c:43|Inmate|*_*|13|1|0|I've been stuck here for so long..|
-#c:44|Slime|/^¬^\|19|1|0||
 
 
-#_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
+#_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
 
-#p:100|:D|11|5|3|
+#p:100|:D|11|5|3|1|0
 
 
 #ptest:101|Knight|^C>|12|5|3|
