@@ -211,7 +211,7 @@ Status player_find_object(Player* player, Id id){
 
 
 Status player_set_health(Player *player, int health){
-    if(player == NULL || health < 0 || health > 100){
+    if(player == NULL|| health > 20){
         return ERROR;
     }
 

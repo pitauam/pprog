@@ -1,27 +1,27 @@
 #s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|1|
-#s:12|Corridor|-------'-|l[o] [o]l|l   $   l|l  -$-  l|---------|1|
-#s:13|Dungeon|---------|l l l l l|l l l l l|l l l l l|---------|1|
+#s:12|Corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|1|
+#s:13|Dungeon|    _    |  /___\  | /_____\ |/_______\|_________|1|
 #s:14|Dining room| .-===-. | ! . . ! | ! .'. ! |()_____()|II_____II|1|
 #s:15|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|1|
-#s:16|Bathroom|         |         |         |         |         |1|
+#s:16|Bathroom|   ___   |  !___!  |  !_O_!  |  !( )!  |  !/_\!  |1|
 #s:17|Kitchen|         |         |         |         |         |1|
 #s:18|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|1|
 #s:19|Garden|         |         |         |         |         |1|
-#s:111|Dungeon stairs|         |         |         |         |         |0|
-#s:112|Dungeon corridor|         |         |         |         |         |0|
-#s:113|Dungeon cells|         |         |         |         |         |0|
+#s:111|Dungeon stairs|    _    |  /___\  | /_____\ |/_______\|_________|0|
+#s:112|Dungeon corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|0|
+#s:113|Dungeon cells|_________|!   !   !|![_]![_]!|!   !   !|!___!___!|0|
 #s:114|Guard post|         |         |         |         |         |0|
 #s:115|Armory|         |         |         |         |         |0|
-#s:124|Cell|         |         |         |         |         |0|
-#s:125|Cell|         |         |         |         |         |0|
-#s:116|Atic stairs|         |         |         |         |         |2|
-#s:117|Atic corridor|         |         |         |         |         |2|
+#s:124|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
+#s:125|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
+#s:116|Atic stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
+#s:117|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:118|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
 #s:119|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
-#s:121|Atic corridor|         |         |         |         |         |2|
-#s:122|Atic corridor|         |         |         |         |         |2|
-#s:123|Throne door|         |         |         |         |         |2|
-#s:127|Throne room|         |         |         |         |         |2|
+#s:121|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
+#s:122|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
+#s:123|Servers door| /-----\ |/   ^   \|!  [H]  !|!  [I]  !|/  _ _  \|2|
+#s:127|Servers room|         |         |         |         |         |2|
 
 
 
@@ -122,7 +122,7 @@ directions: NO_DIR,N,S,E,W U D
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
 
-#p:100|:D|11|5|3|1|1
+#p:100|:D|16|5|3|1|1
 
 
 #ptest:101|Knight|^C>|12|5|3|

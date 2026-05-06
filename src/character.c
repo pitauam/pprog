@@ -108,7 +108,7 @@ const char *character_get_description(Character *character){
 }
 
 Status character_set_health(Character *character, int health){
-    if(character == NULL || health < 0 || health > 100){
+    if(character == NULL || health > 20){
         return ERROR;
     }
 

@@ -356,10 +356,10 @@ void game_actions_take(Game *game){
 
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
-  if(player_location == NO_ID) {{
+  if(player_location == NO_ID) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   player = game_get_player(game);
 
@@ -384,7 +384,7 @@ void game_actions_take(Game *game){
 
     
     if(object_get_movable(game_get_object(game, object_id)) == TRUE){
-      printf("%s", game_get_object_name(game, game_get_object(game, object_id)));
+      
       if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0 && dependency != NO_ID)
       {
         /* Get the object and checks dependency */
@@ -1008,7 +1008,7 @@ void game_actions_use(Game *game){
   /* Each category of the object adds or removes health to the character or player */
   if(character_name == NULL || character_name[0] == '\0'){
 
-    if(object_get_category(obj) == 2 ){
+    if(object_get_category(obj) == 1 ){
       player_set_health(player, player_get_health(player) + object_get_health(obj));
     }
 
