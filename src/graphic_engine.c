@@ -416,7 +416,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
 
-  sprintf(str, " Health : %d", player_get_health(player));
+  sprintf(str, " Health : %d Strength: %d Armor: %d", player_get_health(player), player_get_strength(player), player_get_armor(player));
   screen_area_puts(ge->descript, str);
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
