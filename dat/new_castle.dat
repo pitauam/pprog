@@ -41,7 +41,7 @@
 #o:26|DungeonKey|11|It could open a door|1|2|1|-1|12|
 #o:27|Potion| |A healing potion|10|1|1|-1|-1|
 #o:28|Wand| |It looks like a stick|2|2|1|-1|-1|
-#o:29|Shovel| |Maybe you could dig somewhere|2|6|1|-1|-1|
+#o:29|Shovel|19|Maybe you could dig somewhere|2|6|1|-1|-1|
 #o:211|Coin| |Maybe you can give this to someone|1|4|1|-1|-1|
 #o:212|Armor| |Use it to protect you from damage|2|5|1|-1|-1|
 #o:213|Torch| |You could use it to light something on fire|1|6|1|-1|-1|
@@ -117,7 +117,7 @@ directions: NO_DIR,N,S,E,W U D
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|
 
-#p:100|:D|11|5|3|
+#p:100|:D|19|5|3|
 
 
 #ptest:101|Knight|^C>|12|5|3|
