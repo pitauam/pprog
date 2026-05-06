@@ -39,11 +39,11 @@
 #o:24|Stew|132|Smells.. weird|2|1|1|-1|-1|
 #o:25|depRose|16|Looks spiky|4|3|1|-1|-1|
 #o:26|DungeonKey|11|It could open a door|1|2|1|-1|12|
-#o:27|Potion| |A healing potion|10|1|1|-1|-1|
+#o:27|Potion|114|A healing potion|10|1|1|-1|-1|
 #o:28|Wand| |It looks like a stick|2|2|1|-1|-1|
 #o:29|Shovel|19|Maybe you could dig somewhere|2|6|1|-1|-1|
 #o:211|Coin| |Maybe you can give this to someone|1|4|1|-1|-1|
-#o:212|Armor| |Use it to protect you from damage|2|5|1|-1|-1|
+#o:212|Armor|15|Use it to protect you from damage|2|5|1|-1|-1|
 #o:213|Torch| |You could use it to light something on fire|1|6|1|-1|-1|
 #o:214|AticKey| |It could open a door|1|6|1|-1|-1|
 #o:215|Chimney| |It can be lighted up|1|-1|-1|-1|-1|
@@ -113,16 +113,16 @@ directions: NO_DIR,N,S,E,W U D
 #c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|1|1|
 #c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|1|0|
 #c:43|Inmate|*_*|124|1|0|I've been stuck here for so long..|1|0|
-#c:44|Bit|-_-|19|5|0||1|0|
-#c:45|Byte|<o_->|19|7|0||2|1|
-#c:46|Mega|>0_0<|19|10|0||2|2|
+#c:44|Bit|-_-|19|7|0||1|0|
+#c:45|Byte|<o_->|19|10|0||2|1|
+#c:46|Mega|>0_0<|19|15|0||2|2|
 
 
 
 
 #_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
 
-#p:100|:D|11|5|3|1|0
+#p:100|:D|11|5|3|1|1
 
 
 #ptest:101|Knight|^C>|12|5|3|

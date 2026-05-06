@@ -227,7 +227,7 @@ Status object_print(Object* object) {
 
   if (object_get_category(object) == Venom) {
     fprintf(stdout, "- Object category is venomus\n");
-  } else if (object_get_category(object) == Elixir) {
+  } else if (object_get_category(object) == Healing) {
     fprintf(stdout, "- Object category is an elexir\n");
   } else if (object_get_category(object) == Strength) {
     fprintf(stdout, "- Object category is empowering\n");
