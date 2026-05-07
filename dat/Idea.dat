@@ -1,0 +1,54 @@
+#s:11|Entrance hall| |==   ==| |  []  | |  []  | |______|
+#s:12|Server core| |[##][##]| |  ||  | |  ||  | |[____]|
+#s:121|Dungeon| |///////| |///////| |///////| |///////|
+#s:13|Testing lab| |<> <>| | <> <> | | <> <> | |______|
+#s:131|Vault| |$$$$$$| |$$$$$$| |$$$$$$| |$$$$$$|
+#s:132|Control nexus| | CTRL | | CTRL | | CTRL | | CTRL |
+#s:14|Storage bay| | [ ] | | [ ] | | [ ] | | [ ] |
+#s:15|Inner courtyard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|------|
+#s:16|Attic hub| |^^^^^^| |^^^^^^| |^^^^^^| |^^^^^^|
+
+#object:id|name|spawn_id|description|health|category|movable|dependency|open
+
+#o:21|Laser|11|High-energy weapon|10|2|1|-1|-1
+#o:22|Energy pack|14|Restores energy|5|1|1|-1|-1
+#o:23|Robot|12|Combat android ally|8|2|1|25|-1
+#o:24|Malware|132|Corrupts your systems|3|3|1|-1|-1
+#o:25|Code fragment|13|Piece of core algorithm|4|6|1|-1|-1
+#o:26|Keycard|11|Grants access to secure rooms|10|6|1|-1|131
+#o:27|Battery|14|Portable power source|5|1|1|-1|-1
+#o:28|Broken chip|121|Damaged hardware fragment|2|0|1|-1|-1
+#o:29|Drone|15|Hostile surveillance unit|6|3|1|-1|-1
+
+#links:id|name|origin_id|destination_id|direction|open|
+directions: NO_DIR,N,S,E,W
+              -1,  0,1,2,3
+
+#l:31|EntranceLink|11|12|1|1|
+#l:32|CoreReturn|12|11|0|1|
+#l:33|CoreToLab|12|13|1|1|
+#l:34|CoreToDungeon|12|121|3|1|
+#l:35|DungeonToAttic|121|16|-1|1|
+#l:36|LabReturn|13|12|0|1|
+#l:37|LabToVault|13|131|2|1|
+#l:38|LabToStorage|13|14|1|1|
+#l:39|VaultReturn|131|13|3|1|
+#l:310|VaultToControl|131|132|2|0|
+#l:311|ControlReturn|132|131|3|1|
+#l:312|StorageReturn|14|13|0|1|
+#l:313|StorageToCourtyard|14|15|1|1|
+#l:314|CourtyardReturn|15|14|0|1|
+#l:315|CourtyardToAttic|15|16|1|1|
+#l:316|AtticReturn|16|15|0|1|
+
+#c:41|Mario|:)|11|5|1|I scan repositories… the IA is evolving too fast!|
+#c:42|Samuel|^_^|13|5|1|Graphics won't save us… but I can guide you!|
+#c:43|Paula|:P|14|5|1|I tested this… it was NOT supposed to happen|
+#c:44|Pita|>:O|12|5|0|Tasks pending… eliminate intruder|
+#c:45|Tuki|:D|121|5|0|I hunt memory… yours is next|
+#c:46|SEGFAULT|X_X|16|10|0|...ERROR... CONTROL IS MINE...|
+
+#_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|
+
+#p:100|:D|11|5|3|
+#p:101|^C>|12|5|3|

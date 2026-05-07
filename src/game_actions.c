@@ -843,7 +843,6 @@ void game_actions_recruit(Game *game) {
 }
 
 void game_actions_abandon(Game *game) {
-  int i;
   char *chr_name = NULL;
   Character *chr = NULL;
   Id chr_following = NO_ID;
