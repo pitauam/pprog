@@ -281,6 +281,7 @@ void game_actions_move(Game *game){
   space_id = game_get_player_location(game);
   actual_space = game_get_space(game, space_id);
   if (NO_ID == space_id || !actual_space) {
+    game_set_message(game, "Oops! You couldn't move.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -288,6 +289,7 @@ void game_actions_move(Game *game){
   future_id = game_get_connection(game, space_id, dir);
   future_space = game_get_space(game, future_id);
   if (NO_ID == space_id || !future_space) {
+    game_set_message(game, "Oops! You couldn't move.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -311,6 +313,7 @@ void game_actions_move(Game *game){
       current_char_following = character_get_following(chr);
 
       if (current_char_id == NO_ID || !chr){
+        game_set_message(game, "Oops! You couldn't move.");
         command_set_return(game_get_last_command(game), ERROR);
         return;
       }
@@ -320,54 +323,58 @@ void game_actions_move(Game *game){
         
         if (space_remove_character(actual_space, current_char_id) == ERROR)
         {
+          game_set_message(game, "Oops! You couldn't move.");
           command_set_return(game_get_last_command(game), ERROR);
           return;
         }
 
         if (space_add_character(future_space, current_char_id) == ERROR)
         {
+          game_set_message(game, "Oops! You couldn't move.");
           command_set_return(game_get_last_command(game), ERROR);
           return;
         }
+        game_set_message(game, "You moved successfully!");
         command_set_return(game_get_last_command(game), OK);
       }
     }
   }
   else
   {
+    game_set_message(game, "Oops! You couldn't move.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
+  game_set_message(game, "You moved successfully!");
   command_set_return(game_get_last_command(game), OK);
   return;
 }
 
 
 void game_actions_take(Game *game){
-  Id player_location = NO_ID;
-  Id object_location = NO_ID;
-  Id object_id = NO_ID;
+  Id player_location = NO_ID, object_location = NO_ID, object_id = NO_ID;
   int i, j;
   char object_name[MAX_ARG];
   Player *player;
   Object *object;
   Id dependency = NO_ID;
 
-  /*gets the id of the space where the player is*/
+  /* Gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
   if(player_location == NO_ID) {
+    game_set_message(game, "Oops! You couldn't take anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   player = game_get_player(game);
 
-
-  /*saves the last command argument*/
+  /* Saves the last command argument*/
   strcpy(object_name, command_get_arg(game_get_last_command(game), 0));
 
   if (player_inventory_full(player) == TRUE) {
+    game_set_message(game, "Oops! You couldn't take anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -401,6 +408,7 @@ void game_actions_take(Game *game){
 
                   /*deletes the object from the space*/
                   space_remove_object(game_get_space(game, player_location), object_id);
+                  game_set_message(game, "You took successfully the object!");
                   command_set_return(game_get_last_command(game), OK);
                   return;
                 }
@@ -420,6 +428,7 @@ void game_actions_take(Game *game){
 
           /*deletes the object from the space*/
           space_remove_object(game_get_space(game, player_location), object_id);
+          game_set_message(game, "You took successfully the object!");
           command_set_return(game_get_last_command(game), OK);
           return;
         }
@@ -427,6 +436,7 @@ void game_actions_take(Game *game){
     }
   }
 
+  game_set_message(game, "Oops! You couldn't take anything.");
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
@@ -444,7 +454,8 @@ void game_actions_drop(Game *game){
   /*gets the id of the space where the player is*/
   space_id = game_get_player_location(game);
   if(space_id == NO_ID){
-    {
+  {
+    game_set_message(game, "Oops! You couldn't drop anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -472,6 +483,7 @@ void game_actions_drop(Game *game){
 
   if (object_exists == FALSE)
   {
+    game_set_message(game, "Oops! You couldn't drop anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -480,6 +492,7 @@ void game_actions_drop(Game *game){
 
   if (player_find_object(player, object_id) == ERROR)
   {
+    game_set_message(game, "Oops! You couldn't drop anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   } else if (dependency != NO_ID && player_find_object(player, dependency) == OK)
@@ -499,6 +512,7 @@ void game_actions_drop(Game *game){
     space_add_object(game_get_space(game, space_id), object_id);
   }
   
+  game_set_message(game, "You dropped the object successfully.");
   command_set_return(game_get_last_command(game), OK);
   return;
 }
@@ -513,16 +527,11 @@ void game_actions_attack(Game *game){
   Character *current_char = NULL;
   Player *player = NULL;
 
-  int enemy_health;
-  int player_health;
-  int random_number;
-  int characters_damage = 0;
-  int i;
-  
+  int enemy_health, player_health, random_number, characters_damage = 0, i, n_followers;  
   int random_character; /*chooses a number betwen -1 and n_following_characters to decide who gets the damage*/
-  int n_followers;
 
   if (!game) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -530,6 +539,7 @@ void game_actions_attack(Game *game){
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
   if (player_location == NO_ID) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -537,18 +547,21 @@ void game_actions_attack(Game *game){
   /*gets the id of the enemy character located at the same space as the player*/
   enemy_character_at_player_location = game_actions_get_enemy_character_at(game, player_location);
   if (enemy_character_at_player_location == NO_ID) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   enemy = game_get_character(game, enemy_character_at_player_location);
   if (enemy == NULL) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   /*if character is friendly, return*/
   if (character_get_friendly(enemy) == TRUE) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -562,6 +575,7 @@ void game_actions_attack(Game *game){
   
   /*if character is dead or player is dead, return*/
   if (enemy_health <= 0 || player_health <= 0) {
+    game_set_message(game, "Your attack didn't work!");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -662,6 +676,7 @@ void game_actions_attack(Game *game){
   }
   /*all above must be moved*/
 
+  game_set_message(game, "Your attack worked!");
   command_set_return(game_get_last_command(game), OK);
   return;
 }
@@ -669,24 +684,24 @@ void game_actions_attack(Game *game){
 
 void game_actions_chat(Game *game){
 
-  Id player_location = NO_ID; 
-  Id character_id = NO_ID;
+  Id player_location = NO_ID, character_id = NO_ID;
   Character *character = NULL;
   int i;
   char character_name[MAX_ARG];
 
-
-  if (!game) {{
+  if (!game) {
+    game_set_message(game, "You couldn't chat with anyone.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   /*gets the id of the space where the player is located*/
   player_location = game_get_player_location(game);
-  if (player_location == NO_ID) {{
+  if (player_location == NO_ID) {
+    game_set_message(game, "You couldn't chat with anyone.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   /*Get the character wanted*/
   strcpy(character_name, command_get_arg(game_get_last_command(game), 0)); /*name got it*/
@@ -698,57 +713,56 @@ void game_actions_chat(Game *game){
       /*We found the character wanted*/
 
       /*if character is not friendly, return*/
-      if (character_get_friendly(character) == FALSE) {{
+      if (character_get_friendly(character) == FALSE) {
+        game_set_message(game, "You couldn't chat with anyone.");
         command_set_return(game_get_last_command(game), ERROR);
-        return;
-      }}
-
-      if(game_set_message(game, character_get_message(character)) == OK){
-        game_set_name_message(game, character_get_name(character));
-        command_set_return(game_get_last_command(game), OK);
         return;
       }
 
-
+      if(game_set_message(game, character_get_message(character)) == OK){
+        game_set_name_message(game, character_get_name(character));
+        game_set_message(game, "You chatted successfully!");
+        command_set_return(game_get_last_command(game), OK);
+        return;
+      }
     }
   }
 
-  
-
+  game_set_message(game, "You couldn't chat with anyone.");
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
 
 
 void game_actions_inspect(Game *game){
-  Id player_location = NO_ID;
-  Bool object_exists = FALSE; 
-  Id Id_object_player = NO_ID;
+  Id player_location = NO_ID, Id_object_player = NO_ID, buffer = NO_ID;
+  Bool object_exists = FALSE;
   Object *object = NULL; 
   Player *player = NULL;
   Space *current_space = NULL;
   char object_name[MAX_ARG];
-  Id buffer = NO_ID;
-
   int i;
 
   if (!game)
   {
+    game_set_message(game, "You couldn't inspect anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
   
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
-  if(player_location == NO_ID) {{
+  if(player_location == NO_ID) {
+    game_set_message(game, "You couldn't inspect anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   player = game_get_player(game);
 
   if (!player)
   {
+    game_set_message(game, "You couldn't inspect anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -757,6 +771,7 @@ void game_actions_inspect(Game *game){
 
   if (!current_space)
   {
+    game_set_message(game, "You couldn't inspect anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -781,19 +796,19 @@ void game_actions_inspect(Game *game){
     
   }
 
-  if (object_exists == FALSE) {{
+  if (object_exists == FALSE) {
+    game_set_message(game, "You couldn't inspect anything.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
   
-  if (player_inventory_empty(player) == TRUE) {{
+  if (player_inventory_empty(player) == TRUE) {
 
     if (space_find_object(current_space, Id_object_player) == FALSE)
     {
       command_set_return(game_get_last_command(game), ERROR);
       return;
-    }else
-    {
+    } else {
       object = game_get_object(game, Id_object_player);
       game_set_message(game, object_get_desc(object));
       game_set_name_message(game, object_get_name(object));
@@ -801,23 +816,20 @@ void game_actions_inspect(Game *game){
       return;
     }
 
-  }}else
-  {
+  } else {
     for (i = 0; i < player_get_n_objects(player); i++)
-  {
-    if (player_find_object(player,Id_object_player) == OK)
     {
-      object = game_get_object(game, Id_object_player);
-      game_set_message(game, object_get_desc(object));
-      game_set_name_message(game, object_get_name(object));
-      command_set_return(game_get_last_command(game), OK);
-      return;
+      if (player_find_object(player,Id_object_player) == OK)
+      {
+        object = game_get_object(game, Id_object_player);
+        game_set_message(game, object_get_desc(object));
+        game_set_name_message(game, object_get_name(object));
+        command_set_return(game_get_last_command(game), OK);
+        return;
+      }
     }
-    
   }
-  }
-
-    return;
+  return;
 }
 
 void game_actions_recruit(Game *game) {
@@ -828,6 +840,7 @@ void game_actions_recruit(Game *game) {
   Character *chr = NULL;
 
   if (!game) {
+    game_set_message(game, "You couldn't recruit anyone.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -835,12 +848,14 @@ void game_actions_recruit(Game *game) {
   player_location = game_get_player_location(game);
   if (player_location == NO_ID)
   {
+    game_set_message(game, "You couldn't recruit anyone.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   chr_name = command_get_arg(game_get_last_command(game), 0);
   if (chr_name == NULL || chr_name[0] == '\0') {
+    game_set_message(game, "You couldn't recruit anyone.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -855,13 +870,14 @@ void game_actions_recruit(Game *game) {
       if (strcmp(chr_name, character_get_name(chr)) == 0) {
         
         character_set_following(chr, player_get_id(game_get_player(game)));
-        
+        game_set_message(game, "Your recruit was successfull!");
         command_set_return(game_get_last_command(game), OK);  /*Done successfully*/
         return;
       }
     }
   }
 
+  game_set_message(game, "You couldn't recruit anyone.");
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
@@ -872,25 +888,35 @@ void game_actions_abandon(Game *game) {
   Id chr_following = NO_ID;
 
   if (!game) {
+    game_set_message(game, "You couldn't abandon your partner.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   chr_name = command_get_arg(game_get_last_command(game), 0);
-
   if (chr_name == NULL) {
+    game_set_message(game, "You couldn't abandon your partner.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   chr = game_get_character_by_name(game, chr_name);
-  if(!chr) return;
+  if(!chr) {
+    game_set_message(game, "You couldn't abandon your partner.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   chr_following = character_get_following(chr);
-  if(chr_following == NO_ID) return ;
+  if(chr_following == NO_ID) {
+    game_set_message(game, "You couldn't abandon your partner.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   if (chr_following == player_get_id(game_get_player(game))) {
     character_set_following(chr, NO_ID);
+    game_set_message(game, "You abandoned your partner successfully.");
     command_set_return(game_get_last_command(game), OK);
     return;
   }
@@ -908,28 +934,32 @@ void game_actions_abandon(Game *game) {
     }
   }*/
 
+  game_set_message(game, "You couldn't abandon your partner.");
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
 
 
 void game_actions_use(Game *game){
-  int i=0, j=0;
+  int i, j;
   Player *player = NULL;
   Object *obj = NULL;
   Character *character = NULL, *found_character = NULL;
-
   Id object_id = NO_ID;
-  char *obj_name = NULL;
-  char *character_name = NULL;
+  char *obj_name = NULL, *character_name = NULL;
 
-  if(game == NULL) return;
-
+  if (!game)
+  {
+    game_set_message(game, "You couldn't use the object.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
   /* Get object name (use "something") */
   obj_name = command_get_arg(game_get_last_command(game), 0);
   character_name = command_get_arg(game_get_last_command(game), 1);
 
   if(obj_name == NULL){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -937,6 +967,7 @@ void game_actions_use(Game *game){
   /* Get the player */
   player = game_get_player(game);
   if(player == NULL){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -963,6 +994,7 @@ void game_actions_use(Game *game){
 
     /* If it doesn't work */
     if(found_character == NULL){
+      game_set_message(game, "You couldn't use the object.");
       command_set_return(game_get_last_command(game), ERROR);
       return;
     }
@@ -983,11 +1015,13 @@ void game_actions_use(Game *game){
   }
 
   if(object_id == NO_ID){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   if(player_find_object(player, object_id) == ERROR){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -996,11 +1030,13 @@ void game_actions_use(Game *game){
   obj = game_get_object(game, object_id);
 
   if(obj == NULL){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
   if(object_get_health(obj) == 0){
+    game_set_message(game, "You couldn't use the object.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
   }
@@ -1024,6 +1060,7 @@ void game_actions_use(Game *game){
   } else {
 
     if(character == NULL){
+      game_set_message(game, "You couldn't use the object.");
       command_set_return(game_get_last_command(game), ERROR);
       return;
     }
@@ -1046,8 +1083,11 @@ void game_actions_use(Game *game){
   player_remove_object(player, object_id);
   game_remove_object(game, obj);
 
+  /* Sets message from the object */
+  game_set_message(game, object_get_desc(obj));
+  game_set_name_message(game, object_get_name(obj));
   command_set_return(game_get_last_command(game), OK);
-  
+  return;
 }
 
 
@@ -1061,24 +1101,54 @@ void game_actions_open(Game *game){
 
   /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
   strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
-  if (!link_name) return;
+  if (!link_name)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   strcpy(object_name, command_get_arg(game_get_last_command(game), 2));
-  if (!object_name) return;
+  if (!object_name)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   /*Get all we need*/
   link = game_get_link_by_name(game, link_name);
-  if(!link) return;
+  if(!link)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
   link_id = link_get_id(link);
-  if(link_id == NO_ID) return;
+  if(link_id == NO_ID)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
 
   obj = game_get_object_by_name(game, object_name);
-  if(!obj) return;
+  if(!obj)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
+    return;
+  }
+
   obj_id = object_get_id(obj);
 
 
   /*This command only has sense if the link is actually closed*/
-  if(link_get_open(link)==TRUE) {
+  if(link_get_open(link)==TRUE)
+  {
+    game_set_message(game, "You couldn't open the link.");
+    command_set_return(game_get_last_command(game), ERROR);
     return;
   }
 
@@ -1087,8 +1157,13 @@ void game_actions_open(Game *game){
     /*Uses this object to open the link*/
     player_remove_object(game_get_player(game), obj_id);
     link_set_open(link, TRUE);
+    game_set_message(game, "You opened the link successfully!");
+    command_set_return(game_get_last_command(game), OK);
+    return;
   }
 
+  game_set_message(game, "You couldn't open the link.");
+  command_set_return(game_get_last_command(game), ERROR);
   return;
 }
 

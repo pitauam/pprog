@@ -553,6 +553,38 @@ Link *game_get_link(Game *game, Id id) {
   return NULL;
 }
 
+Id game_get_link_id_at(Game *game, int position) {
+  
+  if (!game || position < 0 || position > MAX_LINKS)
+  {
+    return NO_ID;
+  }
+
+  return link_get_id(game->link[position]);
+}
+
+
+Link *game_get_link_by_origin_destination(Game *game, Id origin, Id destination) {
+  int i;
+  Link *aux_link = NULL;
+
+  if (!game || origin == NO_ID || destination == NO_ID)
+  {
+    return NULL;
+  }
+
+  for (i = 0; i < MAX_LINKS; i++)
+  {
+    aux_link = game_get_link(game, game_get_link_id_at(game, i));
+    if (link_get_origin(aux_link) == origin && link_get_destination(aux_link) == destination)
+    {
+      return aux_link;
+    }
+  }
+  
+  return NULL;
+}
+
 Link* game_get_link_by_name(Game* game, char* name){
   int i;
   if(!game) return NULL;

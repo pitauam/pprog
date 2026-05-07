@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
       /*updates the game rules*/
       game_rules_update(game);
       /*time given to see the result of the player's actions*/
-      sleep(1);
+      sleep(3);
       /*advances the turn to the next player*/
       game_next_turn(game);
       last_cmd = game_get_last_command(game);

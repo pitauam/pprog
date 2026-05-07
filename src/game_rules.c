@@ -120,6 +120,7 @@ Status game_rules_update(Game *game) {
       break;
   }
 
+  game_set_name_message(game, "game_rules");
   return OK;
 }
 

@@ -19,8 +19,8 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 90  /*!< Width of the map area */
-#define WIDTH_DES 45  /*!< Width of the description area */
+#define WIDTH_MAP 70  /*!< Width of the map area */
+#define WIDTH_DES 84  /*!< Width of the description area */
 #define WIDTH_BAN 25  /*!< Width of the banner area */
 #define HEIGHT_MAP 32 /*!< Height of the map area */
 #define HEIGHT_BAN 1  /*!< Height of the banner area */
@@ -208,6 +208,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   char box_act[10][WORD_SIZE * 3] = {{'\0'}};
   char box_down[10][WORD_SIZE * 3] = {{'\0'}};
   int current_floor = 1;
+  Object *aux_obj = NULL;
   /*char msg[WORD_SIZE] = {'\0'};
   char chr_msg[WORD_SIZE] = {'\0'};*/
 
@@ -442,25 +443,25 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
 
-  sprintf(str, " Objects :");
+  sprintf(str, " Objects (Name (Location): Health (pts)):");
   screen_area_puts(ge->descript, str);
   for(i = 0; i < game_get_number_of_objects(game); i++){
-    if ((obj_loc = game_get_object_location(game, game_get_object_id_at(game, i) )) != NO_ID) {
+    aux_obj = game_get_object(game, game_get_object_id_at(game, i));
+    obj_loc = game_get_object_location(game, game_get_object_id_at(game, i) );
+    if ((obj_loc != NO_ID && (game_get_player_location(game) == obj_loc)) || inventory_find_object(player_get_inventory(game_get_player(game)), object_get_id(aux_obj))) {
     
-    sprintf(str, "    %5s:% 3d (%d)", (game_get_object_name(game, game_get_object(game, game_get_object_id_at(game, i)))), (int)obj_loc, object_get_health(game_get_object(game, game_get_object_id_at(game, i))));
-    
+    sprintf(str, "    %5s (%d): %d pts", (game_get_object_name(game, aux_obj)), (int)obj_loc, object_get_health(aux_obj));
     screen_area_puts(ge->descript, str);
     }
   }
 
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
-  sprintf(str, " Characters :");
+  sprintf(str, " Characters (Name (Description) (Location): Health (pts), Armor (pts), (Friendly)):");
   screen_area_puts(ge->descript, str);
   
   for(i=0; i < game_get_number_of_spaces(game); i++){
     /*char_id = game_get_character_location(game, game_get_character_id(game, game_get_space_id_at(game, i)));*/
-
 
     char_loc = game_get_space_id_at(game, i);
 
@@ -468,20 +469,28 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
     for (j = 0; j < space_get_n_characters(game_get_space(game, char_loc)); j++)
     {
       character_id = space_get_character_id_at(game_get_space(game, char_loc), j);
-    
+
       if (character_id != NO_ID) 
       {
         char_loc = game_get_space_id_at(game,i);
 
         chr = game_get_character(game, character_id);
-
-        sprintf(str, "%9s (%3s): Health: %d Armor: %d", (character_get_name(chr)),character_get_description(chr), character_get_health(chr), character_get_armor(chr));
-
-        if(character_get_following(chr) != NO_ID){
-          sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+        if (space_is_discovered(game_get_space(game ,char_loc)))
+        {
+          sprintf(str, "%9s (%3s) (%d): %d pts, %d pts", (character_get_name(chr)), character_get_description(chr), (int)char_loc, character_get_health(chr), character_get_armor(chr));
+          if (character_get_friendly(chr))
+          {
+            strcat(str, " (Friendly)");
+          } else {
+            strcat(str, " (Hostile)");
+          }
+          screen_area_puts(ge->descript, str);
+          
+          if (character_get_following(chr) != NO_ID){
+            sprintf(str, "    Following %s", player_get_name(game_get_player(game)));
+            screen_area_puts(ge->descript, str);
+          }
         }
-    
-        screen_area_puts(ge->descript, str);
       }
 
     }
@@ -525,13 +534,15 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
 
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
-  sprintf(str, " Message from %s: %s",game_get_name_message(game), game_get_message(game));
-  screen_area_puts(ge->descript, str);
 
-  game_set_message(game, "\0"); /*removes the message*/
-  game_set_name_message(game, "\0"); /*removes the name*/
-  
-  
+  if (game_get_message(game) != NULL)
+  {
+    sprintf(str, " Message from %s: %s", game_get_name_message(game), game_get_message(game));
+    screen_area_puts(ge->descript, str);
+    game_set_message(game, "\0"); /*removes the message*/
+    game_set_name_message(game, "\0"); /*removes the name*/
+  }
+
   /* Paint in the banner area */
   screen_area_puts(ge->banner, " The haunted castle game ");
 
@@ -561,7 +572,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
 
 }
 
-
 /**
  * @brief prints a link and its destination space
  * @author Iker Diaz
@@ -573,6 +583,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
  * @param direction_name string with the name of the direction
  */
 void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id, Direction direction, const char *direction_name){
+  Bool open = FALSE;
   Id destination_id = NO_ID;
   Space *destination_space = NULL;
   char str[255];
@@ -591,6 +602,14 @@ void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id
     return;
   }
 
-  sprintf(str, "    %s -> %3ld %.16s", direction_name, (long)destination_id, space_get_name(destination_space));
-  screen_area_puts(ge->descript, str);
+  open = link_get_open(game_get_link_by_origin_destination(game, origin_id, destination_id));
+
+  if (open)
+  {
+    sprintf(str, "    %s -> %3ld %.16s (Open)", direction_name, (long)destination_id, space_get_name(destination_space));
+    screen_area_puts(ge->descript, str);
+  } else {
+    sprintf(str, "    %s -> %3ld %.16s (Closed)", direction_name, (long)destination_id, space_get_name(destination_space));
+    screen_area_puts(ge->descript, str);
+  }
 }
