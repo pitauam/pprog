@@ -356,10 +356,10 @@ void game_actions_take(Game *game){
 
   /*gets the id of the space where the player is*/
   player_location = game_get_player_location(game);
-  if(player_location == NO_ID) {{
+  if(player_location == NO_ID) {
     command_set_return(game_get_last_command(game), ERROR);
     return;
-  }}
+  }
 
   player = game_get_player(game);
 
@@ -384,7 +384,7 @@ void game_actions_take(Game *game){
 
     
     if(object_get_movable(game_get_object(game, object_id)) == TRUE){
-      printf("%s", game_get_object_name(game, game_get_object(game, object_id)));
+      
       if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0 && dependency != NO_ID)
       {
         /* Get the object and checks dependency */
@@ -516,6 +516,7 @@ void game_actions_attack(Game *game){
   int enemy_health;
   int player_health;
   int random_number;
+  int characters_damage = 0;
   int i;
   
   int random_character; /*chooses a number betwen -1 and n_following_characters to decide who gets the damage*/
@@ -575,6 +576,7 @@ void game_actions_attack(Game *game){
     {
       follower_ids[n_followers] = current_char_id;
       n_followers++;
+      characters_damage += character_get_strength(current_char);
     }
   }
 
@@ -588,7 +590,12 @@ void game_actions_attack(Game *game){
   /*if the player wins*/
   if (random_number >= 5)
   {
-    character_set_health(enemy, (enemy_health - (1 + n_followers)));
+    if(character_get_armor(enemy) == 0){
+      character_set_health(enemy, (enemy_health - (player_get_strength(player) + characters_damage )));
+    }
+    else{
+      character_set_armor(enemy, character_get_armor(enemy) - 1);
+    }
   } 
   /*if the player looses*/
   else
@@ -597,19 +604,36 @@ void game_actions_attack(Game *game){
     if (n_followers == 0)
     {
       /*player gets hit*/
-      player_set_health(player, (player_health -1));
+      if(player_get_armor(player) == 0){
+        player_set_health(player, (player_health -character_get_strength(enemy)));
+      }
+      else{
+      player_set_armor(player, player_get_armor(player) - 1);
+      }
     }
     /*if it's the players turn to get hit*/
     else if (random_character == -1)
     {
       /*player gets hit*/
-      player_set_health(player, (player_health -1));
+      if(player_get_armor(player) == 0){
+        player_set_health(player, (player_health -character_get_strength(enemy)));
+      }
+      else{
+      player_set_armor(player, player_get_armor(player) - 1);
+      }
     }
     /*characters following the player get hit, depending if they are followers or not*/
     else
     {
+
       char_aux = game_get_character(game, follower_ids[random_character]);
-      character_set_health(char_aux, (character_get_health(char_aux) - 1));
+      if(character_get_armor(char_aux) == 0){
+        character_set_health(char_aux, (character_get_health(char_aux) - character_get_strength(enemy)));;
+      }
+      else{
+        character_set_armor(char_aux, character_get_armor(char_aux) - 1);
+      }
+      
     }  
   }
 
@@ -984,8 +1008,18 @@ void game_actions_use(Game *game){
   /* Each category of the object adds or removes health to the character or player */
   if(character_name == NULL || character_name[0] == '\0'){
 
-    player_set_health(player,
-      player_get_health(player) + object_get_health(obj));
+    if(object_get_category(obj) == 1 ){
+      player_set_health(player, player_get_health(player) + object_get_health(obj));
+    }
+
+    if(object_get_category(obj) == 2 ){
+      player_set_strength(player, player_get_strength(player) + object_get_health(obj));
+    }
+
+    if(object_get_category(obj) == 5 ){
+      player_set_armor(player, player_get_armor(player) + object_get_health(obj));
+    }
+
 
   } else {
 
@@ -994,8 +1028,18 @@ void game_actions_use(Game *game){
       return;
     }
 
-    character_set_health(character,
-      character_get_health(character) + object_get_health(obj));
+    if(object_get_category(obj) == 1 ){
+      character_set_health(character, character_get_health(character) + object_get_health(obj));
+    }
+
+    if(object_get_category(obj) == 2 ){
+      character_set_strength(character, character_get_strength(character) + object_get_health(obj));
+    }
+
+    if(object_get_category(obj) == 5 ){
+      character_set_armor(character, character_get_armor(character) + object_get_health(obj));
+    }
+    
   }
 
   /* Remove from inventary */

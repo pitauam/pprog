@@ -27,6 +27,8 @@ struct _Character{
     Bool friendly;                  /*!< TRUE if its firendly FALSE otherwise, hardcoded friendly*/
     char message[WORD_SIZE +1];     /*!< Message of the character*/
     Id following;                   /*!<The id of the player that is following*/
+    int strength;
+    int armor;
 };
 
 Character *character_create(Id id){
@@ -41,6 +43,8 @@ Character *character_create(Id id){
     new_character->name[0] = '\0';
     new_character->gdesc[0] = '\0';
     new_character->health = 5;
+    new_character->strength = 1;
+    new_character->armor = 0;
     new_character->friendly = TRUE; 
     new_character->message[0] = '\0';
     new_character->message[0] = '\0';
@@ -104,7 +108,7 @@ const char *character_get_description(Character *character){
 }
 
 Status character_set_health(Character *character, int health){
-    if(character == NULL || health < 0 || health > 100){
+    if(character == NULL || health > 20){
         return ERROR;
     }
 
@@ -174,6 +178,44 @@ Status character_set_following(Character *character, Id id) {
     character->following = id;
 
     return OK;
+}
+
+Status character_set_strength(Character *character, int strength){
+    if(character == NULL || strength < 0){
+        return ERROR;
+    }
+
+    character->strength = strength;
+
+    return OK;
+}
+
+int character_get_strength(Character *character){
+    if(character == NULL){
+        return -1;
+    }
+
+    return character->strength;
+}
+
+
+
+Status character_set_armor(Character *character, int armor){
+    if(character == NULL || armor < 0){
+        return ERROR;
+    }
+
+    character->armor = armor;
+
+    return OK;
+}
+
+int character_get_armor(Character *character){
+    if(character == NULL){
+        return -1;
+    }
+
+    return character->armor;
 }
 Status character_print(Character *character){
     /* Error Control */

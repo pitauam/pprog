@@ -20,7 +20,7 @@
 #include "types.h"
 
 #define WIDTH_MAP 90  /*!< Width of the map area */
-#define WIDTH_DES 37  /*!< Width of the description area */
+#define WIDTH_DES 45  /*!< Width of the description area */
 #define WIDTH_BAN 25  /*!< Width of the banner area */
 #define HEIGHT_MAP 32 /*!< Height of the map area */
 #define HEIGHT_BAN 1  /*!< Height of the banner area */
@@ -416,7 +416,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
 
-  sprintf(str, " Health : %d", player_get_health(player));
+  sprintf(str, " Health : %d Strength: %d Armor: %d", player_get_health(player), player_get_strength(player), player_get_armor(player));
   screen_area_puts(ge->descript, str);
   sprintf(str, " ");
   screen_area_puts(ge->descript, str);
@@ -475,7 +475,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
 
         chr = game_get_character(game, character_id);
 
-        sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));
+        sprintf(str, "%9s (%3s): Health: %d Armor: %d", (character_get_name(chr)),character_get_description(chr), character_get_health(chr), character_get_armor(chr));
 
         if(character_get_following(chr) != NO_ID){
           sprintf(str, "%9s (%3s):% 3d (%i)", (character_get_name(chr)),character_get_description(chr), (int)char_loc, character_get_health(chr));

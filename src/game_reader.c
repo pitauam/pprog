@@ -342,6 +342,8 @@ Status game_reader_load_characters(Game *game, char *filename){
   Id id = NO_ID;
   Id space_id = NO_ID;
   int health_points;
+  int strength_points;
+  int armor_points;
   int friendly;
 
   Character *character = NULL;
@@ -379,6 +381,11 @@ Status game_reader_load_characters(Game *game, char *filename){
       toks = strtok(NULL, "|");
       /*message the character has*/
       strcpy(message, toks);
+      toks = strtok(NULL, "|");
+      strength_points = atol(toks);
+      toks = strtok(NULL, "|");
+      armor_points = atol(toks);
+
 
       character = character_create(id);
       if (character != NULL) {
@@ -395,6 +402,8 @@ Status game_reader_load_characters(Game *game, char *filename){
           character_set_friendly(character, FALSE);
         }
         character_set_message(character, message);
+        character_set_strength(character, strength_points);
+        character_set_armor(character, armor_points);
         game_add_character(game, character);
       }
     }
@@ -419,6 +428,8 @@ Status game_reader_load_players(Game *game, char *filename) {
   Id id = NO_ID;
   Id space_id = NO_ID;
   int health_points;
+  int strength_points;
+  int armor_points;
   int max_objects;
   Player *player = NULL;
   Status status = OK;
@@ -449,6 +460,10 @@ Status game_reader_load_players(Game *game, char *filename) {
       toks = strtok(NULL, "|");
       /*maximum number of objects in the backpack*/
       max_objects = atol(toks);
+      toks = strtok(NULL, "|");
+      strength_points = atol(toks);
+      toks = strtok(NULL, "|");
+      armor_points = atol(toks);
 
       player = player_create(id);
       if (player != NULL) {
@@ -457,6 +472,8 @@ Status game_reader_load_players(Game *game, char *filename) {
         space_set_discovered(game_get_space(game, space_id), TRUE);
         player_set_health(player, health_points);
         player_set_max_objects(player, max_objects);
+        player_set_armor(player, armor_points);
+        player_set_strength(player, strength_points);
 
         game_command_create(game);
 
