@@ -333,7 +333,6 @@ void game_actions_move(Game *game){
           command_set_return(game_get_last_command(game), ERROR);
           return;
         }
-        game_set_message(game, "You moved successfully!");
         command_set_return(game_get_last_command(game), OK);
       }
     }
@@ -345,7 +344,6 @@ void game_actions_move(Game *game){
     return;
   }
 
-  game_set_message(game, "You moved successfully!");
   command_set_return(game_get_last_command(game), OK);
   return;
 }
@@ -717,7 +715,6 @@ void game_actions_chat(Game *game){
 
       if(game_set_message(game, character_get_message(character)) == OK){
         game_set_name_message(game, character_get_name(character));
-        game_set_message(game, "You chatted successfully!");
         command_set_return(game_get_last_command(game), OK);
         return;
       }
