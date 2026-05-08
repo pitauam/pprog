@@ -1094,9 +1094,7 @@ void game_actions_open(Game *game){
   Link* link =  NULL;
   Object* obj = NULL;
 
-  fprintf(stdout, "principio");
-  if(!game) {return;
-  fprintf(stdout, "no game");}
+  if(!game) {return;}
 
   /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
   strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
@@ -1104,9 +1102,7 @@ void game_actions_open(Game *game){
   {
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
-    fprintf(stdout, "no linkname");
     return;
-      fprintf(stdout, "no linkname");
 
   }*/
 
@@ -1124,7 +1120,6 @@ void game_actions_open(Game *game){
   link = game_get_link_by_name(game, link_name);
   if(!link)
   {
-    fprintf(stdout, "no link");
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -1133,7 +1128,6 @@ void game_actions_open(Game *game){
   link_id = link_get_id(link);
   if(link_id == NO_ID)
   {
-    fprintf(stdout, "no linkid");
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -1142,7 +1136,6 @@ void game_actions_open(Game *game){
   obj = game_get_object_by_name(game, object_name);
   if(!obj)
   {
-    fprintf(stdout, "no obj");
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -1154,7 +1147,6 @@ void game_actions_open(Game *game){
   /*This command only has sense if the link is actually closed*/
   if(link_get_open(link)==TRUE)
   {
-    fprintf(stdout, "space opened");
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -1163,7 +1155,6 @@ void game_actions_open(Game *game){
   /*Check that the object can open this link*/
   if(link_id == object_get_open(obj)) {
     /*Uses this object to open the link*/
-    fprintf(stdout, "ready to open");
     player_remove_object(game_get_player(game), obj_id);
     link_set_open(link, TRUE);
     game_set_message(game, "You opened the link successfully!");
@@ -1175,8 +1166,6 @@ void game_actions_open(Game *game){
   command_set_return(game_get_last_command(game), ERROR);
   return;
 }
-
-
 
 Id game_actions_get_enemy_character_at(Game *game, Id space_id){
   int i;
