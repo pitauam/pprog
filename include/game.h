@@ -337,6 +337,17 @@ Status game_add_space(Game *game, Space *space);
 Space *game_get_space(Game *game, Id id);
 
 /**
+ * @brief Gets the pointer of the space from its id
+ * @author Paula de la Fuente
+ *
+ * @param game pointer to game
+ * @param id id of the space
+ * @return pointer to the space or NULL if something went wrong
+ */
+Space* game_get_space_by_id(Game* game, Id id);
+
+
+/**
  * @brief gets the Id of the space where it is
  * @author Profesores PPROG
  *
