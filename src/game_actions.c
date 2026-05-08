@@ -385,6 +385,11 @@ void game_actions_take(Game *game){
     object = game_get_object(game, object_id);
     dependency = object_get_dependency(object);
 
+    if(object_id == NO_ID || !object || dependency == NO_ID){
+      game_set_message(game, "Oops! You couldn't take anything.");
+      command_set_return(game_get_last_command(game), ERROR);
+    }
+
 
     /*if the name in the argument is the same as the name of one of the objects, then it exists*/
 
@@ -1085,7 +1090,7 @@ void game_actions_use(Game *game){
 
 void game_actions_open(Game *game){
   Id obj_id = NO_ID, link_id = NO_ID;
-  char* link_name =  NULL, *object_name = NULL;
+  char link_name[MAX_ARG], object_name[MAX_ARG];
   Link* link =  NULL;
   Object* obj = NULL;
 
@@ -1095,7 +1100,7 @@ void game_actions_open(Game *game){
 
   /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
   strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
-  if (!link_name)
+  /*if (link_name)
   {
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
@@ -1103,17 +1108,17 @@ void game_actions_open(Game *game){
     return;
       fprintf(stdout, "no linkname");
 
-  }
+  }*/
 
   strcpy(object_name, command_get_arg(game_get_last_command(game), 2));
-  if (!object_name)
+  /*if (!object_name)
   {
     game_set_message(game, "You couldn't open the link.");
     command_set_return(game_get_last_command(game), ERROR);
     fprintf(stdout, "no objname");
     return;
     
-  }
+  }*/
 
   /*Get all we need*/
   link = game_get_link_by_name(game, link_name);
