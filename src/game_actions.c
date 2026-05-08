@@ -1093,12 +1093,13 @@ void game_actions_open(Game *game){
   char link_name[MAX_ARG], object_name[MAX_ARG];
   Link* link =  NULL;
   Object* obj = NULL;
-
+  char *arg0 = NULL;
+  char *arg2 = NULL;
   if(!game) {return;}
 
   /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
-  char *arg0 = command_get_arg(game_get_last_command(game), 0);
-  char *arg2 = command_get_arg(game_get_last_command(game), 2);
+  arg0 = command_get_arg(game_get_last_command(game), 0);
+  arg2 = command_get_arg(game_get_last_command(game), 2);
 
   if (!arg0 || arg0[0] == '\0' || !arg2 || arg2[0] == '\0') {
     game_set_message(game, "You couldn't open the link. Missing arguments.");
