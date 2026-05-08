@@ -101,8 +101,8 @@ directions: NO_DIR,N,S,E,W U D
 #l:340|Atic_corridor_122-Atic_corridor_121|122|121|3|1|
 #l:341|Atic_corridor_122-Servers_door|122|123|2|1|
 #l:342|Servers_door-Atic_corridor_122|123|122|3|1|
-#l:343|Servers_door-Servers_room|123|127|2|0|
-#l:344|Servers_room-Servers_door|127|123|3|0|
+#l:343|Servers_door-Servers_room|123|127|2|1|
+#l:344|Servers_room-Servers_door|127|123|3|1|
 
 
 

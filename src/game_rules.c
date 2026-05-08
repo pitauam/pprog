@@ -405,7 +405,7 @@ void game_rules_update_check_player_dead(Game *game){
         }
       }
     }
-
+  }
   else if (character_get_health(game_get_character(game, 46)) <= 0)
     {
       printf("\n\n");
@@ -434,7 +434,7 @@ void game_rules_update_check_player_dead(Game *game){
       player_print(game_get_player(game));
       game_set_finished(game, TRUE); /*if player wins, game ends*/
     }
-  }
+  
   return; 
 }
 
