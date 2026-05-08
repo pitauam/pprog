@@ -53,7 +53,7 @@ Status set_destroy(Set* set)
 
 Status set_add_value(Set* set, Id value)
 {
-    if (!set){return ERROR;}
+    if (!set || value == NO_ID || set->n_ids >= SIZE ){return ERROR;}
 
     set->ids[set->n_ids] = value;
     set->n_ids++;
@@ -65,7 +65,7 @@ Status set_del_value(Set* set, Id value) {
     int i;
     if (!set || value == NO_ID) return ERROR;
     
-    for (i = 0; i < SIZE; i++) {
+    for (i = 0; i < set->n_ids; i++) {
         if (set->ids[i] == value) {
             set->n_ids--;
             set->ids[i] = set->ids[set->n_ids];
@@ -82,7 +82,7 @@ Status set_find_id(Set* set, Id id)
     int i;
     if (!set) {return ERROR;}
 
-    for (i = 0; i < SIZE; i++) {
+    for (i = 0; i < set->n_ids; i++) {
         if (set->ids[i] == id) {
             return OK;
         }
@@ -97,7 +97,7 @@ Status set_print(Set *set)
     int i;
     if (!set) {return ERROR;}
 
-    for (i = 0; i < SIZE ;i++)
+    for (i = 0; i < set->n_ids ;i++)
     {
         if (set->ids[i] != NO_ID) 
         {
@@ -118,7 +118,7 @@ int set_get_n_ids(Set *set)
 
 Id set_get_id(Set *set, int pos){
 
-    if (!set || pos < 0){
+    if (!set || pos < 0 || pos >= set->n_ids){
         return NO_ID;
     }
 

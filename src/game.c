@@ -239,17 +239,82 @@ Status game_add_object(Game *game, Object *object) {
 
 Status game_remove_object(Game *game, Object *object){
 
-  Id obj_id = object_get_id(object);
-  int index = game_get_object_position(game, obj_id);
+  Id obj_id = NO_ID;
+  int index = -1;
+  int i = 0;
 
-  if(!game || !object || index == -1){
+  if(!game || !object){
+    return ERROR;
+  }
+
+  obj_id = object_get_id(object);
+  index = game_get_object_position(game, obj_id);
+
+  if(index == -1){
     return ERROR;
   }
 
   object_destroy(game->object[index]);
-  game->object[index] = NULL;
+  for (i = index; i < game->n_objects - 1; i++)
+  {
+    game->object[i] = game->object[i + 1];
+  }
+
+  game->n_objects--;
+  game->object[game->n_objects] = NULL;
   
   return OK;
+}
+
+void game_sort_inventory(Game *game) {
+  Player *player = NULL;
+  Inventory *inventory = NULL;
+  Id ids[MAX_OBJECTS];
+  Id key = NO_ID;
+  int n_objects = 0, i, j;
+
+  if (!game) {
+    return;
+  }
+
+  player = game_get_player(game);
+  if (!player) {
+    return;
+  }
+
+  inventory = player_get_inventory(player);
+  if (!inventory) {
+    return;
+  }
+
+  n_objects = inventory_get_n_objects(inventory);
+  if (n_objects <= 1 || n_objects > MAX_OBJECTS) {
+    return;
+  }
+
+  for (i = 0; i < n_objects; i++) {
+    ids[i] = inventory_get_object_id(inventory, i);
+  }
+
+  for (i = 1; i < n_objects; i++) {
+    key = ids[i];
+    j = i - 1;
+
+    while (j >= 0 && object_compare(game_get_object(game, ids[j]), game_get_object(game, key)) > 0) {
+      ids[j + 1] = ids[j];
+      j--;
+    }
+
+    ids[j + 1] = key;
+  }
+
+  for (i = 0; i < n_objects; i++) {
+    inventory_remove_object(inventory, ids[i]);
+  }
+
+  for (i = 0; i < n_objects; i++) {
+    inventory_add_object(inventory, ids[i]);
+  }
 }
 
 Object *game_get_object(Game *game, Id id) {
@@ -746,14 +811,8 @@ int game_get_turn(Game *game){
 Status game_next_turn(Game *game){
   if (!game || game->n_players <= 0) {return ERROR;}
 
-  if (game->turn >= game->n_players - 1)
-  {
-    game->turn = 0;
-  }
-  else 
-  {
-    game->turn++;
-  }
+  /*works as a circular turn*/
+  game->turn = (game->turn + 1) % game->n_players;
 
   return OK;
 }

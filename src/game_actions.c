@@ -354,7 +354,7 @@ void game_actions_move(Game *game){
 
 void game_actions_take(Game *game){
   Id player_location = NO_ID, object_location = NO_ID, object_id = NO_ID;
-  int i, j;
+  int i;
   char object_name[MAX_ARG];
   Player *player;
   Object *object;
@@ -384,55 +384,35 @@ void game_actions_take(Game *game){
     /*gets the object id*/
     object_id = game_get_object_id_at(game, i);
     object = game_get_object(game, object_id);
+
+    if (!object || object_get_movable(object) != TRUE || strcmp(game_get_object_name(game, object), object_name) != 0) {
+      continue;
+    }
+
     dependency = object_get_dependency(object);
+    if (dependency != NO_ID && player_find_object(player, dependency) == ERROR) {
+      continue;
+    }
 
-
-    /*if the name in the argument is the same as the name of one of the objects, then it exists*/
-
-    
-    if(object_get_movable(game_get_object(game, object_id)) == TRUE){
-      
-      if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0 && dependency != NO_ID)
+    object_location = game_get_object_location(game, object_id);
+    /*if the object is in the same place as the player, then it can take it*/
+    if (object_location != NO_ID && object_location == player_location)
+    {
+      /*sets the object to the player*/
+      if (player_add_object(player, object_id) == ERROR)
       {
-        /* Get the object and checks dependency */
-        for(j = 0; j < player_get_n_objects(player); j++){
-          if(player_get_object_id(player, j) == dependency){
-              if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
-              {
-                object_location = game_get_object_location(game, object_id);
-                /*if the object is in the same place as the player, then it can take it*/
-                if (object_location != NO_ID && object_location == player_location)
-                {
-                  /*sets the object to the player*/
-                  player_add_object(player, object_id);
-
-                  /*deletes the object from the space*/
-                  space_remove_object(game_get_space(game, player_location), object_id);
-                  game_set_message(game, "You took successfully the object!");
-                  command_set_return(game_get_last_command(game), OK);
-                  return;
-                }
-              }
-            }
-          }
-        }
-      
-    else if (strcmp((game_get_object_name(game, game_get_object(game, object_id))), object_name) == 0)
-      { 
-        object_location = game_get_object_location(game, object_id);
-        /*if the object is in the same place as the player, then it can take it*/
-        if (object_location != NO_ID && object_location == player_location)
-        {
-          /*sets the object to the player*/
-          player_add_object(player, object_id);
-
-          /*deletes the object from the space*/
-          space_remove_object(game_get_space(game, player_location), object_id);
-          game_set_message(game, "You took successfully the object!");
-          command_set_return(game_get_last_command(game), OK);
-          return;
-        }
+        game_set_message(game, "Oops! You couldn't take anything.");
+        command_set_return(game_get_last_command(game), ERROR);
+        return;
       }
+
+      game_sort_inventory(game);
+
+      /*deletes the object from the space*/
+      space_remove_object(game_get_space(game, player_location), object_id);
+      game_set_message(game, "You successfully took the object!");
+      command_set_return(game_get_last_command(game), OK);
+      return;
     }
   }
 
