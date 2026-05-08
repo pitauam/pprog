@@ -15,7 +15,7 @@
 
 #include "character_test.h"
 
-#define MAX_TESTS 29
+#define MAX_TESTS 37
 
 int main(int argc, char** argv) {
   int test = 0, all = 1;
@@ -56,6 +56,14 @@ int main(int argc, char** argv) {
   if (all || test == 27) test2_character_set_description();
   if (all || test == 28) test1_character_get_description();
   if (all || test == 29) test2_character_get_description();
+  if (all || test == 30) test1_character_set_strength();
+  if (all || test == 31) test2_character_set_strength();
+  if (all || test == 32) test1_character_get_strength();
+  if (all || test == 33) test2_character_get_strength();
+  if (all || test == 34) test1_character_set_armor();
+  if (all || test == 35) test2_character_set_armor();
+  if (all || test == 36) test1_character_get_armor();
+  if (all || test == 37) test2_character_get_armor();
 
 
   PRINT_PASSED_PERCENTAGE;
@@ -214,4 +222,50 @@ void test1_character_get_description() {
 void test2_character_get_description() {
   Character *c = NULL;
   PRINT_TEST_RESULT(character_get_description(c) == NULL);
+}
+
+void test1_character_set_strength(){
+  Character *p = character_create(5);
+  PRINT_TEST_RESULT(character_set_strength(p, 10)==OK);
+  character_destroy(p);
+}
+
+void test2_character_set_strength(){
+  Character *p = character_create(5);
+  PRINT_TEST_RESULT(character_set_strength(NULL, -5)==ERROR);
+  character_destroy(p);
+}
+
+void test1_character_get_strength(){
+  Character *p = character_create(5);
+  character_set_strength(p, 10);
+  PRINT_TEST_RESULT(character_get_strength(p) == 10);
+  character_destroy(p);
+}
+
+void test2_character_get_strength(){
+  PRINT_TEST_RESULT(character_get_strength(NULL)==-1);
+}
+
+void test1_character_set_armor(){
+  Character *p = character_create(5);
+  PRINT_TEST_RESULT(character_set_armor(p, 10)==OK);
+  character_destroy(p);
+}
+
+void test2_character_set_armor(){
+  Character *p = character_create(5);
+  PRINT_TEST_RESULT(character_set_armor(NULL, -5)==ERROR);
+  character_destroy(p);
+}
+
+void test1_character_get_armor(){
+  Character *p = character_create(5);
+  character_set_armor(p, 10);
+  PRINT_TEST_RESULT(character_get_armor(p) == 10);
+  character_destroy(p);
+}
+
+void test2_character_get_armor(){
+  PRINT_TEST_RESULT(character_get_armor(NULL)==-1);
 }
