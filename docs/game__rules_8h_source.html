@@ -84,28 +84,29 @@ $(document).ready(function() { init_codefold(0); });
 </div><!--header-->
 <div class="contents">
 <a href="game__rules_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor"> #ifndef GAME_RULES_H</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor"> #define GAME_RULES_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef GAME_RULES_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define GAME_RULES_H</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor"> #include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> <span class="comment">/*</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">#define CMD_LENGTH 30 /*!&lt; Maximum lenght of a command input </span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">#define MAX_CMD_ARG 3 /*!&lt; Maximum arguments a command can have </span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">#define N_CMDT 2</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">#define N_CMD 12</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">typedef enum { CMDS, CMDL } CommandType;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">typedef enum { NO_CMD = -1, UNKNOWN, EXIT, MOVE, TAKE, DROP, ATTACK, CHAT, INSPECT, RECRUIT, ABANDON, USE } CommandCode;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">typedef struct _Command Command;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">Command* command_create();</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="game_8h.html">game.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="game__rules_8h.html#a2e7620041ccf5bc13755c9f28524d22e">   15</a></span><span class="preprocessor">#define MAX_ARG 32 </span><span class="comment">/*maximum number of characters for the argument*/</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abd">   17</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code hl_enumvalue" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda61638226c656b6dd4ad56c29d4e7c351">UNKNOWN_CMD</a> = -1, <a class="code hl_enumvalue" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda5107eef4899bbacf44a8f00917e9cb4c">TELEPORT</a>, <a class="code hl_enumvalue" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda04cf65aec488b3c28916a24e93b4680a">RANDOM_DAMAGE</a>, <a class="code hl_enumvalue" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abdac122961027d843359f0aa6894f880f90">RANDOM_DROP</a>} <a class="code hl_enumeration" href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abd">CommandRules</a>; <span class="comment">/*different commands available*/</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><a class="code hl_enumeration" href="types_8h.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> <a class="code hl_function" href="game__rules_8h.html#a998729dadc4417d7cd538a0679aa0b75">game_rules_update</a>(<a class="code hl_struct" href="struct__Game.html">Game</a> *game);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="agame_8h_html"><div class="ttname"><a href="game_8h.html">game.h</a></div><div class="ttdoc">It defines the game interface.</div></div>
+<div class="ttc" id="agame__rules_8h_html_a1d6f52a75dd5e24792e99fda08b34abd"><div class="ttname"><a href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abd">CommandRules</a></div><div class="ttdeci">CommandRules</div><div class="ttdef"><b>Definition</b> game_rules.h:17</div></div>
+<div class="ttc" id="agame__rules_8h_html_a1d6f52a75dd5e24792e99fda08b34abda04cf65aec488b3c28916a24e93b4680a"><div class="ttname"><a href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda04cf65aec488b3c28916a24e93b4680a">RANDOM_DAMAGE</a></div><div class="ttdeci">@ RANDOM_DAMAGE</div><div class="ttdef"><b>Definition</b> game_rules.h:17</div></div>
+<div class="ttc" id="agame__rules_8h_html_a1d6f52a75dd5e24792e99fda08b34abda5107eef4899bbacf44a8f00917e9cb4c"><div class="ttname"><a href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda5107eef4899bbacf44a8f00917e9cb4c">TELEPORT</a></div><div class="ttdeci">@ TELEPORT</div><div class="ttdef"><b>Definition</b> game_rules.h:17</div></div>
+<div class="ttc" id="agame__rules_8h_html_a1d6f52a75dd5e24792e99fda08b34abda61638226c656b6dd4ad56c29d4e7c351"><div class="ttname"><a href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abda61638226c656b6dd4ad56c29d4e7c351">UNKNOWN_CMD</a></div><div class="ttdeci">@ UNKNOWN_CMD</div><div class="ttdef"><b>Definition</b> game_rules.h:17</div></div>
+<div class="ttc" id="agame__rules_8h_html_a1d6f52a75dd5e24792e99fda08b34abdac122961027d843359f0aa6894f880f90"><div class="ttname"><a href="game__rules_8h.html#a1d6f52a75dd5e24792e99fda08b34abdac122961027d843359f0aa6894f880f90">RANDOM_DROP</a></div><div class="ttdeci">@ RANDOM_DROP</div><div class="ttdef"><b>Definition</b> game_rules.h:17</div></div>
+<div class="ttc" id="agame__rules_8h_html_a998729dadc4417d7cd538a0679aa0b75"><div class="ttname"><a href="game__rules_8h.html#a998729dadc4417d7cd538a0679aa0b75">game_rules_update</a></div><div class="ttdeci">Status game_rules_update(Game *game)</div><div class="ttdoc">reads the command and finds what to do in order to update the game</div><div class="ttdef"><b>Definition</b> game_rules.c:100</div></div>
+<div class="ttc" id="astruct__Game_html"><div class="ttname"><a href="struct__Game.html">_Game</a></div><div class="ttdoc">Game.</div><div class="ttdef"><b>Definition</b> game.c:24</div></div>
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">It defines common types for the whole project.</div></div>
+<div class="ttc" id="atypes_8h_html_a67a0db04d321a74b7e7fcfd3f1a3f70b"><div class="ttname"><a href="types_8h.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a></div><div class="ttdeci">Status</div><div class="ttdef"><b>Definition</b> types.h:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

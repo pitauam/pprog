@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['height_5fban_0',['HEIGHT_BAN',['../graphic__engine_8c.html#a514109fafd6de00710e3a287d51e8e15',1,'graphic_engine.c']]],
-  ['height_5ffdb_1',['HEIGHT_FDB',['../graphic__engine_8c.html#aec4928b7d7a0e91ad936d76d79bedbf2',1,'graphic_engine.c']]],
-  ['height_5fhlp_2',['HEIGHT_HLP',['../graphic__engine_8c.html#a8b64afdab082949b22941eec34a07f13',1,'graphic_engine.c']]],
-  ['height_5fmap_3',['HEIGHT_MAP',['../graphic__engine_8c.html#ad02fab50eba3e27969ad00f27a73ea92',1,'graphic_engine.c']]]
+  ['gdesc_5fheight_0',['GDESC_HEIGHT',['../space_8h.html#a278311f153e12d0f8ce503a71032e6be',1,'space.h']]],
+  ['gdesc_5fsize1_1',['GDESC_SIZE1',['../space_8h.html#aaccacc7b6d9df156c6411257a8a3417d',1,'space.h']]],
+  ['gdesc_5fsize2_2',['GDESC_SIZE2',['../space_8h.html#a228577ef55c41f6aa87728d92e6d8718',1,'space.h']]],
+  ['gdesc_5fwidth_3',['GDESC_WIDTH',['../space_8h.html#ac01accc777b7334288dcf61949a0998f',1,'space.h']]]
 ];

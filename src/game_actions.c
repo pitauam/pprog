@@ -1097,24 +1097,17 @@ void game_actions_open(Game *game){
   if(!game) {return;}
 
   /*Store the arguments in our variables ->   "open <link_name> with <object_name>"  -> link_name = args[0] && object_name = args[2] porque args[1] = "with"*/
-  strcpy(link_name, command_get_arg(game_get_last_command(game), 0));
-  /*if (link_name)
-  {
-    game_set_message(game, "You couldn't open the link.");
+  char *arg0 = command_get_arg(game_get_last_command(game), 0);
+  char *arg2 = command_get_arg(game_get_last_command(game), 2);
+
+  if (!arg0 || arg0[0] == '\0' || !arg2 || arg2[0] == '\0') {
+    game_set_message(game, "You couldn't open the link. Missing arguments.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
+  }
 
-  }*/
-
-  strcpy(object_name, command_get_arg(game_get_last_command(game), 2));
-  /*if (!object_name)
-  {
-    game_set_message(game, "You couldn't open the link.");
-    command_set_return(game_get_last_command(game), ERROR);
-    fprintf(stdout, "no objname");
-    return;
-    
-  }*/
+  strcpy(link_name, arg0);
+  strcpy(object_name, arg2);
 
   /*Get all we need*/
   link = game_get_link_by_name(game, link_name);
