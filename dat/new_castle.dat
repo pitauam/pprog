@@ -43,7 +43,7 @@
 #o:214|AdminKey| |Grants administrative access|0|6|1|-1|-1|
 #o:215|Bitcoin|16|Money wont save you|0|-1|-1|213|-1|
 #o:216|Computer|127|Terminal that requires hacking|1|-1|-1|-1|-1|
-#o:217|Sword+|121|Upgraded plasma edge blade|8|2|1|1|-1|-1|
+#o:217|Sword+|121|Upgraded plasma edge blade|8|2|1|-1|-1|
 #o:218|Note2|14|Items have diferent utilities use them wisely|0|6|1|-1|-1|
 #o:219|Note3|118|Dont use the broken chip|0|6|1|-1|-1|
 #o:220|Med-Patch|113|Heals system integrity|5|1|1|-1|-1|
@@ -69,7 +69,7 @@ directions: NO_DIR,N,S,E,W U D
 #l:312|Vault-Testing_lab|16|15|3|1|
 #l:313|Control_nexus-Server_core|17|14|0|1|
 #l:314|Control_nexus-Inner_countryard|17|18|1|1|
-#l:348|Control_nexus-Stairs|17|128|3|0|
+#l:348|Control_nexus-Stairs|17|128|3|1|
 #l:315|Inner_countryard-Control_nexus|18|17|0|1|
 #l:316|Inner_countryard-Garden|18|19|1|1|
 #l:317|Garden-Inner_countryard|19|18|0|1|
