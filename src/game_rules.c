@@ -269,13 +269,13 @@ void game_rules_update_links(Game *game){
   }
 
   /*if character guardia is dead*/
-  /*42 is Guardia*/
-  if (character_get_health(game_get_character(game, 42)) <= 0 && link_get_open(game_get_link(game, 33)) == TRUE)
+  /*47 is Mega*/
+  if (character_get_health(game_get_character(game, 47)) <= 0 && link_get_open(game_get_link(game, 33)) == FALSE)
   {
   /*opens the 12-14 link and the 14-12 link, 33 and 37 ids*/
   link_set_open(game_get_link(game, 33), 1);
   link_set_open(game_get_link(game, 37), 1);
-  game_set_message(game, "A link has opened when killing Guardia!");
+  game_set_message(game, "A link has opened when killing Mega!");
 
   }
 

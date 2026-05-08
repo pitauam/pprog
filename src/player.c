@@ -294,6 +294,7 @@ int player_get_armor(Player *player){
 
     return player->armor;
 }
+
 /**player_print prints the information of the player*/
   Status player_print(Player* player) {
   Id idaux = NO_ID;

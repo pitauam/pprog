@@ -16,7 +16,7 @@
 #include "player_test.h"
 #include "test.h"
 
-#define MAX_TESTS 30
+#define MAX_TESTS 38
 
 
 /** 
@@ -78,6 +78,14 @@
   if (all || test == 28) test2_player_inventory_full();
   if (all || test == 29) test1_player_get_object_id();
   if (all || test == 30) test2_player_get_object_id();
+  if (all || test == 31) test1_player_set_strength();
+  if (all || test == 32) test2_player_set_strength();
+  if (all || test == 33) test1_player_get_strength();
+  if (all || test == 34) test2_player_get_strength();
+  if (all || test == 35) test1_player_set_armor();
+  if (all || test == 36) test2_player_set_armor();
+  if (all || test == 37) test1_player_get_armor();
+  if (all || test == 38) test2_player_get_armor();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -253,4 +261,50 @@ void test1_player_get_id() {
 void test2_player_get_id() {
   
   PRINT_TEST_RESULT(player_get_id(NULL) == NO_ID);
+}
+
+void test1_player_set_strength(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_strength(p, 10)==OK);
+  player_destroy(p);
+}
+
+void test2_player_set_strength(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_strength(NULL, -5)==ERROR);
+  player_destroy(p);
+}
+
+void test1_player_get_strength(){
+  Player *p = player_create(5);
+  player_set_strength(p, 10);
+  PRINT_TEST_RESULT(player_get_strength(p) == 10);
+  player_destroy(p);
+}
+
+void test2_player_get_strength(){
+  PRINT_TEST_RESULT(player_get_strength(NULL)==-1);
+}
+
+void test1_player_set_armor(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_armor(p, 10)==OK);
+  player_destroy(p);
+}
+
+void test2_player_set_armor(){
+  Player *p = player_create(5);
+  PRINT_TEST_RESULT(player_set_armor(NULL, -5)==ERROR);
+  player_destroy(p);
+}
+
+void test1_player_get_armor(){
+  Player *p = player_create(5);
+  player_set_armor(p, 10);
+  PRINT_TEST_RESULT(player_get_armor(p) == 10);
+  player_destroy(p);
+}
+
+void test2_player_get_armor(){
+  PRINT_TEST_RESULT(player_get_armor(NULL)==-1);
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['total_5fdata_0',['TOTAL_DATA',['../libscreen_8c.html#afba5c5b9f73273ce653f890bb64740b0',1,'libscreen.c']]]
+  ['size_0',['SIZE',['../set_8c.html#a70ed59adcb4159ac551058053e649640',1,'set.c']]]
 ];

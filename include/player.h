@@ -204,12 +204,44 @@ Status player_set_health(Player *player, int health);
  */
 int player_get_health(Player *player);
 
+/**
+ * @brief gets the strength of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param strength number
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
 Status player_set_strength(Player *player, int strength);
 
+/**
+ * @brief gets the strength of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param strength number
+ * @return int with the player's strength
+ */
 int player_get_strength(Player *player);
 
+/**
+ * @brief gets the armors of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param armor number
+ * @return OK if everything goes well, ERROR if something went wrong
+ */
 Status player_set_armor(Player *player, int armor);
 
+/**
+ * @brief gets the armors of the player
+ * @author Mario Rodriguez
+ *
+ * @param player pointer to the structure of the player
+ * @param armor number
+ * @return int with the player's armor
+ */
 int player_get_armor(Player *player);
 
 

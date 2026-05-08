@@ -153,12 +153,44 @@ Id character_get_following(Character *character);
  */
 Status character_set_following(Character *character, Id id);
 
+/**
+ * @brief It sets the strength of a character
+ * @author Mario Rodriguez
+ *
+ * @param character a pointer to the character
+ * @param strength number
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
 Status character_set_strength(Character *character, int strength);
 
+/**
+ * @brief gets the strength of the character
+ * @author Mario Rodriguez
+ *
+ * @param character pointer to the structure of the character
+ * @param strength number
+ * @return int with the player's strength
+ */
 int character_get_strength(Character *character);
 
+/**
+ * @brief It sets the armor of a character
+ * @author Mario Rodriguez
+ *
+ * @param character a pointer to the character
+ * @param armor number
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
 Status character_set_armor(Character *character, int armor);
 
+/**
+ * @brief gets the armor of the character
+ * @author Mario Rodriguez
+ *
+ * @param character pointer to the structure of the character
+ * @param armor number
+ * @return int with the player's armor
+ */
 int character_get_armor(Character *character);
 
 /**
