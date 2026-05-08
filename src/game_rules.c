@@ -196,10 +196,10 @@ void game_rules_random_damage(Game *game){
   Player *player = NULL;
   if (!game){
     return;
-  }
+  } 
 
   /*if the player moved in the last turn*/
-  if (command_get_code(game_get_last_command(game)) == 2)
+  if (command_get_code(game_get_last_command(game)) == MOVE)
   {
     player = game_get_player(game);
     player_set_health(player, (player_get_health(player)-1));
@@ -251,7 +251,7 @@ void game_rules_update_links(Game *game){
 
   /*if character guardia is dead*/
   /*42 is Guardia*/
-  if (character_get_health(game_get_character(game, 42)) <= 0)
+  if (character_get_health(game_get_character(game, 42)) <= 0 && link_get_open(game_get_link(game, 33)) == TRUE)
   {
   /*opens the 12-14 link and the 14-12 link, 33 and 37 ids*/
   link_set_open(game_get_link(game, 33), 1);
@@ -336,14 +336,69 @@ void game_rules_update_find_objects_in_space(Game *game){
 }
 */
 void game_rules_update_check_player_dead(Game *game){
+  Id chr_id = NO_ID;
+  Character *chr = NULL;
+  Id player_location = game_get_player_location(game);
+  int i, n_characters = game_get_number_of_characters(game);
+
+  if (!game){
+    return;
+  }
 
   /*if player has no health*/
   if (player_get_health(game_get_player(game)) <= 0)
   {
     /*player dies*/
-    game_set_message(game, "You died!");
     game_set_finished(game, TRUE); /*if player dies, game ends*/
-  }
+    printf("\n\n"
+           "/  \\    /  |/      \\ /  |  /  |      /       \\ /      |/        |/       \\             /   |\n"
+           "$$  \\  /$$//$$$$$$  |$$ |  $$ |      $$$$$$$  |$$$$$$/ $$$$$$$$/ $$$$$$$  |       __  /$$$/ \n"
+           " $$  \\/$$/ $$ |  $$ |$$ |  $$ |      $$ |  $$ |  $$ |  $$ |__    $$ |  $$ |      /  |/$$ /  \n"
+           "  $$  $$/  $$ |  $$ |$$ |  $$ |      $$ |  $$ |  $$ |  $$    |   $$ |  $$ |      $$/ $$ |   \n");
+    printf("   $$$$/   $$ |  $$ |$$ |  $$ |      $$ |  $$ |  $$ |  $$$$$/    $$ |  $$ |       __ $$ |   \n"
+           "    $$ |   $$ \\__$$ |$$ \\__$$ |      $$ |__$$ | _$$ |_ $$ |_____ $$ |__$$ |      /  |$$  \\_ \n"
+           "    $$ |   $$    $$/ $$    $$/       $$    $$/ / $$   |$$       |$$    $$/       $$/  $$   |\n"
+           "    $$/     $$$$$$/   $$$$$$/        $$$$$$$/  $$$$$$/ $$$$$$$$/ $$$$$$$/  \n"
+           "\n");
 
+    if (command_get_code(game_get_last_command(game)) == ATTACK)
+    {
+      for (i = 0; i < n_characters; i++)
+      {
+        chr_id = game_get_character_id_at(game, i);
+        chr = game_get_character(game, chr_id);
+
+        if (chr != NULL && game_get_character_location(game, chr_id) == player_location && character_get_friendly(chr) == FALSE)
+        {
+          printf("You were killed by: %s\n", character_get_name(chr));
+          character_print(chr);
+          break;
+        }
+      }
+    }
+  }
   return; 
 }
+/*    printf("\n\n");
+    printf(" __      __  ______   __    __        __       __  ______  __    __            _______                               \n");
+    printf("/  \\    /  |/      \\ /  |  /  |      /  |  _  /  |/      |/  \\  /  |          /       \\                              \n");
+    printf("$$  \\  /$$//$$$$$$  |$$ |  $$ |      $$ | / \\ $$ |$$$$$$/ $$  \\ $$ |       __ $$$$$$$  |                             \n");
+    printf(" $$  \\/$$/ $$ |  $$ |$$ |  $$ |      $$ |/$  \\$$ |  $$ |  $$$  \\$$ |      /  |$$ |  $$ |                             \n");
+    printf("  $$  $$/  $$ |  $$ |$$ |  $$ |      $$ /$$$  $$ |  $$ |  $$$$  $$ |      $$/ $$ |  $$ |                             \n");
+    printf("   $$$$/   $$ |  $$ |$$ |  $$ |      $$ $$/$$ $$ |  $$ |  $$ $$ $$ |       __ $$ |  $$ |                             \n");
+    printf("    $$ |   $$ \\__$$ |$$ \\__$$ |      $$$$/  $$$$ | _$$ |_ $$ |$$$$ |      /  |$$ |__$$ |                             \n");
+    printf("    $$ |   $$    $$/ $$    $$/       $$$/    $$$ |/ $$   |$$ | $$$ |      $$/ $$    $$/                              \n");
+    printf("    $$/     $$$$$$/   $$$$$$/        $$/      $$/ $$$$$$/ $$/   $$/           $$$$$$$/                               \n");
+    printf("\n");
+
+    printf("  ______    ______    ______   ________  __        ________         ______    ______   __     __  ________  _______  \n");
+    printf(" /      \\  /      \\  /      \\ /        |/  |      /        |       /      \\  /      \\ /  |   /  |/        |/       \\ \n");
+    printf("/$$$$$$  |/$$$$$$  |/$$$$$$  |$$$$$$$$/ $$ |      $$$$$$$$/       /$$$$$$  |/$$$$$$  |$$ |   $$ |$$$$$$$$/ $$$$$$$  |\n");
+    printf("$$ |  $$/ $$ |__$$ |$$ \\__$$/    $$ |   $$ |      $$ |__          $$ \\__$$/ $$ |__$$ |$$ |   $$ |$$ |__    $$ |  $$ |\n");
+    printf("$$ |      $$    $$ |$$      \\    $$ |   $$ |      $$    |         $$      \\ $$    $$ |$$  \\ /$$/ $$    |   $$ |  $$ |\n");
+    printf("$$ |   __ $$$$$$$$ | $$$$$$  |   $$ |   $$ |      $$$$$/           $$$$$$  |$$$$$$$$ | $$  /$$/  $$$$$/    $$ |  $$ |\n");
+    printf("$$ \\__/  |$$ |  $$ |/  \\__$$ |   $$ |   $$ |_____ $$ |_____       /  \\__$$ |$$ |  $$ |  $$ $$/   $$ |_____ $$ |__$$ |\n");
+    printf("$$    $$/ $$ |  $$ |$$    $$/    $$ |   $$       |$$       |      $$    $$/ $$ |  $$ |   $$$/    $$       |$$    $$/ \n");
+    printf(" $$$$$$/  $$/   $$/  $$$$$$/     $$/    $$$$$$$$/ $$$$$$$$/        $$$$$$/  $$/   $$/     $/     $$$$$$$$/ $$$$$$$/  \n");
+    printf("\n");
+*/
