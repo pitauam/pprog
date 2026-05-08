@@ -170,7 +170,7 @@ Id object_get_dependency(Object* object){
   return object->dependency;
 }
 
-Status object_set_open(Object* object, Bool open){
+Status object_set_open(Object* object, Id open){
   if (!object)
   {
     return ERROR;

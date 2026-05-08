@@ -145,7 +145,7 @@ Id object_get_dependency(Object* object);
  * @param open id to define it
  * @return OK if everything goes well, ERROR if something went wrong
  */
-Status object_set_open(Object* object, Bool open);
+Status object_set_open(Object* object, Id open);
 
 /**
  * @brief Gets if it's open or not
