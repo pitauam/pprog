@@ -524,24 +524,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   graphic_engine_print_link_info(ge, game, id_act, U, "Up");
   graphic_engine_print_link_info(ge, game, id_act, D, "Down");
   
-/*funcion original*/
-/*
-  if (player_inventory_empty(player) == FALSE)
-  {
-
-    if (player_object == 23) if the object is a rose (easter egg)
-    {
-      sprintf(str, " Player has a %s <3", object_get_name(game_get_object(game, player_get_object(player))));
-    }
-    else sprintf(str, " Player has '%s'", object_get_name(game_get_object(game, player_get_object(player))));
-    }
-  
-    }
-  else
-  {
-    sprintf(str, " Player has no objects");
-  }
-*/
   
   /*prints the message of a character*/
 

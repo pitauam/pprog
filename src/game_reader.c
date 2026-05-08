@@ -241,22 +241,6 @@ Game* game_reader_create_from_file(char *filename) {
     return NULL;
   }
 
-  /*
-  if (game_get_player(game) == NULL) {
-    Player *player = player_create(PLAYER_ID);
-
-    if (player == NULL || game_set_player(game, player) == ERROR) {
-      player_destroy(player);
-      game_destroy(game);
-      return NULL;
-    }
-
-    if (game_get_space_id_at(game, 0) != NO_ID) {
-      game_set_player_location(game, game_get_space_id_at(game, 0));
-    }
-  }
-    */
-
   return game;
 }
 

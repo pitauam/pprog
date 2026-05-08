@@ -111,14 +111,9 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  /*prints game data for debugging purposes
-  game_print(game); 
-  */
-  
-
   last_cmd = game_get_last_command(game);
 
-  /*generates a seed for the random number (later should be moved to game.c)*/
+  /*generates a seed for the random number*/
   if (deterministic == TRUE) {
     srand(DETERMINISTIC_SEED);
   } else {

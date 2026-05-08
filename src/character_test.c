@@ -4,7 +4,7 @@
  * @file character_test.c
  * @author Santiago Pita and Marta López
  * @version 1
- * @date 13-04-2026
+ * @date 07-05-2026
  */
 
 #include <stdio.h>
