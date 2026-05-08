@@ -1079,13 +1079,14 @@ void game_actions_use(Game *game){
     
   }
 
+  /* Sets message from the object */
+  game_set_message(game, object_get_desc(obj));
+  game_set_name_message(game, object_get_name(obj));
+
   /* Remove from inventary */
   player_remove_object(player, object_id);
   game_remove_object(game, obj);
 
-  /* Sets message from the object */
-  game_set_message(game, object_get_desc(obj));
-  game_set_name_message(game, object_get_name(obj));
   command_set_return(game_get_last_command(game), OK);
   return;
 }
