@@ -83,7 +83,7 @@ void game_rules_update_check_player_dead(Game *game);
  *
  * @param game pointer to game
  */
-void game_rules_get_admin_card(Game *game);
+void game_rules_update_admin_card(Game *game);
 
 /**
  * @brief When a player kills the character Tuki or Pita, a object fell to the floor
@@ -91,7 +91,7 @@ void game_rules_get_admin_card(Game *game);
  *
  * @param game pointer to game
  */
-void game_rules_get_key_Card(Game *game);
+void game_rules_update_key_card(Game *game);
 
 /*
    Game actions implementation
@@ -108,6 +108,9 @@ Status game_rules_update(Game *game) {
   */
 
   game_rules_update_check_player_dead(game);
+
+  game_rules_update_admin_card(game);
+  game_rules_update_key_card(game);
 
   /*random number between 0 and N_CMD to decide the command that will be executed*/
 
@@ -276,6 +279,13 @@ void game_rules_update_links(Game *game){
 
   }
 
+  if (character_get_health(game_get_character(game, 44)) <= 0 && link_get_open(game_get_link(game, 324)) == FALSE)
+  {
+  /*opens the 12-14 link and the 14-12 link, 33 and 37 ids*/
+  link_set_open(game_get_link(game, 324), 1);
+  game_set_message(game, "A link has opened when killing Pita!");
+
+  }
   return;
 }
 /*
@@ -428,7 +438,7 @@ void game_rules_update_check_player_dead(Game *game){
   return; 
 }
 
-void game_rules_get_key_card(Game *game){
+void game_rules_update_key_card(Game *game){
   Character* tuki = NULL;
   Player* player = NULL;
   Space* space = NULL;
@@ -454,22 +464,24 @@ void game_rules_get_key_card(Game *game){
   tuki_health = character_get_health(tuki);
 
   /*When Marta dies...*/
-  if(tuki_health <= 0) {
+  if(tuki_health <= 0) { 
     /*The Keycard spawns on the space*/
-    if(space_add_object(space, tuki_obj_id)==ERROR){return;}
+    if(space_add_object(space, tuki_obj_id)==ERROR){
+      return;}
   }
 
   return;
 
 }
 
-void game_rules_get_admin_card(Game *game){
+void game_rules_update_admin_card(Game *game){
   Character* pita = NULL;
   Player* player = NULL;
   Space* space = NULL;
   Id space_id = NO_ID;
   Id pita_obj_id = 214;
   int pita_health = 1;
+
 
   /*Get pointer to the player*/
   player = game_get_player(game);
@@ -487,8 +499,11 @@ void game_rules_get_admin_card(Game *game){
 
   /*When Pita dies...*/
   if(pita_health <= 0) {
+        
+
     /*The Admincard spawns on the space*/
-    if(space_add_object(space, pita_obj_id)==ERROR){return;}
+    if(space_add_object(space, pita_obj_id)==ERROR){ return;}
+
   }
 
   return;
