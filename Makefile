@@ -21,9 +21,9 @@ TESTS = spacetest settest charactertest linktest inventorytest objecttest player
 #by default it makes the castle game executable
 all: $(EXE)
 
-#runs auxiliary map
+#runs auxiliary map for testing purposes
 runaux:
-	./$(EXE) dat/new_castle.dat
+	./$(EXE) dat/castle.dat
 
 #runs all tests
 runtests: 

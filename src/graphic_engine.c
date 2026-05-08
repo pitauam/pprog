@@ -56,6 +56,13 @@ struct _Graphic_engine {
  */
 void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id, Direction direction, const char *direction_name);
 
+/**
+ * @brief transforms a category into a string
+ * @author Santiago Pita
+ * @param category category that will be transformed
+ */
+const char *graphic_engine_category_to_string(Category category);
+
 
 /*defines place-place*/
 
@@ -423,12 +430,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   screen_area_puts(ge->descript, str);
 
   if(player_inventory_empty(player) == FALSE){
-  sprintf(str," Player carries: ");
+  sprintf(str," Inventory sorted by category:");
   screen_area_puts(ge->descript, str);
+
     for(i=0; i < player_get_n_objects(player); i++){
       player_obj_id = player_get_object_id(player, i);
-      if (player_obj_id != NO_ID) {
-        sprintf(str, " %12s (%ld) (%d)", object_get_name(game_get_object(game, player_obj_id)), player_obj_id, object_get_health(game_get_object(game, game_get_object_id_at(game, i))));
+      obj = game_get_object(game, player_obj_id);
+      if (player_obj_id != NO_ID && obj != NULL) {
+        sprintf(str, " %02d. [%-8s] %-14s id:%ld", i + 1, graphic_engine_category_to_string(object_get_category(obj)), object_get_name(obj), player_obj_id);
         screen_area_puts(ge->descript, str);
       } 
     }
@@ -448,9 +457,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game, Bool repeat) {
   for(i = 0; i < game_get_number_of_objects(game); i++){
     aux_obj = game_get_object(game, game_get_object_id_at(game, i));
     obj_loc = game_get_object_location(game, game_get_object_id_at(game, i) );
-    if ((obj_loc != NO_ID && (game_get_player_location(game) == obj_loc)) || inventory_find_object(player_get_inventory(game_get_player(game)), object_get_id(aux_obj))) {
-    
-    sprintf(str, "    %5s (%d): %d pts", (game_get_object_name(game, aux_obj)), (int)obj_loc, object_get_health(aux_obj));
+    if (aux_obj != NULL && ((obj_loc != NO_ID && (game_get_player_location(game) == obj_loc)) || inventory_find_object(player_get_inventory(game_get_player(game)), object_get_id(aux_obj)))) {
+    /*if the object location is -1 it continues to the next object*/
+    if (obj_loc == -1)
+    {
+      continue;
+    }
+    sprintf(str, "    [%-8s] %-14s loc:%d hp:%d", graphic_engine_category_to_string(object_get_category(aux_obj)), game_get_object_name(game, aux_obj), (int)obj_loc, object_get_health(aux_obj));
     screen_area_puts(ge->descript, str);
     }
   }
@@ -611,5 +624,27 @@ void graphic_engine_print_link_info(Graphic_engine *ge, Game *game, Id origin_id
   } else {
     sprintf(str, "    %s -> %3ld %.16s (Closed)", direction_name, (long)destination_id, space_get_name(destination_space));
     screen_area_puts(ge->descript, str);
+  }
+}
+
+const char *graphic_engine_category_to_string(Category category) {
+  switch (category)
+  {
+    case Venom:
+      return "Venom";
+    case Healing:
+      return "Healing";
+    case Strength:
+      return "Strength";
+    case Cursed:
+      return "Cursed";
+    case Currency:
+      return "Currency";
+    case Armour:
+      return "Armour";
+    case Utility:
+      return "Utility";
+    default:
+      return "No category";
   }
 }

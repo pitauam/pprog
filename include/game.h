@@ -132,6 +132,13 @@ Status game_add_object(Game *game, Object *object);
 Status game_remove_object(Game *game, Object *object);
 
 /**
+ * @brief Sorts the current player's inventory by object category and name
+ *
+ * @param game pointer to game
+ */
+void game_sort_inventory(Game *game);
+
+/**
  * @brief Gets the pointer of the object said id
  * @author Santiago Pita
  *
@@ -560,16 +567,5 @@ void game_print(Game *game);
  */
 
 Id game_get_random_space(Game *game);
-/*
-int object_compare(Game *game, Object* obj1, Object* obj2) {
-    if (!obj1 || !obj2) return 0;
 
-    if (obj1->category != obj2->category) {
-        return obj1->category - obj2->category;
-    }
-
-    
-    return strcmp(game_get_object_name(game, obj1), game_get_object_name(game, obj2));
-}
-*/
 #endif
