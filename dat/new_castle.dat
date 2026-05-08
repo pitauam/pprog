@@ -57,7 +57,7 @@ directions: NO_DIR,N,S,E,W U D
 #l:31|Entry-Corridor|11|12|1|1|
 #l:32|Corridor-Entry|12|11|0|1|
 #l:33|Corridor-Server_core|12|14|1|0|
-#l:34|Corridor-Dungeon|12|13|3|0|
+#l:34|Corridor-Dungeon|12|13|3|1|
 #l:35|Dungeon-Garden|13|19|-1|1|
 #l:36|Dungeon-Dungeon_stairs|13|111|5|1|
 #l:345|Dungeon-Corridor|13|12|2|1|
