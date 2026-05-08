@@ -32,7 +32,7 @@
 #o:23|Robot|12|Combat android ally|8|2|1|25|-1|
 #o:24|Malware|17|Corrupts internal systems|3|0|1|-1|-1|
 #o:25|Code_fragment|124|Piece of core algorithm|4|6|1|-1|-1|
-#o:26|Keycard||Grants access to secure rooms|0|6|1|-1|34|
+#o:26|Keycard| |Grants access to secure rooms|0|6|1|-1|34|
 #o:27|Battery|115|Portable power source|5|1|1|-1|-1|
 #o:28|Broken_chip|119|Damaged hardware fragment|3|0|1|-1|-1|
 #o:29|Drone|115|Hostile surveillance unit|3|5|1|-1|-1|
@@ -82,8 +82,8 @@ directions: NO_DIR,N,S,E,W U D
 #l:324|AI_guard-Armory|114|115|3|0|
 #l:325|Armory-AI_guard|115|114|2|1|
 #l:326|Dungeon_cells-Dungeon_corridor|113|112|3|1|
-#l:327|Dungeon_cells-Cell_124|113|124|2|0|
-#l:328|Dungeon_cells-Cell_125|113|125|1|0|
+#l:327|Dungeon_cells-Cell_124|113|124|2|1|
+#l:328|Dungeon_cells-Cell_125|113|125|1|1|
 #l:329|Cell_124-Dungeon_cells|124|113|3|1|
 #l:330|Cell_125-Dungeon_cells|125|113|0|1|
 #l:347|Stairs-Control_nexus|128|17|2|1|
@@ -120,4 +120,4 @@ directions: NO_DIR,N,S,E,W U D
 
 #_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
 
-#p:100|;D|11|5|3|1|1
+#p:100|;D|114|20|3|20|1

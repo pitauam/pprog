@@ -464,8 +464,9 @@ void game_rules_update_key_card(Game *game){
   tuki_health = character_get_health(tuki);
 
   /*When Marta dies...*/
-  if(tuki_health <= 0) { 
+  if(tuki_health <= 0 && character_get_following(tuki) != -5) { 
     /*The Keycard spawns on the space*/
+    character_set_following(tuki, -5);
     if(space_add_object(space, tuki_obj_id)==ERROR){
       return;}
   }
@@ -498,9 +499,9 @@ void game_rules_update_admin_card(Game *game){
   pita_health = character_get_health(pita);
 
   /*When Pita dies...*/
-  if(pita_health <= 0) {
+  if(pita_health <= 0 && character_get_following(pita) != -5) {
         
-
+    character_set_following(pita, -5);
     /*The Admincard spawns on the space*/
     if(space_add_object(space, pita_obj_id)==ERROR){ return;}
 
