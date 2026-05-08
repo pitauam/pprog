@@ -13,6 +13,7 @@
 #l:312|Vault-Testing_lab|16|15|3|1|
 #l:313|Control_nexus-Server_core|17|14|0|1|
 #l:314|Control_nexus-Inner_countryard|17|18|1|1|
+#l:348|Control_nexus-Stairs|17|128|3|0|
 #l:315|Inner_countryard-Control_nexus|18|17|0|1|
 #l:316|Inner_countryard-Garden|18|19|1|1|
 #l:317|Garden-Inner_countryard|19|18|0|1|
@@ -29,6 +30,9 @@
 #l:328|Dungeon_cells-Cell_125|113|125|1|0|
 #l:329|Cell_124-Dungeon_cells|124|113|3|1|
 #l:330|Cell_125-Dungeon_cells|125|113|0|1|
+#l:347|Stairs-Control_nexus|128|17|2|1|
+#l:346|Stairs-Atic_stairs|128|116|4|1|
+#l:345|Atic_stairs-Stairs|116|128|5|1|
 #l:331|Atic_stairs-Atic_corridor|116|117|2|1|
 #l:332|Atic_corridor-Atic_stairs|117|116|3|1|
 #l:333|Atic_corridor-Testing_lab_118|117|118|0|1|

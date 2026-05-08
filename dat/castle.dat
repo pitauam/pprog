@@ -53,6 +53,8 @@ directions: NO_DIR,N,S,E,W
 #c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|1|1|
 #c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|1|1|
 #c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|1|1|
+#c:44|Pita|>:O|11|5|0|Tasks pending… eliminate intruder|1|0
+
 
 #_player:playerid|gdesc^C>|spawn11|hp5|maxinventory10|strength|armor|
 
@@ -66,3 +68,4 @@ directions: NO_DIR,N,S,E,W
 #ptest:105|Knight3|^Y>|14|1|0|
 #ptest:106|Knight3|^Z>|14|1|0|
 #ptest:107|Knight3|^Q>|14|1|0|
+
