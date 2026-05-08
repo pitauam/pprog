@@ -39,13 +39,14 @@ char *cmd_to_str[N_CMD][N_CMDT] = {
  * This struct stores all the information related to a command.
  */
 struct _Command {
-  CommandCode code;            /*!< Name of the command */
+  CommandCode code;                           /*!< Name of the command */
   char args[MAX_CMD_ARGS][CMD_LENGTH];        /*!<Arguments introduced with the command*/
-  Status result;               /*!<result of the command (error or ok)*/
+  Status result;                              /*!<result of the command (error or ok)*/
 };
 
-/** space_create allocates memory for a new space
- *  and initializes its members
+/**
+ * space_create allocates memory for a new space
+ * and initializes its members
  */
 Command* command_create() {
   Command* newCommand = NULL;

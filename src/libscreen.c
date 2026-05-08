@@ -190,4 +190,3 @@ void screen_utils_replaces_special_chars(char* str){
   while ((pch = strpbrk (str, "ÁÉÍÓÚÑáéíóúñ")))
     memcpy(pch, "??", 2);
 }
-

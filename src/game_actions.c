@@ -3,7 +3,7 @@
  *
  * @file game_actions.c
  * @version 5
- * @date 16-03-2026
+ * @date 07-05-2026
  * @copyright GNU Public License
  */
 
@@ -218,8 +218,6 @@ Status game_actions_update(Game *game, Command *command) {
       game_actions_open(game);
       break;
 
-      
-
     default:
       break;
   }
@@ -383,7 +381,7 @@ void game_actions_take(Game *game){
     object = game_get_object(game, object_id);
     dependency = object_get_dependency(object);
 
-    if(object_id == NO_ID || !object || dependency == NO_ID){
+    if(object_id == NO_ID || !object){
       game_set_message(game, "Oops! You couldn't take anything.");
       command_set_return(game_get_last_command(game), ERROR);
     }
@@ -913,19 +911,6 @@ void game_actions_abandon(Game *game) {
     command_set_return(game_get_last_command(game), OK);
     return;
   }
-  
-  /*for (i = 0; i < game_get_number_of_characters(game); i++) {
-    chr = game_get_character(game, game_get_character_id_at(game, i));
-    
-    if (chr != NULL && character_get_following(chr) == player_get_id(game_get_player(game))) {
-      if (strcmp(chr_name, character_get_name(chr)) == 0) {
-        
-        character_set_following(chr, NO_ID);
-        command_set_return(game_get_last_command(game), OK);
-        return;
-      }
-    }
-  }*/
 
   game_set_message(game, "You couldn't abandon your partner.");
   command_set_return(game_get_last_command(game), ERROR);

@@ -4,7 +4,7 @@
  * @file character.c
  * @author Mario Rodriguez
  * @version 0
- * @date 022-02-2026
+ * @date 22-04-2026
  */
 
 #include "character.h"
@@ -25,10 +25,10 @@ struct _Character{
     char gdesc[7];                  /*!< Description of the character*/
     int health;                     /*!< Health of the character*/
     Bool friendly;                  /*!< TRUE if its firendly FALSE otherwise, hardcoded friendly*/
-    char message[WORD_SIZE +1];     /*!< Message of the character*/
-    Id following;                   /*!<The id of the player that is following*/
-    int strength;
-    int armor;
+    char message[WORD_SIZE +1];    /*!< Message of the character*/
+    Id following;                  /*!<The id of the player that is following*/
+    int strength;                  /*!< Strength of the character*/
+    int armor;                     /*!< Armor of the character*/
 };
 
 Character *character_create(Id id){
