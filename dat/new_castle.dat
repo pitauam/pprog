@@ -1,10 +1,10 @@
 #s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|1|
 #s:12|Corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|1|
 #s:13|Dungeon|    _    |  /___\  | /_____\ |/_______\|_________|1|
-#s:14|Server core|![##][##]!| !!   !! |  !  !   |[_______]|1|
-#s:15|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|1|
-#s:16|Vault| !$$$$$! | !$$$$$! | !$$$$$! | !$$$$$! |1|
-#s:17|Control nexus|  !CTRL! |  !CTRL! | |  !CTRL! | |  !CTRL! |1|
+#s:14|Server core|![#][#]! | !!   !! |  !  !   |  !  !   |[_______]|1|
+#s:15|Testing lab| !<> <>! | !<> <>! | !<> <>! | !<> <>! |_________|1|
+#s:16|Vault| !$$$$$! | !$$$$$! | !$$$$$! | !$$$$$! | !$$$$$! |1|
+#s:17|Control nexus|  !CTRL! |  !CTRL! |  !CTRL! |  !CTRL! |  !CTRL! |1|
 #s:18|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|1|
 #s:19|Garden|         |         |         |         |         |1|
 #s:111|Dungeon stairs|    _    |  /___\  | /_____\ |/_______\|_________|0|
@@ -14,11 +14,11 @@
 #s:115|Armory|         |         |         |         |         |0|
 #s:124|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
 #s:125|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
-#s:128|Stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
+#s:128|Stairs|    _    |  /___\  | /_____\ |/_______\|_________|1|
 #s:116|Atic stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
 #s:117|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
-#s:118|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|2|
-#s:119|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|2|
+#s:118|Testing lab| !<> <>! | !<> <>! | !<> <>! | !<> <>! |_________|2|
+#s:119|Testing lab| !<> <>! | !<> <>! | !<> <>! | !<> <>! |_________|2|
 #s:121|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:122|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:123|Servers door| /-----\ |/   ^   \|!  [H]  !|!  [I]  !|/  _ _  \|2|
@@ -28,7 +28,7 @@
 #object:id|name|spawn_id|description|health|category|movable|dependency|open
 
 #o:21|Laser|11|High-energy pulse weapon|2|2|1|-1|-1|
-#o:22|Energy pack|14|Restores suit energy levels|5|1|1|-1|-1|
+#o:22|Energy_pack|14|Restores suit energy levels|5|1|1|-1|-1|
 #o:23|Robot|12|Combat android ally|8|2|1|25|-1|
 #o:24|Malware|17|Corrupts internal systems|3|0|1|-1|-1|
 #o:25|Code_fragment|124|Piece of core algorithm|4|6|1|-1|-1|
@@ -61,7 +61,7 @@ directions: NO_DIR,N,S,E,W U D
 #l:35|Dungeon-Garden|13|19|-1|1|
 #l:36|Dungeon-Dungeon_stairs|13|111|5|1|
 #l:345|Dungeon-Corridor|13|12|2|1|
-#l:37|Server_core-Corridor|14|12|0|0|
+#l:37|Server_core-Corridor|14|12|0|1|
 #l:38|Server_core-Testing_lab|14|15|2|1|
 #l:39|Server_core-Control_nexus|14|17|1|1|
 #l:310|Testing_lab-Server_core|15|14|3|1|
@@ -94,8 +94,8 @@ directions: NO_DIR,N,S,E,W U D
 #l:333|Atic_corridor-Testing_lab_118|117|118|0|1|
 #l:334|Atic_corridor-Testing_lab_119|117|119|1|1|
 #l:335|Atic_corridor-Atic_corridor_121|117|121|2|1|
-#l:336|Testing_lab_118-Atic_corridor|118|117|0|1|
-#l:337|Testing_lab_119-Atic_corridor|119|117|1|1|
+#l:336|Testing_lab_118-Atic_corridor|118|117|1|1|
+#l:337|Testing_lab_119-Atic_corridor|119|117|0|1|
 #l:338|Atic_corridor_121-Atic_corridor|121|117|3|1|
 #l:339|Atic_corridor_121-Atic_corridor_122|121|122|2|1|
 #l:340|Atic_corridor_122-Atic_corridor_121|122|121|3|1|

@@ -267,7 +267,7 @@ void game_rules_update_links(Game *game){
 
   /*if character guardia is dead*/
   /*47 is Mega*/
-  if (character_get_health(game_get_character(game, 47)) <= 0 && link_get_open(game_get_link(game, 33)) == TRUE)
+  if (character_get_health(game_get_character(game, 47)) <= 0 && link_get_open(game_get_link(game, 33)) == FALSE)
   {
   /*opens the 12-14 link and the 14-12 link, 33 and 37 ids*/
   link_set_open(game_get_link(game, 33), 1);
