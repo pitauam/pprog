@@ -277,7 +277,7 @@ void game_actions_move(Game *game){
 
   space_id = game_get_player_location(game);
   actual_space = game_get_space(game, space_id);
-  if (NO_ID == space_id || !actual_space) {
+  if (space_id == NO_ID || !actual_space) {
     game_set_message(game, "Oops! You couldn't move.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -285,7 +285,7 @@ void game_actions_move(Game *game){
 
   future_id = game_get_connection(game, space_id, dir);
   future_space = game_get_space(game, future_id);
-  if (NO_ID == space_id || !future_space) {
+  if (future_id == NO_ID || !future_space) {
     game_set_message(game, "Oops! You couldn't move.");
     command_set_return(game_get_last_command(game), ERROR);
     return;
@@ -331,17 +331,10 @@ void game_actions_move(Game *game){
           command_set_return(game_get_last_command(game), ERROR);
           return;
         }
-        command_set_return(game_get_last_command(game), OK);
       }
     }
   }
-  else
-  {
-    game_set_message(game, "Oops! You couldn't move.");
-    command_set_return(game_get_last_command(game), ERROR);
-    return;
-  }
-
+  game_set_message(game, "You moved successfully.");
   command_set_return(game_get_last_command(game), OK);
   return;
 }

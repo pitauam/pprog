@@ -170,7 +170,7 @@ Id character_get_following(Character *character) {
 }
 
 Status character_set_following(Character *character, Id id) {
-    if (!character || id == NO_ID)
+    if (!character)
     {
         return ERROR;
     }
