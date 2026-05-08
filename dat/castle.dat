@@ -17,6 +17,14 @@
 #o:24|Stew|132|Smells.. weird|2|1|1|-1|-1
 #o:25|depRose|16|Looks spiky|4|3|1|-1|-1
 #o:26|Key|11|....|10|2|1|-1|12
+#o:27|Laser|11|High-energy pulse weapon|10|2|1|-1|-1
+#o:29|Malware|11|Corrupts internal systems|3|0|1|-1|-1
+#o:211|Battery|11|Portable power source|5|6|1|-1|-1
+#o:212|Drone|11|Hostile surveillance unit|6|0|1|-1|-1
+#o:213|Credit|11|Digital currency unit|1|4|1|-1|-1
+#o:214|Nanobots|11|Self-repairing medical swarm|10|1|1|-1|-1
+#o:215|Sword++|11|Upgraded plasma edge blade|8|5|1|-1|-1
+#o:216|Repairkit|11|Used to fix damaged gear|2|4|1|-1|-1
 
 
 #links:id|name|origin_id|destination_id|north,south..|open|
@@ -40,14 +48,17 @@ directions: NO_DIR,N,S,E,W
 #l:315|Inner countryard|15|16|1|1|
 #l:316|Garden|16|15|0|1|
 
-#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|
-#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|
-#c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|
+#_character:characterid|knigth|gdesc^C>|spawn11|hp5|friendly|message|strength|armor|
 
-#_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|
+#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|1|1|
+#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|1|1|
+#c:43|Inmate|*_*|121|1|0|I've been stuck here for so long..|1|1|
 
-#p:100|:D|11|5|3|
-#p:101|^C>|12|5|3|
+#_player:playerid|gdesc^C>|spawn11|hp5|maxinventory10|strength|armor|
+
+#p:100|:D|11|5|10|1|1|
+
+#playerold:101|^C>|12|5|3|
 
 #ptest:102|Knight2|^D>|13|3|1|
 #ptest:103|Knight3|^X>|14|1|0|
