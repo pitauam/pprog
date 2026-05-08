@@ -279,6 +279,13 @@ void game_rules_update_links(Game *game){
 
   }
 
+  if (character_get_health(game_get_character(game, 44)) <= 0 && link_get_open(game_get_link(game, 324)) == FALSE)
+  {
+  /*opens the 12-14 link and the 14-12 link, 33 and 37 ids*/
+  link_set_open(game_get_link(game, 324), 1);
+  game_set_message(game, "A link has opened when killing Pita!");
+
+  }
   return;
 }
 /*
@@ -407,7 +414,6 @@ void game_rules_update_key_card(Game *game){
   Id tuki_obj_id = 26;
   int tuki_health = 1;
 
-  printf("entra");
 
   /*Get pointer to the player*/
   player = game_get_player(game);
@@ -427,10 +433,8 @@ void game_rules_update_key_card(Game *game){
 
   /*When Marta dies...*/
   if(tuki_health <= 0) { 
-    fprintf(stdout, "marta muere");
     /*The Keycard spawns on the space*/
     if(space_add_object(space, tuki_obj_id)==ERROR){
-      fprintf(stdout, "error añadiendo objeto m");
       return;}
   }
 
@@ -446,7 +450,6 @@ void game_rules_update_admin_card(Game *game){
   Id pita_obj_id = 214;
   int pita_health = 1;
 
-  fprintf(stdout, "entra");
 
   /*Get pointer to the player*/
   player = game_get_player(game);
@@ -464,13 +467,11 @@ void game_rules_update_admin_card(Game *game){
 
   /*When Pita dies...*/
   if(pita_health <= 0) {
-        fprintf(stdout, "pita muere");
+        
 
     /*The Admincard spawns on the space*/
-    if(space_add_object(space, pita_obj_id)==ERROR){
-          fprintf(stdout, "error obj pita");
+    if(space_add_object(space, pita_obj_id)==ERROR){ return;}
 
-      return;}
   }
 
   return;
