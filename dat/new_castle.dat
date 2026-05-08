@@ -110,6 +110,3 @@ directions: NO_DIR,N,S,E,W U D
 
 
 #_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
-
-#p:100|;D|16|5|3|1|1
-#p:100|^C>|16|5|3|1|1

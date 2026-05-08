@@ -21,6 +21,8 @@
 #include "game_rules.h"
 #include <time.h>
 
+#define DETERMINISTIC_SEED 1
+
 int game_loop_init(Game **game, Graphic_engine **gengine, char *file_name);
 
 void game_loop_cleanup(Game *game, Graphic_engine *gengine);
@@ -32,24 +34,34 @@ int main(int argc, char *argv[]) {
   Game *game = NULL;
   Graphic_engine *gengine;
   int result, a=0;
+  Bool deterministic = FALSE;
   Command *last_cmd = NULL;
   FILE *log_fp = NULL;
   const char *data_file = NULL;
   const char *log_file = NULL;
   char name[WORD_SIZE];
 
-  if (argc != 2 && argc != 4) {
-    fprintf(stderr, "Use: %s <game_data_file> [-l <log>]\n", argv[0]);
+  if (argc < 2 || argc > 5) {
+    fprintf(stderr, "Use: %s <game_data_file> [-l <log>] [-d]\n", argv[0]);
     return 1;
   }
 
   data_file = argv[1];
-  if (argc == 4) {
-    if (strcmp(argv[2], "-l") != 0) {
-      fprintf(stderr, "Use: %s <game_data_file> [-l <log>]\n", argv[0]);
+
+  for (a = 2; a < argc; a++) {
+    if (strcmp(argv[a], "-l") == 0) {
+      if (a + 1 >= argc || log_file != NULL) {
+        fprintf(stderr, "Use: %s <game_data_file> [-l <log>] [-d]\n", argv[0]);
+        return 1;
+      }
+      log_file = argv[a + 1];
+      a++;
+    } else if (strcmp(argv[a], "-d") == 0) {
+      deterministic = TRUE;
+    } else {
+      fprintf(stderr, "Use: %s <game_data_file> [-l <log>] [-d]\n", argv[0]);
       return 1;
     }
-    log_file = argv[3];
   }
   
   result = game_loop_init(&game, &gengine, (char *)data_file);
@@ -100,7 +112,11 @@ int main(int argc, char *argv[]) {
   last_cmd = game_get_last_command(game);
 
   /*generates a seed for the random number (later should be moved to game.c)*/
-  srand(time(NULL));
+  if (deterministic == TRUE) {
+    srand(DETERMINISTIC_SEED);
+  } else {
+    srand(time(NULL));
+  }
 
   while ((command_get_code(last_cmd) != EXIT) && (game_get_finished(game) == FALSE)) {
     graphic_engine_paint_game(gengine, game, FALSE);
