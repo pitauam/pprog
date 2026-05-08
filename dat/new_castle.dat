@@ -111,11 +111,11 @@ directions: NO_DIR,N,S,E,W U D
 #c:41|Mario|:)|11|5|1|I scan repositories... the IA is evolving too fast!|1|2
 #c:42|Samuel|^_^|15|6|1|Graphics won't save us... but I can guide you!|1|1
 #c:43|Paula|:P|124|9|1|I tested this... it was NOT supposed to happen|2|1
-#c:44|Pita|>:O|114|13|0|Tasks pending... eliminate intruder|3|2| ->cuando muere abre la Armory()
-#c:45|Tuki|:D|19|13|0|I hunt memory... yours is next|1|2|
-#c:46|SEGFAULT|X_X|127|15|0|...ERROR... CONTROL IS MINE...|2|2
+#c:44|Pita|>:O|114|13|0|Tasks pending... eliminate intruder|1|1|
+#c:45|Tuki|:D|19|6|0|I hunt memory... yours is next|1|1|
+#c:46|SEGFAULT|X_X|127|15|0|...ERROR... CONTROL IS MINE...|2|2|
 #c:47|Mega|M_M|12|3|0|MEGAAAA|1|1|
-#c:48|Giga|G_G|113|7|0|GIGAA|1|2|
+#c:48|Giga|G_G|113|8|0|GIGAA|1|1|
 
 
 #_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
