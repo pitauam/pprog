@@ -1,60 +1,51 @@
 #s:11|Entry| _ !#     |[_]--'---|!'!""`""!|! ! /^\ !|!_!_!I!_!|1|
 #s:12|Corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|1|
 #s:13|Dungeon|    _    |  /___\  | /_____\ |/_______\|_________|1|
-#s:14|Dining room| .-===-. | ! . . ! | ! .'. ! |()_____()|II_____II|1|
-#s:15|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|1|
-#s:16|Bathroom|   ___   |  !___!  |  !_O_!  |  !( )!  |  !/_\!  |1|
-#s:17|Kitchen|         |         |         |         |         |1|
+#s:14|Server core|![##][##]!| !!   !! |  !  !   |[_______]|1|
+#s:15|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|1|
+#s:16|Vault| !$$$$$! | !$$$$$! | !$$$$$! | !$$$$$! |1|
+#s:17|Control nexus|  !CTRL! |  !CTRL! | |  !CTRL! | |  !CTRL! |1|
 #s:18|Inner countryard| /\ /\ /\|//\\/\\/\|//\\/\\/\| II II II|---------|1|
 #s:19|Garden|         |         |         |         |         |1|
 #s:111|Dungeon stairs|    _    |  /___\  | /_____\ |/_______\|_________|0|
 #s:112|Dungeon corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|0|
 #s:113|Dungeon cells|_________|!   !   !|![_]![_]!|!   !   !|!___!___!|0|
-#s:114|Guard post|         |         |         |         |         |0|
+#s:114|AI guard|         |         |         |         |         |0|
 #s:115|Armory|         |         |         |         |         |0|
 #s:124|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
 #s:125|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
 #s:116|Atic stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
 #s:117|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
-#s:118|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
-#s:119|Bedroom|!-------!|! .   . !|! .   . !|! .   . !|!-------!|2|
+#s:118|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|2|
+#s:119|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|2|
 #s:121|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:122|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:123|Servers door| /-----\ |/   ^   \|!  [H]  !|!  [I]  !|/  _ _  \|2|
 #s:127|Servers room|         |         |         |         |         |2|
 
 
-
-
-
-
-#faltan los espacios nuevos
-
 #object:id|name|spawn_id|description|health|category|movable|dependency|open
 
-
-#o:21|Sword|11|It gives you a damage boost|2|2|1|-1|-1|
-#o:22|Steak|14|Tasty steak..|5|1|1|-1|-1|
-#o:23|Rose|16|Looks spiky|4|3|1|25|-1|-1|
-#o:24|Stew|132|Smells.. weird|2|1|1|-1|-1|
-#o:25|depRose|16|Looks spiky|4|3|1|-1|-1|
-#o:26|DungeonKey|11|It could open a door|1|2|1|-1|12|
-#o:27|Potion|114|A healing potion|10|1|1|-1|-1|
-#o:28|Wand| |It looks like a stick|2|2|1|-1|-1|
-#o:29|Shovel|19|Maybe you could dig somewhere|2|6|1|-1|-1|
-#o:211|Coin| |Maybe you can give this to someone|1|4|1|-1|-1|
-#o:212|Armor|15|Use it to protect you from damage|2|5|1|-1|-1|
-#o:213|Torch| |You could use it to light something on fire|1|6|1|-1|-1|
-#o:214|AticKey| |It could open a door|1|6|1|-1|-1|
-#o:215|Chimney| |It can be lighted up|1|-1|-1|-1|-1|
-#o:216|Box| |Its can be broken with something|1|-1|-1|-1|-1|
-#o:217|Sword+| |It gives you a damage boost|4|2|1|1|-1|-1|
-#o:218|Armor+| |Use it to protect you from damage|4|5|1|-1|-1|
-#o:219|Repairkit| |Repairs your armor|2|4|1|-1|-1|
-#o:221|Bendages| |Heals you a bit|2|1|1|-1|-1|
-
-
-#he puesto esto para ir poniendo un poco como seria 
+#o:21|Laser|11|High-energy pulse weapon|10|2|1|-1|-1
+#o:22|Energy pack|14|Restores suit energy levels|5|1|1|-1|-1
+#o:23|Robot|12|Combat android ally|8|2|1|25|-1
+#o:24|Malware|132|Corrupts internal systems|3|0|1|-1|-1
+#o:25|Code_fragment|13|Piece of core algorithm|4|6|1|-1|-1
+#o:26|Keycard|11|Grants access to secure rooms|10|6|1|-1|131
+#o:27|Battery|114|Portable power source|5|6|1|-1|-1
+#o:28|Broken_chip| |Damaged hardware fragment|2|3|1|-1|-1
+#o:29|Drone|19|Hostile surveillance unit|6|0|1|-1|-1
+#o:210|Credit| |Digital currency unit|1|4|1|-1|-1
+#o:211|Nanobots|201|Self-repairing medical swarm|10|1|1|-1|-1
+#o:212|Sword|15|High-frequency vibratory blade|5|5|1|-1|-1
+#o:213|Torch| |Plasma torch to light things|1|6|1|-1|-1
+#o:214|AdminKey| |Grants administrative access|1|6|1|-1|-1
+#o:215|Fire| |A dangerous digital fire|1|-1|-1|213|-1
+#o:216|Computer| |Terminal that requires hacking|1|-1|-1|-1|-1
+#o:217|Sword+| |Upgraded plasma edge blade|8|5|1|1|-1|-1
+#o:218|Laser+| |Overclocked pulse weapon|4|2|1|-1|-1
+#o:219|Repairkit| |Used to fix damaged gear|2|4|1|-1|-1
+#o:220|Med-Patch| |Heals system integrity|2|1|1|-1|-1
 
 
 #links:id|name|origin_id|destination_id|north,south..|open|
@@ -68,67 +59,56 @@ directions: NO_DIR,N,S,E,W U D
 #l:35|Dungeon|13|19|-1|1|
 #l:36|Dungeon|13|111|5|1|
 #l:345|Dungeon|13|12|2|1|
-#l:37|Dining room|14|12|0|0|
-#l:38|Dining room|14|15|2|1|
-#l:39|Dining room|14|17|1|1|
-#l:310|Bedroom|15|14|3|1|
-#l:311|Bedroom|15|16|2|1|
-#l:312|Bathroom|16|15|3|1|
-#l:312|Kitchen|17|14|0|1|
-#l:314|Kitchen|17|18|1|1|
-#l:315|Inner countryard|18|17|0|1|
-#l:316|Inner countryard|18|19|1|1|
+#l:37|Server_core|14|12|0|0|
+#l:38|Server_core|14|15|2|1|
+#l:39|Server_core|14|17|1|1|
+#l:310|Testing_lab|15|14|3|1|
+#l:311|Testing_lab|15|16|2|1|
+#l:312|Vault|16|15|3|1|
+#l:312|Control_nexus|17|14|0|1|
+#l:314|Control_nexus|17|18|1|1|
+#l:315|Inner_countryard|18|17|0|1|
+#l:316|Inner_countryard|18|19|1|1|
 #l:317|Garden|19|18|0|1|
-#l:318|Dungeon stairs|111|13|4|1|
-#l:319|Dungeon stairs|111|112|1|1|
-#l:320|Dungeon corridor|112|111|0|1|
-#l:321|Dungeon corridor|112|113|2|1|
-#l:322|Dungeon corridor|112|114|3|1|
-#l:323|Guard post|114|112|2|1|
-#l:324|Guard post|114|115|3|0|
+#l:318|Dungeon_stairs|111|13|4|1|
+#l:319|Dungeon_stairs|111|112|1|1|
+#l:320|Dungeon_corridor|112|111|0|1|
+#l:321|Dungeon_corridor|112|113|2|1|
+#l:322|Dungeon_corridor|112|114|3|1|
+#l:323|AI_guard|114|112|2|1|
+#l:324|AI_guard|114|115|3|0|
 #l:325|Armory|115|114|2|1|
-#l:326|Dungeon cells|113|112|3|1|
-#l:327|Dungeon cells|113|124|2|0|
-#l:328|Dungeon cells|113|125|1|0|
+#l:326|Dungeon_cells|113|112|3|1|
+#l:327|Dungeon_cells|113|124|2|0|
+#l:328|Dungeon_cells|113|125|1|0|
 #l:329|Cell|124|113|3|1|
 #l:330|Cell|125|113|0|1|
-#l:331|Atic stairs|116|117|2|1|
-#l:332|Atic corridor|117|116|3|1|
-#l:333|Atic corridor|117|118|0|1|
-#l:334|Atic corridor|117|119|1|1|
-#l:335|Atic corridor|117|121|2|1|
-#l:336|Bedroom|118|117|0|1|
-#l:337|Bedroom|119|117|1|1|
-#l:338|Atic corridor|121|117|3|1|
-#l:339|Atic corridor|121|122|2|1|
-#l:340|Atic corridor|122|121|3|1|
-#l:341|Atic corridor|122|123|2|1|
-#l:342|Throne door|123|122|3|1|
-#l:343|Throne door|123|127|2|0|
-#l:344|Throne room|127|123|3|0|
+#l:331|Atic_stairs|116|117|2|1|
+#l:332|Atic_corridor|117|116|3|1|
+#l:333|Atic_corridor|117|118|0|1|
+#l:334|Atic_corridor|117|119|1|1|
+#l:335|Atic_corridor|117|121|2|1|
+#l:336|Testing_lab|118|117|0|1|
+#l:337|Testing_lab|119|117|1|1|
+#l:338|Atic_corridor|121|117|3|1|
+#l:339|Atic_corridor|121|122|2|1|
+#l:340|Atic_corridor|122|121|3|1|
+#l:341|Atic_corridor|122|123|2|1|
+#l:342|Throne_door|123|122|3|1|
+#l:343|Throne_door|123|127|2|0|
+#l:344|Throne_room|127|123|3|0|
 
 
 #_character:characterid|knigth|gdesc^C>|spawn11|hp5|friendly|message|strength|armor|
 
-#c:41|Kevin|O_o|11|5|1| Hi, I am Kevin. Need your help, kill all enemies for me :)|1|1|
-#c:42|Guardia|>:O|12|5|0|JASJAJSJAJSJAJ return when you are stronger peasant|1|0|
-#c:43|Inmate|*_*|124|1|0|I've been stuck here for so long..|1|0|
-#c:44|Bit|-_-|19|7|0||1|0|
-#c:45|Byte|<o_->|19|10|0||2|1|
-#c:46|Mega|>0_0<|19|15|0||2|2|
+#c:41|Mario|:)|11|5|1|I scan repositories… the IA is evolving too fast!|1|2
+#c:42|Samuel|^_^|15|6|1|Graphics won't save us… but I can guide you!|1|1
+#c:43|Paula|:P|116|9|1|I tested this… it was NOT supposed to happen|0|1
+#c:44|Pita|>:O|17|5|0|Tasks pending… eliminate intruder|1|0
+#c:45|Tuki|:D|112|7|0|I hunt memory… yours is next|1|1
+#c:46|SEGFAULT|X_X|127|15|0|...ERROR... CONTROL IS MINE...|2|2
 
 
+#_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
 
-
-#_player:playerid|knigth|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|
-
-#p:100|:D|11|5|3|1|1
-
-
-#ptest:101|Knight|^C>|12|5|3|
-#ptest:102|Knight2|^D>|13|3|1|
-#ptest:103|Knight3|^X>|14|1|0|
-#ptest:104|Knight3|^J>|14|1|0|
-#ptest:105|Knight3|^Y>|14|1|0|
-#ptest:106|Knight3|^Z>|14|1|0|
-#ptest:107|Knight3|^Q>|14|1|0|
+#p:100|;D|11|5|3|1|1

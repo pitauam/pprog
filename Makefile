@@ -87,6 +87,15 @@ run: $(EXE)
 #run Iteration 3 map and generates a log file
 runlog: $(EXE)
 	./$(EXE) dat/new_castle.dat -l log.txt
+
+#run Iteration 3 map in deterministic mode
+rund: $(EXE)
+	./$(EXE) dat/new_castle.dat -d
+
+#run Iteration 3 map in deterministic mode and generates a log file
+rundlog: $(EXE)
+	./$(EXE) dat/new_castle.dat -d -l log.txt
+
 #runs Iteration 3 map with valgrind and generates a log file
 runv: $(EXE)
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/new_castle.dat -l log.txt

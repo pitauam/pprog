@@ -91,6 +91,8 @@ Status game_rules_update(Game *game) {
   game_rules_update_check_player_dead(game);
   */
 
+  game_rules_update_check_player_dead(game);
+
   /*random number between 0 and N_CMD to decide the command that will be executed*/
 
   random_number = rand() % 6;
@@ -334,5 +336,14 @@ void game_rules_update_find_objects_in_space(Game *game){
 }
 */
 void game_rules_update_check_player_dead(Game *game){
+
+  /*if player has no health*/
+  if (player_get_health(game_get_player(game)) <= 0)
+  {
+    /*player dies*/
+    game_set_message(game, "You died!");
+    game_set_finished(game, TRUE); /*if player dies, game ends*/
+  }
+
   return; 
 }
