@@ -221,4 +221,60 @@ void test1_player_get_object_id();
  */
 void test2_player_get_object_id();
 
+/**
+ * @test Test function for player_strength setting
+ * @pre Valid pointer to player and positive strength value
+ * @post Output == OK
+ */
+void test1_player_set_strength();
+
+/**
+ * @test Test function for player_strength setting
+ * @pre Valid pointer to player = NULL
+ * @post Output == ERROR
+ */
+void test2_player_set_strength();
+
+/**
+ * @test Test function for player_strength getting
+ * @pre Valid pointer to player with strength = 10
+ * @post Output == 10
+ */
+void test1_player_get_strength();
+
+/**
+ * @test Test function for player_strength getting
+ * @pre Pointer to player = NULL
+ * @post Output == -1
+ */
+void test2_player_get_strength();
+
+/**
+ * @test Test function for player_armor setting
+ * @pre Valid pointer to player and positive armor value
+ * @post Output == OK
+ */
+void test1_player_set_armor();
+
+/**
+ * @test Test function for player_armor setting
+ * @pre Valid pointer to player = NULL
+ * @post Output == ERROR
+ */
+void test2_player_set_armor();
+
+/**
+ * @test Test function for player_armor getting
+ * @pre Valid pointer to player with armor = 10
+ * @post Output == 10
+ */
+void test1_player_get_armor();
+
+/**
+ * @test Test function for player_armor getting
+ * @pre Pointer to player = NULL
+ * @post Output == -1
+ */
+void test2_player_get_armor();
+
 #endif

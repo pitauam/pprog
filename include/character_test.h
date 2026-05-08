@@ -213,4 +213,60 @@ void test1_character_get_description();
  */
 void test2_character_get_description();
 
+/**
+ * @test Test function for character_strength setting
+ * @pre Valid pointer to character and positive strength value
+ * @post Output == OK
+ */
+void test1_character_set_strength();
+
+/**
+ * @test Test function for character_strength setting
+ * @pre Valid pointer to character = NULL
+ * @post Output == ERROR
+ */
+void test2_character_set_strength();
+
+/**
+ * @test Test function for character_strength getting
+ * @pre Valid pointer to character with strength = 10
+ * @post Output == 10
+ */
+void test1_character_get_strength();
+
+/**
+ * @test Test function for character_strength getting
+ * @pre Pointer to character = NULL
+ * @post Output == -1
+ */
+void test2_character_get_strength();
+
+/**
+ * @test Test function for character_armor setting
+ * @pre Valid pointer to character and positive armor value
+ * @post Output == OK
+ */
+void test1_character_set_armor();
+
+/**
+ * @test Test function for character_armor setting
+ * @pre Valid pointer to character = NULL
+ * @post Output == ERROR
+ */
+void test2_character_set_armor();
+
+/**
+ * @test Test function for character_armor getting
+ * @pre Valid pointer to character with armor = 10
+ * @post Output == 10
+ */
+void test1_character_get_armor();
+
+/**
+ * @test Test function for character_armor getting
+ * @pre Pointer to character = NULL
+ * @post Output == -1
+ */
+void test2_character_get_armor();
+
 #endif
