@@ -177,11 +177,17 @@ Category object_get_category(Object* object);
 /**
  * @brief Prints the information of an object (shows its Id)
  * @author Santiago Pita
- *
- * 
  * @param object pointer to the structure of the object
  * @return OK if everything goes well, ERROR if something went wrong
  */
 Status object_print(Object* object);
+
+/**
+ * @brief compares two objects by category and then by name
+ * @author Santiago Pita
+ * @param obj1 pointer to the first opbject
+ * @param obj2 pointer to the second object
+ * @return <0 if obj1 goes before or >0 if obj1 goes after. 0 if they are equal*/
+int object_compare(Object* obj1, Object* obj2);
 
 #endif

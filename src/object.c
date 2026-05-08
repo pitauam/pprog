@@ -239,3 +239,15 @@ Status object_print(Object* object) {
 
   return OK;
 }
+
+int object_compare(Object* obj1, Object* obj2) {
+  if (!obj1 || !obj2) {
+    return 0;}
+  
+  if (object_get_category(obj1) != object_get_category(obj2)) 
+  {
+    return object_get_category(obj1) - object_get_category(obj2);
+  }
+
+  return strcmp(object_get_name(obj1), object_get_name(obj2));
+}

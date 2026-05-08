@@ -175,6 +175,9 @@ Status game_add_player(Game *game, Player *player) {
   }
 
   game->player[game->n_players] = player;
+  
+  game->interface_data[game->n_players]->last_cmd = command_create();
+
   game->n_players++;
 
   return OK;

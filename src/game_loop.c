@@ -104,6 +104,13 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  if (game_get_number_of_players(game) <= 0)
+  {
+    fprintf(stderr, "Error: game data file has no players.\n");
+    game_loop_cleanup(game, gengine);
+    return 1;
+  }
+
   /*prints game data for debugging purposes
   game_print(game); 
   */

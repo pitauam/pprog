@@ -560,5 +560,16 @@ void game_print(Game *game);
  */
 
 Id game_get_random_space(Game *game);
+/*
+int object_compare(Game *game, Object* obj1, Object* obj2) {
+    if (!obj1 || !obj2) return 0;
 
+    if (obj1->category != obj2->category) {
+        return obj1->category - obj2->category;
+    }
+
+    
+    return strcmp(game_get_object_name(game, obj1), game_get_object_name(game, obj2));
+}
+*/
 #endif
