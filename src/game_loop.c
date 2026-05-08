@@ -39,14 +39,14 @@ int main(int argc, char *argv[]) {
   char name[WORD_SIZE];
 
   if (argc != 2 && argc != 4) {
-    fprintf(stderr, "Use: %s <game_data_file> [-l <log_file>]\n", argv[0]);
+    fprintf(stderr, "Use: %s <game_data_file> [-l <log>]\n", argv[0]);
     return 1;
   }
 
   data_file = argv[1];
   if (argc == 4) {
     if (strcmp(argv[2], "-l") != 0) {
-      fprintf(stderr, "Use: %s <game_data_file> [-l <log_file>]\n", argv[0]);
+      fprintf(stderr, "Use: %s <game_data_file> [-l <log>]\n", argv[0]);
       return 1;
     }
     log_file = argv[3];

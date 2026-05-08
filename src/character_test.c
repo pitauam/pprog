@@ -95,7 +95,7 @@ void test2_character_get_name() {
 
 void test1_character_set_health() {
   Character *c = character_create(5);
-  PRINT_TEST_RESULT(character_set_health(c, 100) == OK);
+  PRINT_TEST_RESULT(character_set_health(c, 15) == OK);
   character_destroy(c);
 }
 void test2_character_set_health() {
@@ -105,8 +105,8 @@ void test2_character_set_health() {
 
 void test1_character_get_health() {
   Character *c = character_create(5);
-  character_set_health(c, 100);
-  PRINT_TEST_RESULT(character_get_health(c) == 100);
+  character_set_health(c, 15);
+  PRINT_TEST_RESULT(character_get_health(c) == 15);
   character_destroy(c);
 }
 void test2_character_get_health() {

@@ -463,6 +463,10 @@ Status game_reader_load_players(Game *game, char *filename) {
       toks = strtok(NULL, "|");
       strength_points = atol(toks);
       toks = strtok(NULL, "|");
+      if(toks == NULL){
+        fclose(file);
+        return ERROR;
+      }
       armor_points = atol(toks);
 
       player = player_create(id);

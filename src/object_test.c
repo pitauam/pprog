@@ -234,8 +234,8 @@ void test2_set_category() {
 
 void test1_get_category(){
   Object *o = object_create(1);
-  object_set_category(o, Elixir);
-  PRINT_TEST_RESULT(object_get_category(o) == Elixir);
+  object_set_category(o, Healing);
+  PRINT_TEST_RESULT(object_get_category(o) == Healing);
   object_destroy(o);
 }
 

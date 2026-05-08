@@ -86,10 +86,10 @@ run: $(EXE)
 
 #run Iteration 3 map and generates a log file
 runlog: $(EXE)
-	./$(EXE) dat/castle.dat -l log.txt
+	./$(EXE) dat/new_castle.dat -l log.txt
 #runs Iteration 3 map with valgrind and generates a log file
 runv: $(EXE)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/castle.dat -l log.txt
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXE) dat/new_castle.dat -l log.txt
 
 #runs anthill map with valgrind
 runvaux:
