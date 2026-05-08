@@ -10,10 +10,11 @@
 #s:111|Dungeon stairs|    _    |  /___\  | /_____\ |/_______\|_________|0|
 #s:112|Dungeon corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|0|
 #s:113|Dungeon cells|_________|!   !   !|![_]![_]!|!   !   !|!___!___!|0|
-#s:114|AI guard|         |         |         |         |         |0|
+#s:114|Security|         |         |         |         |         |0|
 #s:115|Armory|         |         |         |         |         |0|
 #s:124|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
 #s:125|Cell|---------|l l l l l|l l l l l|l l l l l|---------|0|
+#s:128|Stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
 #s:116|Atic stairs|    _    |  /___\  | /_____\ |/_______\|_________|2|
 #s:117|Atic corridor|---------|l  -$-  l|l   $   l|l  -$-  l|---------|2|
 #s:118|Testing lab| !<> <>! | !<> <>! | !<> <>! |_________|2|
@@ -26,87 +27,95 @@
 
 #object:id|name|spawn_id|description|health|category|movable|dependency|open
 
-#o:21|Laser|11|High-energy pulse weapon|10|2|1|-1|-1
-#o:22|Energy pack|14|Restores suit energy levels|5|1|1|-1|-1
-#o:23|Robot|12|Combat android ally|8|2|1|25|-1
-#o:24|Malware|132|Corrupts internal systems|3|0|1|-1|-1
-#o:25|Code_fragment|13|Piece of core algorithm|4|6|1|-1|-1
-#o:26|Keycard|11|Grants access to secure rooms|10|6|1|-1|131
-#o:27|Battery|114|Portable power source|5|6|1|-1|-1
-#o:28|Broken_chip| |Damaged hardware fragment|2|3|1|-1|-1
-#o:29|Drone|19|Hostile surveillance unit|6|0|1|-1|-1
-#o:210|Credit| |Digital currency unit|1|4|1|-1|-1
-#o:211|Nanobots|201|Self-repairing medical swarm|10|1|1|-1|-1
-#o:212|Sword|15|High-frequency vibratory blade|5|5|1|-1|-1
-#o:213|Torch| |Plasma torch to light things|1|6|1|-1|-1
-#o:214|AdminKey| |Grants administrative access|1|6|1|-1|-1
-#o:215|Fire| |A dangerous digital fire|1|-1|-1|213|-1
-#o:216|Computer| |Terminal that requires hacking|1|-1|-1|-1|-1
-#o:217|Sword+| |Upgraded plasma edge blade|8|5|1|1|-1|-1
-#o:218|Laser+| |Overclocked pulse weapon|4|2|1|-1|-1
-#o:219|Repairkit| |Used to fix damaged gear|2|4|1|-1|-1
-#o:220|Med-Patch| |Heals system integrity|2|1|1|-1|-1
+#o:21|Laser|11|High-energy pulse weapon|2|2|1|-1|-1|
+#o:22|Energy pack|14|Restores suit energy levels|5|1|1|-1|-1|
+#o:23|Robot|12|Combat android ally|8|2|1|25|-1|
+#o:24|Malware|17|Corrupts internal systems|3|0|1|-1|-1|
+#o:25|Code_fragment|124|Piece of core algorithm|4|6|1|-1|-1|
+#o:26|Keycard||Grants access to secure rooms|0|6|1|-1|34|
+#o:27|Battery|115|Portable power source|5|1|1|-1|-1|
+#o:28|Broken_chip|119|Damaged hardware fragment|3|0|1|-1|-1|
+#o:29|Drone|115|Hostile surveillance unit|3|5|1|-1|-1|
+#o:210|Note1|12|U need a Keycards to open diferent places|1|6|1|-1|-1|                
+#o:211|Rock|125|Self-repairing medical swarm|10|1|-1|-1|-1|
+#o:212|Sword|15|High-frequency vibratory blade|5|2|1|-1|-1|
+#o:213|Gun|115|Plasma torch to light things|5|2|1|-1|-1|
+#o:214|AdminKey| |Grants administrative access|0|6|1|-1|-1|
+#o:215|Bitcoin|16|Money wont save you|0|-1|-1|213|-1|
+#o:216|Computer|127|Terminal that requires hacking|1|-1|-1|-1|-1|
+#o:217|Sword+|121|Upgraded plasma edge blade|8|2|1|1|-1|-1|
+#o:218|Note2|14|Items have diferent utilities use them wisely|0|6|1|-1|-1|
+#o:219|Note3|118|Dont use the broken chip|0|6|1|-1|-1|
+#o:220|Med-Patch|113|Heals system integrity|5|1|1|-1|-1|
+#o:221|Firewall|117|Boost your health|10|1|1|-1|-1|
 
 
 #links:id|name|origin_id|destination_id|north,south..|open|
 directions: NO_DIR,N,S,E,W U D
               -1,  0,1,2,3 4 5
 
-#l:31|Entry|11|12|1|1|
-#l:32|Corridor|12|11|0|1|
-#l:33|Corridor|12|14|1|0|
-#l:34|Corridor|12|13|3|0|
-#l:35|Dungeon|13|19|-1|1|
-#l:36|Dungeon|13|111|5|1|
-#l:345|Dungeon|13|12|2|1|
-#l:37|Server_core|14|12|0|0|
-#l:38|Server_core|14|15|2|1|
-#l:39|Server_core|14|17|1|1|
-#l:310|Testing_lab|15|14|3|1|
-#l:311|Testing_lab|15|16|2|1|
-#l:312|Vault|16|15|3|1|
-#l:312|Control_nexus|17|14|0|1|
-#l:314|Control_nexus|17|18|1|1|
-#l:315|Inner_countryard|18|17|0|1|
-#l:316|Inner_countryard|18|19|1|1|
-#l:317|Garden|19|18|0|1|
-#l:318|Dungeon_stairs|111|13|4|1|
-#l:319|Dungeon_stairs|111|112|1|1|
-#l:320|Dungeon_corridor|112|111|0|1|
-#l:321|Dungeon_corridor|112|113|2|1|
-#l:322|Dungeon_corridor|112|114|3|1|
-#l:323|AI_guard|114|112|2|1|
-#l:324|AI_guard|114|115|3|0|
-#l:325|Armory|115|114|2|1|
-#l:326|Dungeon_cells|113|112|3|1|
-#l:327|Dungeon_cells|113|124|2|0|
-#l:328|Dungeon_cells|113|125|1|0|
-#l:329|Cell|124|113|3|1|
-#l:330|Cell|125|113|0|1|
-#l:331|Atic_stairs|116|117|2|1|
-#l:332|Atic_corridor|117|116|3|1|
-#l:333|Atic_corridor|117|118|0|1|
-#l:334|Atic_corridor|117|119|1|1|
-#l:335|Atic_corridor|117|121|2|1|
-#l:336|Testing_lab|118|117|0|1|
-#l:337|Testing_lab|119|117|1|1|
-#l:338|Atic_corridor|121|117|3|1|
-#l:339|Atic_corridor|121|122|2|1|
-#l:340|Atic_corridor|122|121|3|1|
-#l:341|Atic_corridor|122|123|2|1|
-#l:342|Throne_door|123|122|3|1|
-#l:343|Throne_door|123|127|2|0|
-#l:344|Throne_room|127|123|3|0|
+#l:31|Entry-Corridor|11|12|1|1|
+#l:32|Corridor-Entry|12|11|0|1|
+#l:33|Corridor-Server_core|12|14|1|0|
+#l:34|Corridor-Dungeon|12|13|3|0|
+#l:35|Dungeon-Garden|13|19|-1|1|
+#l:36|Dungeon-Dungeon_stairs|13|111|5|1|
+#l:345|Dungeon-Corridor|13|12|2|1|
+#l:37|Server_core-Corridor|14|12|0|0|
+#l:38|Server_core-Testing_lab|14|15|2|1|
+#l:39|Server_core-Control_nexus|14|17|1|1|
+#l:310|Testing_lab-Server_core|15|14|3|1|
+#l:311|Testing_lab-Vault|15|16|2|1|
+#l:312|Vault-Testing_lab|16|15|3|1|
+#l:313|Control_nexus-Server_core|17|14|0|1|
+#l:314|Control_nexus-Inner_countryard|17|18|1|1|
+#l:348|Control_nexus-Stairs|17|128|3|0|
+#l:315|Inner_countryard-Control_nexus|18|17|0|1|
+#l:316|Inner_countryard-Garden|18|19|1|1|
+#l:317|Garden-Inner_countryard|19|18|0|1|
+#l:318|Dungeon_stairs-Dungeon|111|13|4|1|
+#l:319|Dungeon_stairs-Dungeon_corridor|111|112|1|1|
+#l:320|Dungeon_corridor-Dungeon_stairs|112|111|0|1|
+#l:321|Dungeon_corridor-Dungeon_cells|112|113|2|1|
+#l:322|Dungeon_corridor-AI_guard|112|114|3|1|
+#l:323|AI_guard-Dungeon_corridor|114|112|2|1|
+#l:324|AI_guard-Armory|114|115|3|0|
+#l:325|Armory-AI_guard|115|114|2|1|
+#l:326|Dungeon_cells-Dungeon_corridor|113|112|3|1|
+#l:327|Dungeon_cells-Cell_124|113|124|2|0|
+#l:328|Dungeon_cells-Cell_125|113|125|1|0|
+#l:329|Cell_124-Dungeon_cells|124|113|3|1|
+#l:330|Cell_125-Dungeon_cells|125|113|0|1|
+#l:347|Stairs-Control_nexus|128|17|2|1|
+#l:346|Stairs-Atic_stairs|128|116|4|1|
+#l:345|Atic_stairs-Stairs|116|128|5|1|
+#l:331|Atic_stairs-Atic_corridor|116|117|2|1|
+#l:332|Atic_corridor-Atic_stairs|117|116|3|1|
+#l:333|Atic_corridor-Testing_lab_118|117|118|0|1|
+#l:334|Atic_corridor-Testing_lab_119|117|119|1|1|
+#l:335|Atic_corridor-Atic_corridor_121|117|121|2|1|
+#l:336|Testing_lab_118-Atic_corridor|118|117|0|1|
+#l:337|Testing_lab_119-Atic_corridor|119|117|1|1|
+#l:338|Atic_corridor_121-Atic_corridor|121|117|3|1|
+#l:339|Atic_corridor_121-Atic_corridor_122|121|122|2|1|
+#l:340|Atic_corridor_122-Atic_corridor_121|122|121|3|1|
+#l:341|Atic_corridor_122-Servers_door|122|123|2|1|
+#l:342|Servers_door-Atic_corridor_122|123|122|3|1|
+#l:343|Servers_door-Servers_room|123|127|2|0|
+#l:344|Servers_room-Servers_door|127|123|3|0|
+
 
 
 #_character:characterid|knigth|gdesc^C>|spawn11|hp5|friendly|message|strength|armor|
 
 #c:41|Mario|:)|11|5|1|I scan repositories… the IA is evolving too fast!|1|2
 #c:42|Samuel|^_^|15|6|1|Graphics won't save us… but I can guide you!|1|1
-#c:43|Paula|:P|116|9|1|I tested this… it was NOT supposed to happen|0|1
-#c:44|Pita|>:O|17|5|0|Tasks pending… eliminate intruder|1|0
-#c:45|Tuki|:D|112|7|0|I hunt memory… yours is next|1|1
+#c:43|Paula|:P|124|9|1|I tested this… it was NOT supposed to happen|2|1
+#c:44|Pita|>:O|114|13|0|Tasks pending… eliminate intruder|3|2| ->cuando muere abre la Armory()
+#c:45|Tuki|:D|19|13|0|I hunt memory… yours is next|1|2| -> cuando muere te da la Keycard
 #c:46|SEGFAULT|X_X|127|15|0|...ERROR... CONTROL IS MINE...|2|2
+#c:47|Mega|M_M|12|3|0|MEGAAAA|1|1|
+#c:48|Giga|G_G|113|7|0|GIGAA|1|2|
 
 
 #_player:playerid|gdesc^C>|spawn11|hp5|maxinventory3|strength|armor|

@@ -36,6 +36,19 @@ struct _Game {
   InterfaceData* interface_data[MAX_PLAYERS]; /*!< Stores the interface data of each player */
 };
 
+Space* game_get_space_by_id(Game* game, Id id){
+  int i;
+  if(!game || id == NO_ID) return NULL;
+
+  for (i = 0; i < game->n_spaces; i++) {
+    if (space_get_id(game->spaces[i]) == id) {
+      return game->spaces[i];
+    }
+  }
+
+  return NULL;
+}
+
 
 
 /**
