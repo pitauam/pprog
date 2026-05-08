@@ -130,6 +130,15 @@ int player_get_n_objects(Player* player);
 Id player_get_object_id(Player* player, int pos);
 
 /**
+ * @brief It gets the player's inventory
+ * @author Samuel Manzorro
+ * 
+ * @param player a pointer to the player
+ * @return the player's inventory
+ */
+Inventory *player_get_inventory(Player *player);
+
+/**
  * @brief Gets if the players inventory is empty
  * @author Mario Rodriguez
  *

@@ -163,6 +163,16 @@ Id player_get_object_id(Player* player, int pos){
     return inventory_get_object_id(player->backpack, pos);
 }
 
+Inventory *player_get_inventory(Player *player) {
+
+  if (!player)
+  {
+    return NULL;
+  }
+
+  return player->backpack;
+}
+
 Bool player_inventory_empty(Player* player) {
 
   if (!player || !player->backpack) {

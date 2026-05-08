@@ -21,7 +21,6 @@
 struct _Link{
   Id id;                           /*!< Id number of the link, it must be unique */
   char name[WORD_SIZE + 1];        /*!< Name of the link */
-
   Id origin;                       /*!< Id of the previous space where the player came from */
   Id destination;                  /*!< Id of the destination space where the player is going to */
   Direction direction;             /*!< Direction of how the link is made, whether the connection is established from north, south, east or west */

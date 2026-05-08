@@ -378,6 +378,27 @@ Status game_add_link(Game *game, Link *link);
 Link *game_get_link(Game *game, Id id);
 
 /**
+ * @brief It gets a link from its position in the game array
+ * @author Samuel Manzorro
+ * 
+ * @param game a pointer to the game
+ * @param position the position in the game array
+ * @return the link from its position in the game array 
+ */
+Id game_get_link_id_at(Game *game, int position);
+
+/**
+ * @brief It gets a link from its orign and destination
+ * @author Samuel Manzorro
+ * 
+ * @param game a pointer to the game
+ * @param origin the origin of the link
+ * @param destination the destination of the link
+ * @return the link corresponding to the origin and destination
+ */
+Link *game_get_link_by_origin_destination(Game *game, Id origin, Id destination);
+
+/**
  * @brief Gets the pointer of the link from its name
  * @author Paula de la Fuente
  *
