@@ -113,6 +113,7 @@ int main(int argc, char *argv[]) {
 
     if (command_get_code(last_cmd) == EXIT || game_get_finished(game) == TRUE) 
     {
+      game_rules_update(game);
       break;
     }
         

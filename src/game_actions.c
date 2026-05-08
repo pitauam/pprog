@@ -651,17 +651,10 @@ void game_actions_attack(Game *game){
     }  
   }
 
-  /*checks if character is dead or player is dead (this should be move to another place, not inside game_actions)*/
   if (character_get_health(enemy) <= 0)
   {
     /*enemy character dies*/
     space_remove_character(game_get_space(game, player_location), enemy_character_at_player_location);
-  }
-
-  if (player_get_health(game_get_player(game)) <= 0)
-  {
-    /*player dies*/
-    game_set_finished(game, TRUE); /*if player dies, game ends*/
   }
 
   if (char_aux != NULL && character_get_health(char_aux) <= 0)
@@ -674,7 +667,6 @@ void game_actions_attack(Game *game){
     character_set_following(char_aux, NO_ID);
     space_remove_character(game_get_space(game, player_location), character_get_id(char_aux));
   }
-  /*all above must be moved*/
 
   game_set_message(game, "Your attack worked!");
   command_set_return(game_get_last_command(game), OK);
